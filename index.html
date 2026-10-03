@@ -1094,18 +1094,38 @@
                         return;
                     }
                     const t = translations[currentLang];
+                    
+                    // GitHub stats from live data
+                    const ghStats = githubData ? 
+                        `${githubData.stats.total_repos} repos · ${githubData.stats.total_stars} ⭐ · ${githubData.stats.languages} talen` : 
+                        'Loading...';
+                    
+                    // External platform stats with fallback
+                    const thmStats = data.tryhackme && data.tryhackme.rank !== 'N/A" ? 
+                        `Rank: ${data.tryhackme.rank} · ${data.tryhackme.points} pts` : 
+                        'Live data unavailable';
+                    
+                    const htbStats = data.hackthebox && data.hackthebox.rank !== 'N/A' ? 
+                        `Rank: ${data.hackthebox.rank} · ${data.hackthebox.points} pts` : 
+                        'Live data unavailable';
+                    
+                    const cylabStats = data.cylab && data.cylab.rank !== 'N/A' ? 
+                        `Rank: ${data.cylab.rank} · ${data.cylab.points} pts` : 
+                        'Live data unavailable';
+                    
                     const profiles = [
-                        { name: 'GitHub', icon: '🐙', url: 'https://github.com/itsdarklikehell', username: 'itsdarklikehell', stats: githubData ? `${githubData.stats.total_repos} repos · ${githubData.stats.total_stars} ⭐` : '' },
-                        { name: 'TryHackMe', icon: '🔒', url: 'https://tryhackme.com/p/SgtStroopwafel', username: 'SgtStroopwafel', stats: data.tryhackme ? `${data.tryhackme.rank} · ${data.tryhackme.points} pts` : '' },
-                        { name: 'Hack The Box', icon: '📦', url: 'https://profile.hackthebox.com/profile/01a0f22b-f959-73b9-925c-c2e2e350db97', username: 'SgtStroopwafel', stats: data.hackthebox ? `${data.hackthebox.rank} · ${data.hackthebox.points} pts` : '' },
-                        { name: 'CyLab Academy', icon: '🎓', url: 'https://learn.cylabacademy.org/users/SgtStroopwafel', username: 'SgtStroopwafel', stats: data.cylab ? `${data.cylab.rank} · ${data.cylab.points} pts` : '' }
+                        { name: 'GitHub', icon: '🐙', url: 'https://github.com/itsdarklikehell', username: 'itsdarklikehell', stats: ghStats, live: true },
+                        { name: 'TryHackMe', icon: '🔒', url: 'https://tryhackme.com/p/SgtStroopwafel', username: 'SgtStroopwafel', stats: thmStats, live: data.tryhackme && data.tryhackme.rank !== 'N/A' },
+                        { name: 'Hack The Box', icon: '📦', url: 'https://profile.hackthebox.com/profile/01a0f22b-f959-73b9-925c-c2e2e350db97', username: 'SgtStroopwafel', stats: htbStats, live: data.hackthebox && data.hackthebox.rank !== 'N/A' },
+                        { name: 'CyLab Academy', icon: '🎓', url: 'https://learn.cylabacademy.org/users/SgtStroopwafel', username: 'SgtStroopwafel', stats: cylabStats, live: data.cylab && data.cylab.rank !== 'N/A' }
                     ];
                     container.innerHTML = profiles.map(p => `
-                        <a href="${p.url}" target="_blank" class="activity-card" style="text-decoration: none; color: inherit;">
+                        <a href="${p.url}" target="_blank" class="activity-card" style="text-decoration: none; color: inherit; ${p.live ? '' : 'opacity: 0.7;'}">
                             <div class="activity-icon">${p.icon}</div>
                             <div class="activity-name">${p.name}</div>
                             <div class="activity-link">${p.username}</div>
-                            ${p.stats ? `<div style="color: var(--text-muted); font-size: 0.75rem; margin-top: 0.25rem;">${p.stats}</div>` : ''}
+                            <div style="color: var(--text-muted); font-size: 0.75rem; margin-top: 0.25rem;">${p.stats}</div>
+                            ${p.live ? '<div style="color: var(--accent2); font-size: 0.7rem; margin-top: 0.15rem;">● Live</div>' : '<div style="color: var(--text-muted); font-size: 0.7rem; margin-top: 0.15rem;">○ Offline</div>'}
                         </a>
                     `).join('');
                 })
