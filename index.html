@@ -1000,7 +1000,8 @@
 
         function renderProjects() {
             const container = document.getElementById('projects-container');
-            if (!githubData || !githubData.repos) {
+            const repos = githubData && githubData.stats ? githubData.stats.repos : (githubData ? githubData.repos : null);
+            if (!repos) {
                 container.innerHTML = '<p class="about-text">No data available</p>';
                 return;
             }
@@ -1015,7 +1016,7 @@
                 'Other': []
             };
 
-            githubData.repos.forEach(repo => {
+            repos.forEach(repo => {
                 const name = repo.name.toLowerCase();
                 const desc = (repo.description || '').toLowerCase();
                 const topics = (repo.topics || []).join(' ').toLowerCase();
@@ -1070,12 +1071,11 @@
 
         function renderSkills() {
             const container = document.getElementById('skills-container');
-            if (!githubData || !githubData.skills) {
+            const skills = githubData && githubData.stats ? githubData.stats.skills : (githubData ? githubData.skills : null);
+            if (!skills) {
                 container.innerHTML = '<p class="about-text">No data available</p>';
                 return;
             }
-
-            const skills = githubData.skills;
             const langNames = {
                 'Shell': 'Shell/Bash',
                 'Python': 'Python',
@@ -1098,14 +1098,16 @@
 
         function renderStats() {
             if (!githubData || !githubData.stats) return;
-            document.getElementById('stat-repos').textContent = githubData.stats.total_repos;
-            document.getElementById('stat-stars').textContent = githubData.stats.total_stars;
-            document.getElementById('stat-langs').textContent = githubData.stats.languages;
+            const stats = githubData.stats.stats || githubData.stats;
+            document.getElementById('stat-repos').textContent = stats.total_repos;
+            document.getElementById('stat-stars').textContent = stats.total_stars;
+            document.getElementById('stat-langs').textContent = stats.languages;
         }
 
         function renderContributions() {
             const container = document.getElementById('contributions-container');
-            if (!githubData || !githubData.contributions) {
+            const contributions = githubData && githubData.stats ? githubData.stats.contributions : (githubData ? githubData.contributions : null);
+            if (!contributions) {
                 container.innerHTML = '<p class="about-text">No data available</p>';
                 return;
             }
@@ -1124,7 +1126,7 @@
                 'CreateEvent': t.create
             };
 
-            const recent = githubData.contributions.slice(0, 8);
+            const recent = contributions.slice(0, 8);
             container.innerHTML = recent.map(c => `
                 <div class="contribution-item">
                     <div class="contrib-icon">${typeIcons[c.type] || '📌'}</div>
@@ -1158,7 +1160,7 @@
                     
                     // GitHub stats from live data
                     const ghStats = githubData ? 
-                        `${githubData.stats.total_repos} repos · ${githubData.stats.total_stars} ⭐ · ${githubData.stats.languages} talen` : 
+                        `${(githubData.stats && githubData.stats.stats ? githubData.stats.stats : githubData.stats).total_repos} repos · ${(githubData.stats && githubData.stats.stats ? githubData.stats.stats : githubData.stats).total_stars} ⭐ · ${(githubData.stats && githubData.stats.stats ? githubData.stats.stats : githubData.stats).languages} talen` : 
                         'Loading...';
                     
                     // External platform stats with fallback
@@ -1210,16 +1212,18 @@
             
             // Count contributions per day from githubData
             const contribCounts = {};
-            if (githubData && githubData.contributions) {
-                githubData.contributions.forEach(c => {
+            const contributions = githubData && githubData.stats ? githubData.stats.contributions : (githubData ? githubData.contributions : null);
+            const repos = githubData && githubData.stats ? githubData.stats.repos : (githubData ? githubData.repos : null);
+            if (contributions) {
+                contributions.forEach(c => {
                     const date = c.date.split('T')[0];
                     contribCounts[date] = (contribCounts[date] || 0) + 1;
                 });
             }
             
             // Also count repo creations and updates
-            if (githubData && githubData.repos) {
-                githubData.repos.forEach(r => {
+            if (repos) {
+                repos.forEach(r => {
                     const created = r.created ? r.created.split('T')[0] : null;
                     const updated = r.updated ? r.updated.split('T')[0] : null;
                     if (created) contribCounts[created] = (contribCounts[created] || 0) + 1;
@@ -1265,9 +1269,10 @@
             
             // GitHub achievements
             if (githubData) {
-                const totalRepos = githubData.stats.total_repos;
-                const totalStars = githubData.stats.total_stars;
-                const languages = githubData.stats.languages;
+                const stats = githubData.stats && githubData.stats.stats ? githubData.stats.stats : githubData.stats;
+                const totalRepos = stats.total_repos;
+                const totalStars = stats.total_stars;
+                const languages = stats.languages;
                 const followers = githubData.github_user ? githubData.github_user.followers : 0;
                 
                 if (totalRepos >= 100) achievements.push({ icon: '🏆', name: 'Centurion', desc: '100+ repositories', unlocked: true });
@@ -1342,8 +1347,8 @@
 
         // Donut chart
         function renderDonut() {
-            if (!githubData || !githubData.skills) return;
-            const skills = githubData.skills;
+            const skills = githubData && githubData.stats ? githubData.stats.skills : (githubData ? githubData.skills : null);
+            if (!skills) return;
             const total = Object.values(skills).reduce((sum, s) => sum + s.repos, 0);
             const colors = { 'Shell': '#4ecdc4', 'Python': '#3776ab', 'JavaScript': '#f7df1e', 'TypeScript': '#3178c6', 'HTML': '#e34c26', 'CSS': '#264de4' };
             const langNames = { 'Shell': 'Shell/Bash', 'Python': 'Python', 'JavaScript': 'JavaScript', 'TypeScript': 'TypeScript', 'HTML': 'HTML', 'CSS': 'CSS' };
