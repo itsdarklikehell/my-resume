@@ -624,7 +624,8 @@
             .timeline-item { opacity: 1; transform: none; animation: none; page-break-inside: avoid; }
             .donut-chart { display: none; }
             .donut-legend { display: flex; }
-            .card { page-break-inside: avoid; margin-bottom: 0.75rem !important; padding: 0.75rem !important; }
+            .card { page-break-inside: avoid; margin-bottom: 0.6rem !important; padding: 0.7rem !important; }
+            .footer { page-break-before: avoid; margin-top: 0.5rem !important; font-size: 8pt !important; }
             h2 { page-break-after: avoid; font-size: 12pt !important; margin-bottom: 0.5rem !important; }
             video { display: none !important; }
             .stats-grid { gap: 0.5rem !important; }
@@ -843,14 +844,14 @@
                     </video>
                 </section>
 
-                <section class="card">
+                <section class="card no-print">
                     <h2>🏆 Achievements</h2>
                     <div id="achievements-container">
                         <p class="about-text">Loading achievements...</p>
                     </div>
                 </section>
 
-                <section class="card">
+                <section class="card no-print">
                     <h2 data-i18n="profiles">Profielen</h2>
                     <div class="activity-grid" id="profiles-container">
                         <p class="about-text">Loading profiles...</p>
