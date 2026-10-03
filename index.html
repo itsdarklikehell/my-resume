@@ -823,10 +823,11 @@
 
                 <section class="card" id="featured-section" style="display: none;">
                     <h2 data-i18n="featured">Uitgelicht werk</h2>
+                    <p class="about-text" id="featured-stats" style="font-size: 0.8rem; margin-bottom: 0.75rem;"></p>
                     <div id="featured-container"></div>
                 </section>
 
-                <section class="card">
+                <section class="card no-print">
                     <h2>📊 Contribution Heatmap</h2>
                     <div id="contribution-heatmap">
                         <p class="about-text">Loading heatmap...</p>
@@ -1593,6 +1594,21 @@
                     </div>
                 </div>
             `).join('');
+
+            // Compacte cijferregel — het enige cijfer dat de CV-PDF toont, want
+            // Live Activity en Profielen zijn scherm-only.
+            const statsEl = document.getElementById('featured-stats');
+            if (statsEl) {
+                const st = (githubData && githubData.stats && githubData.stats.stats) ? githubData.stats.stats : {};
+                const sk = (githubData && githubData.stats && githubData.stats.skills) || {};
+                const nOwn = st.own_repos != null ? st.own_repos : own.length;
+                const nStars = st.own_stars != null ? st.own_stars : 0;
+                const nForks = st.total_forks || 0;
+                const nLangs = st.languages || Object.keys(sk).length;
+                statsEl.textContent = (currentLang === 'nl'
+                    ? `${nOwn} eigen projecten · ${nStars} sterren · ${nForks} keer geforkt · ${nLangs} talen`
+                    : `${nOwn} own projects · ${nStars} stars · forked ${nForks} times · ${nLangs} languages`);
+            }
 
             section.style.display = '';
         }
