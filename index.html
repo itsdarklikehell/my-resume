@@ -1110,7 +1110,7 @@
 
         function renderProjects() {
             const container = document.getElementById('projects-container');
-            const repos = githubData && githubData.stats ? githubData.stats.repos : (githubData ? githubData.repos : null);
+            const repos = gRepos();
             if (!repos) {
                 container.innerHTML = '<p class="about-text">No data available</p>';
                 return;
@@ -1182,7 +1182,7 @@
 
         function renderSkills() {
             const container = document.getElementById('skills-container');
-            const skills = githubData && githubData.stats ? githubData.stats.skills : (githubData ? githubData.skills : null);
+            const skills = gSkills();
             if (!skills) {
                 container.innerHTML = '<p class="about-text">No data available</p>';
                 return;
@@ -1213,8 +1213,8 @@
 
             // Toon eigen werk, niet het opgeblazen totaal (89% is fork).
             // De fork-cijfers blijven zichtbaar als contextregel eronder.
-            document.getElementById('stat-repos').textContent = stats.own_repos != null ? stats.own_repos : stats.total_repos;
-            document.getElementById('stat-stars').textContent = stats.own_stars != null ? stats.own_stars : stats.total_stars;
+            document.getElementById('stat-repos').textContent = gOwnRepos();
+            document.getElementById('stat-stars').textContent = gOwnStars();
             document.getElementById('stat-langs').textContent = stats.languages;
 
             // Contextregel: hoeveel forks eronder liggen
@@ -1233,7 +1233,7 @@
 
         function renderContributions() {
             const container = document.getElementById('contributions-container');
-            const contributions = githubData && githubData.stats ? githubData.stats.contributions : (githubData ? githubData.contributions : null);
+            const contributions = gContributions();
             if (!contributions) {
                 container.innerHTML = '<p class="about-text">No data available</p>';
                 return;
@@ -1297,9 +1297,9 @@
                     const t = translations[currentLang];
                     
                     // GitHub stats from live data
-                    const gs = githubData ? (githubData.stats && githubData.stats.stats ? githubData.stats.stats : githubData.stats) : null;
-                    const gOwn = gs && gs.own_repos != null ? gs.own_repos : (gs ? gs.total_repos : 0);
-                    const gStars = gs && gs.own_stars != null ? gs.own_stars : (gs ? gs.total_stars : 0);
+                    const gs = githubData ? gTotals() : null;
+                    const gOwn = gOwnRepos();
+                    const gStars = gOwnStars();
                     const ghStats = gs ?
                         `${gOwn} eigen projecten · ${gStars} ⭐ · ${gs.languages} talen` :
                         'Loading...';
@@ -1353,8 +1353,8 @@
             
             // Count contributions per day from githubData
             const contribCounts = {};
-            const contributions = githubData && githubData.stats ? githubData.stats.contributions : (githubData ? githubData.contributions : null);
-            const repos = githubData && githubData.stats ? githubData.stats.repos : (githubData ? githubData.repos : null);
+            const contributions = gContributions();
+            const repos = gRepos();
             if (contributions) {
                 contributions.forEach(c => {
                     const date = c.date.split('T')[0];
@@ -1413,9 +1413,9 @@
             // Forks meerekenen gaf badges als 'Centurion' puur op gekloonde repos;
             // dat houdt geen stand als iemand doorklikt.
             if (githubData) {
-                const stats = githubData.stats && githubData.stats.stats ? githubData.stats.stats : githubData.stats;
-                const ownRepos = stats.own_repos != null ? stats.own_repos : stats.total_repos;
-                const ownStars = stats.own_stars != null ? stats.own_stars : stats.total_stars;
+                const stats = gTotals();
+                const ownRepos = gOwnRepos();
+                const ownStars = gOwnStars();
                 const languages = stats.languages;
                 const followers = githubData.github_user ? githubData.github_user.followers : 0;
                 const totalForks = stats.total_forks || 0;
@@ -1433,13 +1433,13 @@
                 if (followers >= 30) achievements.push({ icon: '🌟', name: 'Influencer', desc: '30+ volgers', unlocked: true });
                 
                 // Activity achievements
-                const contributions = githubData.stats ? githubData.stats.contributions : (githubData.contributions || null);
+                const contributions = gContributions();
                 const recentContribs = contributions ? contributions.length : 0;
                 if (recentContribs >= 10) achievements.push({ icon: '🔥', name: 'Active', desc: '10+ recent contributions', unlocked: true });
                 if (recentContribs >= 20) achievements.push({ icon: '⚡', name: 'Hyperactive', desc: '20+ recent contributions', unlocked: true });
                 
                 // Project diversity
-                const repos = githubData.stats ? githubData.stats.repos : (githubData.repos || null);
+                const repos = gRepos();
                 const categories = new Set();
                 if (repos) repos.forEach(r => {
                     const lang = r.language || 'Unknown';
@@ -1510,6 +1510,15 @@
             };
         }
 
+        // Accessors — na normalizeGitHubData is de vorm canoniek, dus deze
+        // hoeven geen fallbacks meer te doen. Eén plek i.p.v. tien inline checks.
+        const gRepos         = () => (githubData && githubData.stats && githubData.stats.repos) || [];
+        const gSkills        = () => (githubData && githubData.stats && githubData.stats.skills) || {};
+        const gContributions = () => (githubData && githubData.stats && githubData.stats.contributions) || [];
+        const gTotals        = () => (githubData && githubData.stats && githubData.stats.stats) || {};
+        const gOwnRepos      = () => { const t = gTotals(); return t.own_repos != null ? t.own_repos : gRepos().filter(r => !r.fork).length; };
+        const gOwnStars      = () => { const t = gTotals(); return t.own_stars != null ? t.own_stars : 0; };
+
         // Toon een foutbanner zonder de pagina te slopen
         function showDataError(msg) {
             let el = document.getElementById('data-error-banner');
@@ -1568,7 +1577,7 @@
             const container = document.getElementById('featured-container');
             if (!section || !container) return;
 
-            const repos = githubData && githubData.stats ? githubData.stats.repos : null;
+            const repos = gRepos();
             if (!repos || !repos.length) { section.style.display = 'none'; return; }
 
             const own = repos.filter(r => r && !r.fork);
@@ -1599,10 +1608,10 @@
             // Live Activity en Profielen zijn scherm-only.
             const statsEl = document.getElementById('featured-stats');
             if (statsEl) {
-                const st = (githubData && githubData.stats && githubData.stats.stats) ? githubData.stats.stats : {};
+                const st = gTotals();
                 const sk = (githubData && githubData.stats && githubData.stats.skills) || {};
-                const nOwn = st.own_repos != null ? st.own_repos : own.length;
-                const nStars = st.own_stars != null ? st.own_stars : 0;
+                const nOwn = gOwnRepos();
+                const nStars = gOwnStars();
                 const nForks = st.total_forks || 0;
                 const nLangs = st.languages || Object.keys(sk).length;
                 statsEl.textContent = (currentLang === 'nl'
@@ -1677,7 +1686,7 @@
 
         // Donut chart
         function renderDonut() {
-            const skills = githubData && githubData.stats ? githubData.stats.skills : (githubData ? githubData.skills : null);
+            const skills = gSkills();
             if (!skills) return;
             const total = Object.values(skills).reduce((sum, s) => sum + s.repos, 0);
             const colors = { 'Shell': '#4ecdc4', 'Python': '#3776ab', 'JavaScript': '#f7df1e', 'TypeScript': '#3178c6', 'HTML': '#e34c26', 'CSS': '#264de4' };
