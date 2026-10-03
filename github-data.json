@@ -3,19 +3,6 @@
     "repos": [
       {
         "archived": false,
-        "created": "2026-10-01T22:48:42Z",
-        "description": "GitHub Fleet Manager - Automated GitHub fleet management with cron jobs, monitoring, and reporting",
-        "fork": false,
-        "forks": 0,
-        "language": "Shell",
-        "name": "fleet-manager",
-        "stars": 0,
-        "topics": [],
-        "updated": "2026-10-03T17:29:22Z",
-        "url": "https://github.com/itsdarklikehell/fleet-manager"
-      },
-      {
-        "archived": false,
         "created": "2026-10-02T07:46:01Z",
         "description": "Digitale resume van Bauke Molenaar",
         "fork": false,
@@ -24,8 +11,21 @@
         "name": "my-resume",
         "stars": 0,
         "topics": [],
-        "updated": "2026-10-03T17:29:01Z",
+        "updated": "2026-10-03T21:08:42Z",
         "url": "https://github.com/itsdarklikehell/my-resume"
+      },
+      {
+        "archived": false,
+        "created": "2026-10-01T22:48:42Z",
+        "description": "GitHub Fleet Manager - Automated GitHub fleet management with cron jobs, monitoring, and reporting",
+        "fork": false,
+        "forks": 0,
+        "language": "Shell",
+        "name": "fleet-manager",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-10-03T21:01:07Z",
+        "url": "https://github.com/itsdarklikehell/fleet-manager"
       },
       {
         "archived": false,
@@ -4870,6 +4870,36 @@
     },
     "contributions": [
       {
+        "date": "2026-10-03T08:46:56Z",
+        "repo": "itsdarklikehell/awesome-mcp-servers",
+        "type": "CreateEvent",
+        "url": "https://github.com/itsdarklikehell/awesome-mcp-servers"
+      },
+      {
+        "date": "2026-10-03T08:45:18Z",
+        "repo": "itsdarklikehell/arcane-blight-tracker",
+        "type": "PushEvent",
+        "url": "https://github.com/itsdarklikehell/arcane-blight-tracker"
+      },
+      {
+        "date": "2026-10-03T08:45:08Z",
+        "repo": "itsdarklikehell/agent-of-empires",
+        "type": "PushEvent",
+        "url": "https://github.com/itsdarklikehell/agent-of-empires"
+      },
+      {
+        "date": "2026-10-03T20:59:56Z",
+        "repo": "itsdarklikehell/my-resume",
+        "type": "PushEvent",
+        "url": "https://github.com/itsdarklikehell/my-resume"
+      },
+      {
+        "date": "2026-10-03T20:59:49Z",
+        "repo": "itsdarklikehell/fleet-manager",
+        "type": "PushEvent",
+        "url": "https://github.com/itsdarklikehell/fleet-manager"
+      },
+      {
         "date": "2026-10-03T08:45:04Z",
         "repo": "itsdarklikehell/adventurerscodex",
         "type": "PushEvent",
@@ -4934,40 +4964,10 @@
         "repo": "itsdarklikehell/PVE-mods",
         "type": "CreateEvent",
         "url": "https://github.com/itsdarklikehell/PVE-mods"
-      },
-      {
-        "date": "2026-10-02T00:31:20Z",
-        "repo": "itsdarklikehell/fleet-manager",
-        "type": "PushEvent",
-        "url": "https://github.com/itsdarklikehell/fleet-manager"
-      },
-      {
-        "date": "2026-10-03T17:28:03Z",
-        "repo": "itsdarklikehell/fleet-manager",
-        "type": "PushEvent",
-        "url": "https://github.com/itsdarklikehell/fleet-manager"
-      },
-      {
-        "date": "2026-10-02T00:19:32Z",
-        "repo": "itsdarklikehell/hermes-agent",
-        "type": "CreateEvent",
-        "url": "https://github.com/itsdarklikehell/hermes-agent"
-      },
-      {
-        "date": "2026-10-03T17:24:08Z",
-        "repo": "itsdarklikehell/fleet-manager",
-        "type": "PushEvent",
-        "url": "https://github.com/itsdarklikehell/fleet-manager"
-      },
-      {
-        "date": "2026-10-02T02:10:36Z",
-        "repo": "itsdarklikehell/Create-a-Retropie-Extra-Scriptmodule",
-        "type": "PushEvent",
-        "url": "https://github.com/itsdarklikehell/Create-a-Retropie-Extra-Scriptmodule"
       }
     ]
   },
-  "generated_at": "2026-10-03T20:56:52Z",
+  "generated_at": "2026-10-03T21:33:53Z",
   "github_user": {
     "followers": 30,
     "following": 13,
