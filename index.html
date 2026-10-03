@@ -971,6 +971,31 @@
                 edu_friesche_poort: "Tweewielerherstel Monteur",
                 edu_friesland_college: "Monteur Sterkstroom Installaties",
                 activity: "Live Activity",
+                ach_centurion_n: "Centurion",
+                ach_prolific_n: "Prolific",
+                ach_builder_n: "Builder",
+                ach_star_collector_n: "Star Collector",
+                ach_star_magnet_n: "Star Magnet",
+                ach_forked_n: "Geforkt",
+                ach_forked_many_n: "Veel geforkt",
+                ach_polyglot_n: "Polyglot",
+                ach_polyglot_master_n: "Master Polyglot",
+                ach_community_n: "Community",
+                ach_influencer_n: "Influencer",
+                profiles_unavailable: "Profielstatistieken tijdelijk niet beschikbaar",
+                active: "Actief",
+                inactive: "Inactief",
+                ach_centurion: "100+ eigen repositories",
+                ach_prolific: "50+ eigen repositories",
+                ach_builder: "25+ eigen repositories",
+                ach_star_collector: "10+ sterren op eigen werk",
+                ach_star_magnet: "100+ sterren op eigen werk",
+                ach_forked: "10+ keer",
+                ach_forked_many: "50+ keer",
+                ach_polyglot: "5+ talen in eigen werk",
+                ach_polyglot_master: "10+ talen in eigen werk",
+                ach_community: "10+ volgers",
+                ach_influencer: "30+ volgers",
                 stat_repos: "Eigen projecten",
                 featured: "Uitgelicht werk",
                 activity_video: "Projectactiviteit",
@@ -1030,6 +1055,31 @@
                 edu_friesche_poort: "Motorcycle Repair Technician",
                 edu_friesland_college: "Electrical Installation Technician",
                 activity: "Live Activity",
+                ach_centurion_n: "Centurion",
+                ach_prolific_n: "Prolific",
+                ach_builder_n: "Builder",
+                ach_star_collector_n: "Star Collector",
+                ach_star_magnet_n: "Star Magnet",
+                ach_forked_n: "Forked",
+                ach_forked_many_n: "Widely forked",
+                ach_polyglot_n: "Polyglot",
+                ach_polyglot_master_n: "Master Polyglot",
+                ach_community_n: "Community",
+                ach_influencer_n: "Influencer",
+                profiles_unavailable: "Profile statistics temporarily unavailable",
+                active: "Active",
+                inactive: "Inactive",
+                ach_centurion: "100+ own repositories",
+                ach_prolific: "50+ own repositories",
+                ach_builder: "25+ own repositories",
+                ach_star_collector: "10+ stars on own work",
+                ach_star_magnet: "100+ stars on own work",
+                ach_forked: "10+ times",
+                ach_forked_many: "50+ times",
+                ach_polyglot: "5+ languages in own work",
+                ach_polyglot_master: "10+ languages in own work",
+                ach_community: "10+ followers",
+                ach_influencer: "30+ followers",
                 stat_repos: "Own projects",
                 featured: "Featured work",
                 activity_video: "Project activity",
@@ -1124,6 +1174,7 @@
         }
 
         function renderProjects() {
+            const t = translations[currentLang];
             const container = document.getElementById('projects-container');
             const repos = gRepos();
             if (!repos) {
@@ -1180,7 +1231,7 @@
                             <div class="project-title">
                                 <a href="${encodeURI(repo.url || '#')}" target="_blank" rel="noopener" style="color: inherit; text-decoration: none;">${escapeHtml(repo.name)}</a>
                                 <span style="color: var(--accent2); font-size: 0.8rem;">⭐ ${Number(repo.stars) || 0}</span>
-                                ${isActive ? '<span style="color: var(--accent2); font-size: 0.7rem; margin-left: 0.5rem;">● Actief</span>' : '<span style="color: var(--text-muted); font-size: 0.7rem; margin-left: 0.5rem;">○ Inactief</span>'}
+                                ${isActive ? `<span style="color: var(--accent2); font-size: 0.7rem; margin-left: 0.5rem;">● ${t.active}</span>` : `<span style="color: var(--text-muted); font-size: 0.7rem; margin-left: 0.5rem;">○ ${t.inactive}</span>`}
                             </div>
                             <div class="project-desc">${escapeHtml(repo.description || 'No description')}</div>
                             <div class="project-tech">
@@ -1296,7 +1347,7 @@
             const guard = setTimeout(() => {
                 if (done) return;
                 done = true;
-                container.innerHTML = '<p class="about-text">Profielstatistieken tijdelijk niet beschikbaar</p>';
+                container.innerHTML = '<p class="about-text">' + (translations[currentLang].profiles_unavailable || 'N/A') + '</p>';
             }, 8000);
 
             fetch('profile-data.json', { cache: 'no-cache' })
@@ -1316,7 +1367,9 @@
                     const gOwn = gOwnRepos();
                     const gStars = gOwnStars();
                     const ghStats = gs ?
-                        `${gOwn} eigen projecten · ${gStars} ⭐ · ${gs.languages} talen` :
+                        (currentLang === 'nl'
+                            ? `${gOwn} eigen projecten · ${gStars} ⭐ · ${gs.languages} talen`
+                            : `${gOwn} own projects · ${gStars} ⭐ · ${gs.languages} languages`) :
                         'Loading...';
                     
                     // External platform stats with fallback
@@ -1419,6 +1472,7 @@
         }
 
         function renderAchievements() {
+            const t = translations[currentLang];
             const container = document.getElementById('achievements-container');
             if (!container) return;
             
@@ -1435,17 +1489,17 @@
                 const followers = githubData.github_user ? githubData.github_user.followers : 0;
                 const totalForks = stats.total_forks || 0;
 
-                if (ownRepos >= 100) achievements.push({ icon: '🏆', name: 'Centurion', desc: '100+ eigen repositories', unlocked: true });
-                if (ownRepos >= 50) achievements.push({ icon: '🥇', name: 'Prolific', desc: '50+ eigen repositories', unlocked: true });
-                if (ownRepos >= 25) achievements.push({ icon: '🥈', name: 'Builder', desc: '25+ eigen repositories', unlocked: true });
-                if (ownStars >= 10) achievements.push({ icon: '⭐', name: 'Star Collector', desc: '10+ sterren op eigen werk', unlocked: true });
-                if (ownStars >= 100) achievements.push({ icon: '💫', name: 'Star Magnet', desc: '100+ sterren op eigen werk', unlocked: true });
-                if (totalForks >= 10) achievements.push({ icon: '🍴', name: 'Geforkt', desc: '10+ keer geforkt', unlocked: true });
-                if (totalForks >= 50) achievements.push({ icon: '🌳', name: 'Veel geforkt', desc: '50+ keer geforkt', unlocked: true });
-                if (languages >= 5) achievements.push({ icon: '🌐', name: 'Polyglot', desc: '5+ talen in eigen werk', unlocked: true });
-                if (languages >= 10) achievements.push({ icon: '💎', name: 'Master Polyglot', desc: '10+ talen in eigen werk', unlocked: true });
-                if (followers >= 10) achievements.push({ icon: '👥', name: 'Community', desc: '10+ volgers', unlocked: true });
-                if (followers >= 30) achievements.push({ icon: '🌟', name: 'Influencer', desc: '30+ volgers', unlocked: true });
+                if (ownRepos >= 100) achievements.push({ icon: '🏆', name: t.ach_centurion_n, desc: t.ach_centurion, unlocked: true });
+                if (ownRepos >= 50) achievements.push({ icon: '🥇', name: t.ach_prolific_n, desc: t.ach_prolific, unlocked: true });
+                if (ownRepos >= 25) achievements.push({ icon: '🥈', name: t.ach_builder_n, desc: t.ach_builder, unlocked: true });
+                if (ownStars >= 10) achievements.push({ icon: '⭐', name: t.ach_star_collector_n, desc: t.ach_star_collector, unlocked: true });
+                if (ownStars >= 100) achievements.push({ icon: '💫', name: t.ach_star_magnet_n, desc: t.ach_star_magnet, unlocked: true });
+                if (totalForks >= 10) achievements.push({ icon: '🍴', name: t.ach_forked_n, desc: t.ach_forked, unlocked: true });
+                if (totalForks >= 50) achievements.push({ icon: '🌳', name: t.ach_forked_many_n, desc: t.ach_forked_many, unlocked: true });
+                if (languages >= 5) achievements.push({ icon: '🌐', name: t.ach_polyglot_n, desc: t.ach_polyglot, unlocked: true });
+                if (languages >= 10) achievements.push({ icon: '💎', name: t.ach_polyglot_master_n, desc: t.ach_polyglot_master, unlocked: true });
+                if (followers >= 10) achievements.push({ icon: '👥', name: t.ach_community_n, desc: t.ach_community, unlocked: true });
+                if (followers >= 30) achievements.push({ icon: '🌟', name: t.ach_influencer_n, desc: t.ach_influencer, unlocked: true });
                 
                 // Activity achievements
                 const contributions = gContributions();
