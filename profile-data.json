@@ -1,29 +1,15 @@
 {
   "tryhackme": {
-    "username": "SgtStroopwafel",
-    "rank": "Pro Hacker",
-    "points": 0,
-    "rank_percentage": 0,
-    "badges": 0,
-    "rooms_completed": 0,
-    "avatar": "https://tryhackme.com/img/avatars/default.png"
+    "rank": "N/A",
+    "points": 0
   },
   "hackthebox": {
-    "username": "SgtStroopwafel",
-    "rank": "Script Kiddie",
-    "points": 0,
-    "respects": 0,
-    "rank_percentage": 0,
-    "owned_machines": 0,
-    "owned_users": 0,
-    "avatar": "https://www.hackthebox.com/image/avatars/default.png"
+    "rank": "N/A",
+    "points": 0
   },
   "cylab": {
-    "username": "SgtStroopwafel",
-    "rank": "Student",
-    "points": 0,
-    "courses_completed": 0,
-    "certificates": 0,
-    "avatar": "https://learn.cylabacademy.org/img/avatars/default.png"
-  }
+    "rank": "N/A",
+    "points": 0
+  },
+  "generated_at": "2026-10-03T13:09:59Z"
 }
