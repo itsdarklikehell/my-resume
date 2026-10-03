@@ -2,75 +2,178 @@
   "stats": {
     "repos": [
       {
-        "created": "2026-09-11T12:46:24Z",
-        "description": "Real-time D&D 5.5e session companion for character management, encounters, loot, shops, and QR-based player sheets.",
+        "created": "2026-10-02T07:46:01Z",
+        "description": "Digitale resume van Bauke Molenaar",
         "forks": 0,
-        "language": "Unknown",
-        "name": "5.5e-companion",
+        "language": "HTML",
+        "name": "my-resume",
         "stars": 0,
         "topics": [],
-        "updated": "2026-09-11T12:46:25Z",
-        "url": "https://github.com/itsdarklikehell/5.5e-companion"
+        "updated": "2026-10-03T13:19:20Z",
+        "url": "https://github.com/itsdarklikehell/my-resume"
       },
       {
-        "created": "2026-08-25T13:24:24Z",
-        "description": "The 500 AI Agents Projects is a curated collection of AI agent use cases across various industries. It showcases practical applications and provides links to open-source projects for implementation, illustrating how AI agents are transforming sectors such as healthcare, finance, education, retail, and more.",
+        "created": "2026-10-01T22:48:42Z",
+        "description": "GitHub Fleet Manager - Automated GitHub fleet management with cron jobs, monitoring, and reporting",
         "forks": 0,
-        "language": "Unknown",
-        "name": "500-AI-Agents-Projects",
+        "language": "Shell",
+        "name": "fleet-manager",
         "stars": 0,
         "topics": [],
-        "updated": "2026-08-25T13:24:24Z",
-        "url": "https://github.com/itsdarklikehell/500-AI-Agents-Projects"
+        "updated": "2026-10-03T13:13:08Z",
+        "url": "https://github.com/itsdarklikehell/fleet-manager"
       },
       {
-        "created": "2026-09-09T02:23:08Z",
-        "description": "Create D&D adventures with ease using Adventure Artisan. Generate cards for Goals, Locations, Obstacles, Twists, and Characters to form engaging scenarios. ",
+        "created": "2026-10-03T12:18:20Z",
+        "description": "Make changes to FMHY",
         "forks": 0,
         "language": "Unknown",
-        "name": "AdventureArtisan",
+        "name": "edit",
         "stars": 0,
         "topics": [],
-        "updated": "2026-09-09T02:23:09Z",
-        "url": "https://github.com/itsdarklikehell/AdventureArtisan"
+        "updated": "2026-10-03T12:18:20Z",
+        "url": "https://github.com/itsdarklikehell/edit"
       },
       {
-        "created": "2026-09-09T02:34:17Z",
-        "description": "Adventure Lookup Main Repository",
+        "created": "2018-01-02T21:59:34Z",
+        "description": "Download and extract No-Intro full romsets in proper directories on RetroPie.",
+        "forks": 0,
+        "language": "Shell",
+        "name": "RetroPie-Nointro-Full-Romsets",
+        "stars": 2,
+        "topics": [],
+        "updated": "2026-10-03T09:32:25Z",
+        "url": "https://github.com/itsdarklikehell/RetroPie-Nointro-Full-Romsets"
+      },
+      {
+        "created": "2026-10-02T19:46:44Z",
+        "description": "Fork of hmol33/my-resume for PR",
+        "forks": 0,
+        "language": "HTML",
+        "name": "hmol33-my-resume",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-10-02T19:48:24Z",
+        "url": "https://github.com/itsdarklikehell/hmol33-my-resume"
+      },
+      {
+        "created": "2023-05-18T23:04:33Z",
+        "description": "A (remote) control center for pwnagotchi... (think: locally: Flashing a pwnagotchi zip or image to an sd or mmc and add custom config.toml and plugins to it / Creating a flashable backup of an allready made pwnagotchi sd or mmc card / Setting up a bluetooth pan and adding it to a custom config.toml / Connecting to a running pwnagotchi)",
+        "forks": 2,
+        "language": "Shell",
+        "name": "pwnagotchi-control-center",
+        "stars": 12,
+        "topics": [
+          "pwnagotchi",
+          "sdr",
+          "security",
+          "wifi"
+        ],
+        "updated": "2026-10-02T19:46:33Z",
+        "url": "https://github.com/itsdarklikehell/pwnagotchi-control-center"
+      },
+      {
+        "created": "2026-10-02T19:45:26Z",
+        "description": "Digitale CV van Hans Molenaar",
         "forks": 0,
         "language": "Unknown",
-        "name": "AdventureLookup",
+        "name": "my-resume-1",
         "stars": 0,
         "topics": [],
-        "updated": "2026-09-09T02:34:17Z",
-        "url": "https://github.com/itsdarklikehell/AdventureLookup"
+        "updated": "2026-10-02T19:45:26Z",
+        "url": "https://github.com/itsdarklikehell/my-resume-1"
       },
       {
-        "created": "2026-09-09T02:28:14Z",
-        "description": "Experience the next step in tabletop RPGs",
+        "created": "2026-10-02T14:13:44Z",
+        "description": "the runtime your coding agents live on",
         "forks": 0,
-        "language": "JavaScript",
-        "name": "adventurerscodex",
+        "language": "Unknown",
+        "name": "herdr",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-10-02T14:13:44Z",
+        "url": "https://github.com/itsdarklikehell/herdr"
+      },
+      {
+        "created": "2024-09-11T00:11:54Z",
+        "description": "Sunvox Installer Lutris",
+        "forks": 1,
+        "language": "Shell",
+        "name": "sunvox-installer-lutris",
         "stars": 0,
         "topics": [
-          "agent",
-          "ai",
-          "cli",
-          "llm"
+          "installer",
+          "setup",
+          "tool"
         ],
-        "updated": "2026-09-26T20:38:19Z",
-        "url": "https://github.com/itsdarklikehell/adventurerscodex"
+        "updated": "2026-10-02T02:12:31Z",
+        "url": "https://github.com/itsdarklikehell/sunvox-installer-lutris"
       },
       {
-        "created": "2026-09-28T20:04:33Z",
-        "description": "🎭 277 个即插即用的 AI 专家角色 — 支持 Claude Code/Cursor/Copilot 等 20 种工具，覆盖工程/设计/营销/金融等 20 个部门。含 64 个中国市场原创智能体（小红书/抖音/微信/飞书/钉钉/Qt 上位机/机械设计）。搭配编排器 agency-orchestrator，一句话即可让多位专家按 DAG 自动协作。",
-        "forks": 0,
-        "language": "Unknown",
-        "name": "agency-agents-zh",
+        "created": "2025-09-19T15:50:33Z",
+        "description": "My docker stacks, nothing special",
+        "forks": 1,
+        "language": "Shell",
+        "name": "stacks",
         "stars": 0,
         "topics": [],
-        "updated": "2026-09-28T20:04:33Z",
-        "url": "https://github.com/itsdarklikehell/agency-agents-zh"
+        "updated": "2026-10-02T02:12:04Z",
+        "url": "https://github.com/itsdarklikehell/stacks"
+      },
+      {
+        "created": "2026-02-19T09:18:37Z",
+        "description": "picoTracker Theme Studio",
+        "forks": 2,
+        "language": "JavaScript",
+        "name": "picoTracker-Theme-Studio",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-10-02T02:11:14Z",
+        "url": "https://github.com/itsdarklikehell/picoTracker-Theme-Studio"
+      },
+      {
+        "created": "2024-12-26T21:55:44Z",
+        "description": "Helps one create and install a Retropie-Extra scriptmodule for your Retropie-Setup",
+        "forks": 1,
+        "language": "Shell",
+        "name": "Create-a-Retropie-Extra-Scriptmodule",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-10-02T02:10:39Z",
+        "url": "https://github.com/itsdarklikehell/Create-a-Retropie-Extra-Scriptmodule"
+      },
+      {
+        "created": "2026-08-25T20:37:15Z",
+        "description": "Skill + Plugin Registry for OpenClaw",
+        "forks": 1,
+        "language": "TypeScript",
+        "name": "clawhub",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-10-02T02:10:23Z",
+        "url": "https://github.com/itsdarklikehell/clawhub"
+      },
+      {
+        "created": "2026-08-30T13:41:47Z",
+        "description": "Reusable GitHub Actions CI workflows for the itsdarklikehell fleet (lint/typecheck/test/build). Single source of truth.",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "ci-templates",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-10-02T02:10:13Z",
+        "url": "https://github.com/itsdarklikehell/ci-templates"
+      },
+      {
+        "created": "2026-08-25T20:44:05Z",
+        "description": "Collection of AI-related utilities. Welcome to submit pull requests /收藏AI相关的实用工具，欢迎提交pull requests",
+        "forks": 0,
+        "language": "Python",
+        "name": "Awesome-AITools",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-10-02T02:09:41Z",
+        "url": "https://github.com/itsdarklikehell/Awesome-AITools"
       },
       {
         "created": "2026-09-28T20:08:20Z",
@@ -84,47 +187,195 @@
         "url": "https://github.com/itsdarklikehell/agent-of-empires"
       },
       {
-        "created": "2026-09-24T21:04:29Z",
-        "description": "Agent Office — pixel floor for Hermes + OpenCode + Telegram sessions",
-        "forks": 0,
-        "language": "JavaScript",
-        "name": "agent-office",
-        "stars": 0,
-        "topics": [
-          "agent",
-          "ai",
-          "cli",
-          "llm"
-        ],
-        "updated": "2026-09-30T13:19:40Z",
-        "url": "https://github.com/itsdarklikehell/agent-office"
-      },
-      {
-        "created": "2026-08-25T20:46:48Z",
-        "description": "AAS Core is the local, agent-first control plane for complete catalog discovery, agent-owned selection, stack validation, and planning, backed by 2,005+ agentic skills. Includes CLI, local MCP, catalog, plugins, and Workbench.",
-        "forks": 0,
+        "created": "2026-08-21T13:02:55Z",
+        "description": "RPi4B Pwnagotchi + Fancygotchi (off-brand Waveshare 3.5B / ILI9486) with an A2A 'mothership' bridge so GLaDOS (Hermes) and Wheatley (OpenClaw) can remotely help/control it. Built with Bauke Molenaar.",
+        "forks": 1,
         "language": "Python",
-        "name": "agentic-awesome-skills",
-        "stars": 0,
+        "name": "pwnagotchi4b",
+        "stars": 1,
         "topics": [
-          "agent",
-          "ai",
-          "cli",
-          "llm"
+          "pwnagotchi",
+          "sdr",
+          "security",
+          "wifi"
         ],
-        "updated": "2026-10-02T01:28:59Z",
-        "url": "https://github.com/itsdarklikehell/agentic-awesome-skills"
+        "updated": "2026-10-02T01:50:17Z",
+        "url": "https://github.com/itsdarklikehell/pwnagotchi4b"
       },
       {
-        "created": "2026-09-11T01:45:09Z",
-        "description": "AirBoardGame is a versatile Virtual Table Top (VTT) platform designed for playing and creating any board game online with friends.",
+        "created": "2026-08-28T16:53:49Z",
+        "description": "Proxmox modifications",
         "forks": 0,
-        "language": "Unknown",
-        "name": "airboardgame",
+        "language": "Shell",
+        "name": "PVE-mods",
         "stars": 0,
         "topics": [],
-        "updated": "2026-09-11T01:45:09Z",
-        "url": "https://github.com/itsdarklikehell/airboardgame"
+        "updated": "2026-10-02T01:33:04Z",
+        "url": "https://github.com/itsdarklikehell/PVE-mods"
+      },
+      {
+        "created": "2026-07-23T21:53:14Z",
+        "description": "Android music tracker inspired by M8 and LGPT",
+        "forks": 0,
+        "language": "C++",
+        "name": "pockettracker",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-10-02T01:32:55Z",
+        "url": "https://github.com/itsdarklikehell/pockettracker"
+      },
+      {
+        "created": "2026-08-26T21:13:29Z",
+        "description": "A public gallery of animated pets for Codex, Claude Code, DeepSeek Harness, Hermes, OpenCode, Gemini CLI, and more.",
+        "forks": 0,
+        "language": "TypeScript",
+        "name": "petdex",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-10-02T01:32:50Z",
+        "url": "https://github.com/itsdarklikehell/petdex"
+      },
+      {
+        "created": "2026-09-28T20:09:03Z",
+        "description": "🎨 Best DeepSeek Harness Design Plugin. The open-source Claude Design alternative. 🖥️ Local-first desktop app. 🖼️ Your coding agent becomes the design engine: prototypes, landing pages, dashboards, slides, images & video — real files, HTML/PDF/PPTX/MP4 export. 🤖 Claude Code / Codex / Cursor / DeepSeek Harness / OpenCode & 20+ CLIs via BYOK.",
+        "forks": 0,
+        "language": "TypeScript",
+        "name": "open-design",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-10-02T01:32:44Z",
+        "url": "https://github.com/itsdarklikehell/open-design"
+      },
+      {
+        "created": "2026-09-24T21:13:51Z",
+        "description": "Self-hosted control plane for AI agents: dispatch tasks, review runs, track spend, and operate OpenClaw, Claude Code, Codex, and other runtimes.",
+        "forks": 0,
+        "language": "TypeScript",
+        "name": "mission-control",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-10-02T01:32:37Z",
+        "url": "https://github.com/itsdarklikehell/mission-control"
+      },
+      {
+        "created": "2026-09-24T21:23:34Z",
+        "description": "Static analysis for AI agent configs, tool descriptions, and system prompts — catches vague tool descriptions, missing stop conditions, and schema gaps before they reach runtime. Zero-LLM, deterministic checks, built for CI.",
+        "forks": 0,
+        "language": "Python",
+        "name": "lintlang",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-10-02T01:32:28Z",
+        "url": "https://github.com/itsdarklikehell/lintlang"
+      },
+      {
+        "created": "2026-09-11T12:50:46Z",
+        "description": "Local-first digital character sheet and play companion for Legend in the Mist.",
+        "forks": 0,
+        "language": "TypeScript",
+        "name": "legend-ledger",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-10-02T01:32:19Z",
+        "url": "https://github.com/itsdarklikehell/legend-ledger"
+      },
+      {
+        "created": "2026-08-19T17:53:41Z",
+        "description": "GLaDOS Piper TTS voice build (voice model + piper/espeak-ng runtime)",
+        "forks": 0,
+        "language": "Shell",
+        "name": "GLaDOS-TTS",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-10-02T01:32:13Z",
+        "url": "https://github.com/itsdarklikehell/GLaDOS-TTS"
+      },
+      {
+        "created": "2026-09-09T02:40:14Z",
+        "description": "D&D Utility Site",
+        "forks": 0,
+        "language": "HTML",
+        "name": "dnd-utils",
+        "stars": 0,
+        "topics": [
+          "dnd",
+          "gaming",
+          "rpg",
+          "tabletop"
+        ],
+        "updated": "2026-10-02T01:32:04Z",
+        "url": "https://github.com/itsdarklikehell/dnd-utils"
+      },
+      {
+        "created": "2026-09-11T01:09:14Z",
+        "description": "Manage D&D 5e characters and campaigns with a native desktop app featuring real-time multiplayer, full ruleset support, and Player/DM modes.",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "dnd-tracker",
+        "stars": 0,
+        "topics": [
+          "dnd",
+          "gaming",
+          "rpg",
+          "tabletop"
+        ],
+        "updated": "2026-10-02T01:31:58Z",
+        "url": "https://github.com/itsdarklikehell/dnd-tracker"
+      },
+      {
+        "created": "2026-09-16T10:05:09Z",
+        "description": "SRD D&D 5.1.0 and SRD D&D 5.2.1 for Charnik",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "charnik-content-srd",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-10-02T01:31:26Z",
+        "url": "https://github.com/itsdarklikehell/charnik-content-srd"
+      },
+      {
+        "created": "2026-09-11T01:09:50Z",
+        "description": "FOSS dnd 5 and 5.5 charsheet generator, action-, inventory-, spellbook-tracker with easily expandable database",
+        "forks": 0,
+        "language": "TypeScript",
+        "name": "charnik",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-10-02T01:31:20Z",
+        "url": "https://github.com/itsdarklikehell/charnik"
+      },
+      {
+        "created": "2026-09-09T02:21:13Z",
+        "description": "Beholden TTRPG Campaign Tracker",
+        "forks": 0,
+        "language": "TypeScript",
+        "name": "beholden",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-10-02T01:31:12Z",
+        "url": "https://github.com/itsdarklikehell/beholden"
+      },
+      {
+        "created": "2026-09-28T20:05:36Z",
+        "description": "Skill that audits and rewrites content to remove AI writing patterns. Use it with your favorite agents including Claude Code, OpenClaw, Codex, and Hermes.",
+        "forks": 0,
+        "language": "JavaScript",
+        "name": "avoid-ai-writing",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-10-02T01:31:07Z",
+        "url": "https://github.com/itsdarklikehell/avoid-ai-writing"
+      },
+      {
+        "created": "2026-09-28T20:08:04Z",
+        "description": "a recursive self-improving harness designed to help your agents (and future iterations of those agents) succeed on any task",
+        "forks": 0,
+        "language": "Python",
+        "name": "autocontext",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-10-02T01:30:59Z",
+        "url": "https://github.com/itsdarklikehell/autocontext"
       },
       {
         "created": "2025-10-09T06:53:51Z",
@@ -138,26 +389,30 @@
         "url": "https://github.com/itsdarklikehell/airi"
       },
       {
-        "created": "2026-09-15T12:00:23Z",
-        "description": "An open source collection of creative commons licensed, royalty-free music from Stephen McLeod aka allmyfriendsaresynths",
+        "created": "2026-08-25T20:42:40Z",
+        "description": "100+ AI Agents, Agent Skills and RAG Apps - Free and Open Source.",
         "forks": 0,
-        "language": "Unknown",
-        "name": "amfas-music-library",
+        "language": "Python",
+        "name": "awesome-llm-apps",
         "stars": 0,
-        "topics": [],
-        "updated": "2026-09-15T12:00:23Z",
-        "url": "https://github.com/itsdarklikehell/amfas-music-library"
+        "topics": [
+          "awesome",
+          "curation",
+          "resources"
+        ],
+        "updated": "2026-10-02T01:30:47Z",
+        "url": "https://github.com/itsdarklikehell/awesome-llm-apps"
       },
       {
-        "created": "2026-08-25T14:19:32Z",
-        "description": "No description",
-        "forks": 0,
-        "language": "Vue",
-        "name": "Anima",
-        "stars": 0,
+        "created": "2021-08-07T17:04:29Z",
+        "description": "An plugin for pwnagotchi that uses apprise to send notifications.",
+        "forks": 1,
+        "language": "Python",
+        "name": "apprise-notify",
+        "stars": 3,
         "topics": [],
-        "updated": "2026-08-30T14:26:59Z",
-        "url": "https://github.com/itsdarklikehell/Anima"
+        "updated": "2026-10-02T01:30:46Z",
+        "url": "https://github.com/itsdarklikehell/apprise-notify"
       },
       {
         "created": "2026-09-11T01:32:56Z",
@@ -176,72 +431,6 @@
         "url": "https://github.com/itsdarklikehell/another-dice-roller"
       },
       {
-        "created": "2021-08-07T17:04:29Z",
-        "description": "An plugin for pwnagotchi that uses apprise to send notifications.",
-        "forks": 1,
-        "language": "Python",
-        "name": "apprise-notify",
-        "stars": 3,
-        "topics": [],
-        "updated": "2026-10-02T01:30:46Z",
-        "url": "https://github.com/itsdarklikehell/apprise-notify"
-      },
-      {
-        "created": "2026-09-09T02:42:39Z",
-        "description": "A simple, embedable, tracker for the exploration of Ythryn in \"Icewind Dale: Rime of the Frostmaiden\".",
-        "forks": 0,
-        "language": "HTML",
-        "name": "arcane-blight-tracker",
-        "stars": 0,
-        "topics": [],
-        "updated": "2026-10-01T01:08:29Z",
-        "url": "https://github.com/itsdarklikehell/arcane-blight-tracker"
-      },
-      {
-        "created": "2026-09-11T12:47:25Z",
-        "description": "A digital tabletop grid for D&D-style games, designed for TV display and local play.",
-        "forks": 0,
-        "language": "JavaScript",
-        "name": "Aure-Relics-Grid",
-        "stars": 0,
-        "topics": [],
-        "updated": "2026-09-25T16:38:32Z",
-        "url": "https://github.com/itsdarklikehell/Aure-Relics-Grid"
-      },
-      {
-        "created": "2026-09-28T20:08:04Z",
-        "description": "a recursive self-improving harness designed to help your agents (and future iterations of those agents) succeed on any task",
-        "forks": 0,
-        "language": "Python",
-        "name": "autocontext",
-        "stars": 0,
-        "topics": [],
-        "updated": "2026-10-02T01:30:59Z",
-        "url": "https://github.com/itsdarklikehell/autocontext"
-      },
-      {
-        "created": "2026-09-24T21:25:26Z",
-        "description": "An autonomous novel writing pipeline, by Hermes Agent",
-        "forks": 0,
-        "language": "Unknown",
-        "name": "autonovel",
-        "stars": 0,
-        "topics": [],
-        "updated": "2026-09-24T21:25:26Z",
-        "url": "https://github.com/itsdarklikehell/autonovel"
-      },
-      {
-        "created": "2026-09-28T20:05:36Z",
-        "description": "Skill that audits and rewrites content to remove AI writing patterns. Use it with your favorite agents including Claude Code, OpenClaw, Codex, and Hermes.",
-        "forks": 0,
-        "language": "JavaScript",
-        "name": "avoid-ai-writing",
-        "stars": 0,
-        "topics": [],
-        "updated": "2026-10-02T01:31:07Z",
-        "url": "https://github.com/itsdarklikehell/avoid-ai-writing"
-      },
-      {
         "created": "2026-08-25T20:46:54Z",
         "description": "A curated collection of 1000+ agent skills from official dev teams and the community, compatible with Claude Code, Codex, Gemini CLI, Cursor, and more.",
         "forks": 0,
@@ -256,33 +445,6 @@
         ],
         "updated": "2026-10-02T01:29:28Z",
         "url": "https://github.com/itsdarklikehell/awesome-agent-skills"
-      },
-      {
-        "created": "2026-08-25T20:44:52Z",
-        "description": "A trilingual (繁中 / English / 简中) learning roadmap for agentic AI: from LLM basics to multi-agent systems, with 240+ curated resources and hands-on examples. 中文 AI agent 學習地圖。",
-        "forks": 0,
-        "language": "Python",
-        "name": "awesome-agentic-ai-zh",
-        "stars": 0,
-        "topics": [
-          "agent",
-          "ai",
-          "cli",
-          "llm"
-        ],
-        "updated": "2026-09-25T16:21:06Z",
-        "url": "https://github.com/itsdarklikehell/awesome-agentic-ai-zh"
-      },
-      {
-        "created": "2026-08-25T20:51:05Z",
-        "description": "A curated catalogue of awesome agentic AI patterns",
-        "forks": 0,
-        "language": "HTML",
-        "name": "awesome-agentic-patterns",
-        "stars": 0,
-        "topics": [],
-        "updated": "2026-08-25T21:41:05Z",
-        "url": "https://github.com/itsdarklikehell/awesome-agentic-patterns"
       },
       {
         "created": "2026-08-25T20:47:44Z",
@@ -301,221 +463,19 @@
         "url": "https://github.com/itsdarklikehell/awesome-agents"
       },
       {
-        "created": "2026-08-25T20:42:56Z",
-        "description": "A list of AI autonomous agents",
+        "created": "2026-08-25T20:36:24Z",
+        "description": "The awesome collection of OpenClaw skills. 5,400+ skills filtered and categorized from the official OpenClaw Skills Registry.🦞",
         "forks": 0,
         "language": "Unknown",
-        "name": "awesome-ai-agents",
-        "stars": 0,
-        "topics": [],
-        "updated": "2026-08-25T20:42:56Z",
-        "url": "https://github.com/itsdarklikehell/awesome-ai-agents"
-      },
-      {
-        "created": "2026-08-25T20:43:41Z",
-        "description": "A collection of projects showcasing RAG, agents, workflows, and other AI use cases",
-        "forks": 0,
-        "language": "Python",
-        "name": "awesome-ai-apps",
-        "stars": 0,
-        "topics": [],
-        "updated": "2026-09-09T02:06:59Z",
-        "url": "https://github.com/itsdarklikehell/awesome-ai-apps"
-      },
-      {
-        "created": "2026-08-25T20:43:57Z",
-        "description": "Curated list of AI-powered developer tools.",
-        "forks": 0,
-        "language": "Unknown",
-        "name": "awesome-ai-devtools",
-        "stars": 0,
-        "topics": [],
-        "updated": "2026-08-25T20:43:57Z",
-        "url": "https://github.com/itsdarklikehell/awesome-ai-devtools"
-      },
-      {
-        "created": "2026-08-25T20:43:03Z",
-        "description": "Elevate your AI research writing, no more tedious polishing ✨ ",
-        "forks": 0,
-        "language": "Unknown",
-        "name": "awesome-ai-research-writing",
-        "stars": 0,
-        "topics": [],
-        "updated": "2026-08-25T20:43:03Z",
-        "url": "https://github.com/itsdarklikehell/awesome-ai-research-writing"
-      },
-      {
-        "created": "2026-08-25T20:43:49Z",
-        "description": "A curated list of Artificial Intelligence Top Tools",
-        "forks": 0,
-        "language": "Unknown",
-        "name": "awesome-ai-tools",
-        "stars": 0,
-        "topics": [],
-        "updated": "2026-08-25T20:43:49Z",
-        "url": "https://github.com/itsdarklikehell/awesome-ai-tools"
-      },
-      {
-        "created": "2026-08-25T20:44:05Z",
-        "description": "Collection of AI-related utilities. Welcome to submit pull requests /收藏AI相关的实用工具，欢迎提交pull requests",
-        "forks": 0,
-        "language": "Python",
-        "name": "Awesome-AITools",
-        "stars": 0,
-        "topics": [],
-        "updated": "2026-10-02T02:09:41Z",
-        "url": "https://github.com/itsdarklikehell/Awesome-AITools"
-      },
-      {
-        "created": "2026-08-25T20:44:43Z",
-        "description": "A curated list of Artificial Intelligence (AI) courses, books, video lectures and papers.",
-        "forks": 0,
-        "language": "Unknown",
-        "name": "awesome-artificial-intelligence",
-        "stars": 0,
-        "topics": [],
-        "updated": "2026-08-25T20:44:43Z",
-        "url": "https://github.com/itsdarklikehell/awesome-artificial-intelligence"
-      },
-      {
-        "created": "2026-08-25T20:50:59Z",
-        "description": "An orchestrated sub agent dev team powered by claude code",
-        "forks": 0,
-        "language": "Unknown",
-        "name": "awesome-claude-agents",
-        "stars": 0,
-        "topics": [],
-        "updated": "2026-08-25T20:50:59Z",
-        "url": "https://github.com/itsdarklikehell/awesome-claude-agents"
-      },
-      {
-        "created": "2026-08-25T20:51:29Z",
-        "description": "A hand-picked collection of the finest of resources for the most awesome of agents, Claude Code, the undisputed champion of coding companions, from the unstoppable team at Anthropic PBC. A delectable showcase of top tier skills, ambidextrous agents, scintillating status lines, top notch developer tooling, and also we have plugins",
-        "forks": 0,
-        "language": "Python",
-        "name": "awesome-claude-code",
-        "stars": 0,
-        "topics": [
-          "agent",
-          "ai",
-          "cli",
-          "llm"
-        ],
-        "updated": "2026-10-02T01:28:56Z",
-        "url": "https://github.com/itsdarklikehell/awesome-claude-code"
-      },
-      {
-        "created": "2026-08-25T20:43:12Z",
-        "description": "A curated list of awesome Claude Skills, resources, and tools for customizing Claude AI workflows",
-        "forks": 0,
-        "language": "Unknown",
-        "name": "awesome-claude-skills",
-        "stars": 0,
-        "topics": [],
-        "updated": "2026-08-25T20:43:13Z",
-        "url": "https://github.com/itsdarklikehell/awesome-claude-skills"
-      },
-      {
-        "created": "2026-08-25T20:47:19Z",
-        "description": "Community-contributed instructions, agents, skills, and configurations to help you make the most of GitHub Copilot.",
-        "forks": 0,
-        "language": "JavaScript",
-        "name": "awesome-copilot",
-        "stars": 0,
-        "topics": [
-          "agent",
-          "ai",
-          "cli",
-          "llm"
-        ],
-        "updated": "2026-10-02T01:28:48Z",
-        "url": "https://github.com/itsdarklikehell/awesome-copilot"
-      },
-      {
-        "created": "2026-09-24T22:05:52Z",
-        "description": "A curated list of CTF frameworks, libraries, resources and softwares",
-        "forks": 0,
-        "language": "Unknown",
-        "name": "awesome-ctf",
-        "stars": 0,
-        "topics": [],
-        "updated": "2026-09-24T22:05:52Z",
-        "url": "https://github.com/itsdarklikehell/awesome-ctf"
-      },
-      {
-        "created": "2026-08-25T20:48:10Z",
-        "description": "No description",
-        "forks": 0,
-        "language": "Unknown",
-        "name": "awesome-deepseek-agent",
-        "stars": 0,
-        "topics": [
-          "agent",
-          "ai",
-          "cli",
-          "llm"
-        ],
-        "updated": "2026-10-02T01:29:10Z",
-        "url": "https://github.com/itsdarklikehell/awesome-deepseek-agent"
-      },
-      {
-        "created": "2026-08-25T20:47:35Z",
-        "description": "A collection of DESIGN.md files analysis by popular brand design systems. Drop one into your project and let coding agents generate a matching UI.",
-        "forks": 0,
-        "language": "Unknown",
-        "name": "awesome-design-md",
-        "stars": 0,
-        "topics": [],
-        "updated": "2026-08-25T20:47:35Z",
-        "url": "https://github.com/itsdarklikehell/awesome-design-md"
-      },
-      {
-        "created": "2026-09-11T01:03:54Z",
-        "description": "Resources for Dungeons & Dragons",
-        "forks": 0,
-        "language": "Unknown",
-        "name": "awesome-dnd",
-        "stars": 0,
-        "topics": [],
-        "updated": "2026-09-11T01:03:54Z",
-        "url": "https://github.com/itsdarklikehell/awesome-dnd"
-      },
-      {
-        "created": "2026-08-25T20:43:25Z",
-        "description": "A curated list of modern Generative Artificial Intelligence projects and services",
-        "forks": 0,
-        "language": "Unknown",
-        "name": "awesome-generative-ai",
-        "stars": 0,
-        "topics": [],
-        "updated": "2026-09-09T02:07:49Z",
-        "url": "https://github.com/itsdarklikehell/awesome-generative-ai"
-      },
-      {
-        "created": "2026-08-25T20:42:48Z",
-        "description": "A one stop repository for generative AI research updates, interview resources, notebooks and much more!",
-        "forks": 0,
-        "language": "HTML",
-        "name": "awesome-generative-ai-guide",
+        "name": "awesome-openclaw-skills",
         "stars": 0,
         "topics": [
           "awesome",
           "curation",
           "resources"
         ],
-        "updated": "2026-09-25T16:22:50Z",
-        "url": "https://github.com/itsdarklikehell/awesome-generative-ai-guide"
-      },
-      {
-        "created": "2026-08-25T20:47:57Z",
-        "description": "A curated list of GPT agents for cybersecurity",
-        "forks": 0,
-        "language": "Unknown",
-        "name": "Awesome-GPT-Agents",
-        "stars": 0,
-        "topics": [],
-        "updated": "2026-08-25T20:47:57Z",
-        "url": "https://github.com/itsdarklikehell/Awesome-GPT-Agents"
+        "updated": "2026-10-02T01:29:17Z",
+        "url": "https://github.com/itsdarklikehell/awesome-openclaw-skills"
       },
       {
         "created": "2026-08-25T20:51:44Z",
@@ -534,41 +494,20 @@
         "url": "https://github.com/itsdarklikehell/awesome-hermes-agent"
       },
       {
-        "created": "2026-09-24T21:27:39Z",
-        "description": "Hermes Agent skills and plugins: 350+ tools, memory providers, and guides for Nous Research's agent.",
+        "created": "2026-08-25T20:48:10Z",
+        "description": "No description",
         "forks": 0,
         "language": "Unknown",
-        "name": "awesome-hermes-skills",
-        "stars": 0,
-        "topics": [],
-        "updated": "2026-09-24T21:27:39Z",
-        "url": "https://github.com/itsdarklikehell/awesome-hermes-skills"
-      },
-      {
-        "created": "2026-08-25T13:18:46Z",
-        "description": "Curated real-world use cases for Hermes Agent — the self-improving AI agent from Nous Research. Backed by primary sources.",
-        "forks": 0,
-        "language": "Python",
-        "name": "awesome-hermes-usecases",
-        "stars": 0,
-        "topics": [],
-        "updated": "2026-09-09T02:07:20Z",
-        "url": "https://github.com/itsdarklikehell/awesome-hermes-usecases"
-      },
-      {
-        "created": "2026-08-25T20:42:40Z",
-        "description": "100+ AI Agents, Agent Skills and RAG Apps - Free and Open Source.",
-        "forks": 0,
-        "language": "Python",
-        "name": "awesome-llm-apps",
+        "name": "awesome-deepseek-agent",
         "stars": 0,
         "topics": [
-          "awesome",
-          "curation",
-          "resources"
+          "agent",
+          "ai",
+          "cli",
+          "llm"
         ],
-        "updated": "2026-10-02T01:30:47Z",
-        "url": "https://github.com/itsdarklikehell/awesome-llm-apps"
+        "updated": "2026-10-02T01:29:10Z",
+        "url": "https://github.com/itsdarklikehell/awesome-deepseek-agent"
       },
       {
         "created": "2026-08-25T20:42:28Z",
@@ -586,96 +525,188 @@
         "url": "https://github.com/itsdarklikehell/awesome-mcp-servers"
       },
       {
-        "created": "2026-08-25T20:50:53Z",
-        "description": "162 production-ready AI agent templates for OpenClaw. SOUL.md configs across 19 categories. Submit yours!",
+        "created": "2026-08-25T20:46:48Z",
+        "description": "AAS Core is the local, agent-first control plane for complete catalog discovery, agent-owned selection, stack validation, and planning, backed by 2,005+ agentic skills. Includes CLI, local MCP, catalog, plugins, and Workbench.",
         "forks": 0,
-        "language": "Unknown",
-        "name": "awesome-openclaw-agents",
-        "stars": 0,
-        "topics": [],
-        "updated": "2026-08-25T20:50:53Z",
-        "url": "https://github.com/itsdarklikehell/awesome-openclaw-agents"
-      },
-      {
-        "created": "2026-08-25T20:36:24Z",
-        "description": "The awesome collection of OpenClaw skills. 5,400+ skills filtered and categorized from the official OpenClaw Skills Registry.🦞",
-        "forks": 0,
-        "language": "Unknown",
-        "name": "awesome-openclaw-skills",
+        "language": "Python",
+        "name": "agentic-awesome-skills",
         "stars": 0,
         "topics": [
-          "awesome",
-          "curation",
-          "resources"
+          "agent",
+          "ai",
+          "cli",
+          "llm"
         ],
-        "updated": "2026-10-02T01:29:17Z",
-        "url": "https://github.com/itsdarklikehell/awesome-openclaw-skills"
+        "updated": "2026-10-02T01:28:59Z",
+        "url": "https://github.com/itsdarklikehell/agentic-awesome-skills"
       },
       {
-        "created": "2026-08-25T13:18:36Z",
-        "description": "A community collection of OpenClaw use cases for making life easier.",
+        "created": "2026-08-25T20:51:29Z",
+        "description": "A hand-picked collection of the finest of resources for the most awesome of agents, Claude Code, the undisputed champion of coding companions, from the unstoppable team at Anthropic PBC. A delectable showcase of top tier skills, ambidextrous agents, scintillating status lines, top notch developer tooling, and also we have plugins",
         "forks": 0,
-        "language": "Unknown",
-        "name": "awesome-openclaw-usecases",
+        "language": "Python",
+        "name": "awesome-claude-code",
         "stars": 0,
-        "topics": [],
-        "updated": "2026-08-25T13:18:36Z",
-        "url": "https://github.com/itsdarklikehell/awesome-openclaw-usecases"
+        "topics": [
+          "agent",
+          "ai",
+          "cli",
+          "llm"
+        ],
+        "updated": "2026-10-02T01:28:56Z",
+        "url": "https://github.com/itsdarklikehell/awesome-claude-code"
       },
       {
-        "created": "2026-08-25T20:51:17Z",
-        "description": "🤖 A comprehensive list of 1,500+ resources and tools related to AI agents.",
-        "forks": 0,
-        "language": "Unknown",
-        "name": "awesome_ai_agents",
-        "stars": 0,
-        "topics": [],
-        "updated": "2026-08-25T20:51:17Z",
-        "url": "https://github.com/itsdarklikehell/awesome_ai_agents"
-      },
-      {
-        "created": "2018-02-07T21:33:03Z",
-        "description": "A huge collection of handy bash aliases.",
-        "forks": 0,
-        "language": "Shell",
-        "name": "bash_aliases",
-        "stars": 0,
-        "topics": [],
-        "updated": "2026-10-01T21:03:22Z",
-        "url": "https://github.com/itsdarklikehell/bash_aliases"
-      },
-      {
-        "created": "2026-09-09T02:21:13Z",
-        "description": "Beholden TTRPG Campaign Tracker",
-        "forks": 0,
-        "language": "TypeScript",
-        "name": "beholden",
-        "stars": 0,
-        "topics": [],
-        "updated": "2026-10-02T01:31:12Z",
-        "url": "https://github.com/itsdarklikehell/beholden"
-      },
-      {
-        "created": "2019-12-13T00:08:39Z",
-        "description": "The Swiss Army knife for 802.11, BLE and Ethernet networks reconnaissance and MITM attacks.",
-        "forks": 0,
-        "language": "Go",
-        "name": "bettercap",
-        "stars": 0,
-        "topics": [],
-        "updated": "2026-08-22T21:18:45Z",
-        "url": "https://github.com/itsdarklikehell/bettercap"
-      },
-      {
-        "created": "2026-09-09T02:37:35Z",
-        "description": "This tool transforms the interactive, tabbed D&D Beyond character sheet into a condensed, printer-friendly format. It solves the problem of \"hidden\" content in tabs (Actions, Spells, Equipment) by expanding them into a single fully customized layout view.",
+        "created": "2026-08-25T20:47:19Z",
+        "description": "Community-contributed instructions, agents, skills, and configurations to help you make the most of GitHub Copilot.",
         "forks": 0,
         "language": "JavaScript",
-        "name": "beyond-print-enhancer",
+        "name": "awesome-copilot",
+        "stars": 0,
+        "topics": [
+          "agent",
+          "ai",
+          "cli",
+          "llm"
+        ],
+        "updated": "2026-10-02T01:28:48Z",
+        "url": "https://github.com/itsdarklikehell/awesome-copilot"
+      },
+      {
+        "created": "2025-10-18T07:23:27Z",
+        "description": "Talk to any LLM with hands-free voice interaction, voice interruption, and Live2D taking face running locally across platforms",
+        "forks": 0,
+        "language": "Python",
+        "name": "Open-LLM-VTuber",
         "stars": 0,
         "topics": [],
-        "updated": "2026-09-26T20:19:13Z",
-        "url": "https://github.com/itsdarklikehell/beyond-print-enhancer"
+        "updated": "2026-10-02T01:28:41Z",
+        "url": "https://github.com/itsdarklikehell/Open-LLM-VTuber"
+      },
+      {
+        "created": "2026-09-24T21:25:56Z",
+        "description": "Autonomous SRE agent that detects, diagnoses, and self-heals production incidents - with a standalone watchdog that needs no Hermes install, just an Anthropic API key. Memory + Skills + Cron + Gateway + Subagents + Atropos RL.",
+        "forks": 0,
+        "language": "Python",
+        "name": "hermes-incident-commander",
+        "stars": 0,
+        "topics": [
+          "agent",
+          "ai",
+          "cli",
+          "llm"
+        ],
+        "updated": "2026-10-02T01:27:26Z",
+        "url": "https://github.com/itsdarklikehell/hermes-incident-commander"
+      },
+      {
+        "created": "2026-09-28T20:03:05Z",
+        "description": "Hermes Agent setup, migration, LightRAG, Telegram, and skill creation guide",
+        "forks": 0,
+        "language": "Python",
+        "name": "hermes-optimization-guide",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-10-02T01:27:21Z",
+        "url": "https://github.com/itsdarklikehell/hermes-optimization-guide"
+      },
+      {
+        "created": "2026-09-24T21:05:49Z",
+        "description": "Pixel-art virtual office for Hermes Agent — watch your agents work as animated pixel characters",
+        "forks": 0,
+        "language": "HTML",
+        "name": "hermes-pixel-office-enhanced",
+        "stars": 0,
+        "topics": [
+          "agent",
+          "ai",
+          "cli",
+          "llm"
+        ],
+        "updated": "2026-10-02T01:27:17Z",
+        "url": "https://github.com/itsdarklikehell/hermes-pixel-office-enhanced"
+      },
+      {
+        "created": "2026-09-28T20:02:56Z",
+        "description": "Hermes Atlas — the decision layer for Hermes Agent: install guidance, mode & skill picks, and a curated catalog of 240+ ecosystem tools with live GitHub data",
+        "forks": 0,
+        "language": "HTML",
+        "name": "hermes-ecosystem",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-10-02T01:27:13Z",
+        "url": "https://github.com/itsdarklikehell/hermes-ecosystem"
+      },
+      {
+        "created": "2026-08-25T20:39:20Z",
+        "description": "Desktop Companion for Hermes Agent",
+        "forks": 0,
+        "language": "TypeScript",
+        "name": "hermes-desktop",
+        "stars": 0,
+        "topics": [
+          "agent",
+          "ai",
+          "cli",
+          "llm"
+        ],
+        "updated": "2026-10-02T01:27:11Z",
+        "url": "https://github.com/itsdarklikehell/hermes-desktop"
+      },
+      {
+        "created": "2026-08-25T20:38:51Z",
+        "description": "The agent that grows with you",
+        "forks": 0,
+        "language": "Python",
+        "name": "hermes-agent",
+        "stars": 0,
+        "topics": [
+          "agent",
+          "ai",
+          "automation",
+          "cli",
+          "llm"
+        ],
+        "updated": "2026-10-02T01:27:11Z",
+        "url": "https://github.com/itsdarklikehell/hermes-agent"
+      },
+      {
+        "created": "2020-02-16T18:35:36Z",
+        "description": "A python plugin for pwnagotchi that enables it to utilize tts to speak.",
+        "forks": 5,
+        "language": "Python",
+        "name": "pwnspeaker",
+        "stars": 20,
+        "topics": [],
+        "updated": "2026-10-02T01:11:44Z",
+        "url": "https://github.com/itsdarklikehell/pwnspeaker"
+      },
+      {
+        "created": "2021-08-05T01:29:12Z",
+        "description": "No description",
+        "forks": 20,
+        "language": "Python",
+        "name": "pwnagotchi-plugins",
+        "stars": 231,
+        "topics": [
+          "pwnagotchi",
+          "sdr",
+          "security",
+          "wifi"
+        ],
+        "updated": "2026-10-01T21:39:24Z",
+        "url": "https://github.com/itsdarklikehell/pwnagotchi-plugins"
+      },
+      {
+        "created": "2026-10-01T21:30:59Z",
+        "description": "Script collectie - Gource visualisation",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "scripts",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-10-01T21:31:00Z",
+        "url": "https://github.com/itsdarklikehell/scripts"
       },
       {
         "created": "2016-05-30T22:43:23Z",
@@ -689,92 +720,101 @@
         "url": "https://github.com/itsdarklikehell/blather"
       },
       {
-        "created": "2026-09-09T02:33:02Z",
-        "description": "My personally cultivated list of FoundryVTT Modules for Dungeons and Dragons 5e and Pathfinder 2e that play nicely together without creating an overwhelming amount of UI options or causing noticeable FPS drops.",
+        "created": "2017-11-25T21:43:27Z",
+        "description": "No description",
         "forks": 0,
-        "language": "Unknown",
-        "name": "Bryans-Preferred-Modules-for-FoundryVTT",
+        "language": "Shell",
+        "name": "RetroPie-Stream-Recording",
         "stars": 0,
         "topics": [],
-        "updated": "2026-09-09T02:33:02Z",
-        "url": "https://github.com/itsdarklikehell/Bryans-Preferred-Modules-for-FoundryVTT"
+        "updated": "2026-10-01T21:03:23Z",
+        "url": "https://github.com/itsdarklikehell/RetroPie-Stream-Recording"
       },
       {
-        "created": "2026-09-11T01:10:54Z",
-        "description": "Drag and Drop Form Builder for Vueform",
+        "created": "2018-02-07T21:33:03Z",
+        "description": "A huge collection of handy bash aliases.",
         "forks": 0,
-        "language": "Unknown",
-        "name": "builder",
+        "language": "Shell",
+        "name": "bash_aliases",
         "stars": 0,
         "topics": [],
-        "updated": "2026-09-11T01:10:54Z",
-        "url": "https://github.com/itsdarklikehell/builder"
+        "updated": "2026-10-01T21:03:22Z",
+        "url": "https://github.com/itsdarklikehell/bash_aliases"
       },
       {
-        "created": "2026-09-11T12:48:06Z",
-        "description": "Simple TTRPG Campaign manager",
+        "created": "2026-09-09T02:42:39Z",
+        "description": "A simple, embedable, tracker for the exploration of Ythryn in \"Icewind Dale: Rime of the Frostmaiden\".",
         "forks": 0,
-        "language": "Unknown",
-        "name": "Camply-Portal",
+        "language": "HTML",
+        "name": "arcane-blight-tracker",
         "stars": 0,
         "topics": [],
-        "updated": "2026-09-11T12:48:06Z",
-        "url": "https://github.com/itsdarklikehell/Camply-Portal"
+        "updated": "2026-10-01T01:08:29Z",
+        "url": "https://github.com/itsdarklikehell/arcane-blight-tracker"
       },
       {
-        "created": "2026-08-30T21:01:16Z",
-        "description": "iptv app",
+        "created": "2026-09-09T02:29:25Z",
+        "description": "TTRPG resource manager, bringing all your books, maps, etc. in one place.",
         "forks": 0,
+        "language": "C#",
+        "name": "COMPASS",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-10-01T01:07:51Z",
+        "url": "https://github.com/itsdarklikehell/COMPASS"
+      },
+      {
+        "created": "2022-07-10T22:49:12Z",
+        "description": "Demo viewer using Pouet.net's metadata",
+        "forks": 1,
         "language": "Python",
-        "name": "canal-digitaal",
-        "stars": 0,
+        "name": "showet",
+        "stars": 1,
         "topics": [],
-        "updated": "2026-09-25T16:23:00Z",
-        "url": "https://github.com/itsdarklikehell/canal-digitaal"
+        "updated": "2026-10-01T00:09:04Z",
+        "url": "https://github.com/itsdarklikehell/showet"
       },
       {
-        "created": "2026-09-11T01:12:52Z",
-        "description": "A D&D map builder and campaign manager",
-        "forks": 0,
-        "language": "Unknown",
-        "name": "cartographer",
-        "stars": 0,
-        "topics": [],
-        "updated": "2026-09-11T01:12:52Z",
-        "url": "https://github.com/itsdarklikehell/cartographer"
-      },
-      {
-        "created": "2026-09-15T12:00:37Z",
-        "description": "Database of games.",
-        "forks": 0,
-        "language": "Unknown",
-        "name": "cartridge-index",
-        "stars": 0,
-        "topics": [],
-        "updated": "2026-09-15T12:00:37Z",
-        "url": "https://github.com/itsdarklikehell/cartridge-index"
-      },
-      {
-        "created": "2026-09-11T01:09:50Z",
-        "description": "FOSS dnd 5 and 5.5 charsheet generator, action-, inventory-, spellbook-tracker with easily expandable database",
+        "created": "2026-09-28T20:04:19Z",
+        "description": "Garry's Opinionated OpenClaw/Hermes Agent Brain",
         "forks": 0,
         "language": "TypeScript",
-        "name": "charnik",
+        "name": "gbrain",
         "stars": 0,
         "topics": [],
-        "updated": "2026-10-02T01:31:20Z",
-        "url": "https://github.com/itsdarklikehell/charnik"
+        "updated": "2026-10-01T00:08:38Z",
+        "url": "https://github.com/itsdarklikehell/gbrain"
       },
       {
-        "created": "2026-09-16T10:05:09Z",
-        "description": "SRD D&D 5.1.0 and SRD D&D 5.2.1 for Charnik",
+        "created": "2026-09-24T21:04:29Z",
+        "description": "Agent Office — pixel floor for Hermes + OpenCode + Telegram sessions",
         "forks": 0,
-        "language": "Unknown",
-        "name": "charnik-content-srd",
+        "language": "JavaScript",
+        "name": "agent-office",
         "stars": 0,
-        "topics": [],
-        "updated": "2026-10-02T01:31:26Z",
-        "url": "https://github.com/itsdarklikehell/charnik-content-srd"
+        "topics": [
+          "agent",
+          "ai",
+          "cli",
+          "llm"
+        ],
+        "updated": "2026-09-30T13:19:40Z",
+        "url": "https://github.com/itsdarklikehell/agent-office"
+      },
+      {
+        "created": "2026-09-11T01:43:52Z",
+        "description": "An easy-to-deploy containerized Foundry Virtual Tabletop server.",
+        "forks": 0,
+        "language": "Shell",
+        "name": "foundryvtt-docker",
+        "stars": 0,
+        "topics": [
+          "deployment",
+          "devops",
+          "infrastructure"
+        ],
+        "updated": "2026-09-29T23:47:51Z",
+        "url": "https://github.com/itsdarklikehell/foundryvtt-docker"
       },
       {
         "created": "2026-09-11T01:02:13Z",
@@ -788,81 +828,70 @@
         "url": "https://github.com/itsdarklikehell/chronicle"
       },
       {
-        "created": "2026-08-30T13:41:47Z",
-        "description": "Reusable GitHub Actions CI workflows for the itsdarklikehell fleet (lint/typecheck/test/build). Single source of truth.",
+        "created": "2026-09-28T20:07:11Z",
+        "description": "Literate programming skill for agent harnesses like Claude Code, OpenCode and Hermes Agent",
         "forks": 0,
         "language": "Unknown",
-        "name": "ci-templates",
+        "name": "litprog-skill",
         "stars": 0,
         "topics": [],
-        "updated": "2026-10-02T02:10:13Z",
-        "url": "https://github.com/itsdarklikehell/ci-templates"
+        "updated": "2026-09-28T20:07:11Z",
+        "url": "https://github.com/itsdarklikehell/litprog-skill"
       },
       {
-        "created": "2026-09-11T01:47:52Z",
-        "description": "Cyberpunk tabletop map project",
+        "created": "2026-09-28T20:07:03Z",
+        "description": "Unofficial Hermes Agent skill pack built from fantasy spell and skill names",
         "forks": 0,
         "language": "Unknown",
-        "name": "CITY_NET",
+        "name": "Wizards-of-the-Ghosts",
         "stars": 0,
         "topics": [],
-        "updated": "2026-09-11T01:47:52Z",
-        "url": "https://github.com/itsdarklikehell/CITY_NET"
+        "updated": "2026-09-28T20:07:03Z",
+        "url": "https://github.com/itsdarklikehell/Wizards-of-the-Ghosts"
       },
       {
-        "created": "2026-08-25T13:43:13Z",
-        "description": "Claw3D is an open source 3D engine built on OpenClaw for creating games, simulations, and high-performance 3D applications.",
+        "created": "2026-09-28T20:04:45Z",
+        "description": "Custom skins (visual themes) for the Hermes CLI agent",
         "forks": 0,
-        "language": "TypeScript",
-        "name": "Claw3D",
+        "language": "Unknown",
+        "name": "hermes-skins",
         "stars": 0,
         "topics": [],
-        "updated": "2026-08-31T22:42:53Z",
-        "url": "https://github.com/itsdarklikehell/Claw3D"
+        "updated": "2026-09-28T20:04:45Z",
+        "url": "https://github.com/itsdarklikehell/hermes-skins"
       },
       {
-        "created": "2026-08-25T20:37:15Z",
-        "description": "Skill + Plugin Registry for OpenClaw",
-        "forks": 1,
-        "language": "TypeScript",
-        "name": "clawhub",
-        "stars": 0,
-        "topics": [],
-        "updated": "2026-10-02T02:10:23Z",
-        "url": "https://github.com/itsdarklikehell/clawhub"
-      },
-      {
-        "created": "2026-08-25T13:17:49Z",
-        "description": "ClawLibrary is a 2D pixel-game-style control interface for OpenClaw.  It turns OpenClaw's generated assets, runtime activity, and assets related working state into a visual library interface that can be browsed, previewed, and monitored in real time.",
+        "created": "2026-09-28T20:04:33Z",
+        "description": "🎭 277 个即插即用的 AI 专家角色 — 支持 Claude Code/Cursor/Copilot 等 20 种工具，覆盖工程/设计/营销/金融等 20 个部门。含 64 个中国市场原创智能体（小红书/抖音/微信/飞书/钉钉/Qt 上位机/机械设计）。搭配编排器 agency-orchestrator，一句话即可让多位专家按 DAG 自动协作。",
         "forks": 0,
-        "language": "TypeScript",
-        "name": "ClawLibrary",
+        "language": "Unknown",
+        "name": "agency-agents-zh",
         "stars": 0,
         "topics": [],
-        "updated": "2026-08-30T14:26:56Z",
-        "url": "https://github.com/itsdarklikehell/ClawLibrary"
+        "updated": "2026-09-28T20:04:33Z",
+        "url": "https://github.com/itsdarklikehell/agency-agents-zh"
       },
       {
-        "created": "2026-08-25T14:20:53Z",
-        "description": "A sleek, open-source desktop client for OpenClaw. Built with React, Vite,  and Electron for a fast, responsive, and experimental \"Vibe Coding\"  experience.",
+        "created": "2026-09-28T20:03:14Z",
+        "description": "Hermes agent + LLM Wiki + 源代码 完成 Hermes agent  wiki ",
         "forks": 0,
-        "language": "TypeScript",
-        "name": "clawUI",
+        "language": "Unknown",
+        "name": "Hermes-Wiki",
         "stars": 0,
         "topics": [],
-        "updated": "2026-08-30T14:27:36Z",
-        "url": "https://github.com/itsdarklikehell/clawUI"
+        "updated": "2026-09-28T20:03:14Z",
+        "url": "https://github.com/itsdarklikehell/Hermes-Wiki"
       },
       {
-        "created": "2025-10-25T13:09:59Z",
-        "description": "Easily setup production-ready standalone Clickhouse and monitor it",
+        "created": "2026-09-28T20:02:47Z",
+        "description": "Hermes Agent 从入门到精通 · 橙皮书系列 · Nous Research 开源 AI Agent 框架实战指南",
         "forks": 0,
-        "language": "Shell",
-        "name": "clickhouse",
+        "language": "Unknown",
+        "name": "hermes-agent-orange-book",
         "stars": 0,
         "topics": [],
-        "updated": "2026-08-25T21:44:30Z",
-        "url": "https://github.com/itsdarklikehell/clickhouse"
+        "updated": "2026-09-28T20:02:48Z",
+        "url": "https://github.com/itsdarklikehell/hermes-agent-orange-book"
       },
       {
         "created": "2025-04-13T08:08:35Z",
@@ -880,114 +909,20 @@
         "url": "https://github.com/itsdarklikehell/ComfyUI-Installer"
       },
       {
-        "created": "2026-09-09T02:29:25Z",
-        "description": "TTRPG resource manager, bringing all your books, maps, etc. in one place.",
+        "created": "2026-09-09T02:28:14Z",
+        "description": "Experience the next step in tabletop RPGs",
         "forks": 0,
-        "language": "C#",
-        "name": "COMPASS",
+        "language": "JavaScript",
+        "name": "adventurerscodex",
         "stars": 0,
-        "topics": [],
-        "updated": "2026-10-01T01:07:51Z",
-        "url": "https://github.com/itsdarklikehell/COMPASS"
-      },
-      {
-        "created": "2026-09-11T00:59:58Z",
-        "description": "Dungeons and Dragons game designed to be played at the command console",
-        "forks": 0,
-        "language": "Unknown",
-        "name": "Console-DnD",
-        "stars": 0,
-        "topics": [],
-        "updated": "2026-09-11T00:59:58Z",
-        "url": "https://github.com/itsdarklikehell/Console-DnD"
-      },
-      {
-        "created": "2024-12-26T21:55:44Z",
-        "description": "Helps one create and install a Retropie-Extra scriptmodule for your Retropie-Setup",
-        "forks": 1,
-        "language": "Shell",
-        "name": "Create-a-Retropie-Extra-Scriptmodule",
-        "stars": 0,
-        "topics": [],
-        "updated": "2026-10-02T02:10:39Z",
-        "url": "https://github.com/itsdarklikehell/Create-a-Retropie-Extra-Scriptmodule"
-      },
-      {
-        "created": "2017-05-11T01:53:03Z",
-        "description": "This script creates a NATed or Bridged WiFi Access Point.",
-        "forks": 0,
-        "language": "Shell",
-        "name": "create_ap",
-        "stars": 0,
-        "topics": [],
-        "updated": "2026-08-25T21:41:29Z",
-        "url": "https://github.com/itsdarklikehell/create_ap"
-      },
-      {
-        "created": "2026-09-11T01:46:29Z",
-        "description": "The Cypher System for Foundry VTT",
-        "forks": 0,
-        "language": "Unknown",
-        "name": "cyphersystem-foundryvtt",
-        "stars": 0,
-        "topics": [],
-        "updated": "2026-09-11T01:46:29Z",
-        "url": "https://github.com/itsdarklikehell/cyphersystem-foundryvtt"
-      },
-      {
-        "created": "2026-09-11T13:48:18Z",
-        "description": "A fast, powerful, and extensible dice engine for D&D, d20 systems, and any other system that needs dice!",
-        "forks": 0,
-        "language": "Python",
-        "name": "d20",
-        "stars": 0,
-        "topics": [],
-        "updated": "2026-09-25T16:22:57Z",
-        "url": "https://github.com/itsdarklikehell/d20"
-      },
-      {
-        "created": "2026-09-11T13:53:47Z",
-        "description": "A comprehensive Python-based dice notation interpreter and roller.",
-        "forks": 0,
-        "language": "Unknown",
-        "name": "d7",
-        "stars": 0,
-        "topics": [],
-        "updated": "2026-09-11T13:53:47Z",
-        "url": "https://github.com/itsdarklikehell/d7"
-      },
-      {
-        "created": "2026-09-11T12:50:01Z",
-        "description": "Config-driven Fear/Hope tracker for the Daggerheart TTRPG system. Built with Python and Pygame, designed for laptop development with planned Raspberry Pi deployment.",
-        "forks": 0,
-        "language": "Unknown",
-        "name": "daggerheart_tracker",
-        "stars": 0,
-        "topics": [],
-        "updated": "2026-09-11T12:50:01Z",
-        "url": "https://github.com/itsdarklikehell/daggerheart_tracker"
-      },
-      {
-        "created": "2024-04-25T05:45:06Z",
-        "description": "Ever forgot to check in or got caught in the time zone shuffle? 🌎😅 Say hello to your daily check-in savior - the bot that keeps you on track with a sprinkle of quirkiness! 🤖🎉",
-        "forks": 0,
-        "language": "Python",
-        "name": "Daily-Hoyo-Checkin",
-        "stars": 0,
-        "topics": [],
-        "updated": "2026-09-26T20:18:27Z",
-        "url": "https://github.com/itsdarklikehell/Daily-Hoyo-Checkin"
-      },
-      {
-        "created": "2026-09-09T02:38:46Z",
-        "description": "This project is for making a minimalistic experience of the D&D Beyond website.",
-        "forks": 0,
-        "language": "Unknown",
-        "name": "ddb-redirecter",
-        "stars": 0,
-        "topics": [],
-        "updated": "2026-09-09T02:38:46Z",
-        "url": "https://github.com/itsdarklikehell/ddb-redirecter"
+        "topics": [
+          "agent",
+          "ai",
+          "cli",
+          "llm"
+        ],
+        "updated": "2026-09-26T20:38:19Z",
+        "url": "https://github.com/itsdarklikehell/adventurerscodex"
       },
       {
         "created": "2026-09-11T01:12:30Z",
@@ -1006,70 +941,184 @@
         "url": "https://github.com/itsdarklikehell/dice"
       },
       {
-        "created": "2026-09-11T01:28:15Z",
-        "description": "A table-top dice library for PHP",
+        "created": "2026-09-09T02:37:35Z",
+        "description": "This tool transforms the interactive, tabbed D&D Beyond character sheet into a condensed, printer-friendly format. It solves the problem of \"hidden\" content in tabs (Actions, Spells, Equipment) by expanding them into a single fully customized layout view.",
         "forks": 0,
-        "language": "Unknown",
-        "name": "dicee",
+        "language": "JavaScript",
+        "name": "beyond-print-enhancer",
         "stars": 0,
         "topics": [],
-        "updated": "2026-09-11T01:28:15Z",
-        "url": "https://github.com/itsdarklikehell/dicee"
+        "updated": "2026-09-26T20:19:13Z",
+        "url": "https://github.com/itsdarklikehell/beyond-print-enhancer"
       },
       {
-        "created": "2026-09-09T02:41:29Z",
-        "description": "Documentation for DiceForge API",
+        "created": "2024-04-25T05:45:06Z",
+        "description": "Ever forgot to check in or got caught in the time zone shuffle? 🌎😅 Say hello to your daily check-in savior - the bot that keeps you on track with a sprinkle of quirkiness! 🤖🎉",
         "forks": 0,
-        "language": "Unknown",
-        "name": "DiceForge-Docs",
+        "language": "Python",
+        "name": "Daily-Hoyo-Checkin",
         "stars": 0,
         "topics": [],
-        "updated": "2026-09-09T02:41:29Z",
-        "url": "https://github.com/itsdarklikehell/DiceForge-Docs"
+        "updated": "2026-09-26T20:18:27Z",
+        "url": "https://github.com/itsdarklikehell/Daily-Hoyo-Checkin"
       },
       {
-        "created": "2026-09-09T02:32:17Z",
-        "description": "Dice bot for Discord",
+        "created": "2026-09-09T12:49:32Z",
+        "description": "No description",
         "forks": 0,
-        "language": "Unknown",
-        "name": "DiceMaiden",
+        "language": "C++",
+        "name": "picoTracker",
         "stars": 0,
         "topics": [],
-        "updated": "2026-09-09T02:32:17Z",
-        "url": "https://github.com/itsdarklikehell/DiceMaiden"
+        "updated": "2026-09-26T16:06:16Z",
+        "url": "https://github.com/itsdarklikehell/picoTracker"
       },
       {
-        "created": "2026-09-11T01:19:56Z",
-        "description": "Just a physics based dice roller. Created because others were unsatisfying or hard to use.",
+        "created": "2026-09-26T15:54:15Z",
+        "description": "collection of community contributed firmwares for the picoTracker",
         "forks": 0,
         "language": "Unknown",
-        "name": "diceRoller",
+        "name": "picoTracker-playground",
         "stars": 0,
         "topics": [],
-        "updated": "2026-09-11T01:19:57Z",
-        "url": "https://github.com/itsdarklikehell/diceRoller"
+        "updated": "2026-09-26T15:54:15Z",
+        "url": "https://github.com/itsdarklikehell/picoTracker-playground"
       },
       {
-        "created": "2026-09-11T13:52:05Z",
-        "description": "Python tool for rolling a lot of dice",
+        "created": "2026-09-26T15:52:02Z",
+        "description": "No description",
         "forks": 0,
         "language": "Unknown",
-        "name": "dice_roller",
+        "name": "picotracker_client",
         "stars": 0,
         "topics": [],
-        "updated": "2026-09-11T13:52:06Z",
-        "url": "https://github.com/itsdarklikehell/dice_roller"
+        "updated": "2026-09-26T15:52:02Z",
+        "url": "https://github.com/itsdarklikehell/picotracker_client"
       },
       {
-        "created": "2026-09-11T13:50:07Z",
-        "description": "Django-based visualiser for tournaments for the boardgame Diplomacy",
+        "created": "2026-09-16T09:05:44Z",
+        "description": "Cross-Platform SDR Software",
         "forks": 0,
-        "language": "Unknown",
-        "name": "dipvis",
+        "language": "C++",
+        "name": "SDRPlusPlus",
         "stars": 0,
         "topics": [],
-        "updated": "2026-09-11T13:50:07Z",
-        "url": "https://github.com/itsdarklikehell/dipvis"
+        "updated": "2026-09-25T17:07:36Z",
+        "url": "https://github.com/itsdarklikehell/SDRPlusPlus"
+      },
+      {
+        "created": "2017-12-26T16:36:17Z",
+        "description": "setup a Raspberry Pi as an PXE-Server",
+        "forks": 0,
+        "language": "Shell",
+        "name": "RPi-PXE-Server",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-25T17:00:55Z",
+        "url": "https://github.com/itsdarklikehell/RPi-PXE-Server"
+      },
+      {
+        "created": "2026-09-11T13:53:09Z",
+        "description": "Virtual table top for DND with fog of war effect.",
+        "forks": 0,
+        "language": "Python",
+        "name": "dndfog",
+        "stars": 0,
+        "topics": [
+          "dnd",
+          "gaming",
+          "rpg",
+          "tabletop"
+        ],
+        "updated": "2026-09-25T16:56:15Z",
+        "url": "https://github.com/itsdarklikehell/dndfog"
+      },
+      {
+        "created": "2026-09-16T12:20:09Z",
+        "description": "Auto generate a hosted repo for your addons",
+        "forks": 0,
+        "language": "Python",
+        "name": "instant-kodi-repo",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-25T16:48:03Z",
+        "url": "https://github.com/itsdarklikehell/instant-kodi-repo"
+      },
+      {
+        "created": "2026-09-11T12:53:00Z",
+        "description": "Social and fun boardgame about IT. Best with 🍻",
+        "forks": 0,
+        "language": "Python",
+        "name": "ship-it-boardgame",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-25T16:47:20Z",
+        "url": "https://github.com/itsdarklikehell/ship-it-boardgame"
+      },
+      {
+        "created": "2026-09-09T02:28:55Z",
+        "description": "This is the main collection of OpenDnD Tools with generators for persons, dynasties, cities, towns, and more",
+        "forks": 0,
+        "language": "JavaScript",
+        "name": "opendnd",
+        "stars": 0,
+        "topics": [
+          "dnd",
+          "gaming",
+          "rpg",
+          "tabletop"
+        ],
+        "updated": "2026-09-25T16:41:41Z",
+        "url": "https://github.com/itsdarklikehell/opendnd"
+      },
+      {
+        "created": "2026-09-11T01:12:43Z",
+        "description": "Un strumento italiano per creare personaggi di dnd 5.0e",
+        "forks": 0,
+        "language": "TypeScript",
+        "name": "ForgiaDellAvventuriero",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-25T16:39:16Z",
+        "url": "https://github.com/itsdarklikehell/ForgiaDellAvventuriero"
+      },
+      {
+        "created": "2026-09-11T12:47:25Z",
+        "description": "A digital tabletop grid for D&D-style games, designed for TV display and local play.",
+        "forks": 0,
+        "language": "JavaScript",
+        "name": "Aure-Relics-Grid",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-25T16:38:32Z",
+        "url": "https://github.com/itsdarklikehell/Aure-Relics-Grid"
+      },
+      {
+        "created": "2026-09-11T01:10:43Z",
+        "description": "AI agent skills for creating and managing D&D campaigns in Obsidian, including vault structure, Obsidian syntax, D&D wiki linking, statblocks, callouts, and campaign organization.",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "dnd-obsidian-skills",
+        "stars": 0,
+        "topics": [
+          "dnd",
+          "gaming",
+          "rpg",
+          "tabletop"
+        ],
+        "updated": "2026-09-25T16:37:03Z",
+        "url": "https://github.com/itsdarklikehell/dnd-obsidian-skills"
+      },
+      {
+        "created": "2025-09-22T07:46:16Z",
+        "description": "SwarmUI (formerly StableSwarmUI), A Modular Stable Diffusion Web-User-Interface, with an emphasis on making powertools easily accessible, high performance, and extensibility.",
+        "forks": 0,
+        "language": "C#",
+        "name": "SwarmUI",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-25T16:35:59Z",
+        "url": "https://github.com/itsdarklikehell/SwarmUI"
       },
       {
         "created": "2026-09-11T12:47:08Z",
@@ -1083,48 +1132,112 @@
         "url": "https://github.com/itsdarklikehell/dm-assist"
       },
       {
-        "created": "2026-09-15T12:00:57Z",
-        "description": "Repository with text of DMCA takedown notices as received. GitHub does not endorse or adopt any assertion contained in the following notices. Users identified in the notices are presumed innocent until proven guilty. Additional information about our DMCA policy can be found at ",
+        "created": "2026-08-30T21:01:22Z",
+        "description": "Creating a Web SDR with OpenWebRX and a 7-20$ SDR Dongle.",
         "forks": 0,
-        "language": "Unknown",
-        "name": "dmca",
+        "language": "Shell",
+        "name": "OpenWebRx-Installer",
         "stars": 0,
         "topics": [],
-        "updated": "2026-09-15T12:00:57Z",
-        "url": "https://github.com/itsdarklikehell/dmca"
+        "updated": "2026-09-25T16:26:51Z",
+        "url": "https://github.com/itsdarklikehell/OpenWebRx-Installer"
       },
       {
-        "created": "2026-09-11T01:01:54Z",
-        "description": "Interactive terminal D&D helper toolbox program for Dungeon Masters, players, and worldbuilders.",
+        "created": "2026-09-15T12:00:18Z",
+        "description": "Auto audio sample chopper and extractor. ",
         "forks": 0,
-        "language": "Unknown",
-        "name": "dmpower",
+        "language": "JavaScript",
+        "name": "the-good-bits",
         "stars": 0,
         "topics": [],
-        "updated": "2026-09-11T01:01:55Z",
-        "url": "https://github.com/itsdarklikehell/dmpower"
+        "updated": "2026-09-25T16:26:42Z",
+        "url": "https://github.com/itsdarklikehell/the-good-bits"
       },
       {
-        "created": "2026-09-09T02:18:45Z",
-        "description": "A repository of dungeon and dragons notes, adventures, and other miscellaneous items.",
+        "created": "2026-09-16T09:04:52Z",
+        "description": "iNTERCEPT, a free and open-source platform that unites the best signal intelligence tools into a single, accessible interface.",
         "forks": 0,
-        "language": "Unknown",
-        "name": "dnd",
+        "language": "Python",
+        "name": "intercept",
         "stars": 0,
         "topics": [],
-        "updated": "2026-09-09T02:18:45Z",
-        "url": "https://github.com/itsdarklikehell/dnd"
+        "updated": "2026-09-25T16:25:29Z",
+        "url": "https://github.com/itsdarklikehell/intercept"
       },
       {
-        "created": "2026-09-11T01:08:53Z",
-        "description": "Database containing the DnD 5.5th Ed. (only in Spanish)",
+        "created": "2026-09-16T09:05:22Z",
+        "description": "SDR Rx/Tx software for Airspy, Airspy HF+, BladeRF, HackRF, LimeSDR, PlutoSDR, RTL-SDR, SDRplay and FunCube",
         "forks": 0,
-        "language": "Unknown",
-        "name": "DnD-5.5-Spells-ES",
+        "language": "C++",
+        "name": "sdrangel",
+        "stars": 0,
+        "topics": [
+          "pwnagotchi",
+          "sdr",
+          "security",
+          "wifi"
+        ],
+        "updated": "2026-09-25T16:23:51Z",
+        "url": "https://github.com/itsdarklikehell/sdrangel"
+      },
+      {
+        "created": "2026-08-30T21:01:28Z",
+        "description": "install SoapyRemote server on debian, ubunut, fedora or redhat.",
+        "forks": 0,
+        "language": "Shell",
+        "name": "SoapyRemote-server-installer",
+        "stars": 0,
+        "topics": [
+          "installer",
+          "setup",
+          "tool"
+        ],
+        "updated": "2026-09-25T16:23:36Z",
+        "url": "https://github.com/itsdarklikehell/SoapyRemote-server-installer"
+      },
+      {
+        "created": "2024-03-03T01:03:54Z",
+        "description": "A simple background music player to implement on RetroPie and Emulation Station.",
+        "forks": 1,
+        "language": "Shell",
+        "name": "RetroPie_BGM_Player",
         "stars": 0,
         "topics": [],
-        "updated": "2026-09-11T01:08:56Z",
-        "url": "https://github.com/itsdarklikehell/DnD-5.5-Spells-ES"
+        "updated": "2026-09-25T16:23:26Z",
+        "url": "https://github.com/itsdarklikehell/RetroPie_BGM_Player"
+      },
+      {
+        "created": "2026-08-28T16:52:08Z",
+        "description": "Proxmox VE Helper-Scripts (Community Edition) ",
+        "forks": 0,
+        "language": "Shell",
+        "name": "ProxmoxVE",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-25T16:23:24Z",
+        "url": "https://github.com/itsdarklikehell/ProxmoxVE"
+      },
+      {
+        "created": "2026-08-30T21:01:16Z",
+        "description": "iptv app",
+        "forks": 0,
+        "language": "Python",
+        "name": "canal-digitaal",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-25T16:23:00Z",
+        "url": "https://github.com/itsdarklikehell/canal-digitaal"
+      },
+      {
+        "created": "2026-09-11T13:48:18Z",
+        "description": "A fast, powerful, and extensible dice engine for D&D, d20 systems, and any other system that needs dice!",
+        "forks": 0,
+        "language": "Python",
+        "name": "d20",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-25T16:22:57Z",
+        "url": "https://github.com/itsdarklikehell/d20"
       },
       {
         "created": "2026-09-09T02:35:37Z",
@@ -1143,6 +1256,1939 @@
         "url": "https://github.com/itsdarklikehell/dnd-5e-api-php"
       },
       {
+        "created": "2026-09-09T02:26:00Z",
+        "description": "A web app for tabletop gaming to allow the game master to reveal areas of the game map to players, roll dice and take notes.",
+        "forks": 0,
+        "language": "TypeScript",
+        "name": "dungeon-revealer",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-25T16:22:50Z",
+        "url": "https://github.com/itsdarklikehell/dungeon-revealer"
+      },
+      {
+        "created": "2026-08-25T20:42:48Z",
+        "description": "A one stop repository for generative AI research updates, interview resources, notebooks and much more!",
+        "forks": 0,
+        "language": "HTML",
+        "name": "awesome-generative-ai-guide",
+        "stars": 0,
+        "topics": [
+          "awesome",
+          "curation",
+          "resources"
+        ],
+        "updated": "2026-09-25T16:22:50Z",
+        "url": "https://github.com/itsdarklikehell/awesome-generative-ai-guide"
+      },
+      {
+        "created": "2026-09-16T09:04:48Z",
+        "description": "Open source Home Automation System",
+        "forks": 0,
+        "language": "C++",
+        "name": "domoticz",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-25T16:22:10Z",
+        "url": "https://github.com/itsdarklikehell/domoticz"
+      },
+      {
+        "created": "2026-09-16T09:04:56Z",
+        "description": "WebSDR Backend",
+        "forks": 0,
+        "language": "C++",
+        "name": "PhantomSDR",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-25T16:21:58Z",
+        "url": "https://github.com/itsdarklikehell/PhantomSDR"
+      },
+      {
+        "created": "2026-08-30T21:32:17Z",
+        "description": "(⌐■_■) - Raspberry Pi instrumenting Bettercap for Wi-Fi pwning.",
+        "forks": 0,
+        "language": "Python",
+        "name": "pwnagotchijay",
+        "stars": 0,
+        "topics": [
+          "pwnagotchi",
+          "sdr",
+          "security",
+          "wifi"
+        ],
+        "updated": "2026-09-25T16:21:55Z",
+        "url": "https://github.com/itsdarklikehell/pwnagotchijay"
+      },
+      {
+        "created": "2026-09-11T12:44:49Z",
+        "description": "Generate a static wiki from the Stonetop Book PDFs",
+        "forks": 0,
+        "language": "HTML",
+        "name": "stonetop-wiki-generator",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-25T16:21:49Z",
+        "url": "https://github.com/itsdarklikehell/stonetop-wiki-generator"
+      },
+      {
+        "created": "2026-09-11T00:53:27Z",
+        "description": "Mirror of http://bitbucket.org/zxtune/zxtune repository with robot-only issues tracker",
+        "forks": 0,
+        "language": "C++",
+        "name": "zxtune",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-25T16:21:37Z",
+        "url": "https://github.com/itsdarklikehell/zxtune"
+      },
+      {
+        "created": "2021-06-27T21:30:53Z",
+        "description": "GPU/CPU Mining script with intelligent profit-switching between miningpools, algorithms, miners, using all possible combinations of devices (NVIDIA, AMD, CPU). Features: actively maintained, uses the top actual miner programs (Bminer, Ccminer, Claymore, Dstm, EnemyZ, Sgminer, T-rex and more) easy setup wizard, webinterface, auto update.",
+        "forks": 0,
+        "language": "PowerShell",
+        "name": "RainbowMiner-HiveOs",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-25T16:21:29Z",
+        "url": "https://github.com/itsdarklikehell/RainbowMiner-HiveOs"
+      },
+      {
+        "created": "2026-08-25T20:44:52Z",
+        "description": "A trilingual (繁中 / English / 简中) learning roadmap for agentic AI: from LLM basics to multi-agent systems, with 240+ curated resources and hands-on examples. 中文 AI agent 學習地圖。",
+        "forks": 0,
+        "language": "Python",
+        "name": "awesome-agentic-ai-zh",
+        "stars": 0,
+        "topics": [
+          "agent",
+          "ai",
+          "cli",
+          "llm"
+        ],
+        "updated": "2026-09-25T16:21:06Z",
+        "url": "https://github.com/itsdarklikehell/awesome-agentic-ai-zh"
+      },
+      {
+        "created": "2018-03-10T12:50:41Z",
+        "description": "download,unzip,burn and modify a raspbian verrsion to a device",
+        "forks": 0,
+        "language": "Shell",
+        "name": "raspbian-installer",
+        "stars": 0,
+        "topics": [
+          "installer",
+          "setup",
+          "tool"
+        ],
+        "updated": "2026-09-25T14:20:09Z",
+        "url": "https://github.com/itsdarklikehell/raspbian-installer"
+      },
+      {
+        "created": "2020-06-27T11:01:12Z",
+        "description": "A tool to redeem multiple passcodes on intel map.",
+        "forks": 1,
+        "language": "JavaScript",
+        "name": "ingress-multi-passcode-redeemer",
+        "stars": 0,
+        "topics": [
+          "agent",
+          "ai",
+          "cli",
+          "llm"
+        ],
+        "updated": "2026-09-25T14:19:01Z",
+        "url": "https://github.com/itsdarklikehell/ingress-multi-passcode-redeemer"
+      },
+      {
+        "created": "2026-08-25T20:38:40Z",
+        "description": "Hermes WebUI: The best way to use Hermes Agent from the web or from your phone!",
+        "forks": 0,
+        "language": "Python",
+        "name": "hermes-webui",
+        "stars": 0,
+        "topics": [
+          "agent",
+          "ai",
+          "cli",
+          "llm"
+        ],
+        "updated": "2026-09-25T14:10:23Z",
+        "url": "https://github.com/itsdarklikehell/hermes-webui"
+      },
+      {
+        "created": "2026-09-24T22:53:47Z",
+        "description": "310+ Hermes Agent Skills — reusable AI agent workflows for coding, marketing, design, finance, MLOps and more",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "hermes-skills",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-24T22:53:47Z",
+        "url": "https://github.com/itsdarklikehell/hermes-skills"
+      },
+      {
+        "created": "2026-09-24T22:51:16Z",
+        "description": "AI-native terminal emulator & IDE. Built with Tauri, React, and Rust.",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "hermes-ide",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-24T22:51:16Z",
+        "url": "https://github.com/itsdarklikehell/hermes-ide"
+      },
+      {
+        "created": "2026-09-24T22:08:15Z",
+        "description": "Updated version of panoptyks 2022 guerilla guide",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "Pwnagotchi-new-guerilla-guide",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-24T22:08:15Z",
+        "url": "https://github.com/itsdarklikehell/Pwnagotchi-new-guerilla-guide"
+      },
+      {
+        "created": "2026-09-24T22:05:52Z",
+        "description": "A curated list of CTF frameworks, libraries, resources and softwares",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "awesome-ctf",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-24T22:05:52Z",
+        "url": "https://github.com/itsdarklikehell/awesome-ctf"
+      },
+      {
+        "created": "2026-09-24T22:05:37Z",
+        "description": "Television Simulator '99",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "program-guide",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-24T22:05:37Z",
+        "url": "https://github.com/itsdarklikehell/program-guide"
+      },
+      {
+        "created": "2026-09-24T21:27:39Z",
+        "description": "Hermes Agent skills and plugins: 350+ tools, memory providers, and guides for Nous Research's agent.",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "awesome-hermes-skills",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-24T21:27:39Z",
+        "url": "https://github.com/itsdarklikehell/awesome-hermes-skills"
+      },
+      {
+        "created": "2026-09-24T21:26:06Z",
+        "description": "Embodied AI companion for Minecraft — persistent memory, vision, learning, multi-agent. Built on Hermes Agent.",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "hermescraft",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-24T21:26:06Z",
+        "url": "https://github.com/itsdarklikehell/hermescraft"
+      },
+      {
+        "created": "2026-09-24T21:25:26Z",
+        "description": "An autonomous novel writing pipeline, by Hermes Agent",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "autonovel",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-24T21:25:26Z",
+        "url": "https://github.com/itsdarklikehell/autonovel"
+      },
+      {
+        "created": "2026-09-24T21:25:02Z",
+        "description": "AI-powered Pokemon gameplay agent with headless emulation, REST API, and live dashboard. Works with any LLM.",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "pokemon-agent",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-24T21:25:02Z",
+        "url": "https://github.com/itsdarklikehell/pokemon-agent"
+      },
+      {
+        "created": "2026-09-24T21:23:48Z",
+        "description": "Android device control for hermes-agent — bridge app + Python toolset",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "hermes-android",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-24T21:23:49Z",
+        "url": "https://github.com/itsdarklikehell/hermes-android"
+      },
+      {
+        "created": "2026-09-24T21:16:03Z",
+        "description": "Kokorogotchi — a drifting, evolving AI companion, as a Hermes agent plugin.",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "kokorogotchi-hermes",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-24T21:16:03Z",
+        "url": "https://github.com/itsdarklikehell/kokorogotchi-hermes"
+      },
+      {
+        "created": "2026-09-24T21:12:43Z",
+        "description": "Bridge connecting Hermes Agent to Miniverse pixel worlds",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "hermes-miniverse",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-24T21:12:44Z",
+        "url": "https://github.com/itsdarklikehell/hermes-miniverse"
+      },
+      {
+        "created": "2026-09-24T21:10:53Z",
+        "description": "🐱 Catgirl mood animations that react to Hermes Agent sessions in real time. Chafa-powered GIF display. Auto-hooks for every tool call.",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "hermes-visualizer-plugin",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-24T21:10:53Z",
+        "url": "https://github.com/itsdarklikehell/hermes-visualizer-plugin"
+      },
+      {
+        "created": "2025-10-11T03:08:24Z",
+        "description": "A cross-platform MCP (Model Context Protocol) server that provides comprehensive real-time system monitoring capabilities for LLMs.",
+        "forks": 0,
+        "language": "Python",
+        "name": "mcp-system-monitor",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-24T20:53:05Z",
+        "url": "https://github.com/itsdarklikehell/mcp-system-monitor"
+      },
+      {
+        "created": "2019-12-27T00:05:14Z",
+        "description": "Retropie with bgm theme notifications and controls.",
+        "forks": 1,
+        "language": "Shell",
+        "name": "RetroPie-With-Bgm",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-24T20:49:57Z",
+        "url": "https://github.com/itsdarklikehell/RetroPie-With-Bgm"
+      },
+      {
+        "created": "2018-01-03T03:29:42Z",
+        "description": "Download and extract bios files needed for emulation in proper directories on RetroPie.",
+        "forks": 8,
+        "language": "Shell",
+        "name": "RetroPie-Bios-Files",
+        "stars": 8,
+        "topics": [],
+        "updated": "2026-09-24T20:49:56Z",
+        "url": "https://github.com/itsdarklikehell/RetroPie-Bios-Files"
+      },
+      {
+        "created": "2026-09-11T01:10:31Z",
+        "description": "A character builder and digital toolbox for Pathfinder and Starfinder Second Edition.",
+        "forks": 0,
+        "language": "TypeScript",
+        "name": "wanderers-guide",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-24T20:25:01Z",
+        "url": "https://github.com/itsdarklikehell/wanderers-guide"
+      },
+      {
+        "created": "2019-09-17T16:46:02Z",
+        "description": "rTorrent BitTorrent client",
+        "forks": 0,
+        "language": "C++",
+        "name": "rtorrent",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-24T20:10:48Z",
+        "url": "https://github.com/itsdarklikehell/rtorrent"
+      },
+      {
+        "created": "2024-02-10T04:30:35Z",
+        "description": "No description",
+        "forks": 0,
+        "language": "Python",
+        "name": "pwnmothership",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-23T13:42:55Z",
+        "url": "https://github.com/itsdarklikehell/pwnmothership"
+      },
+      {
+        "created": "2018-01-15T23:21:57Z",
+        "description": "No description",
+        "forks": 0,
+        "language": "Shell",
+        "name": "RetroPie-Internet-Radio",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-23T02:34:07Z",
+        "url": "https://github.com/itsdarklikehell/RetroPie-Internet-Radio"
+      },
+      {
+        "created": "2017-12-28T16:40:58Z",
+        "description": "Running ROMs from a USB drive",
+        "forks": 0,
+        "language": "Shell",
+        "name": "RetroPie-ROMs-on-USB",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-23T02:30:38Z",
+        "url": "https://github.com/itsdarklikehell/RetroPie-ROMs-on-USB"
+      },
+      {
+        "created": "2020-02-17T01:17:51Z",
+        "description": "A python plugin for pwnagotchi to sort cracked access points and their passwords.",
+        "forks": 1,
+        "language": "Python",
+        "name": "pwnsorter",
+        "stars": 2,
+        "topics": [],
+        "updated": "2026-09-23T02:07:41Z",
+        "url": "https://github.com/itsdarklikehell/pwnsorter"
+      },
+      {
+        "created": "2018-03-03T02:40:34Z",
+        "description": "No description",
+        "forks": 1,
+        "language": "Shell",
+        "name": "Master-Installer",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-21T22:26:27Z",
+        "url": "https://github.com/itsdarklikehell/Master-Installer"
+      },
+      {
+        "created": "2026-08-29T01:35:38Z",
+        "description": "No description",
+        "forks": 0,
+        "language": "Shell",
+        "name": "Domo-Installer",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-21T22:26:05Z",
+        "url": "https://github.com/itsdarklikehell/Domo-Installer"
+      },
+      {
+        "created": "2018-06-07T20:24:59Z",
+        "description": "A start menu for RPI to install/start a custom command or tool from a curated list",
+        "forks": 0,
+        "language": "Shell",
+        "name": "start-menu",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-21T17:15:07Z",
+        "url": "https://github.com/itsdarklikehell/start-menu"
+      },
+      {
+        "created": "2019-06-27T08:18:51Z",
+        "description": "Track users and display them on a map to navigate and such",
+        "forks": 0,
+        "language": "HTML",
+        "name": "schoolground-tracking",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-21T10:01:14Z",
+        "url": "https://github.com/itsdarklikehell/schoolground-tracking"
+      },
+      {
+        "created": "2018-01-22T14:28:06Z",
+        "description": "No description",
+        "forks": 0,
+        "language": "Shell",
+        "name": "RetroPie-Goodrom-Full-Romsets",
+        "stars": 1,
+        "topics": [],
+        "updated": "2026-09-20T18:08:11Z",
+        "url": "https://github.com/itsdarklikehell/RetroPie-Goodrom-Full-Romsets"
+      },
+      {
+        "created": "2018-01-04T00:26:18Z",
+        "description": "This will add background music while in emulation station on RetroPie (and possibly other debian systems)",
+        "forks": 1,
+        "language": "Python",
+        "name": "RetroPie-Bgm",
+        "stars": 1,
+        "topics": [],
+        "updated": "2026-09-20T18:07:59Z",
+        "url": "https://github.com/itsdarklikehell/RetroPie-Bgm"
+      },
+      {
+        "created": "2018-01-15T00:12:23Z",
+        "description": "No description",
+        "forks": 0,
+        "language": "Shell",
+        "name": "RetroPie-Podcatcher",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-20T18:07:55Z",
+        "url": "https://github.com/itsdarklikehell/RetroPie-Podcatcher"
+      },
+      {
+        "created": "2017-10-21T00:20:33Z",
+        "description": "No description",
+        "forks": 0,
+        "language": "Shell",
+        "name": "raspbian-after-burner",
+        "stars": 0,
+        "topics": [
+          "raspbian"
+        ],
+        "updated": "2026-09-20T18:07:36Z",
+        "url": "https://github.com/itsdarklikehell/raspbian-after-burner"
+      },
+      {
+        "created": "2017-12-28T01:52:33Z",
+        "description": "Properly Mount USB Storage on Raspberry Pi",
+        "forks": 0,
+        "language": "Shell",
+        "name": "raspberry-pi-mount-usb",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-19T19:55:13Z",
+        "url": "https://github.com/itsdarklikehell/raspberry-pi-mount-usb"
+      },
+      {
+        "created": "2017-11-05T20:44:35Z",
+        "description": "No description",
+        "forks": 0,
+        "language": "Shell",
+        "name": "sshfs-menu",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-19T19:45:46Z",
+        "url": "https://github.com/itsdarklikehell/sshfs-menu"
+      },
+      {
+        "created": "2018-04-23T08:12:34Z",
+        "description": "Control tv over HDMI (cec-cient)",
+        "forks": 1,
+        "language": "Unknown",
+        "name": "tv-control",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-19T19:45:38Z",
+        "url": "https://github.com/itsdarklikehell/tv-control"
+      },
+      {
+        "created": "2024-11-18T01:45:27Z",
+        "description": "RetroPie Sunvox Engine \"Emulator\"",
+        "forks": 1,
+        "language": "Shell",
+        "name": "RetroPie-Sunvox",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-18T12:34:57Z",
+        "url": "https://github.com/itsdarklikehell/RetroPie-Sunvox"
+      },
+      {
+        "created": "2019-09-27T10:16:11Z",
+        "description": "This script can download and/or flash various raspberry pi images. ",
+        "forks": 1,
+        "language": "Shell",
+        "name": "raspi-flasher",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-18T12:14:16Z",
+        "url": "https://github.com/itsdarklikehell/raspi-flasher"
+      },
+      {
+        "created": "2020-10-03T03:46:33Z",
+        "description": "A Huge collectin of mods for openmw",
+        "forks": 1,
+        "language": "Unknown",
+        "name": "OpenMWMods",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-18T09:57:01Z",
+        "url": "https://github.com/itsdarklikehell/OpenMWMods"
+      },
+      {
+        "created": "2026-08-28T20:52:21Z",
+        "description": "Persoonlijk Second Brain systeem (Next.js) - notities, gesprekken, herinneringen",
+        "forks": 0,
+        "language": "TypeScript",
+        "name": "second-brain-app",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-18T09:54:43Z",
+        "url": "https://github.com/itsdarklikehell/second-brain-app"
+      },
+      {
+        "created": "2026-07-03T14:43:29Z",
+        "description": "A cli Linux and Windows Nopaystation client made with python and wget. Works with PSvita, PSP, PSMobile and PS3 packages",
+        "forks": 0,
+        "language": "Python",
+        "name": "pynps",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-16T22:23:36Z",
+        "url": "https://github.com/itsdarklikehell/pynps"
+      },
+      {
+        "created": "2026-09-16T21:53:51Z",
+        "description": "Wrapper for gource, git and ffmpeg in order to visualize git repository log histories.",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "gource-since",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-16T21:53:52Z",
+        "url": "https://github.com/itsdarklikehell/gource-since"
+      },
+      {
+        "created": "2026-09-16T21:52:29Z",
+        "description": "software version control visualization",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "Gource",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-16T21:52:30Z",
+        "url": "https://github.com/itsdarklikehell/Gource"
+      },
+      {
+        "created": "2026-09-15T21:30:43Z",
+        "description": "🛠️ Shell menu & scripts to create gources visualisations",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "gource-tools",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-15T21:30:44Z",
+        "url": "https://github.com/itsdarklikehell/gource-tools"
+      },
+      {
+        "created": "2026-09-15T20:54:24Z",
+        "description": "Generate a Gource (https://gource.io) visualization from the history of a Google Drive folder. ",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "drive2gource",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-15T20:54:24Z",
+        "url": "https://github.com/itsdarklikehell/drive2gource"
+      },
+      {
+        "created": "2026-09-15T20:54:09Z",
+        "description": "A Gource log generator from Git repositories with a couple of handy options",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "rource",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-15T20:54:09Z",
+        "url": "https://github.com/itsdarklikehell/rource"
+      },
+      {
+        "created": "2026-09-15T20:53:47Z",
+        "description": "Create videos from gource visualizations of git repos",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "ogre-gource",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-15T20:53:48Z",
+        "url": "https://github.com/itsdarklikehell/ogre-gource"
+      },
+      {
+        "created": "2026-09-15T12:01:18Z",
+        "description": "A .sav / .srm file editor for Earthbound on SNES.",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "Oh-Mother-Earthbound-Save-File-Editor",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-15T12:01:19Z",
+        "url": "https://github.com/itsdarklikehell/Oh-Mother-Earthbound-Save-File-Editor"
+      },
+      {
+        "created": "2026-09-15T12:00:57Z",
+        "description": "Repository with text of DMCA takedown notices as received. GitHub does not endorse or adopt any assertion contained in the following notices. Users identified in the notices are presumed innocent until proven guilty. Additional information about our DMCA policy can be found at ",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "dmca",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-15T12:00:57Z",
+        "url": "https://github.com/itsdarklikehell/dmca"
+      },
+      {
+        "created": "2026-09-15T12:00:37Z",
+        "description": "Database of games.",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "cartridge-index",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-15T12:00:37Z",
+        "url": "https://github.com/itsdarklikehell/cartridge-index"
+      },
+      {
+        "created": "2026-09-15T12:00:34Z",
+        "description": "Utility application for visualising Dirtywave M8 SD cards. Handy for project management, etc.",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "m8-librarian",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-15T12:00:34Z",
+        "url": "https://github.com/itsdarklikehell/m8-librarian"
+      },
+      {
+        "created": "2026-09-15T12:00:31Z",
+        "description": "Web based tools for the GenMDDJ tracker",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "mega-tools",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-15T12:00:31Z",
+        "url": "https://github.com/itsdarklikehell/mega-tools"
+      },
+      {
+        "created": "2026-09-15T12:00:27Z",
+        "description": "Personal music collection",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "music-collection",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-15T12:00:27Z",
+        "url": "https://github.com/itsdarklikehell/music-collection"
+      },
+      {
+        "created": "2026-09-15T12:00:23Z",
+        "description": "An open source collection of creative commons licensed, royalty-free music from Stephen McLeod aka allmyfriendsaresynths",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "amfas-music-library",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-15T12:00:23Z",
+        "url": "https://github.com/itsdarklikehell/amfas-music-library"
+      },
+      {
+        "created": "2026-09-15T12:00:15Z",
+        "description": "Destructive audio effect plugin (AU/VST3) for spicing up loops, pads, and drum patterns. 8 scene sequencer driving stutter, ratchet, reverse, filter, bit-crush, stretch, and stereo-field manipulation. Options for ratchet, probability, and per-step parameter locking. Other features including modulation. Built with JUCE 8 / CMake / C++17. ",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "Loop-Saboteur",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-15T12:00:15Z",
+        "url": "https://github.com/itsdarklikehell/Loop-Saboteur"
+      },
+      {
+        "created": "2026-09-09T02:33:39Z",
+        "description": "A dataset of D&D characters submitted to https://oganm.com/shiny/printSheetApp and https://oganm.com/shiny/interactiveSheet. A superset of characters used in oganm/dndstats",
+        "forks": 0,
+        "language": "R",
+        "name": "dnddata",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-13T22:13:43Z",
+        "url": "https://github.com/itsdarklikehell/dnddata"
+      },
+      {
+        "created": "2026-09-09T02:26:38Z",
+        "description": "Utility to convert JSON data (for content you own) from 5etools or pf2etools into Obsidian-friendly Markdown.",
+        "forks": 0,
+        "language": "Java",
+        "name": "ttrpg-convert-cli",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-13T14:05:01Z",
+        "url": "https://github.com/itsdarklikehell/ttrpg-convert-cli"
+      },
+      {
+        "created": "2026-09-11T13:54:49Z",
+        "description": "Strategy game written in Python inspired by games like chess and Onitama.",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "wars-of-horus",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-11T13:54:49Z",
+        "url": "https://github.com/itsdarklikehell/wars-of-horus"
+      },
+      {
+        "created": "2026-09-11T13:54:16Z",
+        "description": "Generic Universal Roleplaying System (GURPS) Hit Location Calculator Web App",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "MeatGrinder",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-11T13:54:16Z",
+        "url": "https://github.com/itsdarklikehell/MeatGrinder"
+      },
+      {
+        "created": "2026-09-11T13:53:47Z",
+        "description": "A comprehensive Python-based dice notation interpreter and roller.",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "d7",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-11T13:53:47Z",
+        "url": "https://github.com/itsdarklikehell/d7"
+      },
+      {
+        "created": "2026-09-11T13:53:28Z",
+        "description": "A multi-screen presentation tool, initially built for tabletop gaming sessions.",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "gmscreen",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-11T13:53:28Z",
+        "url": "https://github.com/itsdarklikehell/gmscreen"
+      },
+      {
+        "created": "2026-09-11T13:52:26Z",
+        "description": "Generate a random gonzo character for Black Hack + Rad Hack!",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "Gonzo-Hack-Char-Generator",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-11T13:52:26Z",
+        "url": "https://github.com/itsdarklikehell/Gonzo-Hack-Char-Generator"
+      },
+      {
+        "created": "2026-09-11T13:52:05Z",
+        "description": "Python tool for rolling a lot of dice",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "dice_roller",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-11T13:52:06Z",
+        "url": "https://github.com/itsdarklikehell/dice_roller"
+      },
+      {
+        "created": "2026-09-11T13:51:28Z",
+        "description": "👷 Under construction",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "zero-bounce",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-11T13:51:28Z",
+        "url": "https://github.com/itsdarklikehell/zero-bounce"
+      },
+      {
+        "created": "2026-09-11T13:51:00Z",
+        "description": "MakeRPG is intended to be a system that allows anyone who can edit plain text YAML files to make automatic characters from game systems.",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "MakeRPG",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-11T13:51:00Z",
+        "url": "https://github.com/itsdarklikehell/MakeRPG"
+      },
+      {
+        "created": "2026-09-11T13:50:41Z",
+        "description": "Telegram bot for rolling dices in RPG-like games. Supports advanced features: multiple dices and dice-types in one roll command, positive and negative modifiers and roll descriptions. Also user can create chars, add custom modifiers and use them in rolls, make custom predefined rolls.",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "tabletopdicebot",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-11T13:50:41Z",
+        "url": "https://github.com/itsdarklikehell/tabletopdicebot"
+      },
+      {
+        "created": "2026-09-11T13:50:07Z",
+        "description": "Django-based visualiser for tournaments for the boardgame Diplomacy",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "dipvis",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-11T13:50:07Z",
+        "url": "https://github.com/itsdarklikehell/dipvis"
+      },
+      {
+        "created": "2026-09-11T13:49:46Z",
+        "description": "A solo RPG game about being a Trader / Smuggler in a science-fiction galaxy-wide settings",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "stardrifter",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-11T13:49:46Z",
+        "url": "https://github.com/itsdarklikehell/stardrifter"
+      },
+      {
+        "created": "2026-09-11T13:49:25Z",
+        "description": "The RAD-Hack RPG text and tables, ready to be translated into your language",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "rad-hack",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-11T13:49:26Z",
+        "url": "https://github.com/itsdarklikehell/rad-hack"
+      },
+      {
+        "created": "2026-09-11T13:49:04Z",
+        "description": "Simple open world Doppelkopf deck simulation for playing online with your friends via browser.",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "doko3000",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-11T13:49:04Z",
+        "url": "https://github.com/itsdarklikehell/doko3000"
+      },
+      {
+        "created": "2026-09-11T13:48:42Z",
+        "description": "🎲 An RPG dice rolling bot for Telegram.",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "rollem-telegram-bot",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-11T13:48:42Z",
+        "url": "https://github.com/itsdarklikehell/rollem-telegram-bot"
+      },
+      {
+        "created": "2026-09-11T12:50:01Z",
+        "description": "Config-driven Fear/Hope tracker for the Daggerheart TTRPG system. Built with Python and Pygame, designed for laptop development with planned Raspberry Pi deployment.",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "daggerheart_tracker",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-11T12:50:01Z",
+        "url": "https://github.com/itsdarklikehell/daggerheart_tracker"
+      },
+      {
+        "created": "2026-09-11T12:49:43Z",
+        "description": "Tools and resources for my TTRPG campaigns",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "Marks_TTRPG_Tools",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-11T12:49:43Z",
+        "url": "https://github.com/itsdarklikehell/Marks_TTRPG_Tools"
+      },
+      {
+        "created": "2026-09-11T12:49:11Z",
+        "description": "Simple turn tracking card for Home Assistant dashboards.",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "ttrpg-initiative-tracker",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-11T12:49:11Z",
+        "url": "https://github.com/itsdarklikehell/ttrpg-initiative-tracker"
+      },
+      {
+        "created": "2026-09-11T12:48:42Z",
+        "description": "Homebrew JSONs compatible with 5etools. Sister repo of the main OTM 5e.tools website.                          (https://github.com/ryanfp/otm.5etools/tree/homebrew).",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "otm.5etools-homebrew",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-11T12:48:42Z",
+        "url": "https://github.com/itsdarklikehell/otm.5etools-homebrew"
+      },
+      {
+        "created": "2026-09-11T12:48:25Z",
+        "description": "A small Python project for analyzing dice roll data and testing whether a die is fair.",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "fairdie",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-11T12:48:25Z",
+        "url": "https://github.com/itsdarklikehell/fairdie"
+      },
+      {
+        "created": "2026-09-11T12:48:06Z",
+        "description": "Simple TTRPG Campaign manager",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "Camply-Portal",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-11T12:48:06Z",
+        "url": "https://github.com/itsdarklikehell/Camply-Portal"
+      },
+      {
+        "created": "2026-09-11T12:47:46Z",
+        "description": "Player portal, wiki and Foundry VTT modules for Mistborn Gilded Steps — an original tabletop campaign set in Bilming, Scadrial, 343 PC, on the Cosmere RPG. Fan material, non-commercial.",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "mistborn-gilded-steps",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-11T12:47:48Z",
+        "url": "https://github.com/itsdarklikehell/mistborn-gilded-steps"
+      },
+      {
+        "created": "2026-09-11T12:46:52Z",
+        "description": "Your helpful kobold assistant",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "kobold-keeper-api",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-11T12:46:52Z",
+        "url": "https://github.com/itsdarklikehell/kobold-keeper-api"
+      },
+      {
+        "created": "2026-09-11T12:46:24Z",
+        "description": "Real-time D&D 5.5e session companion for character management, encounters, loot, shops, and QR-based player sheets.",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "5.5e-companion",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-11T12:46:25Z",
+        "url": "https://github.com/itsdarklikehell/5.5e-companion"
+      },
+      {
+        "created": "2026-09-11T12:45:51Z",
+        "description": "TTRPG Session Management tool for GM and Players. Used for Umbra Caelis TTRPG games.",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "TTRPG-Site",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-11T12:45:51Z",
+        "url": "https://github.com/itsdarklikehell/TTRPG-Site"
+      },
+      {
+        "created": "2026-09-11T12:45:28Z",
+        "description": "An Auto-GM system for tabletop RPGs and narrative games, built on a data-first, canonization-driven architecture.",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "monitor_dm_system",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-11T12:45:28Z",
+        "url": "https://github.com/itsdarklikehell/monitor_dm_system"
+      },
+      {
+        "created": "2026-09-11T12:45:06Z",
+        "description": "Free browser-based toolkit for tabletop RPG game masters with encounter management, initiative tracking, characters, maps, journals, and generators.",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "Initiative-Tracker",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-11T12:45:06Z",
+        "url": "https://github.com/itsdarklikehell/Initiative-Tracker"
+      },
+      {
+        "created": "2026-09-11T12:44:33Z",
+        "description": "A VTT built for the physical table — dynamic lighting, animated effects and fog of war for DMs who play with a screen instead of a monitor or physical maps. No subscription. No accounts. Works offline.",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "VeilCast-VTT",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-11T12:44:33Z",
+        "url": "https://github.com/itsdarklikehell/VeilCast-VTT"
+      },
+      {
+        "created": "2026-09-11T12:44:25Z",
+        "description": "Open-source collaborative worldbuilding and writing app",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "neverkin",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-11T12:44:25Z",
+        "url": "https://github.com/itsdarklikehell/neverkin"
+      },
+      {
+        "created": "2026-09-11T12:44:12Z",
+        "description": "Lonelog is a lightweight notation system for recording solo tabletop RPG sessions. It provides a standardized way to capture game mechanics, oracle questions, and narrative outcomes—keeping your session logs readable, searchable, and shareable.",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "lonelog",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-11T12:44:13Z",
+        "url": "https://github.com/itsdarklikehell/lonelog"
+      },
+      {
+        "created": "2026-09-11T01:51:38Z",
+        "description": "The Free and Open-Source VTT",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "fari-app",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-11T01:51:38Z",
+        "url": "https://github.com/itsdarklikehell/fari-app"
+      },
+      {
+        "created": "2026-09-11T01:50:52Z",
+        "description": "magically playful, yet simple styling. all in one file.",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "magick.css",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-11T01:50:52Z",
+        "url": "https://github.com/itsdarklikehell/magick.css"
+      },
+      {
+        "created": "2026-09-11T01:48:32Z",
+        "description": "A Rustic Fantasy RPG for the Foundry Virtual Tabletop",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "litm",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-11T01:48:32Z",
+        "url": "https://github.com/itsdarklikehell/litm"
+      },
+      {
+        "created": "2026-09-11T01:47:52Z",
+        "description": "Cyberpunk tabletop map project",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "CITY_NET",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-11T01:47:52Z",
+        "url": "https://github.com/itsdarklikehell/CITY_NET"
+      },
+      {
+        "created": "2026-09-11T01:47:38Z",
+        "description": "OmegaRPG is a free, open-source Virtual Tabletop application.",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "OmegaRPG",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-11T01:47:38Z",
+        "url": "https://github.com/itsdarklikehell/OmegaRPG"
+      },
+      {
+        "created": "2026-09-11T01:47:21Z",
+        "description": "A 3d/2d capable self-hosted virtual tabletop",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "VTT",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-11T01:47:21Z",
+        "url": "https://github.com/itsdarklikehell/VTT"
+      },
+      {
+        "created": "2026-09-11T01:47:09Z",
+        "description": "Official Foundry VTT game system for the Twilight: 2000 (4th Edition) roleplaying game (Free League Publishing)",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "twilight2000-foundry-vtt",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-11T01:47:09Z",
+        "url": "https://github.com/itsdarklikehell/twilight2000-foundry-vtt"
+      },
+      {
+        "created": "2026-09-11T01:46:50Z",
+        "description": "[WIP] Free & open-source virtual tabletop for Dungeons & Dragons",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "tarrasqueapp",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-11T01:46:50Z",
+        "url": "https://github.com/itsdarklikehell/tarrasqueapp"
+      },
+      {
+        "created": "2026-09-11T01:46:29Z",
+        "description": "The Cypher System for Foundry VTT",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "cyphersystem-foundryvtt",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-11T01:46:29Z",
+        "url": "https://github.com/itsdarklikehell/cyphersystem-foundryvtt"
+      },
+      {
+        "created": "2026-09-11T01:46:10Z",
+        "description": "Virtual Table Top implemented in Python and Qt",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "QtVTT",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-11T01:46:10Z",
+        "url": "https://github.com/itsdarklikehell/QtVTT"
+      },
+      {
+        "created": "2026-09-11T01:45:56Z",
+        "description": "A virtual and 🕊liberated🕊 tabletop.  Make, play, and share your tabletop games with dice, cards, tokens, and more.",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "togetherness",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-11T01:45:56Z",
+        "url": "https://github.com/itsdarklikehell/togetherness"
+      },
+      {
+        "created": "2026-09-11T01:45:43Z",
+        "description": "A general-purpose, browser-based game table for casual games and rapid board game development.",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "Virtual-Game-Table",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-11T01:45:43Z",
+        "url": "https://github.com/itsdarklikehell/Virtual-Game-Table"
+      },
+      {
+        "created": "2026-09-11T01:45:32Z",
+        "description": "Free and slimmed down virtual tabletop (VTT) that can be used as a combat grid and as a dungeon exploration tool, made for local, in-person tabletop RPG sessions",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "dungeoneering",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-11T01:45:32Z",
+        "url": "https://github.com/itsdarklikehell/dungeoneering"
+      },
+      {
+        "created": "2026-09-11T01:45:22Z",
+        "description": "A cool little website for playing Dungeons & Dragons together!",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "dungeonclub",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-11T01:45:22Z",
+        "url": "https://github.com/itsdarklikehell/dungeonclub"
+      },
+      {
+        "created": "2026-09-11T01:45:09Z",
+        "description": "AirBoardGame is a versatile Virtual Table Top (VTT) platform designed for playing and creating any board game online with friends.",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "airboardgame",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-11T01:45:09Z",
+        "url": "https://github.com/itsdarklikehell/airboardgame"
+      },
+      {
+        "created": "2026-09-11T01:44:49Z",
+        "description": "This is a Forbidden Lands game System for the Foundry Virtual Tabletop. Made by @Perfectro, @patrys and @aMediocreDad. Maintained by @Cussa",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "forbidden-lands-foundry-vtt",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-11T01:44:49Z",
+        "url": "https://github.com/itsdarklikehell/forbidden-lands-foundry-vtt"
+      },
+      {
+        "created": "2026-09-11T01:44:35Z",
+        "description": "TokenTool removes much of the tedium from creating tokens for use with MapTool or your favorite online gaming application.  Just drag an image into the background, select a frame, zoom and pan to suit, and drag off a finished token.  The resulting token is transparent around the edges and cropped to the size you wanted.",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "TokenTool",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-11T01:44:35Z",
+        "url": "https://github.com/itsdarklikehell/TokenTool"
+      },
+      {
+        "created": "2026-09-11T01:44:10Z",
+        "description": "Virtual Tabletop for playing roleplaying games with remote players or face to face.",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "maptool",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-11T01:44:10Z",
+        "url": "https://github.com/itsdarklikehell/maptool"
+      },
+      {
+        "created": "2026-09-11T01:37:20Z",
+        "description": "Porting tool for the Dungeon Master game",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "DungeonMasterObjectReader",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-11T01:37:20Z",
+        "url": "https://github.com/itsdarklikehell/DungeonMasterObjectReader"
+      },
+      {
+        "created": "2026-09-11T01:32:31Z",
+        "description": "Manage \"Lines & Veils\" lists for TTRPG groups",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "lines-and-veils",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-11T01:32:32Z",
+        "url": "https://github.com/itsdarklikehell/lines-and-veils"
+      },
+      {
+        "created": "2026-09-11T01:32:13Z",
+        "description": "Session scheduling for TTRPG groups",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "terminfinder",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-11T01:32:13Z",
+        "url": "https://github.com/itsdarklikehell/terminfinder"
+      },
+      {
+        "created": "2026-09-11T01:31:52Z",
+        "description": "Create DND Character Sheets",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "dnd-character",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-11T01:31:52Z",
+        "url": "https://github.com/itsdarklikehell/dnd-character"
+      },
+      {
+        "created": "2026-09-11T01:31:29Z",
+        "description": "Web-based D&D 5e NPC generator and manager with a versioned read-only JSON API. Laravel 11 + MySQL, Dockerized.",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "Many-Faced-God",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-11T01:31:29Z",
+        "url": "https://github.com/itsdarklikehell/Many-Faced-God"
+      },
+      {
+        "created": "2026-09-11T01:28:31Z",
+        "description": "D&D5e sheet generator with AI (in italian for now)",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "dnd_sheet_to_print",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-11T01:28:32Z",
+        "url": "https://github.com/itsdarklikehell/dnd_sheet_to_print"
+      },
+      {
+        "created": "2026-09-11T01:28:15Z",
+        "description": "A table-top dice library for PHP",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "dicee",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-11T01:28:15Z",
+        "url": "https://github.com/itsdarklikehell/dicee"
+      },
+      {
+        "created": "2026-09-11T01:27:51Z",
+        "description": "QuestKeeper is a full stack web application for creating and managing Dungeons and Dragons Fifth Edition character sheets through a secure, database driven interface. Built with PHP, MySQL, JavaScript, jQuery, and Bootstrap, it demonstrates relational database design, authentication, dynamic form logic, and responsive UI development.",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "QuestKeeper",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-11T01:27:51Z",
+        "url": "https://github.com/itsdarklikehell/QuestKeeper"
+      },
+      {
+        "created": "2026-09-11T01:27:36Z",
+        "description": "A csv parser for loot & events in rpg sessions",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "lootlogger",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-11T01:27:36Z",
+        "url": "https://github.com/itsdarklikehell/lootlogger"
+      },
+      {
+        "created": "2026-09-11T01:27:23Z",
+        "description": "Make the Boring parts of DND FUN!",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "DNDLootBox",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-11T01:27:23Z",
+        "url": "https://github.com/itsdarklikehell/DNDLootBox"
+      },
+      {
+        "created": "2026-09-11T01:27:11Z",
+        "description": "DnDT - Dungeons and Dragons Tracker",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "dndt",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-11T01:27:12Z",
+        "url": "https://github.com/itsdarklikehell/dndt"
+      },
+      {
+        "created": "2026-09-11T01:26:41Z",
+        "description": "Random generator for some DND adventure/npc/location elements",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "dndmodulegenerator",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-11T01:26:41Z",
+        "url": "https://github.com/itsdarklikehell/dndmodulegenerator"
+      },
+      {
+        "created": "2026-09-11T01:26:26Z",
+        "description": "Utility software for my D&D adventure 'Lost memories'",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "new-dnd-adventure-lost-memories",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-11T01:26:26Z",
+        "url": "https://github.com/itsdarklikehell/new-dnd-adventure-lost-memories"
+      },
+      {
+        "created": "2026-09-11T01:26:06Z",
+        "description": "D&D battle manager - track initiative, HP, and characters with ease. PHP/SQLite, Docker-ready.",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "DnD-Battle-Manager",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-11T01:26:06Z",
+        "url": "https://github.com/itsdarklikehell/DnD-Battle-Manager"
+      },
+      {
+        "created": "2026-09-11T01:25:47Z",
+        "description": "PHP cli app to roll monsters for D&D and other RPGs",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "rollsomefoes",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-11T01:25:47Z",
+        "url": "https://github.com/itsdarklikehell/rollsomefoes"
+      },
+      {
+        "created": "2026-09-11T01:21:30Z",
+        "description": "Manage D&D campaigns with TiddlyWiki",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "tiddlywiki-dnd",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-11T01:21:30Z",
+        "url": "https://github.com/itsdarklikehell/tiddlywiki-dnd"
+      },
+      {
+        "created": "2026-09-11T01:21:02Z",
+        "description": "Masterplan is an application that helps you to build D&D 4E campaigns.",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "masterplan",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-11T01:21:03Z",
+        "url": "https://github.com/itsdarklikehell/masterplan"
+      },
+      {
+        "created": "2026-09-11T01:20:43Z",
+        "description": "Standardized JSON Schema for Dungeons & Dragons 5e characters",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "dnd5e_json_schema",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-11T01:20:43Z",
+        "url": "https://github.com/itsdarklikehell/dnd5e_json_schema"
+      },
+      {
+        "created": "2026-09-11T01:20:19Z",
+        "description": "Phanary is a lightning-fast, free, online app for desktop and mobile that excels at finding and playing atmospheric music and sound effects for games like D&D and Pathfinder. Phanary is meant to be used in a Game Master's preparation and improvisation, and to be quick and streamlined enough to smoothly handle the party going somewhere unexpected.",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "phanary",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-11T01:20:19Z",
+        "url": "https://github.com/itsdarklikehell/phanary"
+      },
+      {
+        "created": "2026-09-11T01:19:56Z",
+        "description": "Just a physics based dice roller. Created because others were unsatisfying or hard to use.",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "diceRoller",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-11T01:19:57Z",
+        "url": "https://github.com/itsdarklikehell/diceRoller"
+      },
+      {
+        "created": "2026-09-11T01:19:43Z",
+        "description": "Dojo is a web app for D&D (5E) dungeon masters. It can be used to design monsters and to plan and run combat encounters.",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "dojo",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-11T01:19:43Z",
+        "url": "https://github.com/itsdarklikehell/dojo"
+      },
+      {
+        "created": "2026-09-11T01:19:26Z",
+        "description": "Visual Studio Code extension for managing campaign documents.",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "vscode-dmbinder",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-11T01:19:26Z",
+        "url": "https://github.com/itsdarklikehell/vscode-dmbinder"
+      },
+      {
+        "created": "2026-09-11T01:18:53Z",
+        "description": "Generate D&D 5E-flavoured fantasy content for your app, video game, website, etc.",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "fantasy-content-generator",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-11T01:18:54Z",
+        "url": "https://github.com/itsdarklikehell/fantasy-content-generator"
+      },
+      {
+        "created": "2026-09-11T01:18:37Z",
+        "description": "Functional 5e spell list by class and level",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "grimoire",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-11T01:18:37Z",
+        "url": "https://github.com/itsdarklikehell/grimoire"
+      },
+      {
+        "created": "2026-09-11T01:18:25Z",
+        "description": "D&D group infrastructure.",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "dungeonchurch",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-11T01:18:25Z",
+        "url": "https://github.com/itsdarklikehell/dungeonchurch"
+      },
+      {
+        "created": "2026-09-11T01:12:52Z",
+        "description": "A D&D map builder and campaign manager",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "cartographer",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-11T01:12:52Z",
+        "url": "https://github.com/itsdarklikehell/cartographer"
+      },
+      {
+        "created": "2026-09-11T01:12:10Z",
+        "description": "An all in one tool for GMs.",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "rpg-book",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-11T01:12:10Z",
+        "url": "https://github.com/itsdarklikehell/rpg-book"
+      },
+      {
+        "created": "2026-09-11T01:11:49Z",
+        "description": "No description",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "dnd-character-dl",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-11T01:11:49Z",
+        "url": "https://github.com/itsdarklikehell/dnd-character-dl"
+      },
+      {
+        "created": "2026-09-11T01:11:32Z",
+        "description": "Track your DnD encounters effortlessly with our website. Get real-time updates, manage players & battles, and never miss a beat.",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "dnd-trackert",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-11T01:11:32Z",
+        "url": "https://github.com/itsdarklikehell/dnd-trackert"
+      },
+      {
+        "created": "2026-09-11T01:10:54Z",
+        "description": "Drag and Drop Form Builder for Vueform",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "builder",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-11T01:10:54Z",
+        "url": "https://github.com/itsdarklikehell/builder"
+      },
+      {
+        "created": "2026-09-11T01:10:11Z",
+        "description": "Campaign management app for virtual D&D campaigns, with future support for creating and managing homebrew campaigns and reusable templates.",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "QuestBase",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-11T01:10:11Z",
+        "url": "https://github.com/itsdarklikehell/QuestBase"
+      },
+      {
+        "created": "2026-09-11T01:09:40Z",
+        "description": "A web page to keep track of your initiative during IRL D&D session",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "Dungeons-And-Dragons-Initiative-Sorter",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-11T01:09:41Z",
+        "url": "https://github.com/itsdarklikehell/Dungeons-And-Dragons-Initiative-Sorter"
+      },
+      {
+        "created": "2026-09-11T01:09:26Z",
+        "description": "Interactive presentation for a game master to show NPCs and artwork to players",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "dnd-dm-presenter",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-11T01:09:26Z",
+        "url": "https://github.com/itsdarklikehell/dnd-dm-presenter"
+      },
+      {
+        "created": "2026-09-11T01:09:03Z",
+        "description": "A portable, offline-first DM tool designed for dual-monitor setups. Manage combat, take notes on mind map, track timelines, and project a rich campaign wiki seamlessly. Download for Android, Windows, Linux, and MacOS. Supports English, Türkçe, French, and Deutch.",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "dungeon-master-tool",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-11T01:09:03Z",
+        "url": "https://github.com/itsdarklikehell/dungeon-master-tool"
+      },
+      {
+        "created": "2026-09-11T01:08:53Z",
+        "description": "Database containing the DnD 5.5th Ed. (only in Spanish)",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "DnD-5.5-Spells-ES",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-11T01:08:56Z",
+        "url": "https://github.com/itsdarklikehell/DnD-5.5-Spells-ES"
+      },
+      {
+        "created": "2026-09-11T01:06:52Z",
+        "description": "No description",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "Naruto-DnD",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-11T01:06:52Z",
+        "url": "https://github.com/itsdarklikehell/Naruto-DnD"
+      },
+      {
+        "created": "2026-09-11T01:06:30Z",
+        "description": "Image generation CLI powered by Google Gemini",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "dndig",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-11T01:06:31Z",
+        "url": "https://github.com/itsdarklikehell/dndig"
+      },
+      {
+        "created": "2026-09-11T01:05:49Z",
+        "description": "Milantus - Web de fichas de personaje D&D 5e",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "Proyecto-DnD",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-11T01:05:50Z",
+        "url": "https://github.com/itsdarklikehell/Proyecto-DnD"
+      },
+      {
+        "created": "2026-09-11T01:04:58Z",
+        "description": "Dungeons & Dragons Functions for Players and Dungeon Masters",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "dndR",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-11T01:05:00Z",
+        "url": "https://github.com/itsdarklikehell/dndR"
+      },
+      {
+        "created": "2026-09-11T01:03:54Z",
+        "description": "Resources for Dungeons & Dragons",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "awesome-dnd",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-11T01:03:54Z",
+        "url": "https://github.com/itsdarklikehell/awesome-dnd"
+      },
+      {
+        "created": "2026-09-11T01:02:26Z",
+        "description": "A Python-based D&D 5th Edition game implementation using Pygame. Features include character management, trading systems, dungeon exploration, and turn-based combat. The game offers rich gameplay mechanics including inventory management, monster encounters, and advanced pathfinding algorithms. ",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "DnD-5th-Edition-API",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-11T01:02:27Z",
+        "url": "https://github.com/itsdarklikehell/DnD-5th-Edition-API"
+      },
+      {
+        "created": "2026-09-11T01:01:54Z",
+        "description": "Interactive terminal D&D helper toolbox program for Dungeon Masters, players, and worldbuilders.",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "dmpower",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-11T01:01:55Z",
+        "url": "https://github.com/itsdarklikehell/dmpower"
+      },
+      {
+        "created": "2026-09-11T01:01:18Z",
+        "description": "No description",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "dnd-with-llm",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-11T01:01:18Z",
+        "url": "https://github.com/itsdarklikehell/dnd-with-llm"
+      },
+      {
+        "created": "2026-09-11T01:00:20Z",
+        "description": "A Python-based terminal game for D&D 5E SRD adventures with LLM-enhanced narrative",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "rpggame",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-11T01:00:22Z",
+        "url": "https://github.com/itsdarklikehell/rpggame"
+      },
+      {
+        "created": "2026-09-11T00:59:58Z",
+        "description": "Dungeons and Dragons game designed to be played at the command console",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "Console-DnD",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-11T00:59:58Z",
+        "url": "https://github.com/itsdarklikehell/Console-DnD"
+      },
+      {
+        "created": "2026-09-11T00:59:36Z",
+        "description": "A Dungeons & Dragons multiplayer game developed by ChatGPT",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "gpt-dnd-game",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-11T00:59:36Z",
+        "url": "https://github.com/itsdarklikehell/gpt-dnd-game"
+      },
+      {
+        "created": "2026-09-11T00:59:17Z",
+        "description": "Simple desktop client for playing your favorite Pen and Paper games",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "DnD-Client",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-11T00:59:17Z",
+        "url": "https://github.com/itsdarklikehell/DnD-Client"
+      },
+      {
+        "created": "2026-09-11T00:58:53Z",
+        "description": "A personal learning project to explore Ink (React for terminals) and Bun runtime through building a terminal-based D&D adventure game.",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "DND-CLI",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-11T00:58:53Z",
+        "url": "https://github.com/itsdarklikehell/DND-CLI"
+      },
+      {
+        "created": "2026-09-09T02:47:38Z",
+        "description": "Your new-best- DnD friend: He joins you on the lovely adventure in the world of Dungeons and Dragons. Supporting you with lots of usefull tools. Good luck!",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "Sumarville",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-09T02:47:39Z",
+        "url": "https://github.com/itsdarklikehell/Sumarville"
+      },
+      {
+        "created": "2026-09-09T02:47:19Z",
+        "description": "An AI tool to convert your idea into a DnD Scenario",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "DnDGenerate",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-09T02:47:19Z",
+        "url": "https://github.com/itsdarklikehell/DnDGenerate"
+      },
+      {
+        "created": "2026-09-09T02:44:02Z",
+        "description": "The Tavern Lore Keeper — a rumor-mill and flavor generator for D&D tables. Taverns, rumors, patrons, cursed items.",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "tavern-lore-keeper",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-09T02:44:02Z",
+        "url": "https://github.com/itsdarklikehell/tavern-lore-keeper"
+      },
+      {
+        "created": "2026-09-09T02:43:37Z",
+        "description": "The Storybook Die — every roll tells a story. A literary d20 that narrates your fortune.",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "storybook-die",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-09T02:43:37Z",
+        "url": "https://github.com/itsdarklikehell/storybook-die"
+      },
+      {
+        "created": "2026-09-09T02:42:14Z",
+        "description": "A quick town, name, or Kingdom generator for fantasy themed TTRPG's.",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "emeralds-location-forge",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-09T02:42:14Z",
+        "url": "https://github.com/itsdarklikehell/emeralds-location-forge"
+      },
+      {
+        "created": "2026-09-09T02:41:45Z",
+        "description": "A modern tracker for D&D 5e encounters. Features HP tracking, D&D 5e API integration and many.",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "DND-Encounter-Manager",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-09T02:41:45Z",
+        "url": "https://github.com/itsdarklikehell/DND-Encounter-Manager"
+      },
+      {
+        "created": "2026-09-09T02:41:29Z",
+        "description": "Documentation for DiceForge API",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "DiceForge-Docs",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-09T02:41:29Z",
+        "url": "https://github.com/itsdarklikehell/DiceForge-Docs"
+      },
+      {
+        "created": "2026-09-09T02:40:57Z",
+        "description": "Midjourney Campaign Codex from the MJ Cartographers Guild",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "mdj-campaigncodex",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-09T02:40:58Z",
+        "url": "https://github.com/itsdarklikehell/mdj-campaigncodex"
+      },
+      {
+        "created": "2026-09-09T02:39:58Z",
+        "description": "A basic currency calculator/converter based on D&D 3.5 SRD",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "dnd-currency-converter",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-09T02:39:58Z",
+        "url": "https://github.com/itsdarklikehell/dnd-currency-converter"
+      },
+      {
+        "created": "2026-09-09T02:38:46Z",
+        "description": "This project is for making a minimalistic experience of the D&D Beyond website.",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "ddb-redirecter",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-09T02:38:46Z",
+        "url": "https://github.com/itsdarklikehell/ddb-redirecter"
+      },
+      {
+        "created": "2026-09-09T02:38:09Z",
+        "description": "No description",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "dnd-units.astrotomic.info",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-09T02:38:09Z",
+        "url": "https://github.com/itsdarklikehell/dnd-units.astrotomic.info"
+      },
+      {
+        "created": "2026-09-09T02:36:56Z",
+        "description": "Dungeon Master Tables and Tools for 5e",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "DungeonMasterTools.github.io",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-09T02:36:56Z",
+        "url": "https://github.com/itsdarklikehell/DungeonMasterTools.github.io"
+      },
+      {
         "created": "2026-09-09T02:36:23Z",
         "description": "A new and modern Character Sheet for 5th edition Dungeons and Dragons.",
         "forks": 0,
@@ -1152,6 +3198,50 @@
         "topics": [],
         "updated": "2026-09-09T02:36:23Z",
         "url": "https://github.com/itsdarklikehell/DnD-5e-Character-Sheet"
+      },
+      {
+        "created": "2026-09-09T02:35:13Z",
+        "description": "A PHP-based web application for managing Dungeons & Dragons campaigns and characters using MySQL.",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "dnd-web-database",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-09T02:35:13Z",
+        "url": "https://github.com/itsdarklikehell/dnd-web-database"
+      },
+      {
+        "created": "2026-09-09T02:34:49Z",
+        "description": "A DM screen that pulls information from D&D Beyond",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "dndbeyond-screen",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-09T02:34:49Z",
+        "url": "https://github.com/itsdarklikehell/dndbeyond-screen"
+      },
+      {
+        "created": "2026-09-09T02:34:17Z",
+        "description": "Adventure Lookup Main Repository",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "AdventureLookup",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-09T02:34:17Z",
+        "url": "https://github.com/itsdarklikehell/AdventureLookup"
+      },
+      {
+        "created": "2026-09-09T02:33:02Z",
+        "description": "My personally cultivated list of FoundryVTT Modules for Dungeons and Dragons 5e and Pathfinder 2e that play nicely together without creating an overwhelming amount of UI options or causing noticeable FPS drops.",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "Bryans-Preferred-Modules-for-FoundryVTT",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-09T02:33:02Z",
+        "url": "https://github.com/itsdarklikehell/Bryans-Preferred-Modules-for-FoundryVTT"
       },
       {
         "created": "2026-09-09T02:32:40Z",
@@ -1165,6 +3255,72 @@
         "url": "https://github.com/itsdarklikehell/DND-5e-LaTeX-Character-Sheet-Template"
       },
       {
+        "created": "2026-09-09T02:32:17Z",
+        "description": "Dice bot for Discord",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "DiceMaiden",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-09T02:32:17Z",
+        "url": "https://github.com/itsdarklikehell/DiceMaiden"
+      },
+      {
+        "created": "2026-09-09T02:27:50Z",
+        "description": "Code for Dungeon Master's Vault Community Edition",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "orcpub",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-09T02:27:50Z",
+        "url": "https://github.com/itsdarklikehell/orcpub"
+      },
+      {
+        "created": "2026-09-09T02:27:04Z",
+        "description": "Solbera's DND5e fonts",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "solbera-dnd-fonts",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-09T02:27:04Z",
+        "url": "https://github.com/itsdarklikehell/solbera-dnd-fonts"
+      },
+      {
+        "created": "2026-09-09T02:25:20Z",
+        "description": "Dungeons & Dragons 5th Edition (2014) SRD v5.1 converted to Markdown.",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "dnd.srd.5.1",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-09T02:25:20Z",
+        "url": "https://github.com/itsdarklikehell/dnd.srd.5.1"
+      },
+      {
+        "created": "2026-09-09T02:24:33Z",
+        "description": "Sales & Dungeons — Thermal Printer as D&D / TTRPG Utility",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "snd",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-09T02:24:33Z",
+        "url": "https://github.com/itsdarklikehell/snd"
+      },
+      {
+        "created": "2026-09-09T02:23:56Z",
+        "description": "Dungeons and Dragons - Too Long; Didn't Read",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "dnd-tldr",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-09T02:23:56Z",
+        "url": "https://github.com/itsdarklikehell/dnd-tldr"
+      },
+      {
         "created": "2026-09-09T02:23:33Z",
         "description": "LaTeX package to typeset material for the fifth edition of the \"world's greatest roleplaying game\".",
         "forks": 0,
@@ -1176,71 +3332,868 @@
         "url": "https://github.com/itsdarklikehell/DND-5e-LaTeX-Template"
       },
       {
-        "created": "2026-09-11T01:02:26Z",
-        "description": "A Python-based D&D 5th Edition game implementation using Pygame. Features include character management, trading systems, dungeon exploration, and turn-based combat. The game offers rich gameplay mechanics including inventory management, monster encounters, and advanced pathfinding algorithms. ",
+        "created": "2026-09-09T02:23:08Z",
+        "description": "Create D&D adventures with ease using Adventure Artisan. Generate cards for Goals, Locations, Obstacles, Twists, and Characters to form engaging scenarios. ",
         "forks": 0,
         "language": "Unknown",
-        "name": "DnD-5th-Edition-API",
+        "name": "AdventureArtisan",
         "stars": 0,
         "topics": [],
-        "updated": "2026-09-11T01:02:27Z",
-        "url": "https://github.com/itsdarklikehell/DnD-5th-Edition-API"
+        "updated": "2026-09-09T02:23:09Z",
+        "url": "https://github.com/itsdarklikehell/AdventureArtisan"
+      },
+      {
+        "created": "2026-09-09T02:21:44Z",
+        "description": "This project is a collection of code and templates I've created in an effort to automate building a TTRPG content library with Obsidian.",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "TTRPGContent",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-09T02:21:44Z",
+        "url": "https://github.com/itsdarklikehell/TTRPGContent"
+      },
+      {
+        "created": "2026-09-09T02:20:45Z",
+        "description": "a basic dnd toolkit ",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "dnd-toolkit",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-09T02:20:45Z",
+        "url": "https://github.com/itsdarklikehell/dnd-toolkit"
+      },
+      {
+        "created": "2026-09-09T02:18:45Z",
+        "description": "A repository of dungeon and dragons notes, adventures, and other miscellaneous items.",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "dnd",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-09T02:18:45Z",
+        "url": "https://github.com/itsdarklikehell/dnd"
+      },
+      {
+        "created": "2026-09-09T02:18:18Z",
+        "description": "Open source Virtual Tabletop based on Godot game engine.",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "Open-VTT",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-09T02:18:18Z",
+        "url": "https://github.com/itsdarklikehell/Open-VTT"
+      },
+      {
+        "created": "2026-09-09T02:17:50Z",
+        "description": "Free browser-based virtual tabletop for Dungeons & Dragons. A lightweight Roll20 alternative with maps, fog of war, tokens and scenes.",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "dnd-tabletop",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-09T02:17:50Z",
+        "url": "https://github.com/itsdarklikehell/dnd-tabletop"
+      },
+      {
+        "created": "2026-09-09T02:15:43Z",
+        "description": "A virtual table top for Dungeons & Dragons 5th Edition that you can run in your browser.",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "ogre.tools",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-09T02:15:43Z",
+        "url": "https://github.com/itsdarklikehell/ogre.tools"
+      },
+      {
+        "created": "2026-09-09T02:15:19Z",
+        "description": "A virtual tabletop designed for 5e D&D, includes a map tool with dynamic lighting, initiative tracker, combat tracker and homebrew management. ",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "Dungeoneer",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-09T02:15:19Z",
+        "url": "https://github.com/itsdarklikehell/Dungeoneer"
+      },
+      {
+        "created": "2026-08-25T20:43:25Z",
+        "description": "A curated list of modern Generative Artificial Intelligence projects and services",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "awesome-generative-ai",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-09T02:07:49Z",
+        "url": "https://github.com/itsdarklikehell/awesome-generative-ai"
+      },
+      {
+        "created": "2026-08-25T20:52:05Z",
+        "description": "Agent Skills 终极指南：快速入门、资源推荐、精选技能与实用工具 ｜The Ultimate Guide to Agent Skills: QuickStart, Resources, Features&Toolkit",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "libukai-awesome-agent-skills",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-09T02:07:29Z",
+        "url": "https://github.com/itsdarklikehell/libukai-awesome-agent-skills"
+      },
+      {
+        "created": "2026-08-30T21:33:35Z",
+        "description": "Little Piggy Tracker, LittleGPTracker feature improved",
+        "forks": 0,
+        "language": "C++",
+        "name": "LittleGPTracker",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-09T02:07:26Z",
+        "url": "https://github.com/itsdarklikehell/LittleGPTracker"
+      },
+      {
+        "created": "2026-08-25T13:18:46Z",
+        "description": "Curated real-world use cases for Hermes Agent — the self-improving AI agent from Nous Research. Backed by primary sources.",
+        "forks": 0,
+        "language": "Python",
+        "name": "awesome-hermes-usecases",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-09T02:07:20Z",
+        "url": "https://github.com/itsdarklikehell/awesome-hermes-usecases"
+      },
+      {
+        "created": "2026-08-25T20:43:41Z",
+        "description": "A collection of projects showcasing RAG, agents, workflows, and other AI use cases",
+        "forks": 0,
+        "language": "Python",
+        "name": "awesome-ai-apps",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-09T02:06:59Z",
+        "url": "https://github.com/itsdarklikehell/awesome-ai-apps"
+      },
+      {
+        "created": "2023-06-17T00:19:42Z",
+        "description": "Grabs pcap off Pwnagotchi, converts to hc22000 format and generates attack rules/scripts for hashcat. ",
+        "forks": 0,
+        "language": "Python",
+        "name": "pwnagotchi-scripts",
+        "stars": 1,
+        "topics": [],
+        "updated": "2026-09-03T07:29:37Z",
+        "url": "https://github.com/itsdarklikehell/pwnagotchi-scripts"
+      },
+      {
+        "created": "2026-09-02T13:57:59Z",
+        "description": "A command-line frontend for Veloren",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "teloren",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-09-02T13:57:59Z",
+        "url": "https://github.com/itsdarklikehell/teloren"
+      },
+      {
+        "created": "2021-08-07T16:32:36Z",
+        "description": "(⌐■_■) - Deep Reinforcement Learning instrumenting bettercap for WiFi pwning.",
+        "forks": 0,
+        "language": "Python",
+        "name": "pwnagotchi",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-08-31T22:48:11Z",
+        "url": "https://github.com/itsdarklikehell/pwnagotchi"
+      },
+      {
+        "created": "2026-08-25T13:44:06Z",
+        "description": "OpenClaw Mission Control Dashboard",
+        "forks": 0,
+        "language": "TypeScript",
+        "name": "tenacitOS",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-08-31T22:43:01Z",
+        "url": "https://github.com/itsdarklikehell/tenacitOS"
+      },
+      {
+        "created": "2026-08-25T13:43:13Z",
+        "description": "Claw3D is an open source 3D engine built on OpenClaw for creating games, simulations, and high-performance 3D applications.",
+        "forks": 0,
+        "language": "TypeScript",
+        "name": "Claw3D",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-08-31T22:42:53Z",
+        "url": "https://github.com/itsdarklikehell/Claw3D"
+      },
+      {
+        "created": "2025-10-05T23:39:36Z",
+        "description": "Configurable response server for Project J.A.I.son",
+        "forks": 0,
+        "language": "Python",
+        "name": "jaison-core",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-08-31T22:42:51Z",
+        "url": "https://github.com/itsdarklikehell/jaison-core"
+      },
+      {
+        "created": "2026-08-25T14:22:59Z",
+        "description": "Terminal neurovisualizer for Hermes Agent. 100+ animated themes that react to what your agent is doing. Watch your AI think.",
+        "forks": 0,
+        "language": "Python",
+        "name": "hermes-neurovision",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-08-31T22:42:50Z",
+        "url": "https://github.com/itsdarklikehell/hermes-neurovision"
+      },
+      {
+        "created": "2026-08-30T21:34:02Z",
+        "description": "Spectral warping wavetable synth",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "vital",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-08-30T21:34:02Z",
+        "url": "https://github.com/itsdarklikehell/vital"
+      },
+      {
+        "created": "2026-07-12T19:56:39Z",
+        "description": "No description",
+        "forks": 0,
+        "language": "Python",
+        "name": "kindalive",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-08-30T19:51:08Z",
+        "url": "https://github.com/itsdarklikehell/kindalive"
+      },
+      {
+        "created": "2023-05-10T20:51:08Z",
+        "description": "Pwnagotchi automation - get your handshakes and convert in one go. ",
+        "forks": 0,
+        "language": "JavaScript",
+        "name": "Pwnagetty",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-08-30T14:40:41Z",
+        "url": "https://github.com/itsdarklikehell/Pwnagetty"
+      },
+      {
+        "created": "2025-10-11T19:21:13Z",
+        "description": "mcp-this lets you turn any command-line tool into an MCP tool and create structured prompt templates that any MCP Client (e.g. Claude Desktop) can use. er for any command",
+        "forks": 0,
+        "language": "Python",
+        "name": "mcp-this",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-08-30T14:40:05Z",
+        "url": "https://github.com/itsdarklikehell/mcp-this"
+      },
+      {
+        "created": "2026-08-14T14:08:15Z",
+        "description": "A small utility to use Ollama models in LM Studio (and vice versa via symlinking) without duplicating disk space",
+        "forks": 0,
+        "language": "Go",
+        "name": "ollama-to-lmstudio-symlinks",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-08-30T14:39:53Z",
+        "url": "https://github.com/itsdarklikehell/ollama-to-lmstudio-symlinks"
+      },
+      {
+        "created": "2026-08-25T13:43:04Z",
+        "description": "Virtual AI Office Dashboard for OpenClaw — visualize your multi-agent workflows in real-time",
+        "forks": 0,
+        "language": "JavaScript",
+        "name": "openclaw-office",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-08-30T14:27:47Z",
+        "url": "https://github.com/itsdarklikehell/openclaw-office"
+      },
+      {
+        "created": "2026-08-25T14:20:53Z",
+        "description": "A sleek, open-source desktop client for OpenClaw. Built with React, Vite,  and Electron for a fast, responsive, and experimental \"Vibe Coding\"  experience.",
+        "forks": 0,
+        "language": "TypeScript",
+        "name": "clawUI",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-08-30T14:27:36Z",
+        "url": "https://github.com/itsdarklikehell/clawUI"
+      },
+      {
+        "created": "2026-08-25T14:02:15Z",
+        "description": "A pixel office for your OpenClaw: turn invisible work states into a cozy little space with characters, daily notes, and guest agents. Code under MIT; art assets for non-commercial learning only.",
+        "forks": 0,
+        "language": "HTML",
+        "name": "Star-Office-UI",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-08-30T14:27:21Z",
+        "url": "https://github.com/itsdarklikehell/Star-Office-UI"
+      },
+      {
+        "created": "2026-08-25T14:19:32Z",
+        "description": "No description",
+        "forks": 0,
+        "language": "Vue",
+        "name": "Anima",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-08-30T14:26:59Z",
+        "url": "https://github.com/itsdarklikehell/Anima"
+      },
+      {
+        "created": "2026-08-25T13:17:49Z",
+        "description": "ClawLibrary is a 2D pixel-game-style control interface for OpenClaw.  It turns OpenClaw's generated assets, runtime activity, and assets related working state into a visual library interface that can be browsed, previewed, and monitored in real time.",
+        "forks": 0,
+        "language": "TypeScript",
+        "name": "ClawLibrary",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-08-30T14:26:56Z",
+        "url": "https://github.com/itsdarklikehell/ClawLibrary"
+      },
+      {
+        "created": "2026-08-10T13:28:22Z",
+        "description": "A web-based tool for viewing and managing the contents of the Pico Tracker Advance SD card, including sample/project analysis and playback tools.",
+        "forks": 0,
+        "language": "HTML",
+        "name": "pico-tracker-librarian",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-08-30T14:26:47Z",
+        "url": "https://github.com/itsdarklikehell/pico-tracker-librarian"
+      },
+      {
+        "created": "2026-08-25T14:24:34Z",
+        "description": "A lightweight web dashboard for viewing all your OpenClaw Bots/Agents/Models/Sessions status at a glance.",
+        "forks": 0,
+        "language": "TypeScript",
+        "name": "OpenClaw-bot-review",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-08-30T13:58:29Z",
+        "url": "https://github.com/itsdarklikehell/OpenClaw-bot-review"
+      },
+      {
+        "created": "2026-08-28T16:52:45Z",
+        "description": "Proxmox VE Helper-Scripts",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "Proxmox",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-08-28T16:52:45Z",
+        "url": "https://github.com/itsdarklikehell/Proxmox"
+      },
+      {
+        "created": "2026-08-25T14:23:18Z",
+        "description": "Web UI consciousness monitor for Hermes — the AI agent with persistent memory",
+        "forks": 0,
+        "language": "Python",
+        "name": "hermes-hudui",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-08-27T02:08:36Z",
+        "url": "https://github.com/itsdarklikehell/hermes-hudui"
+      },
+      {
+        "created": "2023-06-17T00:20:59Z",
+        "description": "the smart way to manage wpa handshakes collected by pwnagotchi",
+        "forks": 0,
+        "language": "Python",
+        "name": "pwnbase",
+        "stars": 1,
+        "topics": [],
+        "updated": "2026-08-25T21:44:52Z",
+        "url": "https://github.com/itsdarklikehell/pwnbase"
+      },
+      {
+        "created": "2025-10-25T13:09:59Z",
+        "description": "Easily setup production-ready standalone Clickhouse and monitor it",
+        "forks": 0,
+        "language": "Shell",
+        "name": "clickhouse",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-08-25T21:44:30Z",
+        "url": "https://github.com/itsdarklikehell/clickhouse"
+      },
+      {
+        "created": "2017-04-05T12:56:11Z",
+        "description": "Backup and restore your sdcard with on linux. ",
+        "forks": 0,
+        "language": "Shell",
+        "name": "SdcardBackupRestore",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-08-25T21:42:43Z",
+        "url": "https://github.com/itsdarklikehell/SdcardBackupRestore"
+      },
+      {
+        "created": "2025-10-06T08:57:44Z",
+        "description": "Easy Docker setup for Stable Diffusion with user-friendly UI",
+        "forks": 0,
+        "language": "Shell",
+        "name": "stable-diffusion-webui-docker",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-08-25T21:42:42Z",
+        "url": "https://github.com/itsdarklikehell/stable-diffusion-webui-docker"
+      },
+      {
+        "created": "2025-10-09T06:54:14Z",
+        "description": "The public version of the Riko Project",
+        "forks": 0,
+        "language": "Python",
+        "name": "riko_project",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-08-25T21:42:28Z",
+        "url": "https://github.com/itsdarklikehell/riko_project"
+      },
+      {
+        "created": "2024-08-18T00:16:18Z",
+        "description": "A collection of post-processing shaders written for ReShade.",
+        "forks": 0,
+        "language": "HLSL",
+        "name": "reshade-shaders",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-08-25T21:42:07Z",
+        "url": "https://github.com/itsdarklikehell/reshade-shaders"
+      },
+      {
+        "created": "2022-07-10T19:48:34Z",
+        "description": "Small Bash script to retrieve and play tunes from modarchive.org",
+        "forks": 0,
+        "language": "Shell",
+        "name": "modarchive",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-08-25T21:41:34Z",
+        "url": "https://github.com/itsdarklikehell/modarchive"
+      },
+      {
+        "created": "2017-05-11T01:53:03Z",
+        "description": "This script creates a NATed or Bridged WiFi Access Point.",
+        "forks": 0,
+        "language": "Shell",
+        "name": "create_ap",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-08-25T21:41:29Z",
+        "url": "https://github.com/itsdarklikehell/create_ap"
+      },
+      {
+        "created": "2026-02-18T11:55:05Z",
+        "description": "Factory sdcard content for the picoTracker",
+        "forks": 0,
+        "language": "Shell",
+        "name": "factory-content",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-08-25T21:41:17Z",
+        "url": "https://github.com/itsdarklikehell/factory-content"
+      },
+      {
+        "created": "2026-08-25T20:51:05Z",
+        "description": "A curated catalogue of awesome agentic AI patterns",
+        "forks": 0,
+        "language": "HTML",
+        "name": "awesome-agentic-patterns",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-08-25T21:41:05Z",
+        "url": "https://github.com/itsdarklikehell/awesome-agentic-patterns"
+      },
+      {
+        "created": "2026-08-25T20:51:17Z",
+        "description": "🤖 A comprehensive list of 1,500+ resources and tools related to AI agents.",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "awesome_ai_agents",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-08-25T20:51:17Z",
+        "url": "https://github.com/itsdarklikehell/awesome_ai_agents"
+      },
+      {
+        "created": "2026-08-25T20:50:59Z",
+        "description": "An orchestrated sub agent dev team powered by claude code",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "awesome-claude-agents",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-08-25T20:50:59Z",
+        "url": "https://github.com/itsdarklikehell/awesome-claude-agents"
+      },
+      {
+        "created": "2026-08-25T20:50:53Z",
+        "description": "162 production-ready AI agent templates for OpenClaw. SOUL.md configs across 19 categories. Submit yours!",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "awesome-openclaw-agents",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-08-25T20:50:53Z",
+        "url": "https://github.com/itsdarklikehell/awesome-openclaw-agents"
+      },
+      {
+        "created": "2026-08-25T20:50:29Z",
+        "description": "Awesome list of 300+ agentic AI resources",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "slavakurilyak-awesome-ai-agents",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-08-25T20:50:29Z",
+        "url": "https://github.com/itsdarklikehell/slavakurilyak-awesome-ai-agents"
+      },
+      {
+        "created": "2026-08-25T20:48:58Z",
+        "description": "Tutorials, Guides and Agent Skills Directories",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "heilcheng-awesome-agent-skills",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-08-25T20:48:58Z",
+        "url": "https://github.com/itsdarklikehell/heilcheng-awesome-agent-skills"
+      },
+      {
+        "created": "2026-08-25T20:47:57Z",
+        "description": "A curated list of GPT agents for cybersecurity",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "Awesome-GPT-Agents",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-08-25T20:47:57Z",
+        "url": "https://github.com/itsdarklikehell/Awesome-GPT-Agents"
+      },
+      {
+        "created": "2026-08-25T20:47:35Z",
+        "description": "A collection of DESIGN.md files analysis by popular brand design systems. Drop one into your project and let coding agents generate a matching UI.",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "awesome-design-md",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-08-25T20:47:35Z",
+        "url": "https://github.com/itsdarklikehell/awesome-design-md"
+      },
+      {
+        "created": "2026-08-25T20:44:43Z",
+        "description": "A curated list of Artificial Intelligence (AI) courses, books, video lectures and papers.",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "awesome-artificial-intelligence",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-08-25T20:44:43Z",
+        "url": "https://github.com/itsdarklikehell/awesome-artificial-intelligence"
+      },
+      {
+        "created": "2026-08-25T20:43:57Z",
+        "description": "Curated list of AI-powered developer tools.",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "awesome-ai-devtools",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-08-25T20:43:57Z",
+        "url": "https://github.com/itsdarklikehell/awesome-ai-devtools"
+      },
+      {
+        "created": "2026-08-25T20:43:49Z",
+        "description": "A curated list of Artificial Intelligence Top Tools",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "awesome-ai-tools",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-08-25T20:43:49Z",
+        "url": "https://github.com/itsdarklikehell/awesome-ai-tools"
+      },
+      {
+        "created": "2026-08-25T20:43:12Z",
+        "description": "A curated list of awesome Claude Skills, resources, and tools for customizing Claude AI workflows",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "awesome-claude-skills",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-08-25T20:43:13Z",
+        "url": "https://github.com/itsdarklikehell/awesome-claude-skills"
+      },
+      {
+        "created": "2026-08-25T20:43:03Z",
+        "description": "Elevate your AI research writing, no more tedious polishing ✨ ",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "awesome-ai-research-writing",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-08-25T20:43:03Z",
+        "url": "https://github.com/itsdarklikehell/awesome-ai-research-writing"
+      },
+      {
+        "created": "2026-08-25T20:42:56Z",
+        "description": "A list of AI autonomous agents",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "awesome-ai-agents",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-08-25T20:42:56Z",
+        "url": "https://github.com/itsdarklikehell/awesome-ai-agents"
+      },
+      {
+        "created": "2026-08-25T20:39:53Z",
+        "description": "Native web workspace for Hermes Agent — chat, terminal, memory, skills, inspector.",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "hermes-workspace",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-08-25T20:39:53Z",
+        "url": "https://github.com/itsdarklikehell/hermes-workspace"
+      },
+      {
+        "created": "2026-08-25T20:37:36Z",
+        "description": "OpenClaw: Use All Major AI Models NO API Token! Claude/ChatGPT/Gemini/DeepSeek/Doubao/Grok/Qwen/Manus/Kimi",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "openclaw-zero-token",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-08-25T20:37:36Z",
+        "url": "https://github.com/itsdarklikehell/openclaw-zero-token"
+      },
+      {
+        "created": "2026-08-25T13:24:24Z",
+        "description": "The 500 AI Agents Projects is a curated collection of AI agent use cases across various industries. It showcases practical applications and provides links to open-source projects for implementation, illustrating how AI agents are transforming sectors such as healthcare, finance, education, retail, and more.",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "500-AI-Agents-Projects",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-08-25T13:24:24Z",
+        "url": "https://github.com/itsdarklikehell/500-AI-Agents-Projects"
+      },
+      {
+        "created": "2026-08-25T13:18:36Z",
+        "description": "A community collection of OpenClaw use cases for making life easier.",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "awesome-openclaw-usecases",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-08-25T13:18:36Z",
+        "url": "https://github.com/itsdarklikehell/awesome-openclaw-usecases"
+      },
+      {
+        "created": "2021-08-05T18:02:05Z",
+        "description": "Pwnagotchi Plugins and Things for Mayhem and Profit",
+        "forks": 0,
+        "language": "Python",
+        "name": "pwnagotchi_plugins",
+        "stars": 1,
+        "topics": [],
+        "updated": "2026-08-25T12:30:56Z",
+        "url": "https://github.com/itsdarklikehell/pwnagotchi_plugins"
+      },
+      {
+        "created": "2021-06-07T02:41:41Z",
+        "description": "Profit Switching Mining Administrator For HiveOS/Linux & Windows: HiveOS Integrated",
+        "forks": 0,
+        "language": "PowerShell",
+        "name": "SWARM",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-08-25T12:30:07Z",
+        "url": "https://github.com/itsdarklikehell/SWARM"
+      },
+      {
+        "created": "2021-01-30T05:48:57Z",
+        "description": "Automated Video Game Downloader",
+        "forks": 0,
+        "language": "Python",
+        "name": "GamezServer",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-08-25T12:24:42Z",
+        "url": "https://github.com/itsdarklikehell/GamezServer"
+      },
+      {
+        "created": "2021-08-05T01:15:07Z",
+        "description": "a plugin for pwnagotchi that shows your GPS location from GPSD",
+        "forks": 0,
+        "language": "Python",
+        "name": "pwnagotchi-plugin-gpsd",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-08-25T12:24:39Z",
+        "url": "https://github.com/itsdarklikehell/pwnagotchi-plugin-gpsd"
+      },
+      {
+        "created": "2019-12-13T00:08:39Z",
+        "description": "The Swiss Army knife for 802.11, BLE and Ethernet networks reconnaissance and MITM attacks.",
+        "forks": 0,
+        "language": "Go",
+        "name": "bettercap",
+        "stars": 0,
+        "topics": [],
+        "updated": "2026-08-22T21:18:45Z",
+        "url": "https://github.com/itsdarklikehell/bettercap"
+      },
+      {
+        "created": "2022-02-25T05:51:32Z",
+        "description": "Pwnagotchi output via HDMI",
+        "forks": 0,
+        "language": "Shell",
+        "name": "pwnagotchi-hdmi-viewer",
+        "stars": 1,
+        "topics": [],
+        "updated": "2026-08-22T21:17:24Z",
+        "url": "https://github.com/itsdarklikehell/pwnagotchi-hdmi-viewer"
+      },
+      {
+        "created": "2020-06-01T21:46:27Z",
+        "description": "The purpose of this program is to make it easier for anyone interested in cyber security to install very useful tools that tend to be challenging to install. This script installs Metasploit-Framework and Armitage to the computer. Please enjoy the script (I hope it makes your life a little easier).",
+        "forks": 0,
+        "language": "Shell",
+        "name": "Install-Armitage-on-Linux",
+        "stars": 1,
+        "topics": [],
+        "updated": "2026-08-22T21:17:21Z",
+        "url": "https://github.com/itsdarklikehell/Install-Armitage-on-Linux"
+      },
+      {
+        "created": "2020-04-01T23:33:55Z",
+        "description": "Background music + overlays for EmulationStation on RetroPie",
+        "forks": 0,
+        "language": "Python",
+        "name": "retropie_music_overlay",
+        "stars": 1,
+        "topics": [],
+        "updated": "2026-08-22T21:17:17Z",
+        "url": "https://github.com/itsdarklikehell/retropie_music_overlay"
+      },
+      {
+        "created": "2020-07-03T02:39:53Z",
+        "description": "IITC plugins",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "iitc-plugins",
+        "stars": 0,
+        "topics": [],
+        "updated": "2020-07-03T02:39:55Z",
+        "url": "https://github.com/itsdarklikehell/iitc-plugins"
+      },
+      {
+        "created": "2020-06-24T20:34:53Z",
+        "description": " continuously passcode redeeming for game ingress",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "ingress-redeem",
+        "stars": 0,
+        "topics": [],
+        "updated": "2020-06-24T20:34:55Z",
+        "url": "https://github.com/itsdarklikehell/ingress-redeem"
+      },
+      {
+        "created": "2019-09-14T16:29:55Z",
+        "description": "A collection of systemd service files.",
+        "forks": 0,
+        "language": "Unknown",
+        "name": "systemd-units",
+        "stars": 0,
+        "topics": [],
+        "updated": "2019-09-14T16:29:57Z",
+        "url": "https://github.com/itsdarklikehell/systemd-units"
       }
     ],
     "skills": {
-      "Unknown": {
-        "repos": 57,
-        "percentage": 57
-      },
-      "JavaScript": {
-        "repos": 6,
-        "percentage": 6
-      },
-      "Rust": {
-        "repos": 1,
-        "percentage": 1
-      },
-      "Python": {
-        "repos": 12,
-        "percentage": 12
-      },
-      "TypeScript": {
-        "repos": 9,
-        "percentage": 9
-      },
-      "Vue": {
-        "repos": 1,
-        "percentage": 1
-      },
-      "PHP": {
-        "repos": 2,
-        "percentage": 2
-      },
       "HTML": {
-        "repos": 3,
+        "repos": 12,
         "percentage": 3
       },
       "Shell": {
-        "repos": 6,
+        "repos": 41,
+        "percentage": 11
+      },
+      "Unknown": {
+        "repos": 204,
+        "percentage": 57
+      },
+      "JavaScript": {
+        "repos": 12,
+        "percentage": 3
+      },
+      "TypeScript": {
+        "repos": 21,
         "percentage": 6
       },
-      "Go": {
+      "Python": {
+        "repos": 45,
+        "percentage": 13
+      },
+      "Rust": {
         "repos": 1,
+        "percentage": 0
+      },
+      "C++": {
+        "repos": 10,
+        "percentage": 3
+      },
+      "PHP": {
+        "repos": 2,
         "percentage": 1
       },
       "C#": {
-        "repos": 1,
+        "repos": 2,
         "percentage": 1
       },
-      "C++": {
-        "repos": 1,
+      "PowerShell": {
+        "repos": 2,
         "percentage": 1
+      },
+      "R": {
+        "repos": 1,
+        "percentage": 0
+      },
+      "Java": {
+        "repos": 1,
+        "percentage": 0
+      },
+      "Go": {
+        "repos": 2,
+        "percentage": 1
+      },
+      "Vue": {
+        "repos": 1,
+        "percentage": 0
+      },
+      "HLSL": {
+        "repos": 1,
+        "percentage": 0
       }
     },
     "stats": {
-      "total_repos": 100,
+      "total_repos": 358,
       "total_stars": 0,
-      "languages": 12
+      "languages": 16
     },
     "contributions": [
       {
@@ -1356,16 +4309,10 @@
         "repo": "itsdarklikehell/picoTracker-Theme-Studio",
         "type": "CreateEvent",
         "url": "https://github.com/itsdarklikehell/picoTracker-Theme-Studio"
-      },
-      {
-        "date": "2026-10-02T20:38:26Z",
-        "repo": "itsdarklikehell/GLaDOS-TTS",
-        "type": "CreateEvent",
-        "url": "https://github.com/itsdarklikehell/GLaDOS-TTS"
       }
     ]
   },
-  "generated_at": "2026-10-03T13:09:59Z",
+  "generated_at": "2026-10-03T13:26:25Z",
   "github_user": {
     "followers": 30,
     "following": 13,

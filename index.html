@@ -739,6 +739,20 @@
                 </section>
 
                 <section class="card">
+                    <h2>📊 Contribution Heatmap</h2>
+                    <div id="contribution-heatmap">
+                        <p class="about-text">Loading heatmap...</p>
+                    </div>
+                </section>
+
+                <section class="card">
+                    <h2>🏆 Achievements</h2>
+                    <div id="achievements-container">
+                        <p class="about-text">Loading achievements...</p>
+                    </div>
+                </section>
+
+                <section class="card">
                     <h2 data-i18n="profiles">Profielen</h2>
                     <div class="activity-grid" id="profiles-container">
                         <p class="about-text">Loading profiles...</p>
@@ -991,20 +1005,67 @@
                 return;
             }
 
-            const topRepos = githubData.repos.slice(0, 6);
-            container.innerHTML = topRepos.map(repo => `
-                <div class="project-item">
-                    <div class="project-title">
-                        <a href="${repo.url}" target="_blank" style="color: inherit; text-decoration: none;">${repo.name}</a>
-                        <span style="color: var(--accent2); font-size: 0.8rem;">⭐ ${repo.stars}</span>
-                    </div>
-                    <div class="project-desc">${repo.description || 'No description'}</div>
-                    <div class="project-tech">
-                        ${repo.language !== 'Unknown' ? `<span>${repo.language}</span>` : ''}
-                        ${repo.topics.slice(0, 3).map(t => `<span>${t}</span>`).join('')}
-                    </div>
-                </div>
-            `).join('');
+            // Categorize repos
+            const categories = {
+                'AI & Agents': [],
+                'Security': [],
+                'DevOps & Tools': [],
+                'Gaming & TTRPG': [],
+                'Web & Frontend': [],
+                'Other': []
+            };
+
+            githubData.repos.forEach(repo => {
+                const name = repo.name.toLowerCase();
+                const desc = (repo.description || '').toLowerCase();
+                const topics = (repo.topics || []).join(' ').toLowerCase();
+                const combined = name + ' ' + desc + ' ' + topics;
+
+                if (combined.match(/ai|agent|llm|openclaw|claw|comfy|neuro|brain/)) {
+                    categories['AI & Agents'].push(repo);
+                } else if (combined.match(/security|hack|pentest|ctf|pwn|wifi|bluetooth|bettercap/)) {
+                    categories['Security'].push(repo);
+                } else if (combined.match(/docker|deploy|ci|cd|ansible|terraform|kubernetes|k8s|helm/)) {
+                    categories['DevOps & Tools'].push(repo);
+                } else if (combined.match(/game|rpg|dnd|d&d|dice|foundry|retro|rom|emulator/)) {
+                    categories['Gaming & TTRPG'].push(repo);
+                } else if (combined.match(/web|html|css|js|ts|react|vue|angular|frontend/)) {
+                    categories['Web & Frontend'].push(repo);
+                } else {
+                    categories['Other'].push(repo);
+                }
+            });
+
+            // Sort each category by stars (desc)
+            Object.values(categories).forEach(cat => cat.sort((a, b) => b.stars - a.stars));
+
+            // Render top 3 per category
+            let html = '';
+            for (const [catName, repos] of Object.entries(categories)) {
+                if (repos.length === 0) continue;
+                const topRepos = repos.slice(0, 3);
+                html += `<div style="margin-bottom: 1.5rem;">
+                    <h3 style="font-size: 1rem; color: var(--accent); margin-bottom: 0.75rem;">${catName} (${repos.length})</h3>
+                    ${topRepos.map(repo => {
+                        const isActive = new Date(repo.updated) > new Date(Date.now() - 90 * 24 * 60 * 60 * 1000);
+                        return `
+                        <div class="project-item" style="${isActive ? '' : 'opacity: 0.6;'}">
+                            <div class="project-title">
+                                <a href="${repo.url}" target="_blank" style="color: inherit; text-decoration: none;">${repo.name}</a>
+                                <span style="color: var(--accent2); font-size: 0.8rem;">⭐ ${repo.stars}</span>
+                                ${isActive ? '<span style="color: var(--accent2); font-size: 0.7rem; margin-left: 0.5rem;">● Actief</span>' : '<span style="color: var(--text-muted); font-size: 0.7rem; margin-left: 0.5rem;">○ Inactief</span>'}
+                            </div>
+                            <div class="project-desc">${repo.description || 'No description'}</div>
+                            <div class="project-tech">
+                                ${repo.language !== 'Unknown' ? `<span>${repo.language}</span>` : ''}
+                                ${repo.topics.slice(0, 3).map(t => `<span>${t}</span>`).join('')}
+                            </div>
+                        </div>
+                    `}).join('')}
+                </div>`;
+            }
+
+            container.innerHTML = html || '<p class="about-text">No projects found</p>';
         }
 
         function renderSkills() {
@@ -1134,12 +1195,126 @@
                 });
         }
 
+        function renderContributionHeatmap() {
+            const container = document.getElementById('contribution-heatmap');
+            if (!container) return;
+            
+            // Generate last 30 days of activity
+            const days = [];
+            const today = new Date();
+            for (let i = 29; i >= 0; i--) {
+                const d = new Date(today);
+                d.setDate(d.getDate() - i);
+                days.push(d.toISOString().split('T')[0]);
+            }
+            
+            // Count contributions per day from githubData
+            const contribCounts = {};
+            if (githubData && githubData.contributions) {
+                githubData.contributions.forEach(c => {
+                    const date = c.date.split('T')[0];
+                    contribCounts[date] = (contribCounts[date] || 0) + 1;
+                });
+            }
+            
+            // Also count repo creations and updates
+            if (githubData && githubData.repos) {
+                githubData.repos.forEach(r => {
+                    const created = r.created ? r.created.split('T')[0] : null;
+                    const updated = r.updated ? r.updated.split('T')[0] : null;
+                    if (created) contribCounts[created] = (contribCounts[created] || 0) + 1;
+                    if (updated) contribCounts[updated] = (contribCounts[updated] || 0) + 1;
+                });
+            }
+            
+            // Find max for scaling
+            const maxCount = Math.max(...days.map(d => contribCounts[d] || 0), 1);
+            
+            // Render heatmap
+            let html = '<div style="display: grid; grid-template-columns: repeat(10, 1fr); gap: 3px; margin-bottom: 0.5rem;">';
+            days.forEach(day => {
+                const count = contribCounts[day] || 0;
+                const intensity = count / maxCount;
+                const opacity = 0.15 + (intensity * 0.85);
+                const color = count > 0 ? `rgba(78, 205, 196, ${opacity})` : 'var(--surface2)';
+                html += `<div title="${day}: ${count} contributions" style="width: 100%; aspect-ratio: 1; border-radius: 3px; background: ${color};"></div>`;
+            });
+            html += '</div>';
+            
+            // Legend
+            html += '<div style="display: flex; justify-content: space-between; font-size: 0.7rem; color: var(--text-muted);">';
+            html += '<span>30 dagen geleden</span>';
+            html += '<span>Vandaag</span>';
+            html += '</div>';
+            
+            // Stats
+            const totalContribs = Object.values(contribCounts).reduce((a, b) => a + b, 0);
+            const activeDays = Object.keys(contribCounts).length;
+            html += `<div style="margin-top: 0.5rem; font-size: 0.8rem; color: var(--text-muted);">`;
+            html += `${totalContribs} activiteiten in laatste 30 dagen · ${activeDays} actieve dagen`;
+            html += `</div>`;
+            
+            container.innerHTML = html;
+        }
+
+        function renderAchievements() {
+            const container = document.getElementById('achievements-container');
+            if (!container) return;
+            
+            const achievements = [];
+            
+            // GitHub achievements
+            if (githubData) {
+                const totalRepos = githubData.stats.total_repos;
+                const totalStars = githubData.stats.total_stars;
+                const languages = githubData.stats.languages;
+                const followers = githubData.github_user ? githubData.github_user.followers : 0;
+                
+                if (totalRepos >= 100) achievements.push({ icon: '🏆', name: 'Centurion', desc: '100+ repositories', unlocked: true });
+                if (totalRepos >= 50) achievements.push({ icon: '🥇', name: 'Prolific', desc: '50+ repositories', unlocked: true });
+                if (totalRepos >= 10) achievements.push({ icon: '🥈', name: 'Builder', desc: '10+ repositories', unlocked: true });
+                if (totalStars >= 10) achievements.push({ icon: '⭐', name: 'Star Collector', desc: '10+ stars', unlocked: true });
+                if (languages >= 5) achievements.push({ icon: '🌐', name: 'Polyglot', desc: '5+ languages', unlocked: true });
+                if (languages >= 10) achievements.push({ icon: '💎', name: 'Master Polyglot', desc: '10+ languages', unlocked: true });
+                if (followers >= 10) achievements.push({ icon: '👥', name: 'Community', desc: '10+ followers', unlocked: true });
+                if (followers >= 30) achievements.push({ icon: '🌟', name: 'Influencer', desc: '30+ followers', unlocked: true });
+                
+                // Activity achievements
+                const recentContribs = githubData.contributions ? githubData.contributions.length : 0;
+                if (recentContribs >= 10) achievements.push({ icon: '🔥', name: 'Active', desc: '10+ recent contributions', unlocked: true });
+                if (recentContribs >= 20) achievements.push({ icon: '⚡', name: 'Hyperactive', desc: '20+ recent contributions', unlocked: true });
+                
+                // Project diversity
+                const categories = new Set();
+                githubData.repos.forEach(r => {
+                    const lang = r.language || 'Unknown';
+                    if (lang !== 'Unknown') categories.add(lang);
+                });
+                if (categories.size >= 5) achievements.push({ icon: '🎨', name: 'Diverse', desc: '5+ different languages', unlocked: true });
+            }
+            
+            // Render achievements
+            let html = '<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 0.75rem;">';
+            achievements.forEach(a => {
+                html += `<div style="background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 0.75rem; text-align: center;">
+                    <div style="font-size: 1.5rem; margin-bottom: 0.25rem;">${a.icon}</div>
+                    <div style="font-weight: 600; font-size: 0.85rem; margin-bottom: 0.15rem;">${a.name}</div>
+                    <div style="color: var(--text-muted); font-size: 0.7rem;">${a.desc}</div>
+                </div>`;
+            });
+            html += '</div>';
+            
+            container.innerHTML = html || '<p class="about-text">No achievements yet</p>';
+        }
+
         function renderAll() {
             renderProjects();
             renderSkills();
             renderDonut();
             renderStats();
             renderContributions();
+            renderContributionHeatmap();
+            renderAchievements();
             renderProfiles();
         }
 
