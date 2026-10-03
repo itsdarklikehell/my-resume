@@ -1285,13 +1285,15 @@
                 if (followers >= 30) achievements.push({ icon: '🌟', name: 'Influencer', desc: '30+ followers', unlocked: true });
                 
                 // Activity achievements
-                const recentContribs = githubData.contributions ? githubData.contributions.length : 0;
+                const contributions = githubData.stats ? githubData.stats.contributions : (githubData.contributions || null);
+                const recentContribs = contributions ? contributions.length : 0;
                 if (recentContribs >= 10) achievements.push({ icon: '🔥', name: 'Active', desc: '10+ recent contributions', unlocked: true });
                 if (recentContribs >= 20) achievements.push({ icon: '⚡', name: 'Hyperactive', desc: '20+ recent contributions', unlocked: true });
                 
                 // Project diversity
+                const repos = githubData.stats ? githubData.stats.repos : (githubData.repos || null);
                 const categories = new Set();
-                githubData.repos.forEach(r => {
+                if (repos) repos.forEach(r => {
                     const lang = r.language || 'Unknown';
                     if (lang !== 'Unknown') categories.add(lang);
                 });
