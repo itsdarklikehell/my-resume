@@ -605,15 +605,32 @@
             border-color: var(--accent);
         }
 
-        /* Print-friendly */
+        /* Print-friendly: een CV hoort 2-3 pagina's te zijn, niet 11.
+           De volledige projectlijst, heatmap en video zijn scherm-only; de PDF
+           toont uitgelicht werk, ervaring, opleiding en vaardigheden. */
         @media print {
-            body { background: #fff; color: #000; }
-            .card, .header { border-color: #ddd; background: #fff; }
+            /* Printbreedte is ~816px, net onder de 860px mobile-breakpoint.
+               Zonder deze regel klapt de layout naar 1 kolom en wordt de PDF
+               8 pagina's i.p.v. 3. */
+            .grid { grid-template-columns: 1fr 300px !important; gap: 1.25rem !important; }
+            .container { padding: 0 !important; max-width: none !important; }
+            body { background: #fff; color: #000; font-size: 10pt; }
+            .card, .header { border-color: #ddd; background: #fff; box-shadow: none; }
             .header-avatar { background: #333; }
-            .theme-toggle, .lang-toggle, .share-buttons, .contact-form { display: none; }
-            .timeline-item { opacity: 1; transform: none; animation: none; }
+            .theme-toggle, .lang-toggle, .share-buttons, .contact-form,
+            #projects-section, #contribution-heatmap, #gource-section,
+            .no-print, .last-updated { display: none !important; }
+            #featured-section { display: block !important; }
+            .timeline-item { opacity: 1; transform: none; animation: none; page-break-inside: avoid; }
             .donut-chart { display: none; }
             .donut-legend { display: flex; }
+            .card { page-break-inside: avoid; margin-bottom: 0.75rem !important; padding: 0.75rem !important; }
+            h2 { page-break-after: avoid; font-size: 12pt !important; margin-bottom: 0.5rem !important; }
+            video { display: none !important; }
+            .stats-grid { gap: 0.5rem !important; }
+            .stat-value { font-size: 1.4rem !important; }
+            .project-item, .timeline-item { margin-bottom: 0.5rem !important; }
+            .about-text { font-size: 9.5pt !important; }
         }
 
         /* Auto theme */
@@ -628,6 +645,56 @@
             }
         }
     </style>
+
+    <link rel="canonical" href="https://itsdarklikehell.github.io/my-resume/">
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Bauke Molenaar",
+  "alternateName": "SgtStroopwafel",
+  "jobTitle": "Technisch professional",
+  "url": "https://itsdarklikehell.github.io/my-resume/",
+  "email": "mailto:bauke.molenaar@gmail.com",
+  "telephone": "+31636065494",
+  "address": {
+    "@type": "PostalAddress",
+    "addressCountry": "NL"
+  },
+  "knowsLanguage": [
+    {
+      "@type": "Language",
+      "name": "Nederlands"
+    },
+    {
+      "@type": "Language",
+      "name": "Duits"
+    },
+    {
+      "@type": "Language",
+      "name": "Engels"
+    }
+  ],
+  "knowsAbout": [
+    "Elektrotechniek",
+    "Zonnepanelen",
+    "NEN 1010",
+    "Shell/Bash",
+    "Python",
+    "JavaScript",
+    "TypeScript",
+    "Linux",
+    "Docker",
+    "GitHub Actions"
+  ],
+  "sameAs": [
+    "https://github.com/itsdarklikehell",
+    "https://tryhackme.com/p/SgtStroopwafel",
+    "https://profile.hackthebox.com/profile/01a0f22b-f959-73b9-925c-c2e2e350db97",
+    "https://learn.cylabacademy.org/users/SgtStroopwafel"
+  ]
+}
+    </script>
 </head>
 <body>
     <button class="theme-toggle" onclick="toggleTheme()" title="Toggle thema">🌙</button>
@@ -660,7 +727,7 @@
                     </div>
                 </section>
 
-                <section class="card">
+                <section class="card" id="projects-section">
                     <h2 data-i18n="projects">Projecten</h2>
                     <div id="projects-container">
                         <p class="about-text">Loading projects...</p>
@@ -716,12 +783,26 @@
                     </div>
                 </section>
 
-                <section class="card">
+                <!-- Certificaten & Paden.
+                     Vul aan door <div class="timeline-item"> blokken toe te voegen:
+                         <div class="timeline-item">
+                             <div class="role">Naam certificaat / pad</div>
+                             <div class="company">Uitgever</div>
+                             <div class="period">Jaar</div>
+                         </div>
+                     Zolang er geen items in staan, verbergt het script de sectie
+                     automatisch (zowel op scherm als in de PDF). -->
+                <section class="card" id="certificates-section" style="display: none;">
+                    <h2 data-i18n="certificates">Certificaten &amp; Paden</h2>
+                    <div id="certificates-container"></div>
+                </section>
+
+                <section class="card no-print">
                     <h2 data-i18n="activity">Live Activity</h2>
                     <div class="stats-grid" id="stats-container">
                         <div class="stat-item">
                             <div class="stat-value" id="stat-repos">-</div>
-                            <div class="stat-label" data-i18n="stat_repos">Repos</div>
+                            <div class="stat-label" data-i18n="stat_repos">Eigen projecten</div>
                         </div>
                         <div class="stat-item">
                             <div class="stat-value" id="stat-stars">-</div>
@@ -729,13 +810,19 @@
                         </div>
                         <div class="stat-item">
                             <div class="stat-value" id="stat-langs">-</div>
-                            <div class="stat-label" data-i18n="stat_langs">Languages</div>
+                            <div class="stat-label" data-i18n="stat_langs">Talen</div>
                         </div>
                     </div>
+                    <p class="about-text" id="stats-note" style="font-size: 0.8rem; margin-top: 0.5rem;"></p>
                     <div id="contributions-container">
                         <p class="about-text">Loading activity...</p>
                     </div>
                     <div class="last-updated" id="last-updated"></div>
+                </section>
+
+                <section class="card" id="featured-section" style="display: none;">
+                    <h2 data-i18n="featured">Uitgelicht werk</h2>
+                    <div id="featured-container"></div>
                 </section>
 
                 <section class="card">
@@ -743,6 +830,17 @@
                     <div id="contribution-heatmap">
                         <p class="about-text">Loading heatmap...</p>
                     </div>
+                </section>
+
+                <section class="card" id="gource-section">
+                    <h2 data-i18n="activity_video">Projectactiviteit</h2>
+                    <p class="about-text" style="font-size: 0.8rem; margin-bottom: 0.75rem;" data-i18n="activity_video_note">
+                        Gevisualiseerde commit-historie van mijn GitHub-werk.
+                    </p>
+                    <video controls preload="metadata" playsinline
+                           style="width: 100%; border-radius: 8px; border: 1px solid var(--border); background: #000;">
+                        <source src="gource.mp4" type="video/mp4">
+                    </video>
                 </section>
 
                 <section class="card">
@@ -761,9 +859,9 @@
             </div>
 
             <aside class="sidebar">
-                <section class="card">
+                <section class="card no-print">
                     <h2 data-i18n="download">Download CV</h2>
-                    <a href="https://canva.link/tmyeeati5zwh0e2" class="download-btn" target="_blank">
+                    <a href="bauke-molenaar-cv.pdf" download class="download-btn" target="_blank">
                         📄 <span data-i18n="download_pdf">Download PDF</span>
                     </a>
                     <button class="download-btn" style="margin-top: 0.5rem; background: var(--surface2); color: var(--text); border: 1px solid var(--border);" onclick="downloadJSON()">
@@ -771,7 +869,7 @@
                     </button>
                 </section>
 
-                <section class="card">
+                <section class="card no-print">
                     <h2 data-i18n="share">Delen</h2>
                     <div class="share-buttons">
                         <a class="share-btn" href="https://www.linkedin.com/sharing/share-offsite/?url=https://itsdarklikehell.github.io/my-resume/" target="_blank">💼 LinkedIn</a>
@@ -780,7 +878,7 @@
                     </div>
                 </section>
 
-                <section class="card">
+                <section class="card no-print">
                     <h2 data-i18n="contact">Contact</h2>
                     <form class="contact-form" onsubmit="sendEmail(event)">
                         <input type="text" name="name" placeholder="Naam" required>
@@ -831,7 +929,7 @@
                     </div>
                     <div class="lang-item">
                         <span class="lang-name" data-i18n="lang_en">Engels</span>
-                        <span class="lang-level" data-i18n="lang_basic">Basis</span>
+                        <span class="lang-level" data-i18n="lang_professional">Professioneel</span>
                     </div>
                 </section>
             </aside>
@@ -863,7 +961,11 @@
                 edu_friesche_poort: "Tweewielerherstel Monteur",
                 edu_friesland_college: "Monteur Sterkstroom Installaties",
                 activity: "Live Activity",
-                stat_repos: "Repos",
+                stat_repos: "Eigen projecten",
+                featured: "Uitgelicht werk",
+                activity_video: "Projectactiviteit",
+                activity_video_note: "Gevisualiseerde commit-historie van mijn GitHub-werk.",
+                certificates: "Certificaten & Paden",
                 stat_stars: "Stars",
                 stat_langs: "Talen",
                 profiles: "Profielen",
@@ -883,6 +985,7 @@
                 lang_en: "Engels",
                 lang_native: "Moedertaal",
                 lang_basic: "Basis",
+                lang_professional: "Professioneel",
                 footer: "© 2026 Bauke Molenaar — Gemaakt met ❤️",
                 last_updated: "Laatst bijgewerkt",
                 contributed_to: "Bijgedragen aan",
@@ -915,7 +1018,11 @@
                 edu_friesche_poort: "Motorcycle Repair Technician",
                 edu_friesland_college: "Electrical Installation Technician",
                 activity: "Live Activity",
-                stat_repos: "Repos",
+                stat_repos: "Own projects",
+                featured: "Featured work",
+                activity_video: "Project activity",
+                activity_video_note: "Visualised commit history of my GitHub work.",
+                certificates: "Certificates & Paths",
                 stat_stars: "Stars",
                 stat_langs: "Languages",
                 profiles: "Profiles",
@@ -935,6 +1042,7 @@
                 lang_en: "English",
                 lang_native: "Native",
                 lang_basic: "Basic",
+                lang_professional: "Professional",
                 footer: "© 2026 Bauke Molenaar — Made with ❤️",
                 last_updated: "Last updated",
                 contributed_to: "Contributed to",
@@ -1016,9 +1124,10 @@
                 'Other': []
             };
 
-            repos.forEach(repo => {
-                const name = repo.name.toLowerCase();
-                const desc = (repo.description || '').toLowerCase();
+            // Alleen eigen werk categoriseren: forks zijn niet jouw projecten.
+            repos.filter(repo => repo && !repo.fork).forEach(repo => {
+                const name = String(repo.name || '').toLowerCase();
+                const desc = String(repo.description || '').toLowerCase();
                 const topics = (repo.topics || []).join(' ').toLowerCase();
                 const combined = name + ' ' + desc + ' ' + topics;
 
@@ -1052,14 +1161,14 @@
                         return `
                         <div class="project-item" style="${isActive ? '' : 'opacity: 0.6;'}">
                             <div class="project-title">
-                                <a href="${repo.url}" target="_blank" style="color: inherit; text-decoration: none;">${repo.name}</a>
-                                <span style="color: var(--accent2); font-size: 0.8rem;">⭐ ${repo.stars}</span>
+                                <a href="${encodeURI(repo.url || '#')}" target="_blank" rel="noopener" style="color: inherit; text-decoration: none;">${escapeHtml(repo.name)}</a>
+                                <span style="color: var(--accent2); font-size: 0.8rem;">⭐ ${Number(repo.stars) || 0}</span>
                                 ${isActive ? '<span style="color: var(--accent2); font-size: 0.7rem; margin-left: 0.5rem;">● Actief</span>' : '<span style="color: var(--text-muted); font-size: 0.7rem; margin-left: 0.5rem;">○ Inactief</span>'}
                             </div>
-                            <div class="project-desc">${repo.description || 'No description'}</div>
+                            <div class="project-desc">${escapeHtml(repo.description || 'No description')}</div>
                             <div class="project-tech">
-                                ${repo.language !== 'Unknown' ? `<span>${repo.language}</span>` : ''}
-                                ${repo.topics.slice(0, 3).map(t => `<span>${t}</span>`).join('')}
+                                ${repo.language !== 'Unknown' ? `<span>${escapeHtml(repo.language)}</span>` : ''}
+                                ${(repo.topics || []).slice(0, 3).map(t => `<span>${escapeHtml(t)}</span>`).join('')}
                             </div>
                         </div>
                     `}).join('')}
@@ -1099,9 +1208,25 @@
         function renderStats() {
             if (!githubData || !githubData.stats) return;
             const stats = githubData.stats.stats || githubData.stats;
-            document.getElementById('stat-repos').textContent = stats.total_repos;
-            document.getElementById('stat-stars').textContent = stats.total_stars;
+
+            // Toon eigen werk, niet het opgeblazen totaal (89% is fork).
+            // De fork-cijfers blijven zichtbaar als contextregel eronder.
+            document.getElementById('stat-repos').textContent = stats.own_repos != null ? stats.own_repos : stats.total_repos;
+            document.getElementById('stat-stars').textContent = stats.own_stars != null ? stats.own_stars : stats.total_stars;
             document.getElementById('stat-langs').textContent = stats.languages;
+
+            // Contextregel: hoeveel forks eronder liggen
+            const note = document.getElementById('stats-note');
+            if (note) {
+                const t = translations[currentLang];
+                if (stats.fork_repos) {
+                    note.textContent = (currentLang === 'nl'
+                        ? `Eigen projecten · daarnaast ${stats.fork_repos} forks en bijdragen aan andermans projecten`
+                        : `Own projects · plus ${stats.fork_repos} forks and contributions to other projects`);
+                } else {
+                    note.textContent = '';
+                }
+            }
         }
 
         function renderContributions() {
@@ -1131,7 +1256,7 @@
                 <div class="contribution-item">
                     <div class="contrib-icon">${typeIcons[c.type] || '📌'}</div>
                     <div class="contrib-text">
-                        ${typeLabels[c.type] || c.type} — <a href="${c.url}" target="_blank">${c.repo}</a>
+                        ${escapeHtml(typeLabels[c.type] || c.type)} — <a href="${encodeURI(c.url || '#')}" target="_blank" rel="noopener">${escapeHtml(c.repo)}</a>
                     </div>
                     <div class="contrib-date">${new Date(c.date).toLocaleDateString(currentLang === 'nl' ? 'nl-NL' : 'en-US')}</div>
                 </div>
@@ -1170,8 +1295,11 @@
                     const t = translations[currentLang];
                     
                     // GitHub stats from live data
-                    const ghStats = githubData ? 
-                        `${(githubData.stats && githubData.stats.stats ? githubData.stats.stats : githubData.stats).total_repos} repos · ${(githubData.stats && githubData.stats.stats ? githubData.stats.stats : githubData.stats).total_stars} ⭐ · ${(githubData.stats && githubData.stats.stats ? githubData.stats.stats : githubData.stats).languages} talen` : 
+                    const gs = githubData ? (githubData.stats && githubData.stats.stats ? githubData.stats.stats : githubData.stats) : null;
+                    const gOwn = gs && gs.own_repos != null ? gs.own_repos : (gs ? gs.total_repos : 0);
+                    const gStars = gs && gs.own_stars != null ? gs.own_stars : (gs ? gs.total_stars : 0);
+                    const ghStats = gs ?
+                        `${gOwn} eigen projecten · ${gStars} ⭐ · ${gs.languages} talen` :
                         'Loading...';
                     
                     // External platform stats with fallback
@@ -1232,9 +1360,10 @@
                 });
             }
             
-            // Also count repo creations and updates
+            // Repo-creatie/updates van EIGEN werk meetellen (forks niet: die zeggen
+            // niets over jouw activiteit en zouden de heatmap opblazen).
             if (repos) {
-                repos.forEach(r => {
+                repos.filter(r => r && !r.fork).forEach(r => {
                     const created = r.created ? r.created.split('T')[0] : null;
                     const updated = r.updated ? r.updated.split('T')[0] : null;
                     if (created) contribCounts[created] = (contribCounts[created] || 0) + 1;
@@ -1278,22 +1407,28 @@
             
             const achievements = [];
             
-            // GitHub achievements
+            // GitHub achievements — gebaseerd op EIGEN werk.
+            // Forks meerekenen gaf badges als 'Centurion' puur op gekloonde repos;
+            // dat houdt geen stand als iemand doorklikt.
             if (githubData) {
                 const stats = githubData.stats && githubData.stats.stats ? githubData.stats.stats : githubData.stats;
-                const totalRepos = stats.total_repos;
-                const totalStars = stats.total_stars;
+                const ownRepos = stats.own_repos != null ? stats.own_repos : stats.total_repos;
+                const ownStars = stats.own_stars != null ? stats.own_stars : stats.total_stars;
                 const languages = stats.languages;
                 const followers = githubData.github_user ? githubData.github_user.followers : 0;
-                
-                if (totalRepos >= 100) achievements.push({ icon: '🏆', name: 'Centurion', desc: '100+ repositories', unlocked: true });
-                if (totalRepos >= 50) achievements.push({ icon: '🥇', name: 'Prolific', desc: '50+ repositories', unlocked: true });
-                if (totalRepos >= 10) achievements.push({ icon: '🥈', name: 'Builder', desc: '10+ repositories', unlocked: true });
-                if (totalStars >= 10) achievements.push({ icon: '⭐', name: 'Star Collector', desc: '10+ stars', unlocked: true });
-                if (languages >= 5) achievements.push({ icon: '🌐', name: 'Polyglot', desc: '5+ languages', unlocked: true });
-                if (languages >= 10) achievements.push({ icon: '💎', name: 'Master Polyglot', desc: '10+ languages', unlocked: true });
-                if (followers >= 10) achievements.push({ icon: '👥', name: 'Community', desc: '10+ followers', unlocked: true });
-                if (followers >= 30) achievements.push({ icon: '🌟', name: 'Influencer', desc: '30+ followers', unlocked: true });
+                const totalForks = stats.total_forks || 0;
+
+                if (ownRepos >= 100) achievements.push({ icon: '🏆', name: 'Centurion', desc: '100+ eigen repositories', unlocked: true });
+                if (ownRepos >= 50) achievements.push({ icon: '🥇', name: 'Prolific', desc: '50+ eigen repositories', unlocked: true });
+                if (ownRepos >= 25) achievements.push({ icon: '🥈', name: 'Builder', desc: '25+ eigen repositories', unlocked: true });
+                if (ownStars >= 10) achievements.push({ icon: '⭐', name: 'Star Collector', desc: '10+ sterren op eigen werk', unlocked: true });
+                if (ownStars >= 100) achievements.push({ icon: '💫', name: 'Star Magnet', desc: '100+ sterren op eigen werk', unlocked: true });
+                if (totalForks >= 10) achievements.push({ icon: '🍴', name: 'Geforkt', desc: '10+ keer geforkt', unlocked: true });
+                if (totalForks >= 50) achievements.push({ icon: '🌳', name: 'Veel geforkt', desc: '50+ keer geforkt', unlocked: true });
+                if (languages >= 5) achievements.push({ icon: '🌐', name: 'Polyglot', desc: '5+ talen in eigen werk', unlocked: true });
+                if (languages >= 10) achievements.push({ icon: '💎', name: 'Master Polyglot', desc: '10+ talen in eigen werk', unlocked: true });
+                if (followers >= 10) achievements.push({ icon: '👥', name: 'Community', desc: '10+ volgers', unlocked: true });
+                if (followers >= 30) achievements.push({ icon: '🌟', name: 'Influencer', desc: '30+ volgers', unlocked: true });
                 
                 // Activity achievements
                 const contributions = githubData.stats ? githubData.stats.contributions : (githubData.contributions || null);
@@ -1343,6 +1478,8 @@
             const user = (raw.github_user && typeof raw.github_user === 'object') ? raw.github_user : {};
 
             const starsFromRepos = repos.reduce((a, r) => a + num(r && r.stars), 0);
+            const forks = repos.filter(r => r && r.fork);
+            const own = repos.filter(r => r && !r.fork);
             const langsFromSkills = Object.keys(skills).length;
 
             return {
@@ -1353,7 +1490,13 @@
                     stats: {
                         total_repos: num(inner.total_repos) || repos.length,
                         total_stars: num(inner.total_stars) || starsFromRepos,
-                        languages: num(inner.languages) || langsFromSkills
+                        languages: num(inner.languages) || langsFromSkills,
+                        // Eigen werk vs forks: de CV toont eigen werk, forks zijn context
+                        own_repos: num(inner.own_repos) || own.length,
+                        fork_repos: num(inner.fork_repos) || forks.length,
+                        own_stars: num(inner.own_stars) || own.reduce((a, r) => a + num(r && r.stars), 0),
+                        fork_stars: num(inner.fork_stars) || forks.reduce((a, r) => a + num(r && r.stars), 0),
+                        total_forks: num(inner.total_forks) || own.reduce((a, r) => a + num(r && r.forks), 0)
                     }
                 },
                 github_user: {
@@ -1402,8 +1545,71 @@
             });
         }
 
+        // Escape voor waarden die uit de GitHub-API komen (beschrijvingen, topics,
+        // repo-namen). Die zijn door de gebruiker zelf te beïnvloeden, dus we
+        // renderen ze nooit ruw in innerHTML.
+        function escapeHtml(v) {
+            if (v == null) return '';
+            return String(v)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#39;');
+        }
+
+        // Uitgelicht werk: top-3 originele projecten op impact (sterren, dan forks).
+        // Bewust vóór de categorielijst, zodat het beste werk niet verdwijnt
+        // tussen honderden repos in de categorieën.
+        function renderFeatured() {
+            const section = document.getElementById('featured-section');
+            const container = document.getElementById('featured-container');
+            if (!section || !container) return;
+
+            const repos = githubData && githubData.stats ? githubData.stats.repos : null;
+            if (!repos || !repos.length) { section.style.display = 'none'; return; }
+
+            const own = repos.filter(r => r && !r.fork);
+            if (!own.length) { section.style.display = 'none'; return; }
+
+            const score = r => (r.stars || 0) * 10 + (r.forks || 0);
+            const top = own.slice().sort((a, b) => score(b) - score(a)).slice(0, 3);
+            if (!top.length || score(top[0]) === 0) { section.style.display = 'none'; return; }
+
+            const medals = ['🥇', '🥈', '🥉'];
+            container.innerHTML = top.map((r, i) => `
+                <div class="project-item" style="border-left: 3px solid var(--accent); padding-left: 0.75rem; margin-bottom: 1rem;">
+                    <div class="project-title">
+                        <span style="margin-right: 0.35rem;">${medals[i]}</span>
+                        <a href="${encodeURI(r.url || '#')}" target="_blank" rel="noopener" style="color: inherit; text-decoration: none;">${escapeHtml(r.name)}</a>
+                        ${r.stars ? `<span style="color: var(--accent2); font-size: 0.8rem; margin-left: 0.4rem;">⭐ ${Number(r.stars) || 0}</span>` : ''}
+                        ${r.forks ? `<span style="color: var(--text-muted); font-size: 0.8rem; margin-left: 0.4rem;">🍴 ${Number(r.forks) || 0}</span>` : ''}
+                    </div>
+                    <div class="project-desc">${escapeHtml(r.description)}</div>
+                    <div class="project-tech">
+                        ${r.language && r.language !== 'Unknown' ? `<span>${escapeHtml(r.language)}</span>` : ''}
+                        ${(r.topics || []).slice(0, 3).map(t => `<span>${escapeHtml(t)}</span>`).join('')}
+                    </div>
+                </div>
+            `).join('');
+
+            section.style.display = '';
+        }
+
+        // Toon de certificaten-sectie alleen als er items in staan.
+        // Zo blijft de CV netjes zolang de lijst nog niet is aangevuld.
+        function renderCertificates() {
+            const section = document.getElementById('certificates-section');
+            const container = document.getElementById('certificates-container');
+            if (!section || !container) return;
+            const hasItems = container.querySelectorAll('.timeline-item').length > 0;
+            section.style.display = hasItems ? '' : 'none';
+        }
+
         function renderAll() {
             const steps = [
+                ['featured', renderFeatured],
+                ['certificates', renderCertificates],
                 ['projects', renderProjects],
                 ['skills', renderSkills],
                 ['donut', renderDonut],
