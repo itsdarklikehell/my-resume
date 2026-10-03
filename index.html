@@ -7,13 +7,16 @@
     <meta name="description" content="Bauke Molenaar — Technisch professional met een passie voor ICT en probleemoplossing">
     <meta property="og:title" content="Bauke Molenaar — CV">
     <meta property="og:description" content="Technisch professional met een passie voor ICT en probleemoplossing">
-    <meta property="og:image" content="https://itsdarklikehell.github.io/my-resume/profile.jpg">
+    <meta property="og:image" content="https://itsdarklikehell.github.io/my-resume/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Bauke Molenaar — technisch professional">
     <meta property="og:url" content="https://itsdarklikehell.github.io/my-resume/">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Bauke Molenaar — CV">
     <meta name="twitter:description" content="Technisch professional met een passie voor ICT en probleemoplossing">
-    <meta name="twitter:image" content="https://itsdarklikehell.github.io/my-resume/profile.jpg">
+    <meta name="twitter:image" content="https://itsdarklikehell.github.io/my-resume/og-image.png">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
@@ -656,6 +659,7 @@
   "alternateName": "SgtStroopwafel",
   "jobTitle": "Technisch professional",
   "url": "https://itsdarklikehell.github.io/my-resume/",
+  "image": "https://itsdarklikehell.github.io/my-resume/og-image.png",
   "email": "mailto:bauke.molenaar@gmail.com",
   "telephone": "+31636065494",
   "address": {
@@ -864,7 +868,11 @@
                 <section class="card no-print">
                     <h2 data-i18n="download">Download CV</h2>
                     <a href="bauke-molenaar-cv.pdf" download class="download-btn" target="_blank">
-                        📄 <span data-i18n="download_pdf">Download PDF</span>
+                        🇳🇱 <span data-i18n="download_pdf_nl">Download CV (NL)</span>
+                    </a>
+                    <a href="bauke-molenaar-cv-en.pdf" download class="download-btn" target="_blank"
+                       style="margin-top: 0.5rem;">
+                        🇬🇧 <span data-i18n="download_pdf_en">Download CV (EN)</span>
                     </a>
                     <button class="download-btn" style="margin-top: 0.5rem; background: var(--surface2); color: var(--text); border: 1px solid var(--border);" onclick="downloadJSON()">
                         📋 <span data-i18n="download_json">Download JSON</span>
@@ -973,6 +981,8 @@
                 profiles: "Profielen",
                 download: "Download CV",
                 download_pdf: "Download PDF",
+                download_pdf_nl: "Download CV (NL)",
+                download_pdf_en: "Download CV (EN)",
                 expertise: "Expertise",
                 exp_meterkasten: "Meterkasten",
                 exp_bekabeling: "Bekabeling",
@@ -1030,6 +1040,8 @@
                 profiles: "Profiles",
                 download: "Download Resume",
                 download_pdf: "Download PDF",
+                download_pdf_nl: "Download CV (NL)",
+                download_pdf_en: "Download CV (EN)",
                 expertise: "Expertise",
                 exp_meterkasten: "Meter Boxes",
                 exp_bekabeling: "Cabling",
@@ -1061,6 +1073,8 @@
         };
 
         let currentLang = 'nl';
+        // Taal uit ?lang= — bepaald bij het laden, gebruikt door applyLang
+        const urlLang = new URLSearchParams(location.search).get('lang');
         let githubData = null;
 
         function detectLang() {
@@ -1077,7 +1091,8 @@
             });
             document.getElementById('lang-label').textContent = lang.toUpperCase();
             document.documentElement.lang = lang;
-            localStorage.setItem('lang', lang);
+            // Alleen bewaren als de taal niet via de URL is opgelegd
+            if (!(urlLang === 'nl' || urlLang === 'en')) localStorage.setItem('lang', lang);
             if (githubData) renderAll();
         }
 
@@ -1677,7 +1692,12 @@
         }
 
         // Initialize
-        const savedLang = localStorage.getItem('lang') || detectLang();
+        // ?lang=nl|en heeft voorrang: de PDF-generator rendert via een verse
+        // Chrome-instantie zonder localStorage, dus de taal moet via de URL mee.
+        // Ook handig als deelbare taalspecifieke link.
+        const savedLang = (urlLang === 'nl' || urlLang === 'en')
+            ? urlLang
+            : (localStorage.getItem('lang') || detectLang());
         applyLang(savedLang);
 
         const savedTheme = localStorage.getItem('theme') || 'dark';
