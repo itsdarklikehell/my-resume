@@ -9,7 +9,7 @@
         "name": "my-resume",
         "stars": 0,
         "topics": [],
-        "updated": "2026-10-03T13:19:20Z",
+        "updated": "2026-10-03T16:56:44Z",
         "url": "https://github.com/itsdarklikehell/my-resume"
       },
       {
@@ -20,7 +20,7 @@
         "name": "fleet-manager",
         "stars": 0,
         "topics": [],
-        "updated": "2026-10-03T13:13:08Z",
+        "updated": "2026-10-03T13:29:05Z",
         "url": "https://github.com/itsdarklikehell/fleet-manager"
       },
       {
@@ -4125,37 +4125,29 @@
       }
     ],
     "skills": {
-      "HTML": {
-        "repos": 12,
-        "percentage": 3
+      "Python": {
+        "repos": 45,
+        "percentage": 29
       },
       "Shell": {
         "repos": 41,
-        "percentage": 11
-      },
-      "Unknown": {
-        "repos": 204,
-        "percentage": 57
-      },
-      "JavaScript": {
-        "repos": 12,
-        "percentage": 3
+        "percentage": 27
       },
       "TypeScript": {
         "repos": 21,
-        "percentage": 6
+        "percentage": 14
       },
-      "Python": {
-        "repos": 45,
-        "percentage": 13
+      "HTML": {
+        "repos": 12,
+        "percentage": 8
       },
-      "Rust": {
-        "repos": 1,
-        "percentage": 0
+      "JavaScript": {
+        "repos": 12,
+        "percentage": 8
       },
       "C++": {
         "repos": 10,
-        "percentage": 3
+        "percentage": 6
       },
       "PHP": {
         "repos": 2,
@@ -4169,150 +4161,106 @@
         "repos": 2,
         "percentage": 1
       },
-      "R": {
-        "repos": 1,
-        "percentage": 0
-      },
-      "Java": {
-        "repos": 1,
-        "percentage": 0
-      },
       "Go": {
         "repos": 2,
         "percentage": 1
       },
+      "Rust": {
+        "repos": 1,
+        "percentage": 1
+      },
+      "R": {
+        "repos": 1,
+        "percentage": 1
+      },
+      "Java": {
+        "repos": 1,
+        "percentage": 1
+      },
       "Vue": {
         "repos": 1,
-        "percentage": 0
+        "percentage": 1
       },
       "HLSL": {
         "repos": 1,
-        "percentage": 0
+        "percentage": 1
       }
     },
     "stats": {
       "total_repos": 358,
-      "total_stars": 0,
-      "languages": 16
+      "total_stars": 291,
+      "languages": 15
     },
     "contributions": [
       {
-        "date": "2026-10-01T22:01:25Z",
-        "repo": "itsdarklikehell/mcp-system-monitor",
+        "date": "2026-10-02T02:10:36Z",
+        "repo": "itsdarklikehell/Create-a-Retropie-Extra-Scriptmodule",
         "type": "PushEvent",
-        "url": "https://github.com/itsdarklikehell/mcp-system-monitor"
+        "url": "https://github.com/itsdarklikehell/Create-a-Retropie-Extra-Scriptmodule"
       },
       {
-        "date": "2026-10-01T21:56:25Z",
-        "repo": "itsdarklikehell/mcp-system-monitor",
-        "type": "CreateEvent",
-        "url": "https://github.com/itsdarklikehell/mcp-system-monitor"
-      },
-      {
-        "date": "2026-10-02T00:45:12Z",
-        "repo": "itsdarklikehell/agent-of-empires",
-        "type": "CreateEvent",
-        "url": "https://github.com/itsdarklikehell/agent-of-empires"
-      },
-      {
-        "date": "2026-10-03T12:58:46Z",
-        "repo": "itsdarklikehell/fleet-manager",
+        "date": "2026-10-03T16:55:40Z",
+        "repo": "itsdarklikehell/my-resume",
         "type": "PushEvent",
-        "url": "https://github.com/itsdarklikehell/fleet-manager"
+        "url": "https://github.com/itsdarklikehell/my-resume"
       },
       {
-        "date": "2026-10-01T21:39:20Z",
-        "repo": "itsdarklikehell/pwnagotchi-plugins",
-        "type": "PushEvent",
-        "url": "https://github.com/itsdarklikehell/pwnagotchi-plugins"
-      },
-      {
-        "date": "2026-10-02T00:22:36Z",
-        "repo": "itsdarklikehell/pwnagotchi4b",
-        "type": "CreateEvent",
-        "url": "https://github.com/itsdarklikehell/pwnagotchi4b"
-      },
-      {
-        "date": "2026-10-02T00:22:33Z",
-        "repo": "itsdarklikehell/pockettracker",
-        "type": "CreateEvent",
-        "url": "https://github.com/itsdarklikehell/pockettracker"
-      },
-      {
-        "date": "2026-10-02T00:19:32Z",
-        "repo": "itsdarklikehell/charnik",
-        "type": "CreateEvent",
-        "url": "https://github.com/itsdarklikehell/charnik"
-      },
-      {
-        "date": "2026-10-02T00:19:22Z",
-        "repo": "itsdarklikehell/avoid-ai-writing",
-        "type": "CreateEvent",
-        "url": "https://github.com/itsdarklikehell/avoid-ai-writing"
-      },
-      {
-        "date": "2026-10-02T00:14:44Z",
-        "repo": "itsdarklikehell/awesome-agents",
-        "type": "PushEvent",
-        "url": "https://github.com/itsdarklikehell/awesome-agents"
-      },
-      {
-        "date": "2026-10-01T21:27:07Z",
-        "repo": "itsdarklikehell/pwnagotchi-plugins",
-        "type": "CreateEvent",
-        "url": "https://github.com/itsdarklikehell/pwnagotchi-plugins"
-      },
-      {
-        "date": "2026-10-03T12:29:19Z",
-        "repo": "itsdarklikehell/fleet-manager",
-        "type": "PushEvent",
-        "url": "https://github.com/itsdarklikehell/fleet-manager"
-      },
-      {
-        "date": "2026-10-03T12:08:00Z",
-        "repo": "itsdarklikehell/fleet-manager",
-        "type": "PushEvent",
-        "url": "https://github.com/itsdarklikehell/fleet-manager"
-      },
-      {
-        "date": "2026-10-03T12:07:40Z",
-        "repo": "itsdarklikehell/fleet-manager",
-        "type": "PushEvent",
-        "url": "https://github.com/itsdarklikehell/fleet-manager"
-      },
-      {
-        "date": "2026-10-03T12:06:55Z",
-        "repo": "itsdarklikehell/fleet-manager",
-        "type": "PushEvent",
-        "url": "https://github.com/itsdarklikehell/fleet-manager"
-      },
-      {
-        "date": "2026-10-01T23:41:14Z",
-        "repo": "itsdarklikehell/sunvox-installer-lutris",
-        "type": "CreateEvent",
-        "url": "https://github.com/itsdarklikehell/sunvox-installer-lutris"
-      },
-      {
-        "date": "2026-10-01T23:34:27Z",
+        "date": "2026-10-02T02:10:10Z",
         "repo": "itsdarklikehell/ci-templates",
-        "type": "CreateEvent",
+        "type": "PushEvent",
         "url": "https://github.com/itsdarklikehell/ci-templates"
       },
       {
-        "date": "2026-10-01T23:34:23Z",
-        "repo": "itsdarklikehell/bash_aliases",
-        "type": "CreateEvent",
-        "url": "https://github.com/itsdarklikehell/bash_aliases"
+        "date": "2026-10-02T02:10:05Z",
+        "repo": "itsdarklikehell/ci-templates",
+        "type": "PushEvent",
+        "url": "https://github.com/itsdarklikehell/ci-templates"
       },
       {
-        "date": "2026-10-01T23:34:22Z",
-        "repo": "itsdarklikehell/picoTracker-Theme-Studio",
+        "date": "2026-10-02T01:33:30Z",
+        "repo": "itsdarklikehell/sunvox-installer-lutris",
+        "type": "PushEvent",
+        "url": "https://github.com/itsdarklikehell/sunvox-installer-lutris"
+      },
+      {
+        "date": "2026-10-02T01:33:11Z",
+        "repo": "itsdarklikehell/pwnagotchi-control-center",
+        "type": "PushEvent",
+        "url": "https://github.com/itsdarklikehell/pwnagotchi-control-center"
+      },
+      {
+        "date": "2026-10-02T01:32:32Z",
+        "repo": "itsdarklikehell/mission-control",
+        "type": "PushEvent",
+        "url": "https://github.com/itsdarklikehell/mission-control"
+      },
+      {
+        "date": "2026-10-02T01:28:53Z",
+        "repo": "itsdarklikehell/awesome-mcp-servers",
+        "type": "PushEvent",
+        "url": "https://github.com/itsdarklikehell/awesome-mcp-servers"
+      },
+      {
+        "date": "2026-10-02T01:28:44Z",
+        "repo": "itsdarklikehell/awesome-copilot",
+        "type": "PushEvent",
+        "url": "https://github.com/itsdarklikehell/awesome-copilot"
+      },
+      {
+        "date": "2026-10-01T22:49:27Z",
+        "repo": "itsdarklikehell/stonetop-wiki-generator",
         "type": "CreateEvent",
-        "url": "https://github.com/itsdarklikehell/picoTracker-Theme-Studio"
+        "url": "https://github.com/itsdarklikehell/stonetop-wiki-generator"
+      },
+      {
+        "date": "2026-10-02T01:11:41Z",
+        "repo": "itsdarklikehell/pwnspeaker",
+        "type": "PushEvent",
+        "url": "https://github.com/itsdarklikehell/pwnspeaker"
       }
     ]
   },
-  "generated_at": "2026-10-03T13:26:25Z",
+  "generated_at": "2026-10-03T17:21:21Z",
   "github_user": {
     "followers": 30,
     "following": 13,

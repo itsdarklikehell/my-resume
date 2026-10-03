@@ -1148,10 +1148,21 @@
         function renderProfiles() {
             const container = document.getElementById('profiles-container');
             if (!container) return;
-            
-            fetch('profile-data.json')
+
+            // Timeout-guard: nooit eeuwig op "Loading profiles..." blijven staan
+            let done = false;
+            const guard = setTimeout(() => {
+                if (done) return;
+                done = true;
+                container.innerHTML = '<p class="about-text">Profielstatistieken tijdelijk niet beschikbaar</p>';
+            }, 8000);
+
+            fetch('profile-data.json', { cache: 'no-cache' })
                 .then(r => r.ok ? r.json() : null)
                 .then(data => {
+                    if (done) return;
+                    done = true;
+                    clearTimeout(guard);
                     if (!data) {
                         container.innerHTML = '<p class="about-text">No profile data available</p>';
                         return;
@@ -1314,28 +1325,122 @@
             container.innerHTML = html || '<p class="about-text">No achievements yet</p>';
         }
 
+        // Normaliseer beide JSON-vormen (flat en nested) naar één canonieke structuur.
+        // Garandeert altijd: stats.repos (array), stats.skills (object),
+        // stats.contributions (array), stats.stats {total_repos,total_stars,languages}.
+        function normalizeGitHubData(raw) {
+            if (!raw || typeof raw !== 'object') return null;
+            const s = (raw.stats && typeof raw.stats === 'object') ? raw.stats : {};
+            const inner = (s.stats && typeof s.stats === 'object') ? s.stats : s;
+            const num = v => (typeof v === 'number' && isFinite(v)) ? v : 0;
+
+            const repos = Array.isArray(s.repos) ? s.repos
+                        : (Array.isArray(raw.repos) ? raw.repos : []);
+            const contributions = Array.isArray(s.contributions) ? s.contributions
+                                : (Array.isArray(raw.contributions) ? raw.contributions : []);
+            const skills = (s.skills && typeof s.skills === 'object' && !Array.isArray(s.skills)) ? s.skills
+                         : ((raw.skills && typeof raw.skills === 'object' && !Array.isArray(raw.skills)) ? raw.skills : {});
+            const user = (raw.github_user && typeof raw.github_user === 'object') ? raw.github_user : {};
+
+            const starsFromRepos = repos.reduce((a, r) => a + num(r && r.stars), 0);
+            const langsFromSkills = Object.keys(skills).length;
+
+            return {
+                stats: {
+                    repos: repos,
+                    skills: skills,
+                    contributions: contributions,
+                    stats: {
+                        total_repos: num(inner.total_repos) || repos.length,
+                        total_stars: num(inner.total_stars) || starsFromRepos,
+                        languages: num(inner.languages) || langsFromSkills
+                    }
+                },
+                github_user: {
+                    followers: num(user.followers),
+                    following: num(user.following),
+                    total_repos: num(user.total_repos) || repos.length
+                },
+                generated_at: raw.generated_at || null
+            };
+        }
+
+        // Toon een foutbanner zonder de pagina te slopen
+        function showDataError(msg) {
+            let el = document.getElementById('data-error-banner');
+            if (!el) {
+                el = document.createElement('div');
+                el.id = 'data-error-banner';
+                el.style.cssText = 'position:fixed;bottom:1rem;left:1rem;right:1rem;max-width:520px;margin:0 auto;background:#7f1d1d;color:#fff;padding:0.6rem 0.9rem;border-radius:8px;font-size:0.8rem;z-index:9999;box-shadow:0 4px 12px rgba(0,0,0,.4);';
+                document.body.appendChild(el);
+            }
+            el.textContent = '⚠️ ' + msg;
+            clearTimeout(el._t);
+            el._t = setTimeout(() => { if (el.parentNode) el.parentNode.removeChild(el); }, 15000);
+        }
+
+        // Vervang alleen containers die NOG in hun placeholder-staat staan,
+        // zodat een fout nooit al gerenderde inhoud wist.
+        function setFallbackForPlaceholders() {
+            const placeholders = [
+                ['projects-container', 'Loading projects...'],
+                ['skills-container', 'Loading skills...'],
+                ['contributions-container', 'Loading activity...'],
+                ['contribution-heatmap', 'Loading heatmap...'],
+                ['achievements-container', 'Loading achievements...'],
+                ['profiles-container', 'Loading profiles...']
+            ];
+            placeholders.forEach(([id, placeholder]) => {
+                const el = document.getElementById(id);
+                if (!el) return;
+                const txt = (el.textContent || '').trim();
+                const hasContent = el.children.length > 0 && txt.indexOf('Loading') === -1;
+                if (!hasContent || txt === placeholder || txt === '') {
+                    // Veilig: statische literal, geen gebruikersdata
+                    if (!hasContent) el.innerHTML = '<p class="about-text">Unable to load live data</p>';
+                }
+            });
+        }
+
         function renderAll() {
-            renderProjects();
-            renderSkills();
-            renderDonut();
-            renderStats();
-            renderContributions();
-            renderContributionHeatmap();
-            renderAchievements();
-            renderProfiles();
+            const steps = [
+                ['projects', renderProjects],
+                ['skills', renderSkills],
+                ['donut', renderDonut],
+                ['stats', renderStats],
+                ['contributions', renderContributions],
+                ['heatmap', renderContributionHeatmap],
+                ['achievements', renderAchievements],
+                ['profiles', renderProfiles]
+            ];
+            const failed = [];
+            steps.forEach(([name, fn]) => {
+                try {
+                    fn();
+                } catch (e) {
+                    failed.push(name);
+                    console.error('Render stap mislukt: ' + name, e);
+                }
+            });
+            return failed;
         }
 
         async function loadGitHubData() {
             try {
-                const response = await fetch('github-data.json');
-                if (!response.ok) throw new Error('Failed to load');
-                githubData = await response.json();
-                renderAll();
+                const response = await fetch('github-data.json', { cache: 'no-cache' });
+                if (!response.ok) throw new Error('HTTP ' + response.status);
+                const raw = await response.json();
+                githubData = normalizeGitHubData(raw);
+                if (!githubData) throw new Error('onverwachte datastructuur');
+                const failed = renderAll();
+                if (failed.length) {
+                    showDataError('Sommige secties konden niet getoond worden: ' + failed.join(', '));
+                    setFallbackForPlaceholders();
+                }
             } catch (e) {
                 console.error('Failed to load GitHub data:', e);
-                document.getElementById('projects-container').innerHTML = '<p class="about-text">Unable to load live data</p>';
-                document.getElementById('skills-container').innerHTML = '<p class="about-text">Unable to load live data</p>';
-                document.getElementById('contributions-container').innerHTML = '<p class="about-text">Unable to load live data</p>';
+                showDataError('Live data kon niet geladen worden: ' + (e && e.message ? e.message : e));
+                setFallbackForPlaceholders();
             }
         }
 
@@ -1374,7 +1479,8 @@
         }
 
         function downloadJSON() {
-            const data = { name: 'Bauke Molenaar', title: 'Technisch professional', email: 'bauke.molenaar@gmail.com', phone: '+31 6 3606 5494', github: 'https://github.com/itsdarklikehell', tryhackme: 'https://tryhackme.com/p/SgtStroopwafel', hackthebox: 'https://profile.hackthebox.com/profile/01a0f22b-f959-73b9-925c-c2e2e350db97', cylab: 'https://learn.cylabacademy.org/users/SgtStroopwafel', skills: githubData ? githubData.skills : {}, repos: githubData ? githubData.repos : [], generated_at: new Date().toISOString() };
+            const s = githubData && githubData.stats ? githubData.stats : {};
+            const data = { name: 'Bauke Molenaar', title: 'Technisch professional', email: 'bauke.molenaar@gmail.com', phone: '+31 6 3606 5494', github: 'https://github.com/itsdarklikehell', tryhackme: 'https://tryhackme.com/p/SgtStroopwafel', hackthebox: 'https://profile.hackthebox.com/profile/01a0f22b-f959-73b9-925c-c2e2e350db97', cylab: 'https://learn.cylabacademy.org/users/SgtStroopwafel', skills: s.skills || {}, repos: s.repos || [], generated_at: (githubData && githubData.generated_at) || new Date().toISOString() };
             const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
