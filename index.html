@@ -983,6 +983,8 @@
                 ach_community_n: "Community",
                 ach_influencer_n: "Influencer",
                 profiles_unavailable: "Profielstatistieken tijdelijk niet beschikbaar",
+                profile_gh_line: "{own} eigen projecten · {stars} ⭐ · {langs} talen",
+                featured_stats: "{own} eigen projecten · {stars} sterren · {forks} keer geforkt · {langs} talen",
                 active: "Actief",
                 inactive: "Inactief",
                 ach_centurion: "100+ eigen repositories",
@@ -1067,6 +1069,8 @@
                 ach_community_n: "Community",
                 ach_influencer_n: "Influencer",
                 profiles_unavailable: "Profile statistics temporarily unavailable",
+                profile_gh_line: "{own} own projects · {stars} ⭐ · {langs} languages",
+                featured_stats: "{own} own projects · {stars} stars · forked {forks} times · {langs} languages",
                 active: "Active",
                 inactive: "Inactive",
                 ach_centurion: "100+ own repositories",
@@ -1367,9 +1371,8 @@
                     const gOwn = gOwnRepos();
                     const gStars = gOwnStars();
                     const ghStats = gs ?
-                        (currentLang === 'nl'
-                            ? `${gOwn} eigen projecten · ${gStars} ⭐ · ${gs.languages} talen`
-                            : `${gOwn} own projects · ${gStars} ⭐ · ${gs.languages} languages`) :
+                        (t.profile_gh_line || '')
+                            .replace('{own}', gOwn).replace('{stars}', gStars).replace('{langs}', gs.languages) :
                         'Loading...';
                     
                     // External platform stats with fallback
@@ -1642,6 +1645,7 @@
         // Bewust vóór de categorielijst, zodat het beste werk niet verdwijnt
         // tussen honderden repos in de categorieën.
         function renderFeatured() {
+            const t = translations[currentLang];
             const section = document.getElementById('featured-section');
             const container = document.getElementById('featured-container');
             if (!section || !container) return;
@@ -1683,9 +1687,9 @@
                 const nStars = gOwnStars();
                 const nForks = st.total_forks || 0;
                 const nLangs = st.languages || Object.keys(sk).length;
-                statsEl.textContent = (currentLang === 'nl'
-                    ? `${nOwn} eigen projecten · ${nStars} sterren · ${nForks} keer geforkt · ${nLangs} talen`
-                    : `${nOwn} own projects · ${nStars} stars · forked ${nForks} times · ${nLangs} languages`);
+                statsEl.textContent = (t.featured_stats || '')
+                    .replace('{own}', nOwn).replace('{stars}', nStars)
+                    .replace('{forks}', nForks).replace('{langs}', nLangs);
             }
 
             section.style.display = '';
