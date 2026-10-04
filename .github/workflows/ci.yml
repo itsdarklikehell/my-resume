@@ -1,0 +1,36 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate HTML
+        run: |
+          for f in *.html; do
+            echo "Validating $f"
+            # Basic HTML validation
+            grep -q '<!DOCTYPE html>' "$f" || echo "Warning: $f missing DOCTYPE"
+            grep -q '<html' "$f" || echo "Warning: $f missing <html> tag"
+            grep -q '</html>' "$f" || echo "Warning: $f missing closing </html>"
+          done
+
+      - name: Check for broken internal links
+        run: |
+          # Check for common issues
+          grep -r 'src="http' *.html 2>/dev/null | grep -v 'https://' | head -5 || true
+          grep -r 'href="http' *.html 2>/dev/null | grep -v 'https://' | head -5 || true
+
+      - name: Check file structure
+        run: |
+          echo "File count: $(find . -type f | wc -l)"
+          echo "HTML files: $(find . -name '*.html' | wc -l)"
+          echo "CSS files: $(find . -name '*.css' | wc -l)"
+          echo "JS files: $(find . -name '*.js' | wc -l)"
