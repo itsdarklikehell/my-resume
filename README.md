@@ -34,6 +34,29 @@ De ontwikkelhistorie van dit project in een film:
 
 - Updated README with website badge and last verified timestamp
 
+
+## 🏷️ Tags
+
+- HTML5
+- CSS3
+- JavaScript
+- GitHub Actions
+- GitHub Pages
+- PWA
+- Open Graph
+- Dark Mode
+- Multilingual
+- Live Data
+- Donut Chart
+- Timeline Animation
+- Contact Form
+- JSON Export
+- Share Buttons
+- Print Friendly
+- Auto Theme
+- Last Updated
+- Gource Visualization
+
 ## 🛠️ Tech Stack
 
 - HTML5 + CSS3 + JavaScript (geen frameworks)
