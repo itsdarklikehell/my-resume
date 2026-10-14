@@ -14,6 +14,7 @@ import os
 import subprocess
 import sys
 from datetime import datetime
+from playwright.sync_api import sync_playwright
 
 def run_curl(url, headers=None):
     """Run curl and return parsed JSON if possible, else None."""
@@ -35,42 +36,41 @@ def run_curl(url, headers=None):
         return None
 
 def fetch_tryhackme():
-    """Fetch TryHackMe data. Placeholder: requires API key or not publicly available."""
-    # Example endpoint (if available)
-    url = f"https://tryhackme.com/api/v2/user/profile?username={os.getenv('TRYHACKME_USERNAME', 'SgtStroopwafel')}"
-    headers = []
+    """Fetch TryHackMe data. Try API if key available, else fallback to Playwright scrape."""
     api_key = os.getenv('TRYHACKME_API_KEY')
+    username = os.getenv('TRYHACKME_USERNAME', 'SgtStroopwafel')
     if api_key:
-        headers.append(f"Authorization: Bearer {api_key}")
-    else:
-        # If no API key, we cannot reliably fetch; return None to indicate skip
-        print("TryHackMe: No API key provided; skipping live fetch.")
-        return None
-    data = run_curl(url, headers=headers if headers else None)
-    if data and isinstance(data, dict):
-        # Adjust according to actual API response structure
-        rank = data.get('rank', {}).get('name', 'N/A')
-        points = data.get('score', 0)
-        return {'rank': rank, 'points': points}
-    return None
+        # Use API
+        url = f"https://tryhackme.com/api/v2/user/profile?username={username}"
+        headers = [f"Authorization: Bearer {api_key}"]
+        data = run_curl(url, headers=headers)
+        if data and isinstance(data, dict):
+            rank = data.get('rank', {}).get('name', 'N/A')
+            points = data.get('score', 0)
+            return {'rank': rank, 'points': points}
+        else:
+            print("TryHackMe: API request failed; falling back to scrape.")
+            # fall through to scrape
+    # Scrape via Playwright
+    return scrape_tryhackme(username)
 
 def fetch_hackthebox():
-    """Fetch HackTheBox data. Placeholder."""
-    url = "https://www.hackthebox.com/api/v4/user/info"
-    headers = []
+    """Fetch HackTheBox data. Try API if key available."""
     api_key = os.getenv('HACKTHEBOX_API_KEY')
     if api_key:
-        headers.append(f"Authorization: Bearer {api_key}")
+        url = "https://www.hackthebox.com/api/v4/user/info"
+        headers = [f"Authorization: Bearer {api_key}"]
+        data = run_curl(url, headers=headers)
+        if data and isinstance(data, dict):
+            rank = data.get('data', {}).get('profile', {}).get('rank', 'N/A')
+            points = data.get('data', {}).get('profile', {}).get('points', 0)
+            return {'rank': rank, 'points': points}
+        else:
+            print("HackTheBox: API request failed; no fallback scraping implemented.")
+            return None
     else:
         print("HackTheBox: No API key provided; skipping live fetch.")
         return None
-    data = run_curl(url, headers=headers if headers else None)
-    if data and isinstance(data, dict):
-        # Adjust according to actual API response
-        rank = data.get('data', {}).get('profile', {}).get('rank', 'N/A')
-        points = data.get('data', {}).get('profile', {}).get('points', 0)
-        return {'rank': rank, 'points': points}
-    return None
 
 def fetch_cylab():
     """Fetch CyLab data. Placeholder."""
@@ -95,6 +95,43 @@ def fetch_microsoft_learn():
         points = data.get('points', 0)
         return {'rank': rank, 'points': points}
     return None
+
+def scrape_tryhackme(username):
+    """Scrape TryHackMe public profile for rank and points using Playwright."""
+    from playwright.sync_api import sync_playwright
+    with sync_playwright() as p:
+        browser = p.chromium.launch(headless=True)
+        page = browser.new_page()
+        try:
+            page.goto(f'https://tryhackme.com/p/{username}', timeout=20000)
+            # Wait for rank element
+            page.wait_for_selector('.profile-stats-styles__StyledProfileStatValue-sc-a1b7734d-4', timeout=5000)
+            rank_elem = page.query_selector('.profile-stats-styles__StyledProfileStatValue-sc-a1b7734d-4')
+            rank = rank_elem.inner_text() if rank_elem else 'N/A'
+            points = 'N/A'
+            # Try to find points/score via label
+            stat_blocks = page.query_selector_all('.profile-stats-styles__StyledProfileStat-sc-a1b7734d-2')
+            for block in stat_blocks:
+                label = block.query_selector('.profile-stats-styles__StyledProfileStatLabel-sc-a1b7734d-3')
+                if label:
+                    label_text = label.inner_text().lower()
+                    if 'score' in label_text or 'points' in label_text:
+                        value = block.query_selector('.profile-stats-styles__StyledProfileStatValue-sc-a1b7734d-4')
+                        if value:
+                            points = value.inner_text()
+                        break
+            if points == 'N/A':
+                import re
+                m = re.search(r'Score\\s*[\\:\\-]?\\s*(\\d+)', page.content(), re.I)
+                if m:
+                    points = m.group(1)
+        except Exception as e:
+            print(f"TryHackMe scrape error: {e}")
+            rank = 'N/A'
+            points = 'N/A'
+        finally:
+            browser.close()
+    return {'rank': rank.strip(), 'points': points.strip()}
 
 def main():
     print("Fetching live profile data...")
