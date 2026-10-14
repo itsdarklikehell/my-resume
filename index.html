@@ -1342,10 +1342,13 @@
                         'Live data unavailable';
                     
                     const profiles = [
-                        { name: 'GitHub', icon: '🐙', url: 'https://github.com/itsdarklikehell', username: 'itsdarklikehell', stats: ghStats, live: true },
-                        { name: 'TryHackMe', icon: '🔒', url: 'https://tryhackme.com/p/SgtStroopwafel', username: 'SgtStroopwafel', stats: thmStats, live: data.tryhackme && data.tryhackme.rank !== 'N/A' },
-                        { name: 'Hack The Box', icon: '📦', url: 'https://profile.hackthebox.com/profile/01a0f22b-f959-73b9-925c-c2e2e350db97', username: 'SgtStroopwafel', stats: htbStats, live: data.hackthebox && data.hackthebox.rank !== 'N/A' },
-                        { name: 'CyLab Academy', icon: '🎓', url: 'https://learn.cylabacademy.org/users/SgtStroopwafel', username: 'SgtStroopwafel', stats: cylabStats, live: data.cylab && data.cylab.rank !== 'N/A' }
+                        { name: "GitHub", icon: "🐙", url: "https://github.com/itsdarklikehell", username: "itsdarklikehell", stats: ghStats, live: true },
+                        { name: "TryHackMe", icon: "🔒", url: "https://tryhackme.com/p/SgtStroopwafel", username: "SgtStroopwafel", stats: thmStats, live: data.tryhackme && data.tryhackme.rank !== "N/A" },
+                        { name: "Hack The Box", icon: "📦", url: "https://profile.hackthebox.com/profile/01a0f22b-f959-73b9-925c-c2e2e350db97", username: "SgtStroopwafel", stats: htbStats, live: data.hackthebox && data.hackthebox.rank !== "N/A" },
+                        { name: "CyLab Academy", icon: "🎓", url: "https://learn.cylabacademy.org/users/SgtStroopwafel", username: "SgtStroopwafel", stats: cylabStats, live: data.cylab && data.cylab.rank !== "N/A" },
+                        { name: "Microsoft Learn", icon: "🎓", url: "https://learn.microsoft.com/nl-nl/users/baukemolenaar/", username: "baukemolenaar",
+                          stats: data.microsoft && data.microsoft.rank !== "N/A" ? `Rank: ${data.microsoft.rank} · ${data.microsoft.points} pts` : "Live data unavailable",
+                          live: data.microsoft && data.microsoft.rank !== "N/A" }
                     ];
                     container.innerHTML = profiles.map(p => `
                         <a href="${p.url}" target="_blank" class="activity-card" style="text-decoration: none; color: inherit; ${p.live ? '' : 'opacity: 0.7;'}">
@@ -1456,6 +1459,8 @@
                 if (languages >= 10) achievements.push({ icon: '💎', name: t.ach_polyglot_master_n, desc: t.ach_polyglot_master, unlocked: true });
                 if (followers >= 10) achievements.push({ icon: '👥', name: t.ach_community_n, desc: t.ach_community, unlocked: true });
                 if (followers >= 30) achievements.push({ icon: '🌟', name: t.ach_influencer_n, desc: t.ach_influencer, unlocked: true });
+                // Microsoft Learn achievement
+                achievements.push({ icon: "🎓", name: "Microsoft Learn", desc: "Microsoft Learn profile", unlocked: true });
                 
                 // Activity achievements
                 const contributions = gContributions();
