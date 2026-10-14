@@ -37,6 +37,11 @@ jobs:
           gh auth setup-git
           gh auth status
 
+      - name: Sync with main
+        run: |
+          git fetch origin
+          git reset --hard origin/main
+      
       - name: Fetch GitHub data
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
