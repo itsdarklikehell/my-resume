@@ -19,7 +19,7 @@ De ontwikkelhistorie van dit project in een film:
 
 - **Tweetalig** (NL/EN) met automatische browser-taaldetectie
 - **Live GitHub data** — projecten, skills, contributions (dagelijks geüpdatet)
-- **Live profiel data** — TryHackMe, HackTheBox, CyLab, Microsoft Learn (optioneel, vereist API keys)
+- **Live profiel data** — TryHackMe (via API or public scrape), HackTheBox, CyLab, Microsoft Learn (optioneel, vereist API keys)
 - **Donut chart** met taalverdeling
 - **Geanimeerde tijdlijn** voor werkervaring
 - **Contact formulier** (mailto)
@@ -68,7 +68,7 @@ De ontwikkelhistorie van dit project in een film:
 ```
 ├── index.html              # Hoofdpagina
 ├── github-data.json        # Live GitHub data (automatisch gegenereerd)
-├── profile-data.json       # Live profiel data (THM, HTB, CyLab, Microsoft Learn) – handmatig bijwerken of via API keys
+├── profile-data.json       # Live profiel data (THM via API or scrape, HTB, CyLab, Microsoft Learn) – handmatig bijwerken of via API keys
 ├── profile.jpg            # Profielfoto
 ├── favicon-*.png          # Favicons
 ├── site.webmanifest       # PWA manifest
