@@ -1,19 +1,27 @@
 {
   "tryhackme": {
-    "rank": "N/A",
-    "points": 0
+    "rank": "Top 3%",
+    "points": "35"
   },
   "hackthebox": {
     "rank": "N/A",
-    "points": 0
+    "points": "N/A"
   },
   "cylab": {
     "rank": "N/A",
     "points": 0
   },
-  "generated_at": "2026-10-05T00:23:49Z",
+  "generated_at": "2026-10-14T21:42:30.148533Z",
   "microsoft": {
     "rank": "N/A",
     "points": 0
+  },
+  "ctftime": {
+    "rating": "1.0",
+    "position": "36"
+  },
+  "itchio": {
+    "games": "8",
+    "followers": "8"
   }
 }

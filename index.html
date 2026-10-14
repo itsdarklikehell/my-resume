@@ -1419,23 +1419,33 @@
                     
                     // External platform stats with fallback
                     const thmStats = data.tryhackme && data.tryhackme.rank !== 'N/A' ?
-                        `Rank: ${data.tryhackme.rank} · ${data.tryhackme.points} pts` : 
+                        `Rank: ${data.tryhackme.rank} · ${data.tryhackme.points} pts` :
                         'Live data unavailable';
-                    
-                    const htbStats = data.hackthebox && data.hackthebox.rank !== 'N/A' ? 
-                        `Rank: ${data.hackthebox.rank} · ${data.hackthebox.points} pts` : 
+
+                    const htbStats = data.hackthebox && data.hackthebox.rank !== 'N/A' ?
+                        `Rank: ${data.hackthebox.rank} · ${data.hackthebox.points} pts` :
                         'Live data unavailable';
-                    
-                    const cylabStats = data.cylab && data.cylab.rank !== 'N/A' ? 
-                        `Rank: ${data.cylab.rank} · ${data.cylab.points} pts` : 
+
+                    const cylabStats = data.cylab && data.cylab.rank !== 'N/A' ?
+                        `Rank: ${data.cylab.rank} · ${data.cylab.points} pts` :
                         'Live data unavailable';
-                    
+
+                    const ctftimeStats = data.ctftime && data.ctftime.rating !== 'N/A' ?
+                        `Rating: ${data.ctftime.rating} · Position: ${data.ctftime.position}` :
+                        'Live data unavailable';
+
+                    const itchioStats = data.itchio && data.itchio.games !== 'N/A' ?
+                        `Games: ${data.itchio.games} · Followers: ${data.itchio.followers}` :
+                        'Live data unavailable';
+
                     const profiles = [
                         { name: "GitHub", icon: "🐙", url: "https://github.com/itsdarklikehell", username: "itsdarklikehell", stats: ghStats, live: true },
                         { name: "TryHackMe", icon: "🔒", url: "https://tryhackme.com/p/SgtStroopwafel", username: "SgtStroopwafel", stats: thmStats, live: data.tryhackme && data.tryhackme.rank !== "N/A" },
                         { name: "Hack The Box", icon: "📦", url: "https://profile.hackthebox.com/profile/01a0f22b-f959-73b9-925c-c2e2e350db97", username: "SgtStroopwafel", stats: htbStats, live: data.hackthebox && data.hackthebox.rank !== "N/A" },
                         { name: "CyLab Academy", icon: "🎓", url: "https://learn.cylabacademy.org/users/SgtStroopwafel", username: "SgtStroopwafel", stats: cylabStats, live: data.cylab && data.cylab.rank !== "N/A" },
                         { name: "Microsoft Learn", icon: "🎓", url: "https://learn.microsoft.com/nl-nl/users/baukemolenaar/", username: "baukemolenaar", stats: "Microsoft Learn profile", live: data.microsoft && data.microsoft.rank !== "N/A" },
+                        { name: "CTFtime", icon: "🏁", url: "https://ctftime.org/user/127159", username: "SgtStroopwafel", stats: ctftimeStats, live: data.ctftime && data.ctftime.rating !== "N/A" },
+                        { name: "itch.io", icon: "🎮", url: "https://sgtstroopwafel.itch.io/", username: "sgtstroopwafel", stats: itchioStats, live: data.itchio && data.itchio.games !== "N/A" },
                     ];
                     container.innerHTML = profiles.map(p => `
                         <a href="${p.url}" target="_blank" class="activity-card" style="text-decoration: none; color: inherit; ${p.live ? '' : 'opacity: 0.7;'}">
