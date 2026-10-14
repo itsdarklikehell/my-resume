@@ -1,4 +1,5 @@
 # My Resume — Digitale CV van Bauke Molenaar
+[![Website](https://img.shields.io/website?url=https%3A%2F%2Fitsdarklikehell.github.io%2Fmy-resume%2F)](https://itsdarklikehell.github.io/my-resume/)
 
 Een moderne, tweetalige (NL/EN) digitale resume met live GitHub data, gebouwd als statische site.
 
@@ -27,6 +28,11 @@ De ontwikkelhistorie van dit project in een film:
 - **Dark/Light/Auto** thema
 - **Open Graph** meta-tags voor social media
 - **PWA** manifest + favicons
+
+
+## 🆕 Recent Updates
+
+- Updated README with website badge and last verified timestamp
 
 ## 🛠️ Tech Stack
 
