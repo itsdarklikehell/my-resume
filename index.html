@@ -1394,7 +1394,8 @@
                         { name: "Hack The Box", icon: "📦", url: "https://profile.hackthebox.com/profile/01a0f22b-f959-73b9-925c-c2e2e350db97", username: "SgtStroopwafel", stats: htbStats, live: data.hackthebox && data.hackthebox.rank !== "N/A" },
                         { name: "CyLab Academy", icon: "🎓", url: "https://learn.cylabacademy.org/users/SgtStroopwafel", username: "SgtStroopwafel", stats: cylabStats, live: data.cylab && data.cylab.rank !== "N/A" },
                         { name: "Microsoft Learn", icon: "🎓", url: "https://learn.microsoft.com/nl-nl/users/baukemolenaar/", username: "baukemolenaar",
-                          stats: data.microsoft && data.microsoft.rank !== "N/A" ? `Rank: ${data.microsoft.rank} · ${data.microsoft.points} pts` : "Live data unavailable",
+                          stats: "Microsoft Learn profile",
+                          live: true } · ${data.microsoft.points} pts` : "Live data unavailable",
                           live: data.microsoft && data.microsoft.rank !== "N/A" }
                     ];
                     container.innerHTML = profiles.map(p => `
