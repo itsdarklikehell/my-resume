@@ -19,6 +19,7 @@ De ontwikkelhistorie van dit project in een film:
 
 - **Tweetalig** (NL/EN) met automatische browser-taaldetectie
 - **Live GitHub data** — projecten, skills, contributions (dagelijks geüpdatet)
+- **Live profiel data** — TryHackMe, HackTheBox, CyLab, Microsoft Learn (optioneel, vereist API keys)
 - **Donut chart** met taalverdeling
 - **Geanimeerde tijdlijn** voor werkervaring
 - **Contact formulier** (mailto)
@@ -29,11 +30,9 @@ De ontwikkelhistorie van dit project in een film:
 - **Open Graph** meta-tags voor social media
 - **PWA** manifest + favicons
 
-
 ## 🆕 Recent Updates
 
 - Updated README with website badge and last verified timestamp
-
 
 ## 🏷️ Tags
 
@@ -69,12 +68,13 @@ De ontwikkelhistorie van dit project in een film:
 ```
 ├── index.html              # Hoofdpagina
 ├── github-data.json        # Live GitHub data (automatisch gegenereerd)
-├── profile-data.json       # Handmatige profiel data (THM, HTB, CyLab)
+├── profile-data.json       # Live profiel data (THM, HTB, CyLab, Microsoft Learn) – handmatig bijwerken of via API keys
 ├── profile.jpg            # Profielfoto
 ├── favicon-*.png          # Favicons
 ├── site.webmanifest       # PWA manifest
 ├── scripts/
-│   └── fetch_github_data.py  # Script om GitHub data op te halen
+│   ├── fetch_github_data.py  # Script om GitHub data op te halen
+│   └── fetch_profile_data.py # Script om profiel data op te halen (vereist API keys)
 └── .github/workflows/
     ├── update-data.yml    # Dagelijkse data-update workflow
     └── gource.yml        # Gource visualisatie workflow
@@ -83,6 +83,7 @@ De ontwikkelhistorie van dit project in een film:
 ## 🔄 Automatische Updates
 
 De GitHub data wordt dagelijks om 06:00 UTC automatisch bijgewerkt door de `update-data.yml` workflow. De Gource video wordt bij elke push ververst.
+Als API keys voor TryHackMe, HackTheBox, CyLab of Microsoft Learn zijn ingesteld als repository secrets, wordt de profiel data ook dagelijks bijgewerkt.
 
 ## 📝 License
 
