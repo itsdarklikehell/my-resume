@@ -340,8 +340,8 @@
         }
 
         .download-btn {
-            display: inline-flex;
-            align-items: center;
+            display: block;
+            width: 100%;
             gap: 0.5rem;
             background: linear-gradient(135deg, var(--accent), var(--accent2));
             color: #fff;
@@ -353,6 +353,12 @@
             text-decoration: none;
             cursor: pointer;
             transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .download-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            width: 100%;
         }
 
         .download-btn:hover {
@@ -875,10 +881,12 @@
 <aside class="sidebar">
 <section class="card no-print">
 <h2 data-i18n="download">Download CV</h2>
-<a class="download-btn" onclick="downloadJSON()" target="_blank">🇳🇱 <span data-i18n="download_json">Download JSON</span></a>
-<a class="download-btn" onclick="downloadJSON()" target="_blank" style="margin-top: 0.5rem;">🇬🇧 <span data-i18n="download_json">Download JSON</span></a>
- <a class="download-btn" onclick="window.print()" target="_blank">🇳🇱 <span>Print CV (NL)</span></a>
- <a class="download-btn" onclick="window.print()" target="_blank" style="margin-top: 0.5rem;">🇬🇧 <span>Print CV (EN)</span></a>
+<div class="download-group">
+  <a class="download-btn" onclick="downloadJSON()" target="_blank">🇳🇱 <span data-i18n="download_json">Download JSON</span></a>
+  <a class="download-btn" onclick="downloadJSON()" target="_blank" style="margin-top: 0.5rem;">🇬🇧 <span data-i18n="download_json">Download JSON</span></a>
+   <a class="download-btn" onclick="window.print()" target="_blank">🇳🇱 <span>Print CV (NL)</span></a>
+   <a class="download-btn" onclick="window.print()" target="_blank" style="margin-top: 0.5rem;">🇬🇧 <span>Print CV (EN)</span></a>
+</div>
 </section>
 <section class="card no-print">
 <h2 data-i18n="share">Delen</h2>
@@ -1388,10 +1396,7 @@
                         { name: "TryHackMe", icon: "🔒", url: "https://tryhackme.com/p/SgtStroopwafel", username: "SgtStroopwafel", stats: thmStats, live: data.tryhackme && data.tryhackme.rank !== "N/A" },
                         { name: "Hack The Box", icon: "📦", url: "https://profile.hackthebox.com/profile/01a0f22b-f959-73b9-925c-c2e2e350db97", username: "SgtStroopwafel", stats: htbStats, live: data.hackthebox && data.hackthebox.rank !== "N/A" },
                         { name: "CyLab Academy", icon: "🎓", url: "https://learn.cylabacademy.org/users/SgtStroopwafel", username: "SgtStroopwafel", stats: cylabStats, live: data.cylab && data.cylab.rank !== "N/A" },
-                        { name: "Microsoft Learn", icon: "🎓", url: "https://learn.microsoft.com/nl-nl/users/baukemolenaar/", username: "baukemolenaar",
-                          stats: "Microsoft Learn profile",
-                          live: true } · ${data.microsoft.points} pts` : "Live data unavailable",
-                          live: data.microsoft && data.microsoft.rank !== "N/A" }
+                        { name: "Microsoft Learn", icon: "🎓", url: "https://learn.microsoft.com/nl-nl/users/baukemolenaar/", username: "baukemolenaar", stats: "Microsoft Learn profile", live: data.microsoft && data.microsoft.rank !== "N/A" },
                     ];
                     container.innerHTML = profiles.map(p => `
                         <a href="${p.url}" target="_blank" class="activity-card" style="text-decoration: none; color: inherit; ${p.live ? '' : 'opacity: 0.7;'}">
