@@ -23,3 +23,8 @@
 - Describe what changed and why
 - Reference related issues
 - Ensure CI passes before requesting review
+
+
+## Language‑aware download block
+
+If you modify the Download CV section, remember to add the appropriate `.lang-nl` or `.lang-en` classes to each button and keep the visibility logic in `applyLang()`.

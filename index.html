@@ -655,7 +655,36 @@
                 --text-muted: #5a6070;
             }
         }
-    </style>
+    
+/* Skip link */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+.skip-link:focus {
+  left: 1rem;
+  top: 1rem;
+  width: auto;
+  height: auto;
+  overflow: visible;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: .5rem 1rem;
+  z-index: 1000;
+}
+
+/* Focus visible */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+</style>
 <link href="https://itsdarklikehell.github.io/my-resume/" rel="canonical"/>
 <script type="application/ld+json">
 {
@@ -708,8 +737,9 @@
     </script>
 </head>
 <body>
-<button class="theme-toggle" onclick="toggleTheme()" title="Toggle thema">🌙</button>
-<button class="lang-toggle" onclick="toggleLang()" title="Toggle language">🌐 <span id="lang-label">NL</span></button>
+  <a href="#main-col" class="skip-link">Skip to content</a>
+<button class="theme-toggle" onclick="toggleTheme()" title="Toggle thema" aria-label="Toggle theme">🌙</button>
+<button class="lang-toggle" onclick="toggleLang()" title="Toggle language" aria-label="Toggle language">🌐 <span id="lang-label">NL</span></button>
 <div class="container">
 <header class="header">
 <img alt="Bauke Molenaar" class="header-avatar" src="profile.jpg"/>
@@ -1612,10 +1642,14 @@
             if (!el) {
                 el = document.createElement('div');
                 el.id = 'data-error-banner';
-                el.style.cssText = 'position:fixed;bottom:1rem;left:1rem;right:1rem;max-width:520px;margin:0 auto;background:#7f1d1d;color:#fff;padding:0.6rem 0.9rem;border-radius:8px;font-size:0.8rem;z-index:9999;box-shadow:0 4px 12px rgba(0,0,0,.4);';
+                el.style.cssText = 'position:fixed;bottom:1rem;left:1rem;right:1rem;max-width:520px;margin:0 auto;background:#7f1d1d;color:#fff;padding:0.6rem 0.9rem;border-radius:8px;font-size:0.8rem;z-index:9999;box-shadow:0 4px 12px rgba(0,0,0,.4);display:flex;justify-content:space-between;align-items:center;';
                 document.body.appendChild(el);
             }
-            el.textContent = '⚠️ ' + msg;
+            el.innerHTML = '<span>⚠️ </span>' + msg + '<button aria-label=\"Close\" style=\"background:transparent;border:none;color:#fff;font-size:1.2rem;cursor:pointer;\">&times;</button>';
+            const closeBtn = el.querySelector('button');
+            if (closeBtn) {
+                closeBtn.onclick = () => { if (el.parentNode) el.parentNode.removeChild(el); };
+            }
             clearTimeout(el._t);
             el._t = setTimeout(() => { if (el.parentNode) el.parentNode.removeChild(el); }, 15000);
         }
@@ -1824,5 +1858,17 @@
 
         loadGitHubData();
     </script>
+
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js').then(reg => {
+      console.log('ServiceWorker registered:', reg);
+    }).catch(err => {
+      console.log('ServiceWorker registration failed:', err);
+    });
+  });
+}
+</script>
 </body>
 </html>

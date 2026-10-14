@@ -1,0 +1,4 @@
+/* Humans */
+Built by: Bauke Molenaar (SgtStroopwafel)
+Site: https://itsdarklikehell.github.io/my-resume/
+Last update: 2026-10-14

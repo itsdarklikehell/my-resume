@@ -1,0 +1,8 @@
+# Define who is responsible for code in specific paths.
+/agents/ @SgtStroopwafel
+/scripts/ @SgtStroopwafel
+/*.md @SgtStroopwafel
+/*.html @SgtStroopwafel
+/*.js @SgtStroopwafel
+/*.json @SgtStroopwafel
+/*.css @SgtStroopwafel
