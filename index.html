@@ -882,12 +882,12 @@
 <section class="card no-print">
 <h2 data-i18n="download">Download CV</h2>
 <div class="download-group">
-  <a class="download-btn" href="bauke-molenaar-cv.pdf" download="" target="_blank">🇳🇱 <span data-i18n="download_pdf_nl">Download CV (NL)</span></a>
-  <a class="download-btn" href="bauke-molenaar-cv-en.pdf" download="" target="_blank">🇬🇧 <span data-i18n="download_pdf_en">Download CV (EN)</span></a>
-  <a class="download-btn" onclick="downloadJSON()" target="_blank">🇳🇱 <span data-i18n="download_json">Download JSON</span></a>
-  <a class="download-btn" onclick="downloadJSON()" target="_blank" style="margin-top: 0.5rem;">🇬🇧 <span data-i18n="download_json">Download JSON</span></a>
-   <a class="download-btn" onclick="window.print()" target="_blank">🇳🇱 <span>Print CV (NL)</span></a>
-   <a class="download-btn" onclick="window.print()" target="_blank" style="margin-top: 0.5rem;">🇬🇧 <span>Print CV (EN)</span></a>
+  <a class="download-btn lang-nl" href="bauke-molenaar-cv.pdf" download="" target="_blank">🇳🇱 <span data-i18n="download_pdf_nl">Download CV (NL)</span></a>
+  <a class="download-btn lang-en" href="bauke-molenaar-cv-en.pdf" download="" target="_blank">🇬🇧 <span data-i18n="download_pdf_en">Download CV (EN)</span></a>
+  <a class="download-btn lang-nl" onclick="downloadJSON()" target="_blank">🇳🇱 <span data-i18n="download_json">Download JSON</span></a>
+  <a class="download-btn lang-en" onclick="downloadJSON()" target="_blank" style="margin-top: 0.5rem;">🇬🇧 <span data-i18n="download_json">Download JSON</span></a>
+   <a class="download-btn lang-nl" onclick="window.print()" target="_blank">🇳🇱 <span>Print CV (NL)</span></a>
+   <a class="download-btn lang-en" onclick="window.print()" target="_blank" style="margin-top: 0.5rem;">🇬🇧 <span>Print CV (EN)</span></a>
 </div>
 </section>
 <section class="card no-print">
@@ -1153,6 +1153,13 @@
             // Alleen bewaren als de taal niet via de URL is opgelegd
             if (!(urlLang === 'nl' || urlLang === 'en')) localStorage.setItem('lang', lang);
             if (githubData) renderAll();
+        // Language‑aware visibility for download buttons
+        document.querySelectorAll('.lang-nl').forEach(el => {
+            el.style.display = currentLang === 'nl' ? '' : 'none';
+        });
+        document.querySelectorAll('.lang-en').forEach(el => {
+            el.style.display = currentLang === 'en' ? '' : 'none';
+        });
         }
 
         function toggleLang() {
