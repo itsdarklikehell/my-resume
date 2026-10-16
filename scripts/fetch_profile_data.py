@@ -35,6 +35,12 @@ CANONICAL_FIELDS = [
     'level', 'xp', 'xp_last_year', 'weekly_streak', 'top_interests', 'skills',
     'event_participation', 'yearly_activity', 'reputation_points', 'top_tools',
     'badges', 'skill_matrix',
+    # Additional scrapeable fields
+    'badges_count', 'paths_completed', 'rooms_completed', 'rooms_created',
+    'team_rankings', 'writeups_count', 'events_attended', 'kata_completed',
+    'top_languages', 'recent_articles', 'comment_count',
+    'gold_badges', 'silver_badges', 'bronze_badges', 'top_tags',
+    'answer_count', 'question_count', 'game_rating', 'game_jams',
 ]
 
 
@@ -166,6 +172,41 @@ def scrape_tryhackme(username):
                     if text in known_levels and text not in skill_matrix:
                         skill_matrix.append(text)
                 d['skill_matrix'] = ', '.join(skill_matrix) if skill_matrix else 'N/A'
+
+                # --- badges count ---
+                badges_count = 'N/A'
+                badges_elem = page.query_selector('text="Badges"')
+                if badges_elem:
+                    parent = badges_elem.evaluate_handle('el => el.parentElement')
+                    if parent:
+                        parent_text = parent.inner_text().strip()
+                        lines = [l.strip() for l in parent_text.split('\n') if l.strip()]
+                        for line in lines:
+                            if line != 'Badges' and line.replace(',', '').isdigit():
+                                badges_count = line
+                                break
+                d['badges_count'] = badges_count
+
+                # --- paths completed ---
+                paths_completed = 'N/A'
+                page_text = page.evaluate('() => document.body.innerText')
+                path_match = re.search(r'(\d+)\s+Path completed', page_text)
+                if path_match:
+                    paths_completed = path_match.group(1)
+                d['paths_completed'] = paths_completed
+
+                # --- rooms completed / created / saved ---
+                rooms_completed = 'N/A'
+                rooms_created = 'N/A'
+                rooms_saved = 'N/A'
+                rooms_match = re.search(r'(\d+)\s+Completed\s+(\d+)\s+Created\s+(\d+)\s+Saved', page_text)
+                if rooms_match:
+                    rooms_completed = rooms_match.group(1)
+                    rooms_created = rooms_match.group(2)
+                    rooms_saved = rooms_match.group(3)
+                d['rooms_completed'] = rooms_completed
+                d['rooms_created'] = rooms_created
+                d['rooms_saved'] = rooms_saved
 
                 # --- yearly activity ---
                 yearly_activity = 'N/A'
@@ -338,6 +379,29 @@ def scrape_ctftime():
 
                 d['rating'] = rating.strip()
                 d['position'] = position.strip()
+                # --- team rankings ---
+                team_rankings = 'N/A'
+                page_text = page.evaluate('() => document.body.innerText')
+                # Look for team names and rankings
+                team_match = re.search(r'Team[s]?\s*:\s*([^\n]+)', page_text)
+                if team_match:
+                    team_rankings = team_match.group(1).strip()
+                d['team_rankings'] = team_rankings
+
+                # --- writeups count ---
+                writeups_count = 'N/A'
+                wu_match = re.search(r'(\d+)\s+writeups?', page_text, re.IGNORECASE)
+                if wu_match:
+                    writeups_count = wu_match.group(1)
+                d['writeups_count'] = writeups_count
+
+                # --- events attended ---
+                events_attended = 'N/A'
+                ea_match = re.search(r'(\d+)\s+events?\s+attended', page_text, re.IGNORECASE)
+                if ea_match:
+                    events_attended = ea_match.group(1)
+                d['events_attended'] = events_attended
+
                 # Map onto canonical fields
                 d['xp'] = d['rating']
                 d['reputation_points'] = d['rating']
@@ -419,6 +483,21 @@ def scrape_itchio():
 
                 d['games'] = games.strip()
                 d['followers'] = followers.strip()
+                # --- game rating ---
+                game_rating = 'N/A'
+                page_text = page.evaluate('() => document.body.innerText')
+                rating_match = re.search(r'(\d[\.,]\d)\s*/\s*5', page_text)
+                if rating_match:
+                    game_rating = rating_match.group(1).replace(',', '.')
+                d['game_rating'] = game_rating
+
+                # --- game jams ---
+                game_jams = 'N/A'
+                jam_match = re.search(r'(\d+)\s+jam', page_text, re.IGNORECASE)
+                if jam_match:
+                    game_jams = jam_match.group(1)
+                d['game_jams'] = game_jams
+
                 # Map onto canonical fields
                 d['xp'] = d['followers']
                 d['reputation_points'] = d['followers']
@@ -454,7 +533,24 @@ def fetch_codewars():
         d['xp'] = str(honor)
         d['reputation_points'] = str(honor)
         d['event_participation'] = str(total_completed)
+        d['kata_completed'] = str(total_completed)
         d['badges'] = str(rank)
+        # --- top languages ---
+        top_languages = 'N/A'
+        lang_names = []
+        languages = data.get('ranks', {}).get('languages', {})
+        if isinstance(languages, dict):
+            # Sort by score descending
+            sorted_langs = sorted(languages.items(), key=lambda x: x[1].get('score', 0) if isinstance(x[1], dict) else 0, reverse=True)
+            for lang_name, lang_data in sorted_langs[:5]:
+                if isinstance(lang_data, dict):
+                    name = lang_data.get('name', lang_name)
+                else:
+                    name = lang_name
+                lang_names.append(name)
+        if lang_names:
+            top_languages = ', '.join(lang_names)
+        d['top_languages'] = top_languages
         return d
     return _blank_platform()
 
@@ -476,6 +572,35 @@ def fetch_devto():
         d['event_participation'] = str(posts)
         d['skills'] = 'N/A'
         d['badges'] = str(posts)
+        # --- recent articles ---
+        recent_articles = 'N/A'
+        try:
+            import json as _json
+            articles_url = f"https://dev.to/api/articles?username={username}&per_page=5"
+            articles_cmd = ['curl', '-s', articles_url]
+            articles_result = subprocess.run(articles_cmd, capture_output=True, text=True, timeout=30)
+            if articles_result.returncode == 0:
+                articles = _json.loads(articles_result.stdout)
+                if isinstance(articles, list) and articles:
+                    titles = [a.get('title', '') for a in articles if a.get('title')]
+                    recent_articles = ' | '.join(titles[:5])
+        except Exception:
+            pass
+        d['recent_articles'] = recent_articles
+
+        # --- comment count ---
+        comment_count = 'N/A'
+        try:
+            comments_url = f"https://dev.to/api/comments?username={username}"
+            comments_cmd = ['curl', '-s', comments_url]
+            comments_result = subprocess.run(comments_cmd, capture_output=True, text=True, timeout=30)
+            if comments_result.returncode == 0:
+                comments = _json.loads(comments_result.stdout)
+                if isinstance(comments, list):
+                    comment_count = str(len(comments))
+        except Exception:
+            pass
+        d['comment_count'] = comment_count
         return d
     return _blank_platform()
 
@@ -551,11 +676,36 @@ def fetch_stackoverflow():
             d = _blank_platform()
             rep = profile.get('reputation', 0)
             badges = profile.get('badge_counts', {})
-            total_badges = sum(badges.values()) if isinstance(badges, dict) else 0
+            gold = badges.get('gold', 0) if isinstance(badges, dict) else 0
+            silver = badges.get('silver', 0) if isinstance(badges, dict) else 0
+            bronze = badges.get('bronze', 0) if isinstance(badges, dict) else 0
+            total_badges = gold + silver + bronze
+            q_count = profile.get('question_count', 0)
+            a_count = profile.get('answer_count', 0)
             d['reputation_points'] = str(rep)
             d['badges'] = str(total_badges)
+            d['gold_badges'] = str(gold)
+            d['silver_badges'] = str(silver)
+            d['bronze_badges'] = str(bronze)
             d['xp'] = str(rep)
-            d['event_participation'] = str(profile.get('question_count', 0) + profile.get('answer_count', 0))
+            d['event_participation'] = str(q_count + a_count)
+            d['answer_count'] = str(a_count)
+            d['question_count'] = str(q_count)
+            # --- top tags ---
+            top_tags = 'N/A'
+            try:
+                tags_url = f"https://api.stackexchange.com/2.3/users/{user_id}/tags?site=stackoverflow&pagesize=5&sort=popular"
+                tags_cmd = ['curl', '-s', tags_url]
+                tags_result = subprocess.run(tags_cmd, capture_output=True, text=True, timeout=30)
+                if tags_result.returncode == 0:
+                    tags_resp = json.loads(tags_result.stdout)
+                    tag_items = tags_resp.get('items', [])
+                    if tag_items:
+                        tag_names = [t.get('name', '') for t in tag_items if t.get('name')]
+                        top_tags = ', '.join(tag_names)
+            except Exception:
+                pass
+            d['top_tags'] = top_tags
             return d
     return _blank_platform()
 
