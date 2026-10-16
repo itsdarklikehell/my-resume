@@ -407,7 +407,7 @@ def scrape_itchio():
 # ===========================================================================
 def fetch_codewars():
     """Fetch Codewars data via public API."""
-    username = os.getenv('CODEWARS_USERNAME', 'SgtStroopwafel')
+    username = os.getenv('CODEWARS_USERNAME', 'itsdarklikehell')
     url = f"https://www.codewars.com/api/v1/users/{username}"
     data = run_curl(url)
     if data and isinstance(data, dict):
@@ -431,7 +431,7 @@ def fetch_codewars():
 # ===========================================================================
 def fetch_devto():
     """Fetch DEV.to data via public API."""
-    username = os.getenv('DEVTO_USERNAME', 'sgtstroopwafel')
+    username = os.getenv('DEVTO_USERNAME', 'itsdarklikehell')
     url = f"https://dev.to/api/users/by_username?url={username}"
     data = run_curl(url)
     if data and isinstance(data, dict):
@@ -505,7 +505,7 @@ def fetch_leetcode():
 # ===========================================================================
 def fetch_stackoverflow():
     """Fetch Stack Overflow data via public API (needs user ID)."""
-    user_id = os.getenv('STACKOVERFLOW_USER_ID', '')
+    user_id = os.getenv('STACKOVERFLOW_USER_ID', '9409286')
     if not user_id:
         print("Stack Overflow: STACKOVERFLOW_USER_ID not set — skipping")
         return _blank_platform()

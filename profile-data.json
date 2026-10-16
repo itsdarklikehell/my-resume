@@ -49,7 +49,7 @@
     "badges": "N/A",
     "skill_matrix": "N/A"
   },
-  "generated_at": "2026-10-16T08:23:52.249178Z",
+  "generated_at": "2026-10-16T08:35:30.565826Z",
   "microsoft": {
     "rank": "N/A",
     "points": 0,
@@ -99,20 +99,20 @@
     "skill_matrix": "N/A"
   },
   "codewars": {
-    "level": "N/A",
-    "xp": "0",
+    "level": "8 kyu",
+    "xp": "1",
     "xp_last_year": "N/A",
     "weekly_streak": "N/A",
     "top_interests": "N/A",
     "skills": "N/A",
     "event_participation": "0",
     "yearly_activity": "N/A",
-    "reputation_points": "0",
+    "reputation_points": "1",
     "top_tools": "N/A",
-    "badges": "N/A",
+    "badges": "8 kyu",
     "skill_matrix": "N/A",
-    "rank": "N/A",
-    "points": "0"
+    "rank": "8 kyu",
+    "points": "1"
   },
   "devto": {
     "level": "N/A",
@@ -120,7 +120,7 @@
     "xp_last_year": "N/A",
     "weekly_streak": "N/A",
     "top_interests": "N/A",
-    "skills": "N/A",
+    "skills": "https://media2.dev.to/dynamic/image/width=320,height=320,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.us-east-2.amazonaws.com%2Fuploads%2Fuser%2Fprofile_image%2F336710%2Fe449b355-5509-488e-a242-2fbb2174fd61.png",
     "event_participation": "0",
     "yearly_activity": "N/A",
     "reputation_points": "0",
@@ -144,16 +144,16 @@
   },
   "stackoverflow": {
     "level": "N/A",
-    "xp": "N/A",
+    "xp": "1",
     "xp_last_year": "N/A",
     "weekly_streak": "N/A",
     "top_interests": "N/A",
     "skills": "N/A",
-    "event_participation": "N/A",
+    "event_participation": "0",
     "yearly_activity": "N/A",
-    "reputation_points": "N/A",
+    "reputation_points": "1",
     "top_tools": "N/A",
-    "badges": "N/A",
+    "badges": "0",
     "skill_matrix": "N/A"
   }
 }
