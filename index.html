@@ -823,6 +823,55 @@
   .platform-card {
     padding: 0.75rem;
   }
+
+  /* Skill matrix: 2-column grid on small screens */
+  .skill-matrix-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+  }
+  .skill-matrix-cell {
+    padding: 0.5rem 0.4rem;
+    font-size: 0.8rem;
+  }
+  .skill-matrix-cell .skill-level {
+    font-size: 0.9rem;
+  }
+  .skill-matrix-cell .skill-label {
+    font-size: 0.65rem;
+  }
+
+  /* Donut chart: smaller on mobile */
+  .donut-chart {
+    width: 140px;
+    height: 140px;
+  }
+  .donut-chart .donut-center .donut-total {
+    font-size: 1.25rem;
+  }
+  .donut-legend {
+    font-size: 0.8rem;
+  }
+
+  /* Achievements: tighter padding on mobile */
+  #achievements-container > div {
+    padding: 0.5rem;
+  }
+  #achievements-container > div > div {
+    font-size: 0.8rem;
+  }
+  #achievements-container > div > div > div:first-child {
+    font-size: 1.25rem;
+  }
+
+  /* Field rows: allow wrapping on narrow cards */
+  .field-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+  }
+  .field-value {
+    white-space: normal;
+  }
 }
 
 /* Print: show all cards, remove backgrounds, ensure readability */
@@ -849,6 +898,52 @@
   }
   .card-footer {
     display: none !important;
+  }
+
+  /* Hide Gource video in print */
+  #gource-section,
+  .gource-video,
+  video {
+    display: none !important;
+  }
+
+  /* Skill matrix: print-friendly chips */
+  .skill-matrix-grid {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 0.3rem !important;
+  }
+  .skill-matrix-cell {
+    background: #f0f0f0 !important;
+    color: #000 !important;
+    border: 1px solid #999 !important;
+    padding: 0.3rem 0.5rem !important;
+    font-size: 0.75rem !important;
+    break-inside: avoid;
+  }
+  .skill-matrix-cell .skill-level {
+    color: #000 !important;
+  }
+  .skill-matrix-cell .skill-label {
+    color: #333 !important;
+  }
+
+  /* Achievements: print-friendly badges */
+  #achievements-container {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)) !important;
+    gap: 0.5rem !important;
+  }
+  #achievements-container > div {
+    background: #f0f0f0 !important;
+    border: 1px solid #999 !important;
+    border-radius: 6px !important;
+    padding: 0.5rem !important;
+    text-align: center !important;
+    break-inside: avoid;
+  }
+  #achievements-container > div > div {
+    color: #000 !important;
   }
 }
 
@@ -2338,14 +2433,44 @@
                 const raw = await response.json();
                 githubData = normalizeGitHubData(raw);
                 if (!githubData) throw new Error('onverwachte datastructuur');
-                const failed = renderAll();
-                if (failed.length) {
-                    showDataError('Sommige secties konden niet getoond worden: ' + failed.join(', '));
-                    setFallbackForPlaceholders();
-                }
             } catch (e) {
                 console.error('Failed to load GitHub data:', e);
                 showDataError('Live data kon niet geladen worden: ' + (e && e.message ? e.message : e));
+                setFallbackForPlaceholders();
+                return;
+            }
+
+            // Also fetch live activity from GitHub API for heatmap + live activity
+            try {
+                const eventsResp = await fetch('https://api.github.com/users/itsdarklikehell/events/public?per_page=100', {
+                    cache: 'no-cache',
+                    headers: { 'Accept': 'application/vnd.github+json' }
+                });
+                if (eventsResp.ok) {
+                    const events = await eventsResp.json();
+                    const liveContribs = [];
+                    events.forEach(ev => {
+                        if (['PushEvent', 'CreateEvent', 'PullRequestEvent', 'IssuesEvent'].includes(ev.type)) {
+                            liveContribs.push({ date: ev.created_at });
+                        }
+                    });
+                    // Merge live contributions into githubData (dedupe by date)
+                    const existing = githubData.stats ? githubData.stats.contributions || [] : [];
+                    const seen = new Set(existing.map(c => c.date));
+                    liveContribs.forEach(c => { if (!seen.has(c.date)) existing.push(c); });
+                    if (githubData.stats) githubData.stats.contributions = existing;
+                    if (githubData.stats && githubData.stats.contributions) {
+                        githubData.stats.total_contributions = githubData.stats.contributions.length;
+                    }
+                    console.log('Live GitHub activity fetched:', liveContribs.length, 'new events');
+                }
+            } catch (e) {
+                console.warn('Live GitHub API fetch failed (rate limit or network):', e);
+            }
+
+            const failed = renderAll();
+            if (failed.length) {
+                showDataError('Sommige secties konden niet getoond worden: ' + failed.join(', '));
                 setFallbackForPlaceholders();
             }
         }

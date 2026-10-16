@@ -227,6 +227,73 @@ def scrape_tryhackme(username):
                         top_tools.append(tool)
                 d['top_tools'] = ', '.join(top_tools) if top_tools else 'N/A'
 
+                # --- badges breakdown (gold/silver/bronze) ---
+                gold_badges = 'N/A'
+                silver_badges = 'N/A'
+                bronze_badges = 'N/A'
+                badge_text = page.evaluate('() => document.body.innerText')
+                gb_match = re.search(r'(\d+)\s*Gold\s*badge', badge_text, re.IGNORECASE)
+                if gb_match:
+                    gold_badges = gb_match.group(1)
+                sb_match = re.search(r'(\d+)\s*Silver\s*badge', badge_text, re.IGNORECASE)
+                if sb_match:
+                    silver_badges = sb_match.group(1)
+                bb_match = re.search(r'(\d+)\s*Bronze\s*badge', badge_text, re.IGNORECASE)
+                if bb_match:
+                    bronze_badges = bb_match.group(1)
+                d['gold_badges'] = gold_badges
+                d['silver_badges'] = silver_badges
+                d['bronze_badges'] = bronze_badges
+
+                # --- team rankings ---
+                team_rankings = 'N/A'
+                tm_match = re.search(r'Team[s]?\s*:?\s*([^\n]+)', page_text)
+                if tm_match:
+                    team_rankings = tm_match.group(1).strip()
+                d['team_rankings'] = team_rankings
+
+                # --- writeups count ---
+                writeups_count = 'N/A'
+                wu_match = re.search(r'(\d+)\s+writeups?', page_text, re.IGNORECASE)
+                if wu_match:
+                    writeups_count = wu_match.group(1)
+                d['writeups_count'] = writeups_count
+
+                # --- events attended ---
+                events_attended = 'N/A'
+                ea_match = re.search(r'(\d+)\s+events?\s+attended', page_text, re.IGNORECASE)
+                if ea_match:
+                    events_attended = ea_match.group(1)
+                d['events_attended'] = events_attended
+
+                # --- xp last year ---
+                xp_last_year = 'N/A'
+                xy_match = re.search(r'XP\s+last\s+year[:\s]*(\d+)', page_text, re.IGNORECASE)
+                if xy_match:
+                    xp_last_year = xy_match.group(1)
+                d['xp_last_year'] = xp_last_year
+
+                # --- top interests ---
+                top_interests = 'N/A'
+                ti_match = re.search(r'Interests?\s*:?\s*([^\n]+)', page_text, re.IGNORECASE)
+                if ti_match:
+                    top_interests = ti_match.group(1).strip()
+                d['top_interests'] = top_interests
+
+                # --- skills ---
+                skills = 'N/A'
+                sk_match = re.search(r'Skills?\s*:?\s*([^\n]+)', page_text, re.IGNORECASE)
+                if sk_match:
+                    skills = sk_match.group(1).strip()
+                d['skills'] = skills
+
+                # --- event participation ---
+                event_participation = 'N/A'
+                ep_match = re.search(r'Event\s+participation[:\s]*(\d+)', page_text, re.IGNORECASE)
+                if ep_match:
+                    event_participation = ep_match.group(1)
+                d['event_participation'] = event_participation
+
                 d['rank'] = rank.strip()
                 d['points'] = points.strip()
                 d['highest_league'] = highest_league.strip()
