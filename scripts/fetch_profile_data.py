@@ -3,7 +3,7 @@
 Fetch live profile data from various platforms and update profile-data.json.
 
 Platforms supported: TryHackMe, HackTheBox, CyLab Academy, Microsoft Learn,
-CTFtime, itch.io.
+CTFtime, itch.io, Codewars, DEV.to, LeetCode, Stack Overflow.
 
 Each platform entry in profile-data.json uses a consistent schema with the
 following fields (all default to 'N/A' when not publicly available):
@@ -402,6 +402,132 @@ def scrape_itchio():
 # ===========================================================================
 # Main
 # ===========================================================================
+# ===========================================================================
+# Codewars
+# ===========================================================================
+def fetch_codewars():
+    """Fetch Codewars data via public API."""
+    username = os.getenv('CODEWARS_USERNAME', 'SgtStroopwafel')
+    url = f"https://www.codewars.com/api/v1/users/{username}"
+    data = run_curl(url)
+    if data and isinstance(data, dict):
+        d = _blank_platform()
+        rank = data.get('ranks', {}).get('overall', {}).get('name', 'N/A')
+        honor = data.get('honor', 0)
+        total_completed = data.get('totalCompleted', 0)
+        d['rank'] = str(rank)
+        d['points'] = str(honor)
+        d['level'] = str(rank)
+        d['xp'] = str(honor)
+        d['reputation_points'] = str(honor)
+        d['event_participation'] = str(total_completed)
+        d['badges'] = str(rank)
+        return d
+    return _blank_platform()
+
+
+# ===========================================================================
+# DEV.to
+# ===========================================================================
+def fetch_devto():
+    """Fetch DEV.to data via public API."""
+    username = os.getenv('DEVTO_USERNAME', 'sgtstroopwafel')
+    url = f"https://dev.to/api/users/by_username?url={username}"
+    data = run_curl(url)
+    if data and isinstance(data, dict):
+        d = _blank_platform()
+        posts = data.get('post_count', 0)
+        followers = data.get('followers_count', 0)
+        d['xp'] = str(posts)
+        d['reputation_points'] = str(followers)
+        d['event_participation'] = str(posts)
+        d['skills'] = str(data.get('profile_image', 'N/A'))
+        d['badges'] = str(posts)
+        return d
+    return _blank_platform()
+
+
+# ===========================================================================
+# LeetCode
+# ===========================================================================
+def fetch_leetcode():
+    """Fetch LeetCode data via public GraphQL API (scrape fallback)."""
+    username = os.getenv('LEETCODE_USERNAME', 'SgtStroopwafel')
+    # Try GraphQL API first
+    query = {
+        "query": """
+        userContestRanking(username: "%s") {
+          attendedContestsCount
+          rating
+          globalRanking
+          totalParticipants
+          topPercentage
+        }
+        userProfileUserQuestionProgressV2(userSlug: "%s") {
+          numAcceptedQuestions
+          numFailedQuestions
+          numUntouchedQuestions
+        }
+        """ % (username, username)
+    }
+    try:
+        import json as _json
+        cmd = ['curl', '-s', '-X', 'POST', 'https://leetcode.com/graphql',
+               '-H', 'Content-Type: application/json',
+               '-d', _json.dumps(query)]
+        result = subprocess.run(cmd, capture_output=True, text=True, timeout=30)
+        if result.returncode == 0:
+            resp = _json.loads(result.stdout)
+            if resp and 'data' in resp and resp['data']:
+                user_data = resp['data'].get('userContestRanking')
+                progress = resp['data'].get('userProfileUserQuestionProgressV2')
+                if user_data or progress:
+                    d = _blank_platform()
+                    if user_data:
+                        rating = user_data.get('rating', 0)
+                        ranking = user_data.get('globalRanking', 0)
+                        d['xp'] = str(rating)
+                        d['reputation_points'] = str(rating)
+                        d['event_participation'] = str(user_data.get('attendedContestsCount', 0))
+                        d['rank'] = str(ranking)
+                    if progress:
+                        accepted = progress.get('numAcceptedQuestions', 0)
+                        d['xp_last_year'] = str(accepted)
+                        d['skills'] = str(accepted)
+                    return d
+    except Exception as e:
+        print(f"LeetCode API error: {e}")
+    return _blank_platform()
+
+
+# ===========================================================================
+# Stack Overflow
+# ===========================================================================
+def fetch_stackoverflow():
+    """Fetch Stack Overflow data via public API (needs user ID)."""
+    user_id = os.getenv('STACKOVERFLOW_USER_ID', '')
+    if not user_id:
+        print("Stack Overflow: STACKOVERFLOW_USER_ID not set — skipping")
+        return _blank_platform()
+    url = f"https://api.stackexchange.com/2.3/users/{user_id}?site=stackoverflow&filter=withbody"
+    data = run_curl(url)
+    if data and isinstance(data, dict):
+        items = data.get('items', [])
+        if items:
+            profile = items[0]
+            d = _blank_platform()
+            rep = profile.get('reputation', 0)
+            badges = profile.get('badge_counts', {})
+            total_badges = sum(badges.values()) if isinstance(badges, dict) else 0
+            d['reputation_points'] = str(rep)
+            d['badges'] = str(total_badges)
+            d['xp'] = str(rep)
+            d['event_participation'] = str(profile.get('question_count', 0) + profile.get('answer_count', 0))
+            return d
+    return _blank_platform()
+
+
+
 def main():
     print("Fetching live profile data...")
     profile_path = os.path.join(os.path.dirname(__file__), '..', 'profile-data.json')
@@ -413,7 +539,7 @@ def main():
         print(f"Error reading existing {profile_path}: {e}", file=sys.stderr)
         existing = {}
     # Ensure subkeys exist with canonical fields backfilled
-    for key in ['tryhackme', 'hackthebox', 'cylab', 'microsoft', 'ctftime', 'itchio', 'generated_at']:
+    for key in ['tryhackme', 'hackthebox', 'cylab', 'microsoft', 'ctftime', 'itchio', 'codewars', 'devto', 'leetcode', 'stackoverflow', 'generated_at']:
         if key not in existing:
             existing[key] = {} if key != 'generated_at' else ''
         elif key != 'generated_at':
@@ -428,6 +554,10 @@ def main():
         ('microsoft', fetch_microsoft_learn),
         ('ctftime', fetch_ctftime),
         ('itchio', fetch_itchio),
+        ('codewars', fetch_codewars),
+        ('devto', fetch_devto),
+        ('leetcode', fetch_leetcode),
+        ('stackoverflow', fetch_stackoverflow),
     ]
     for key, fetch_func in platforms:
         print(f"Fetching {key}...")
