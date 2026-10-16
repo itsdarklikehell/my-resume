@@ -1,25 +1,25 @@
 {
   "tryhackme": {
     "rank": "Top 3%",
-    "points": "35",
+    "points": "44",
     "highest_league": "Bronze",
     "highest_streak": "3",
     "level": "Top 3%",
-    "xp": "35",
+    "xp": "44",
     "xp_last_year": "N/A",
     "weekly_streak": "3",
     "top_interests": "N/A",
     "skills": "N/A",
     "event_participation": "N/A",
     "yearly_activity": "7 events in the last year",
-    "reputation_points": "35",
+    "reputation_points": "44",
     "top_tools": "Web, Windows, MacOs, Hydra, Volatility, Dirbuster, Burp Suite, Wireshark",
     "badges": "Bronze",
     "skill_matrix": "Entry level, Foundational, Security Analyst, Penetration Tester, Security Engineer",
     "badges_count": "N/A",
     "paths_completed": "1",
-    "rooms_completed": "N/A",
-    "rooms_created": "N/A",
+    "rooms_completed": "27",
+    "rooms_created": "0",
     "team_rankings": "N/A",
     "writeups_count": "N/A",
     "events_attended": "N/A",
@@ -35,7 +35,7 @@
     "question_count": "N/A",
     "game_rating": "N/A",
     "game_jams": "N/A",
-    "rooms_saved": "N/A"
+    "rooms_saved": "0"
   },
   "hackthebox": {
     "rank": "N/A",
@@ -107,7 +107,7 @@
     "game_rating": "N/A",
     "game_jams": "N/A"
   },
-  "generated_at": "2026-10-16T13:21:27.246829Z",
+  "generated_at": "2026-10-16T15:25:50.319045Z",
   "microsoft": {
     "rank": "N/A",
     "points": 0,

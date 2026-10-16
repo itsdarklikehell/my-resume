@@ -195,15 +195,64 @@ def scrape_tryhackme(username):
                     paths_completed = path_match.group(1)
                 d['paths_completed'] = paths_completed
 
-                # --- rooms completed / created / saved ---
+                # --- rooms completed / created / saved via tab clicks ---
                 rooms_completed = 'N/A'
                 rooms_created = 'N/A'
                 rooms_saved = 'N/A'
-                rooms_match = re.search(r'(\d+)\s+Completed\s+(\d+)\s+Created\s+(\d+)\s+Saved', page_text)
-                if rooms_match:
-                    rooms_completed = rooms_match.group(1)
-                    rooms_created = rooms_match.group(2)
-                    rooms_saved = rooms_match.group(3)
+                try:
+                    completed_tab = page.query_selector('[id*="trigger-completed"]')
+                    if completed_tab:
+                        completed_tab.click()
+                        page.wait_for_timeout(2000)
+                        completed_content = page.query_selector('[id*="content-completed"]')
+                        if completed_content:
+                            ctext = completed_content.inner_text().strip()
+                            if 'No rooms' in ctext or 'Nothing' in ctext:
+                                rooms_completed = '0'
+                            else:
+                                cards = completed_content.query_selector_all(
+                                    '[class*="room-card"], [class*="roomCard"], a[href*="/room/"]'
+                                )
+                                rooms_completed = str(len(cards)) if cards else 'N/A'
+                except Exception:
+                    pass
+
+                try:
+                    created_tab = page.query_selector('[id*="trigger-created"]')
+                    if created_tab:
+                        created_tab.click()
+                        page.wait_for_timeout(2000)
+                        created_content = page.query_selector('[id*="content-created"]')
+                        if created_content:
+                            ctext = created_content.inner_text().strip()
+                            if 'No rooms' in ctext or 'Nothing' in ctext:
+                                rooms_created = '0'
+                            else:
+                                cards = created_content.query_selector_all(
+                                    '[class*="room-card"], [class*="roomCard"], a[href*="/room/"]'
+                                )
+                                rooms_created = str(len(cards)) if cards else 'N/A'
+                except Exception:
+                    pass
+
+                try:
+                    saved_tab = page.query_selector('[id*="trigger-saved"]')
+                    if saved_tab:
+                        saved_tab.click()
+                        page.wait_for_timeout(2000)
+                        saved_content = page.query_selector('[id*="content-saved"]')
+                        if saved_content:
+                            ctext = saved_content.inner_text().strip()
+                            if 'No rooms' in ctext or 'Nothing' in ctext:
+                                rooms_saved = '0'
+                            else:
+                                cards = saved_content.query_selector_all(
+                                    '[class*="room-card"], [class*="roomCard"], a[href*="/room/"]'
+                                )
+                                rooms_saved = str(len(cards)) if cards else 'N/A'
+                except Exception:
+                    pass
+
                 d['rooms_completed'] = rooms_completed
                 d['rooms_created'] = rooms_created
                 d['rooms_saved'] = rooms_saved
@@ -280,12 +329,8 @@ def scrape_tryhackme(username):
                     top_interests = ti_match.group(1).strip()
                 d['top_interests'] = top_interests
 
-                # --- skills ---
-                skills = 'N/A'
-                sk_match = re.search(r'Skills?\s*:?\s*([^\n]+)', page_text, re.IGNORECASE)
-                if sk_match:
-                    skills = sk_match.group(1).strip()
-                d['skills'] = skills
+                # --- skills --- (not publicly listed on TryHackMe profile page)
+                d['skills'] = 'N/A'
 
                 # --- event participation ---
                 event_participation = 'N/A'
@@ -770,7 +815,53 @@ def fetch_leetcode():
                     return d
     except Exception as e:
         print(f"LeetCode API error: {e}")
-    return _blank_platform()
+    # Fallback: scrape profile page (GraphQL often requires auth)
+    return scrape_leetcode(username)
+
+
+def scrape_leetcode(username):
+    """Scrape LeetCode public profile via Playwright."""
+    try:
+        from playwright.sync_api import sync_playwright
+        with sync_playwright() as p:
+            browser = p.chromium.launch(headless=True)
+            page = browser.new_page()
+            try:
+                page.goto(f'https://leetcode.com/u/{username}/', timeout=30000)
+                page.wait_for_timeout(5000)
+
+                d = _blank_platform()
+                page_text = page.evaluate('() => document.body.innerText')
+
+                # Ranking
+                rank_match = re.search(r'Ranking\s*(\d+)', page_text)
+                if rank_match:
+                    d['rank'] = rank_match.group(1)
+                    d['level'] = rank_match.group(1)
+
+                # Rating / XP
+                rating_match = re.search(r'Rating\s*(\d+)', page_text)
+                if rating_match:
+                    d['xp'] = rating_match.group(1)
+                    d['reputation_points'] = rating_match.group(1)
+
+                # Accepted questions
+                accepted_match = re.search(r'(\d+)\s+accepted?\s*questions?', page_text, re.IGNORECASE)
+                if accepted_match:
+                    d['kata_completed'] = accepted_match.group(1)
+                    d['xp_last_year'] = accepted_match.group(1)
+
+                # Contests attended
+                contests_match = re.search(r'(\d+)\s+contests?\s*attended', page_text, re.IGNORECASE)
+                if contests_match:
+                    d['event_participation'] = contests_match.group(1)
+
+                return d
+            finally:
+                browser.close()
+    except Exception as e:
+        print(f"LeetCode scrape error: {e}")
+        return _blank_platform()
 
 
 # ===========================================================================
