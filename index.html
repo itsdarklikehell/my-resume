@@ -890,6 +890,19 @@
     flex-direction: column;
     align-items: flex-start;
   }
+
+  /* Timeline: tighter spacing on mobile for expanded experience list */
+  .timeline-item {
+    padding: 0.6rem;
+    margin-bottom: 0.4rem;
+  }
+  .timeline-item .role {
+    font-size: 1rem;
+  }
+  .timeline-item .company,
+  .timeline-item .period {
+    font-size: 0.8rem;
+  }
 }
 
 /* GitHub Repos Showcase cards */
@@ -1393,51 +1406,51 @@
 </section><section class="card" id="certificates-section">
 <h2 data-i18n="certificates">Certificaten &amp; Paden</h2>
 <div class="timeline-item">
-<div class="role">Professional Scrum Master</div>
-<div class="company">Startel</div>
-<div class="period">jan. 2025 — heden</div>
+<div class="role" data-i18n="cert_psm_role">Professional Scrum Master</div>
+<div class="company" data-i18n="cert_psm_company">Startel</div>
+<div class="period" data-i18n="cert_psm_period">jan. 2025 — heden</div>
 <ul>
-<li>Professional Scrum Master cursus</li>
+<li data-i18n="cert_psm_desc">Professional Scrum Master cursus</li>
 </ul>
 </div>
 <div class="timeline-item">
-<div class="role">Basisveiligheid VCA</div>
-<div class="company">Various</div>
-<div class="period">sep. 2010 — sep. 2020</div>
+<div class="role" data-i18n="cert_vca_role">Basisveiligheid VCA</div>
+<div class="company" data-i18n="cert_vca_company">Various</div>
+<div class="period" data-i18n="cert_vca_period">sep. 2010 — sep. 2020</div>
 <ul>
-<li>Basisveiligheid VCA cursus</li>
+<li data-i18n="cert_vca_desc">Basisveiligheid VCA cursus</li>
 </ul>
 </div>
 <div class="timeline-item">
-<div class="role">Fietstechnicus (vakopleiding)</div>
-<div class="company"> — </div>
-<div class="period">jan. 2012 — feb. 2014</div>
+<div class="role" data-i18n="cert_ft_role">Fietstechnicus (vakopleiding)</div>
+<div class="company" data-i18n="cert_ft_company">—</div>
+<div class="period" data-i18n="cert_ft_period">jan. 2012 — feb. 2014</div>
 <ul>
-<li>Diploma behaald</li>
+<li data-i18n="cert_ft_desc">Diploma behaald</li>
 </ul>
 </div>
 <div class="timeline-item">
-<div class="role">Monteur Sterkstroominstallaties (MSI)</div>
-<div class="company"> — </div>
-<div class="period">aug. 2009 — dec. 2012</div>
+<div class="role" data-i18n="cert_msi_role">Monteur Sterkstroominstallaties (MSI)</div>
+<div class="company" data-i18n="cert_msi_company">—</div>
+<div class="period" data-i18n="cert_msi_period">aug. 2009 — dec. 2012</div>
 <ul>
-<li>Diploma behaald</li>
+<li data-i18n="cert_msi_desc">Diploma behaald</li>
 </ul>
 </div>
 <div class="timeline-item">
-<div class="role">Elektrotechniek (LTS/VBO)</div>
-<div class="company"> — </div>
-<div class="period">aug. 2006 — jul. 2008</div>
+<div class="role" data-i18n="cert_et_role">Elektrotechniek (LTS/VBO)</div>
+<div class="company" data-i18n="cert_et_company">—</div>
+<div class="period" data-i18n="cert_et_period">aug. 2006 — jul. 2008</div>
 <ul>
-<li>Diploma behaald</li>
+<li data-i18n="cert_et_desc">Diploma behaald</li>
 </ul>
 </div>
 <div class="timeline-item">
-<div class="role">Rijbewijs AM</div>
-<div class="company"> — </div>
-<div class="period"> — </div>
+<div class="role" data-i18n="cert_am_role">Rijbewijs AM</div>
+<div class="company" data-i18n="cert_am_company">—</div>
+<div class="period" data-i18n="cert_am_period">—</div>
 <ul>
-<li>Geldig rijbewijs</li>
+<li data-i18n="cert_am_desc">Geldig rijbewijs</li>
 </ul>
 </div>
 </section><section class="card no-print">
@@ -1459,8 +1472,8 @@
 <section class="card no-print">
 <h2 data-i18n="download">Download CV</h2>
 <div class="download-group">
-  <a class="download-btn lang-nl" href="bauke-molenaar-cv.pdf" download="" target="_blank">🇳🇱 <span data-i18n="download_pdf_nl">Download CV (NL)</span></a>
-  <a class="download-btn lang-en" href="bauke-molenaar-cv-en.pdf" download="" target="_blank">🇬🇧 <span data-i18n="download_pdf_en">Download CV (EN)</span></a>
+  <a class="download-btn lang-nl" href="javascript:void(0);" onclick="window.print();" download="" target="_blank">🇳🇱 <span data-i18n="download_pdf_nl">Download CV (NL)</span></a>
+  <a class="download-btn lang-en" href="javascript:void(0);" onclick="window.print();" download="" target="_blank">🇬🇧 <span data-i18n="download_pdf_en">Download CV (EN)</span></a>
   <a class="download-btn lang-nl" onclick="downloadJSON()" target="_blank">🇳🇱 <span data-i18n="download_json">Download JSON</span></a>
   <a class="download-btn lang-en" onclick="downloadJSON()" target="_blank" style="margin-top: 0.5rem;">🇬🇧 <span data-i18n="download_json">Download JSON</span></a>
    <a class="download-btn lang-nl" onclick="window.print()" target="_blank">🇳🇱 <span>Print CV (NL)</span></a>
@@ -1524,21 +1537,21 @@
 <h2 data-i18n="languages">Talen</h2>
 <div class="lang-item">
 <span class="lang-name" data-i18n="lang_nl">Nederlands</span>
-<span class="lang-level" data-i18n="lang_native">Goed Goed</span>
+<span class="lang-level" data-i18n="lang_native">Moedertaal</span>
 </div>
 <div class="lang-item">
 <span class="lang-name" data-i18n="lang_de">Duits</span>
-<span class="lang-level" data-i18n="lang_basic">Redelijk Redelijk</span>
+<span class="lang-level" data-i18n="lang_basic">Basis</span>
 </div>
 <div class="lang-item">
 <span class="lang-name" data-i18n="lang_en">Engels</span>
-<span class="lang-level" data-i18n="lang_professional">Goed Goed</span>
+<span class="lang-level" data-i18n="lang_professional">Professioneel</span>
 </div>
 </section>
 </aside>
 </div>
 <footer class="footer">
-<p data-i18n="footer">Last page edit 2026-10-14 10:01 © 2026 Bauke Molenaar — Made with ❤️
+<p><span id="footer-updated" style="font-size: 0.75rem; color: var(--text-muted); margin-right: 0.5rem;"></span><span data-i18n="footer">© 2026 Bauke Molenaar — Made with ❤️</span></p>
 </footer>
 </div>
 <script>
@@ -1674,7 +1687,31 @@
                 repo_updated: "Bijgewerkt",
                 repo_topics: "Tags",
                 repo_no_desc: "Geen beschrijving",
-                repos_none: "Geen repositories gevonden"
+                repos_none: "Geen repositories gevonden",
+                cert_psm_role: "Professional Scrum Master",
+                cert_psm_company: "Startel",
+                cert_psm_period: "jan. 2025 — heden",
+                cert_psm_desc: "Professional Scrum Master cursus",
+                cert_vca_role: "Basisveiligheid VCA",
+                cert_vca_company: "Various",
+                cert_vca_period: "sep. 2010 — sep. 2020",
+                cert_vca_desc: "Basisveiligheid VCA cursus",
+                cert_ft_role: "Fietstechnicus (vakopleiding)",
+                cert_ft_company: "—",
+                cert_ft_period: "jan. 2012 — feb. 2014",
+                cert_ft_desc: "Diploma behaald",
+                cert_msi_role: "Monteur Sterkstroominstallaties (MSI)",
+                cert_msi_company: "—",
+                cert_msi_period: "aug. 2009 — dec. 2012",
+                cert_msi_desc: "Diploma behaald",
+                cert_et_role: "Elektrotechniek (LTS/VBO)",
+                cert_et_company: "—",
+                cert_et_period: "aug. 2006 — jul. 2008",
+                cert_et_desc: "Diploma behaald",
+                cert_am_role: "Rijbewijs AM",
+                cert_am_company: "—",
+                cert_am_period: "—",
+                cert_am_desc: "Geldig rijbewijs"
             },
             en: {
                 tagline: "Technical professional with a passion for IT and problem-solving",
@@ -1807,7 +1844,31 @@
                 repo_updated: "Updated",
                 repo_topics: "Tags",
                 repo_no_desc: "No description",
-                repos_none: "No repositories found"
+                repos_none: "No repositories found",
+                cert_psm_role: "Professional Scrum Master",
+                cert_psm_company: "Startel",
+                cert_psm_period: "Jan 2025 — Present",
+                cert_psm_desc: "Professional Scrum Master course",
+                cert_vca_role: "Basic Safety VCA",
+                cert_vca_company: "Various",
+                cert_vca_period: "Sep 2010 — Sep 2020",
+                cert_vca_desc: "Basic Safety VCA course",
+                cert_ft_role: "Bicycle Technician (vocational training)",
+                cert_ft_company: "—",
+                cert_ft_period: "Jan 2012 — Feb 2014",
+                cert_ft_desc: "Diploma obtained",
+                cert_msi_role: "High-Voltage Installation Technician (MSI)",
+                cert_msi_company: "—",
+                cert_msi_period: "Aug 2009 — Dec 2012",
+                cert_msi_desc: "Diploma obtained",
+                cert_et_role: "Electrical Engineering (LTS/VBO)",
+                cert_et_company: "—",
+                cert_et_period: "Aug 2006 — Jul 2008",
+                cert_et_desc: "Diploma obtained",
+                cert_am_role: "AM Driver's License",
+                cert_am_company: "—",
+                cert_am_period: "—",
+                cert_am_desc: "Valid driver's license"
             }
         };
 
@@ -2816,6 +2877,17 @@
                     console.error('Render stap mislukt: ' + name, e);
                 }
             });
+            // Dynamic footer "last edited" date from profile data
+            const footerUpdated = document.getElementById('footer-updated');
+            if (footerUpdated && profileData && profileData.generated_at) {
+                const t = translations[currentLang];
+                const date = new Date(profileData.generated_at);
+                footerUpdated.textContent = (t.last_updated || 'Last updated') + ': ' +
+                    date.toLocaleDateString(currentLang === 'nl' ? 'nl-NL' : 'en-US') + ' ' +
+                    date.toLocaleTimeString(currentLang === 'nl' ? 'nl-NL' : 'en-US');
+            } else if (footerUpdated) {
+                footerUpdated.textContent = '';
+            }
             return failed;
         }
 
