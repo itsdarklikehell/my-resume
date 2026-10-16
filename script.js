@@ -1125,12 +1125,6 @@ const translations = {
                 </div>
             `).join('');
 
-            // Last updated
-            if (githubData.generated_at) {
-                const date = new Date(githubData.generated_at);
-                document.getElementById('last-updated').textContent =
-                    `${t.last_updated}: ${date.toLocaleDateString(currentLang === 'nl' ? 'nl-NL' : 'en-US')} ${date.toLocaleTimeString(currentLang === 'nl' ? 'nl-NL' : 'en-US')}`;
-            }
             setSectionTimestamp('contributions', githubData.generated_at);
         }
 
@@ -2041,8 +2035,7 @@ const translations = {
             svg += '</svg>';
             chart.innerHTML = svg + '<div class="donut-center"><div class="donut-total">' + total + '</div><div class="donut-label">' + (currentLang === 'nl' ? 'Repos' : 'Repos') + '</div></div>';
             legend.innerHTML = Object.entries(skills).map(([lang, data]) => '<div class="legend-item"><div class="legend-color" style="background: ' + (colors[lang] || '#9ca3b4') + ';"></div><span class="legend-label">' + (langNames[lang] || lang) + '</span><span class="legend-value">' + data.repos + ' repos (' + data.percentage + '%)</span></div>').join('');
-            setSectionTimestamp('donut', githubData.generated_at);
-        }
+                    }
 
         function downloadJSON() {
             const s = githubData && githubData.stats ? githubData.stats : {};
