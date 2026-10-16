@@ -415,8 +415,18 @@ def main():
         print(f"Fetching {key}...")
         fetched = fetch_func()
         if fetched is not None:
-            existing[key] = fetched
-            print(f"  Updated {key}: {fetched}")
+            # Only update if the fetched data contains real (non-N/A, non-zero) values,
+            # so a failed scrape in CI doesn't overwrite previously good live data.
+            has_data = any(
+                v != 'N/A' and v != 0
+                for v in fetched.values()
+                if isinstance(v, (str, int))
+            )
+            if has_data:
+                existing[key] = fetched
+                print(f"  Updated {key}: {fetched}")
+            else:
+                print(f"  Keeping existing {key}: {existing.get(key)} (fetched all N/A)")
         else:
             print(f"  Keeping existing {key}: {existing.get(key)}")
     # Update timestamp

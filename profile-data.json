@@ -1,9 +1,9 @@
 {
   "tryhackme": {
-    "rank": "N/A",
-    "points": "N/A",
-    "highest_league": "N/A",
-    "highest_streak": "N/A"
+    "rank": "Top 3%",
+    "points": "35",
+    "highest_league": "Bronze",
+    "highest_streak": "3"
   },
   "hackthebox": {
     "rank": "N/A",
@@ -13,7 +13,7 @@
     "rank": "N/A",
     "points": 0
   },
-  "generated_at": "2026-10-16T07:40:15.720232Z",
+  "generated_at": "2026-10-16T07:44:35.297773Z",
   "microsoft": {
     "rank": "N/A",
     "points": 0
