@@ -33,3 +33,14 @@ jobs:
           gource_output_framerate: 25
           gource_multi_sampling: true
           gource_hide: mouse,progress
+
+      - name: Copy video to repo root
+        run: cp ./gource/gource.mp4 ./gource.mp4
+
+      - name: Commit and push gource.mp4
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add gource.mp4
+          git commit -m "Update gource visualization [skip ci]" || true
+          git push || true

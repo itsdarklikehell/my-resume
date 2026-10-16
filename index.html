@@ -1197,6 +1197,11 @@
                 ach_polyglot_master_n: "Master Polyglot",
                 ach_community_n: "Community",
                 ach_influencer_n: "Influencer",
+                ach_thm_bronze_n: "Bronze Badge",
+                ach_thm_silver_n: "Zilveren Badge",
+                ach_thm_gold_n: "Gouden Badge",
+                ach_ms_badges_n: "Microsoft Learn Badges",
+                ach_ms_points_n: "Microsoft Learn Punten",
                 profiles_unavailable: "Profielstatistieken tijdelijk niet beschikbaar",
                 profile_gh_line: "{own} eigen projecten · {stars} ⭐ · {langs} talen",
                 featured_stats: "{own} eigen projecten · {stars} sterren · {forks} keer geforkt · {langs} talen",
@@ -1317,6 +1322,11 @@
                 ach_polyglot_master_n: "Master Polyglot",
                 ach_community_n: "Community",
                 ach_influencer_n: "Influencer",
+                ach_thm_bronze_n: "Bronze Badge",
+                ach_thm_silver_n: "Silver Badge",
+                ach_thm_gold_n: "Gold Badge",
+                ach_ms_badges_n: "Microsoft Learn Badges",
+                ach_ms_points_n: "Microsoft Learn Points",
                 profiles_unavailable: "Profile statistics temporarily unavailable",
                 profile_gh_line: "{own} own projects · {stars} ⭐ · {langs} languages",
                 featured_stats: "{own} own projects · {stars} stars · forked {forks} times · {langs} languages",
@@ -1879,6 +1889,31 @@
                             else { streakIcon = '📅'; streakName = 'Streak'; streakDesc = 'TryHackMe highest streak: ' + streak + ' days'; }
                             achievements.push({ icon: streakIcon, name: streakName, desc: streakDesc, unlocked: true });
                         }
+                    }
+
+                    // TryHackMe badges from live profile data
+                    if (thm.badges && thm.badges !== 'N/A') {
+                        const badges = thm.badges.toString();
+                        if (badges.includes('Gold')) {
+                            achievements.push({ icon: '🥇', name: t.ach_thm_gold_n || 'Gold Badge', desc: 'TryHackMe Gold badge', unlocked: true });
+                        }
+                        if (badges.includes('Silver')) {
+                            achievements.push({ icon: '🥈', name: t.ach_thm_silver_n || 'Silver Badge', desc: 'TryHackMe Silver badge', unlocked: true });
+                        }
+                        if (badges.includes('Bronze')) {
+                            achievements.push({ icon: '🥉', name: t.ach_thm_bronze_n || 'Bronze Badge', desc: 'TryHackMe Bronze badge', unlocked: true });
+                        }
+                    }
+                }
+
+                // Microsoft Learn badges from live profile data
+                if (profileData && profileData.microsoft) {
+                    const ms = profileData.microsoft;
+                    if (ms.badges && ms.badges !== 'N/A' && parseInt(ms.badges) > 0) {
+                        achievements.push({ icon: '🏅', name: t.ach_ms_badges_n || 'Microsoft Learn Badges', desc: 'Microsoft Learn: ' + ms.badges + ' badges', unlocked: true });
+                    }
+                    if (ms.points && ms.points !== 'N/A' && parseInt(ms.points) > 0) {
+                        achievements.push({ icon: '🎓', name: t.ach_ms_points_n || 'Microsoft Learn Points', desc: 'Microsoft Learn: ' + ms.points + ' points', unlocked: true });
                     }
                 }
 
