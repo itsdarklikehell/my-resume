@@ -441,7 +441,7 @@ def fetch_devto():
         d['xp'] = str(posts)
         d['reputation_points'] = str(followers)
         d['event_participation'] = str(posts)
-        d['skills'] = str(data.get('profile_image', 'N/A'))
+        d['skills'] = 'N/A'
         d['badges'] = str(posts)
         return d
     return _blank_platform()

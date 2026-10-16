@@ -1627,6 +1627,22 @@
                         `Games: ${data.itchio.games} · Followers: ${data.itchio.followers}` :
                         'Live data unavailable';
 
+                    const codewarsStats = data.codewars && data.codewars.level !== 'N/A' ?
+                        `Level: ${data.codewars.level} · ${data.codewars.points} pt` :
+                        'Live data unavailable';
+
+                    const devtoStats = data.devto && data.devto.xp !== 'N/A' ?
+                        `${data.devto.xp} posts · ${data.devto.reputation_points} followers` :
+                        'Live data unavailable';
+
+                    const leetcodeStats = data.leetcode && data.leetcode.level !== 'N/A' ?
+                        `Solved: ${data.leetcode.xp} · Level: ${data.leetcode.level}` :
+                        'Live data unavailable';
+
+                    const stackoverflowStats = data.stackoverflow && data.stackoverflow.reputation_points !== 'N/A' ?
+                        `Reputation: ${data.stackoverflow.reputation_points}` :
+                        'Live data unavailable';
+
                     const profiles = [
                         { name: "GitHub", icon: "🐙", url: "https://github.com/itsdarklikehell", username: "itsdarklikehell", stats: ghStats, live: true },
                         { name: "TryHackMe", icon: "🔒", url: "https://tryhackme.com/p/SgtStroopwafel", username: "SgtStroopwafel", stats: thmStats, live: data.tryhackme && data.tryhackme.rank !== "N/A" },
@@ -1635,6 +1651,10 @@
                         { name: "Microsoft Learn", icon: "🎓", url: "https://learn.microsoft.com/nl-nl/users/baukemolenaar/", username: "baukemolenaar", stats: "Microsoft Learn profile", live: data.microsoft && data.microsoft.rank !== "N/A" },
                         { name: "CTFtime", icon: "🏁", url: "https://ctftime.org/user/127159", username: "SgtStroopwafel", stats: ctftimeStats, live: data.ctftime && data.ctftime.rating !== "N/A" },
                         { name: "itch.io", icon: "🎮", url: "https://sgtstroopwafel.itch.io/", username: "sgtstroopwafel", stats: itchioStats, live: data.itchio && data.itchio.games !== "N/A" },
+                        { name: "Codewars", icon: "⚔️", url: "https://www.codewars.com/users/itsdarklikehell", username: "itsdarklikehell", stats: codewarsStats, live: data.codewars && data.codewars.level !== "N/A" },
+                        { name: "DEV.to", icon: "📝", url: "https://dev.to/itsdarklikehell", username: "itsdarklikehell", stats: devtoStats, live: data.devto && data.devto.xp !== "N/A" },
+                        { name: "LeetCode", icon: "🟢", url: "https://leetcode.com/u/SgtStroopwafel", username: "SgtStroopwafel", stats: leetcodeStats, live: data.leetcode && data.leetcode.level !== "N/A" },
+                        { name: "Stack Overflow", icon: "🧱", url: "https://stackoverflow.com/users/9409286/chuck-norris", username: "chuck-norris", stats: stackoverflowStats, live: data.stackoverflow && data.stackoverflow.reputation_points !== "N/A" },
                     ];
                     container.innerHTML = profiles.map(p => `
                         <a href="${p.url}" target="_blank" class="activity-card" style="text-decoration: none; color: inherit; ${p.live ? '' : 'opacity: 0.7;'}">
