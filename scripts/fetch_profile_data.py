@@ -153,6 +153,39 @@ def scrape_tryhackme(username):
                                 highest_streak = line
                                 break
 
+                # --- skill matrix ---
+                skill_matrix = []
+                # Try broader class match to capture all skill level elements
+                skill_elems = page.query_selector_all('[class*="skill-matrix-card-styles"]')
+                for elem in skill_elems:
+                    try:
+                        text = elem.inner_text().strip()
+                    except Exception:
+                        continue
+                    known_levels = ['Entry level', 'Foundational', 'Security Analyst', 'Penetration Tester', 'Security Engineer']
+                    if text in known_levels and text not in skill_matrix:
+                        skill_matrix.append(text)
+                d['skill_matrix'] = ', '.join(skill_matrix) if skill_matrix else 'N/A'
+
+                # --- yearly activity ---
+                yearly_activity = 'N/A'
+                page_text = page.evaluate('() => document.body.innerText')
+                m = None
+                import re as _re
+                m = _re.search(r'(\d+)\s+events?\s+in\s+the\s+last\s+year', page_text)
+                if m:
+                    yearly_activity = f"{m.group(1)} events in the last year"
+                d['yearly_activity'] = yearly_activity
+
+                # --- top tools ---
+                top_tools = []
+                page_text = page.evaluate('() => document.body.innerText')
+                known_tools = ['Web', 'Windows', 'MacOs', 'Hydra', 'Volatility', 'Dirbuster', 'Burp Suite', 'Wireshark', 'Nmap', 'Metasploit', 'John the Ripper', 'Hashcat']
+                for tool in known_tools:
+                    if tool in page_text:
+                        top_tools.append(tool)
+                d['top_tools'] = ', '.join(top_tools) if top_tools else 'N/A'
+
                 d['rank'] = rank.strip()
                 d['points'] = points.strip()
                 d['highest_league'] = highest_league.strip()
