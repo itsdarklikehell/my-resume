@@ -17,6 +17,8 @@
 - Add tests for new features
 - Update documentation for changes
 - Keep commits focused and atomic
+- Keep all README translations (EN/NL/DE/FR) in sync
+- Keep CHANGELOG.md updated with new features
 
 ## Pull Requests
 
@@ -24,7 +26,27 @@
 - Reference related issues
 - Ensure CI passes before requesting review
 
+## Internationalization (i18n)
 
-## Language‑aware download block
+- All user-facing text must use `data-i18n` keys in `index.html`.
+- When adding new translatable text, add the key to all 4 translation objects (nl, en, de, fr) in `index.html`.
+- The NL translation must have 100% coverage of all HTML `data-i18n` keys.
+- Use `toggleLang()` to cycle nl → en → de → fr.
+- URL parameter `?lang=<code>` overrides auto-detection and persistence.
+
+## Color palettes
+
+- Palettes are defined as `data-palette` CSS overrides in the `<style>` block.
+- New palettes must be added to both the CSS (`[data-palette="name"]`) and the JS `togglePalette()` order array.
+- Palette choice is persisted via `localStorage`.
+
+## Download CV section
+
+- Download/print buttons use `.lang-nl` / `.lang-en` classes for language-aware visibility.
+- Only NL and EN buttons are shown for CV print/download (matching the available CV languages).
+- JSON download button is shown for all languages.
+- Keep visibility logic in `applyLang()` consistent with the number of language classes.
+
+## Language-aware download block
 
 If you modify the Download CV section, remember to add the appropriate `.lang-nl` or `.lang-en` classes to each button and keep the visibility logic in `applyLang()`.

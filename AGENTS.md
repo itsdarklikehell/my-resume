@@ -65,6 +65,20 @@ Agents must NOT:
 4. **Notification**: Agent leaves trace of action (commit message, comment if needed)
 5. **Learning**: Agent notes outcome for future reference
 
+## Internationalization (i18n)
+
+- All user-facing text in `index.html` uses `data-i18n` keys.
+- 4 languages supported: nl, en, de, fr.
+- When adding new translatable text, update all 4 translation objects.
+- NL must have 100% coverage of all HTML `data-i18n` keys.
+
+## Palettes and Themes
+
+- Color palettes: default → nord → dracula → solarized → ocean.
+- Theme: dark/light toggle.
+- Both persist via `localStorage`.
+- Palette toggle positioned under theme toggle (CSS `top: 5rem; right: 1.5rem`).
+
 ## Emergency Procedures
 
 If an agent detects:

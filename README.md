@@ -1,90 +1,128 @@
-# My Resume — Digitale CV van Bauke Molenaar
-[![Website](https://img.shields.io/website?url=https%3A%2F%2Fitsdarklikehell.github.io%2Fmy-resume%2F)](https://itsdarklikehell.github.io/my-resume/)
+# my-resume
 
-Een moderne, tweetalige (NL/EN) digitale resume met live GitHub data, gebouwd als statische site.
+A bilingual (NL/EN) — now multilingual (NL/EN/DE/FR) — live-updating CV/resume site built as a single static HTML page. Hosted on GitHub Pages at https://itsdarklikehell.github.io/my-resume/.
 
-## 🎥 Gource Visualization
+---
 
-De ontwikkelhistorie van dit project in een film:
+## Features
 
-<video src="https://raw.githubusercontent.com/itsdarklikehell/my-resume/main/gource.mp4" controls width="100%"></video>
+### Site structure
+- **Single-page CV** — everything on one static HTML page with a clean card-based layout.
+- **Responsive design** — works on desktop and mobile; print-friendly CSS for PDF export.
+- **No build step** — pure HTML/CSS/JS, served directly from GitHub Pages.
 
-*De video wordt automatisch gegenereerd door de [Gource workflow](.github/workflows/gource.yml) bij elke push.*
+### Languages (i18n)
+- **4 languages**: Nederlands (nl), English (en), Deutsch (de), Français (fr).
+- **Language toggle** — cycles nl → en → de → fr with `localStorage` persistence.
+- **URL parameter override** — `?lang=de` forces a language and bypasses persistence.
+- **Auto-detect** — browser language used on first visit (de/fr/en fall back to nl).
+- All UI text, timeline entries, certificates, buttons, and section timestamps are translated via `data-i18n` keys (157 keys per language, 100% coverage).
+- Language‑aware download/print buttons (NL and EN only for CV print; JSON download shown for all).
 
-## 🚀 Live Site
+### Color palettes
+- **Palette cycler** — button cycles through: default → nord → dracula → solarized → ocean → default.
+- **`localStorage` persistence** — your last palette choice is remembered.
+- Applied via `data-palette` CSS overrides on the root element.
 
-**https://itsdarklikehell.github.io/my-resume/**
+### Theme
+- **Dark/Light mode toggle** with `localStorage` persistence.
+- Independent from the palette cycler; both can be combined.
 
-## ✨ Features
+### Live-updating data
+- **Platform cards** — live stats scraped daily via GitHub Actions from 10 platforms:
+  - TryHackMe (with bronze/silver/gold badges and skill matrix)
+  - CTFtime
+  - itch.io
+  - Codewars
+  - DEV.to
+  - Stack Overflow
+  - GitHub (public repos, stars, followers)
+  - HackTheBox (requires `HACKTHEBOX_API_KEY`)
+  - CyLab Academy (requires `CYLAB_API_KEY`)
+  - Microsoft Learn (requires `MICROSOFTLEARN_API_KEY`)
+- **GitHub Repos Showcase** — non-fork repos auto-categorized (AI & Agents, Security, DevOps & Tools, Gaming & TTRPG, Web & Frontend, Other), top 3 per category sorted by stars, active/inactive status.
+- **Skill matrix** — live-updating skill matrix from TryHackMe profile data.
+- **Achievements** — GitHub achievements (Centurion, Prolific, Builder, etc.) and Microsoft Learn badges.
+- **Section timestamps** — "Last updated" timestamps on every data-driven section, populated from `generated_at`.
+- **Daily refresh** — GitHub Actions workflow (`update-data.yml`) runs every day at 06:00 UTC to scrape platform data; a `has_data` guard prevents CI failures from overwriting good local data.
 
-- **Tweetalig** (NL/EN) met automatische browser-taaldetectie
-- **Live GitHub data** — projecten, skills, contributions (dagelijks geüpdatet)
-- **Live profiel data** — TryHackMe (via API or public scrape), HackTheBox, CyLab, Microsoft Learn (optioneel, vereist API keys)
-- **Donut chart** met taalverdeling
-- **Geanimeerde tijdlijn** voor werkervaring
-- **Contact formulier** (mailto)
-- **Download als JSON** voor ATS-systemen
-- **Share knoppen** voor LinkedIn, Twitter, WhatsApp
-- **Print-friendly** versie
-- **Dark/Light/Auto** thema
-- **Open Graph** meta-tags voor social media
-- **PWA** manifest + favicons
+### Sections
+1. **Hero** — name, title, short intro, contact info.
+2. **About Me** — short bio.
+3. **Experience** — 23-item work timeline with role, company, period, and description.
+4. **Education** — Friesche Poort (Tweewielerherstel Monteur) and Friesland College (Monteur Sterkstroom Installaties).
+5. **Projects** — categorized GitHub repos showcase.
+6. **GitHub Repositories** — same data as Projects, dedicated section.
+7. **Featured** — pinned repos with active/inactive status.
+8. **Achievements** — GitHub and Microsoft Learn badges.
+9. **Platform Cards** — live stats from external platforms.
+10. **Profiles** — linked profiles (GitHub, TryHackMe, CTFtime, itch.io, Codewars, DEV.to, Stack Overflow, Microsoft Learn).
+11. **Certificates & Paths** — Professional Scrum Master, VCA, Fietstechnicus, MSI, Elektrotechniek, AM rijbewijs.
+12. **Gource** — video visualization of GitHub commit history.
+13. **Download CV** — print-based PDF export (NL/EN) + JSON download.
+14. **Share** — LinkedIn, Twitter/X, WhatsApp sharing.
+15. **Contact** — email contact form.
+16. **Sidebar** — Expertise tags, Languages (NL/DE/EN with levels: Moedertaal/Basis/Professioneel).
 
-## 🆕 Recent Updates
+### Technical
+- **SEO** — Open Graph tags, Twitter cards, `robots.txt`, `sitemap.xml`, `site.webmanifest`, `browserconfig.xml`, `humans.txt`, `.well-known/security.txt`.
+- **Service Worker** — `/my-resume/sw.js` for offline caching of core assets.
+- **Structured data** — `application/ld+json` Person schema with name, email, address, languages, and skills.
+- **Custom 404 page** — `404.html`.
+- **CI** — basic HTML validation and broken-link checks on push/PR.
 
-- Updated README with website badge and last verified timestamp
+---
 
-## 🏷️ Tags
-
-- HTML5
-- CSS3
-- JavaScript
-- GitHub Actions
-- GitHub Pages
-- PWA
-- Open Graph
-- Dark Mode
-- Multilingual
-- Live Data
-- Donut Chart
-- Timeline Animation
-- Contact Form
-- JSON Export
-- Share Buttons
-- Print Friendly
-- Auto Theme
-- Last Updated
-- Gource Visualization
-
-## 🛠️ Tech Stack
-
-- HTML5 + CSS3 + JavaScript (geen frameworks)
-- GitHub Actions voor automatische data-updates
-- GitHub Pages voor hosting
-- Gource voor visualisatie
-
-## 📁 Structuur
+## Repository structure
 
 ```
-├── index.html              # Hoofdpagina
-├── github-data.json        # Live GitHub data (automatisch gegenereerd)
-├── profile-data.json       # Live profiel data (THM via API or scrape, HTB, CyLab, Microsoft Learn) – handmatig bijwerken of via API keys
-├── profile.jpg            # Profielfoto
-├── favicon-*.png          # Favicons
-├── site.webmanifest       # PWA manifest
+my-resume/
+├── README.md                 # English (main)
+├── README.nl.md              # Dutch
+├── README.de.md              # German
+├── README.fr.md              # French
+├── CHANGELOG.md              # All notable changes
+├── CONTRIBUTING.md           # Contribution guidelines
+├── DEPLOY.md                 # Deployment guide
+├── SECURITY.md               # Security policy
+├── AGENTS.md                 # AI agent interaction guidelines
+├── CODEOWNERS                # Code ownership
+├── index.html                # Main CV page (single static HTML file)
+├── 404.html                  # Custom 404 page
+├── sw.js                     # Service worker
+├── site.webmanifest          # PWA manifest
+├── robots.txt                # SEO
+├── sitemap.xml               # SEO
+├── humans.txt                # Humans.txt
+├── .well-known/security.txt  # Security contact
+├── favicon-16.png            # Favicon 16x16
+├── favicon-32.png            # Favicon 32x32
+├── apple-touch-icon.png      # Apple touch icon
+├── og-image.png              # Open Graph image
+├── gource.mp4                # Gource visualization video
+├── github-data.json          # Live GitHub data (auto-updated)
+├── profile-data.json         # Live platform data (auto-updated)
 ├── scripts/
-│   ├── fetch_github_data.py  # Script om GitHub data op te halen
-│   └── fetch_profile_data.py # Script om profiel data op te halen (vereist API keys)
-└── .github/workflows/
-    ├── update-data.yml    # Dagelijkse data-update workflow
-    └── gource.yml        # Gource visualisatie workflow
+│   ├── fetch_github_data.py  # Fetches GitHub data
+│   └── fetch_profile_data.py # Fetches platform data
+└── .github/
+    └── workflows/
+        ├── update-data.yml   # Daily data scrape (06:00 UTC)
+        ├── gource.yml        # Gource visualization
+        └── ci.yml            # CI checks
 ```
 
-## 🔄 Automatische Updates
+---
 
-De GitHub data wordt dagelijks om 06:00 UTC automatisch bijgewerkt door de `update-data.yml` workflow. De Gource video wordt bij elke push ververst.
-Als API keys voor TryHackMe, HackTheBox, CyLab of Microsoft Learn zijn ingesteld als repository secrets, wordt de profiel data ook dagelijks bijgewerkt.
+## Contact
 
-## 📝 License
+- **Phone**: +31 6 3606 5494
+- **Email**: bauke.molenaar@gmail.com
+- **Location**: Leeuwarden, Netherlands
+- **Site**: https://itsdarklikehell.github.io/my-resume/
 
-© 2026 Bauke Molenaar
+---
+
+## License
+
+This is a personal CV/resume repository. All rights reserved.
