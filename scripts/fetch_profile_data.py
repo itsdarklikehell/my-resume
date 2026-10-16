@@ -294,6 +294,54 @@ def scrape_tryhackme(username):
                     event_participation = ep_match.group(1)
                 d['event_participation'] = event_participation
 
+                # --- Playwright element-based fallback for fields regex missed ---
+                # TryHackMe renders stats as label/value pairs; query common containers
+                stat_containers = page.query_selector_all('[class*="stat"], [class*="profile-stat"], [class*="user-stat"]')
+                for container in stat_containers:
+                    try:
+                        text = container.inner_text().strip()
+                        lines = [l.strip() for l in text.split('\n') if l.strip()]
+                        if len(lines) >= 2:
+                            label = lines[0].lower()
+                            value = lines[1]
+                            if 'xp last year' in label or 'xp_last_year' in label:
+                                if value.replace(',', '').isdigit() and d['xp_last_year'] == 'N/A':
+                                    d['xp_last_year'] = value
+                            elif 'interest' in label and d['top_interests'] == 'N/A':
+                                d['top_interests'] = value
+                            elif 'skill' in label and d['skills'] == 'N/A':
+                                d['skills'] = value
+                            elif 'event' in label and 'participation' in label and d['event_participation'] == 'N/A':
+                                if value.replace(',', '').isdigit():
+                                    d['event_participation'] = value
+                    except Exception:
+                        continue
+
+                # Also scan all elements with text containing known labels
+                for label_text, field_key in [
+                    ('XP last year', 'xp_last_year'),
+                    ('Interests', 'top_interests'),
+                    ('Skills', 'skills'),
+                    ('Event participation', 'event_participation'),
+                ]:
+                    if d[field_key] != 'N/A':
+                        continue
+                    elems = page.query_selector_all(f'text=/{label_text}/i')
+                    for elem in elems:
+                        try:
+                            parent = elem.evaluate_handle('el => el.parentElement')
+                            if parent:
+                                ptext = parent.inner_text().strip()
+                                lines = [l.strip() for l in ptext.split('\n') if l.strip()]
+                                for line in lines:
+                                    if line.lower() != label_text.lower():
+                                        d[field_key] = line
+                                        break
+                        except Exception:
+                            continue
+                    if d[field_key] != 'N/A':
+                        break
+
                 d['rank'] = rank.strip()
                 d['points'] = points.strip()
                 d['highest_league'] = highest_league.strip()
@@ -751,6 +799,7 @@ def fetch_stackoverflow():
             a_count = profile.get('answer_count', 0)
             d['reputation_points'] = str(rep)
             d['badges'] = str(total_badges)
+            d['badges_count'] = str(total_badges)
             d['gold_badges'] = str(gold)
             d['silver_badges'] = str(silver)
             d['bronze_badges'] = str(bronze)

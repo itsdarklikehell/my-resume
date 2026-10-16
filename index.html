@@ -872,6 +872,24 @@
   .field-value {
     white-space: normal;
   }
+
+  /* Repos showcase: tighter cards on mobile */
+  .repo-card {
+    padding: 0.6rem;
+    margin-bottom: 0.6rem;
+  }
+  .repo-header {
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+  .repo-meta {
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+  .repo-footer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }
 
 /* GitHub Repos Showcase cards */
@@ -2537,12 +2555,33 @@
             container.innerHTML = html;
         }
 
+// Gource project activity video: hides itself if gource.mp4 isn't available.
+        function renderGource() {
+            const section = document.getElementById('gource-section');
+            const video = document.querySelector('#gource-section video');
+            if (!section || !video) return;
+
+            // Check whether gource.mp4 exists via HEAD request
+            fetch('gource.mp4', { method: 'HEAD', cache: 'no-cache' })
+                .then(r => {
+                    if (r.ok) {
+                        section.style.display = '';
+                    } else {
+                        section.style.display = 'none';
+                    }
+                })
+                .catch(() => {
+                    section.style.display = 'none';
+                });
+        }
+
         function renderAll() {
             const steps = [
                 ['featured', renderFeatured],
                 ['certificates', renderCertificates],
                 ['projects', renderProjects],
                 ['repos', renderGitHubRepos],
+                ['gource', renderGource],
                 ['skills', renderSkills],
                 ['donut', renderDonut],
                 ['stats', renderStats],
