@@ -953,6 +953,23 @@
   margin-right: 0.25rem;
 }
 
+/* Last-updated timestamps beneath live-data blocks */
+.section-updated {
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  margin-top: 0.5rem;
+  border-top: 1px solid var(--border);
+  padding-top: 0.4rem;
+  font-style: italic;
+}
+
+/* Print: hide timestamps */
+@media print {
+  .section-updated {
+    display: none !important;
+  }
+}
+
 /* Print: hide repos showcase, keep featured */
 @media print {
   #repos-showcase-section {
@@ -1158,11 +1175,13 @@
 <div id="projects-container">
 <p class="about-text">Loading projects...</p>
 </div>
+<div class="section-updated" id="projects-updated"></div>
 </section><section class="card" id="repos-showcase-section">
 <h2 data-i18n="repos_showcase">GitHub Repositories</h2>
 <div id="repos-showcase-container">
 <p class="about-text">Loading repositories...</p>
 </div>
+<div class="section-updated" id="repos-updated"></div>
 </section><section class="card no-print">
 <h2 data-i18n="activity">Live Activity</h2>
 <div class="stats-grid" id="stats-container">
@@ -1188,22 +1207,26 @@
 <h2 data-i18n="featured">Uitgelicht werk</h2>
 <p class="about-text" id="featured-stats" style="font-size: 0.8rem; margin-bottom: 0.75rem;"></p>
 <div id="featured-container"></div>
+<div class="section-updated" id="featured-updated"></div>
 </section><section class="card no-print">
 <h2>🏆 Achievements</h2>
 <div id="achievements-container">
 <p class="about-text">Loading achievements...</p>
 </div>
+<div class="section-updated" id="achievements-updated"></div>
 </section><section class="card">
 <h2>📊 Platform Cards</h2>
 <p class="about-text">Live-updating stats from external platforms (auto-refreshes daily via GitHub Actions).</p>
 <div id="platform-cards-container">
 <p class="about-text">Loading platform data...</p>
 </div>
+<div class="section-updated" id="platform-cards-updated"></div>
 </section><section class="card no-print">
 <h2 data-i18n="profiles">Profielen</h2>
 <div class="activity-grid" id="profiles-container">
 <p class="about-text">Loading profiles...</p>
 </div>
+<div class="section-updated" id="profiles-updated"></div>
 </section><section class="card" id="certificates-section" style="display: none;">
 <h2 data-i18n="certificates">Certificaten &amp; Paden</h2>
 <div class="timeline-item">
@@ -1259,6 +1282,7 @@
 <div id="contribution-heatmap">
 <p class="about-text">Loading heatmap...</p>
 </div>
+<div class="section-updated" id="heatmap-updated"></div>
 </section><section class="card" id="gource-section">
 <h2 data-i18n="activity_video">Projectactiviteit</h2>
 <p class="about-text" data-i18n="activity_video_note" style="font-size: 0.8rem; margin-bottom: 0.75rem;">
@@ -1323,13 +1347,16 @@
 <div id="skills-container">
 <p class="about-text">Loading skills...</p>
 </div>
-</section>
-<section class="card">
+</div>
+<div class="section-updated" id="donut-updated"></div>
+<div class="section-updated" id="skills-updated"></div>
+</section><section class="card">
 <h2 data-i18n="skill_matrix_title">Skill Matrix</h2>
 <p class="about-text" data-i18n="skill_matrix_sub">Live-updating skill matrix from TryHackMe profile data.</p>
 <div id="skill-matrix-container">
 <p class="about-text">Loading skill matrix...</p>
 </div>
+<div class="section-updated" id="skill-matrix-updated"></div>
 </section><section class="card">
 <h2 data-i18n="languages">Talen</h2>
 <div class="lang-item">
@@ -1751,6 +1778,7 @@
             }
 
             container.innerHTML = html || '<p class="about-text">No projects found</p>';
+            setSectionTimestamp('projects', githubData.generated_at);
         }
 
         function renderSkills() {
@@ -1778,6 +1806,7 @@
                     <div class="bar"><div class="bar-fill" style="width: ${data.percentage}%; background: ${getLangColor(lang)};"></div></div>
                 </div>
             `).join('');
+            setSectionTimestamp('skills', githubData.generated_at);
         }
 
         function renderStats() {
@@ -1802,6 +1831,7 @@
                     note.textContent = '';
                 }
             }
+            setSectionTimestamp('stats', githubData.generated_at);
         }
 
         function renderContributions() {
@@ -1840,9 +1870,10 @@
             // Last updated
             if (githubData.generated_at) {
                 const date = new Date(githubData.generated_at);
-                document.getElementById('last-updated').textContent = 
+                document.getElementById('last-updated').textContent =
                     `${t.last_updated}: ${date.toLocaleDateString(currentLang === 'nl' ? 'nl-NL' : 'en-US')} ${date.toLocaleTimeString(currentLang === 'nl' ? 'nl-NL' : 'en-US')}`;
             }
+            setSectionTimestamp('contributions', githubData.generated_at);
         }
 
         function renderProfiles() {
@@ -1941,6 +1972,7 @@
                 .catch(() => {
                     container.innerHTML = '<p class="about-text">Unable to load profile data</p>';
                 });
+            setSectionTimestamp('profiles', data.generated_at);
         }
 
         function renderContributionHeatmap() {
@@ -2006,6 +2038,7 @@
             html += `</div>`;
             
             container.innerHTML = html;
+            setSectionTimestamp('heatmap', githubData.generated_at);
         }
 
         function renderAchievements() {
@@ -2147,6 +2180,7 @@
             html += '</div>';
             
             container.innerHTML = html || '<p class="about-text">No achievements yet</p>';
+            setSectionTimestamp('achievements', profileData.generated_at);
         }
 
 
@@ -2281,7 +2315,10 @@
 
             html += '</div>';
             container.innerHTML = html;
+            setSectionTimestamp('platform-cards', profileData.generated_at);
         }
+
+
 
 
 
@@ -2332,6 +2369,7 @@
                 (t.skill_matrix_source || 'Source: TryHackMe live profile data') + '</p>';
 
             container.innerHTML = html;
+            setSectionTimestamp('skill-matrix', profileData.generated_at);
         }
 // Normaliseer beide JSON-vormen (flat en nested) naar één canonieke structuur.
         // Garandeert altijd: stats.repos (array), stats.skills (object),
@@ -2494,7 +2532,7 @@
                     .replace('{own}', nOwn).replace('{stars}', nStars)
                     .replace('{forks}', nForks).replace('{langs}', nLangs);
             }
-
+            setSectionTimestamp('featured', githubData.generated_at);
             section.style.display = '';
         }
 
@@ -2553,6 +2591,7 @@
             }).join('');
 
             container.innerHTML = html;
+            setSectionTimestamp('repos', githubData.generated_at);
         }
 
 // Gource project activity video: hides itself if gource.mp4 isn't available.
@@ -2573,6 +2612,21 @@
                 .catch(() => {
                     section.style.display = 'none';
                 });
+        }
+
+        // Helper: set "last updated" timestamp beneath a live-data block.
+        function setSectionTimestamp(containerId, timestamp) {
+            const el = document.getElementById(containerId + '-updated');
+            if (!el) return;
+            if (timestamp) {
+                const date = new Date(timestamp);
+                const t = translations[currentLang];
+                el.textContent = (t.last_updated || 'Last updated') + ': ' +
+                    date.toLocaleDateString(currentLang === 'nl' ? 'nl-NL' : 'en-US') + ' ' +
+                    date.toLocaleTimeString(currentLang === 'nl' ? 'nl-NL' : 'en-US');
+            } else {
+                el.textContent = '';
+            }
         }
 
         function renderAll() {
@@ -2701,6 +2755,7 @@
             svg += '</svg>';
             chart.innerHTML = svg + '<div class="donut-center"><div class="donut-total">' + total + '</div><div class="donut-label">' + (currentLang === 'nl' ? 'Repos' : 'Repos') + '</div></div>';
             legend.innerHTML = Object.entries(skills).map(([lang, data]) => '<div class="legend-item"><div class="legend-color" style="background: ' + (colors[lang] || '#9ca3b4') + ';"></div><span class="legend-label">' + (langNames[lang] || lang) + '</span><span class="legend-value">' + data.repos + ' repos (' + data.percentage + '%)</span></div>').join('');
+            setSectionTimestamp('donut', githubData.generated_at);
         }
 
         function downloadJSON() {
