@@ -1,18 +1,18 @@
 const CACHE_NAME = 'resume-cache-v1';
 const urlsToCache = [
-  '/',
-  '/index.html',
-  '/profile.jpg',
-  '/og-image.png',
-  '/favicon-32.png',
-  '/favicon-16.png',
-  '/apple-touch-icon.png',
-  '/site.webmanifest',
-  '/bauke-molenaar-cv.pdf',
-  '/bauke-molenaar-cv-en.pdf',
-  '/gource.mp4',
-  '/github-data.json',
-  '/profile-data.json',
+  '/my-resume/',
+  '/my-resume/index.html',
+  '/my-resume/profile.jpg',
+  '/my-resume/og-image.png',
+  '/my-resume/favicon-32.png',
+  '/my-resume/favicon-16.png',
+  '/my-resume/apple-touch-icon.png',
+  '/my-resume/site.webmanifest',
+  '/my-resume/bauke-molenaar-cv.pdf',
+  '/my-resume/bauke-molenaar-cv-en.pdf',
+  '/my-resume/gource.mp4',
+  '/my-resume/github-data.json',
+  '/my-resume/profile-data.json',
 ];
 
 self.addEventListener('install', event => {
