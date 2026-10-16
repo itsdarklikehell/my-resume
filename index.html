@@ -1974,7 +1974,7 @@
                 .catch(() => {
                     container.innerHTML = '<p class="about-text">Unable to load profile data</p>';
                 });
-            setSectionTimestamp('profiles', data.generated_at);
+            setSectionTimestamp('profiles', profileData ? profileData.generated_at : null);
         }
 
         function renderContributionHeatmap() {
@@ -2182,7 +2182,7 @@
             html += '</div>';
             
             container.innerHTML = html || '<p class="about-text">No achievements yet</p>';
-            setSectionTimestamp('achievements', profileData.generated_at);
+            setSectionTimestamp('achievements', profileData ? profileData.generated_at : null);
         }
 
 
