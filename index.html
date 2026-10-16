@@ -46,6 +46,52 @@
             --text-muted: #5a6070;
         }
 
+        /* Color palette overrides */
+        [data-palette="nord"] {
+            --bg: #2e3440;
+            --surface: #3b4252;
+            --surface2: #434c5e;
+            --border: #4c566a;
+            --text: #eceff4;
+            --text-muted: #d8dee9;
+            --accent: #88c0d0;
+            --accent2: #8fbcbb;
+            --accent3: #bf616a;
+        }
+        [data-palette="dracula"] {
+            --bg: #282a36;
+            --surface: #44475a;
+            --surface2: #6272a4;
+            --border: #6272a4;
+            --text: #f8f8f2;
+            --text-muted: #bd93f9;
+            --accent: #bd93f9;
+            --accent2: #50fa7b;
+            --accent3: #ff79c6;
+        }
+        [data-palette="solarized"] {
+            --bg: #002b36;
+            --surface: #073642;
+            --surface2: #00384e;
+            --border: #586e75;
+            --text: #eee8d5;
+            --text-muted: #93a1a1;
+            --accent: #268bd2;
+            --accent2: #2aa198;
+            --accent3: #d33682;
+        }
+        [data-palette="ocean"] {
+            --bg: #0f172a;
+            --surface: #1e293b;
+            --surface2: #334155;
+            --border: #475569;
+            --text: #f1f5f9;
+            --text-muted: #94a3b8;
+            --accent: #38bdf8;
+            --accent2: #818cf8;
+            --accent3: #f472b6;
+        }
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
@@ -82,6 +128,28 @@
         }
 
         .theme-toggle:hover {
+            background: var(--surface2);
+            transform: scale(1.05);
+        }
+
+        .palette-toggle {
+            position: fixed;
+            top: 1.5rem;
+            right: 7.5rem;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.2rem;
+            z-index: 100;
+            transition: all 0.2s;
+        }
+        .palette-toggle:hover {
             background: var(--surface2);
             transform: scale(1.05);
         }
@@ -1119,6 +1187,7 @@
   <a href="#main-col" class="skip-link">Skip to content</a>
 <button class="theme-toggle" onclick="toggleTheme()" title="Toggle thema" aria-label="Toggle theme">🌙</button>
 <button class="lang-toggle" onclick="toggleLang()" title="Toggle language" aria-label="Toggle language">🌐 <span id="lang-label">NL</span></button>
+<button class="palette-toggle" onclick="togglePalette()" title="Toggle kleurenpalet" aria-label="Toggle color palette">🎨</button>
 <div class="container">
 <header class="header">
 <img alt="Bauke Molenaar" class="header-avatar" src="profile.jpg"/>
@@ -2488,6 +2557,20 @@
             document.querySelector('.theme-toggle').textContent = next === 'light' ? '☀️' : '🌙';
         }
 
+        function togglePalette() {
+            const html = document.documentElement;
+            const order = ['', 'nord', 'dracula', 'solarized', 'ocean'];
+            const current = html.getAttribute('data-palette') || '';
+            const idx = order.indexOf(current);
+            const next = order[(idx + 1) % order.length];
+            if (next) {
+                html.setAttribute('data-palette', next);
+            } else {
+                html.removeAttribute('data-palette');
+            }
+            localStorage.setItem('palette', next);
+        }
+
         function getLangColor(lang) {
             const colors = {
                 'Shell': '#4ecdc4',
@@ -3535,6 +3618,11 @@
         const savedTheme = localStorage.getItem('theme') || 'dark';
         document.documentElement.setAttribute('data-theme', savedTheme);
         document.querySelector('.theme-toggle').textContent = savedTheme === 'light' ? '☀️' : '🌙';
+
+        const savedPalette = localStorage.getItem('palette');
+        if (savedPalette) {
+            document.documentElement.setAttribute('data-palette', savedPalette);
+        }
 
         // Donut chart
         function renderDonut() {
