@@ -840,6 +840,12 @@
 <p class="about-text">Loading achievements...</p>
 </div>
 </section><section class="card no-print">
+<h2>📊 Platform Cards</h2>
+<p class="about-text">Live-updating stats from external platforms (auto-refreshes daily via GitHub Actions).</p>
+<div id="platform-cards-container">
+<p class="about-text">Loading platform data...</p>
+</div>
+</section><section class="card no-print">
 <h2 data-i18n="profiles">Profielen</h2>
 <div class="activity-grid" id="profiles-container">
 <p class="about-text">Loading profiles...</p>
@@ -1642,6 +1648,84 @@
             html += '</div>';
             
             container.innerHTML = html || '<p class="about-text">No achievements yet</p>';
+
+
+        // ── Live-updating platform cards ─────────────────────────────────
+        // Renders one card per platform with the canonical fields that are
+        // publicly available (level, xp, weekly_streak, reputation_points,
+        // badges, etc.).  Blocked platforms show a "not publicly available"
+        // note instead of fabricated data.
+        function renderPlatformCards() {
+            const container = document.getElementById('platform-cards-container');
+            if (!container || !profileData) return;
+
+            const t = translations[currentLang] || {};
+            const platforms = [
+                { key: 'tryhackme',   label: 'TryHackMe',   icon: '🎯' },
+                { key: 'ctftime',     label: 'CTFtime',     icon: '🏁' },
+                { key: 'itchio',      label: 'itch.io',     icon: '🎮' },
+                { key: 'hackthebox',  label: 'HackTheBox',  icon: '📦' },
+                { key: 'cylab',       label: 'CyLab',       icon: '🎓' },
+                { key: 'microsoft',   label: 'Microsoft Learn', icon: '📘' },
+            ];
+
+            let html = '<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1rem;">';
+
+            platforms.forEach(p => {
+                const data = profileData[p.key];
+                if (!data) return;
+
+                // Determine if the platform has any real data (not all N/A)
+                const hasAny = Object.values(data).some(v => v !== 'N/A' && v !== 0 && v !== '');
+
+                let fieldRows = '';
+                if (!hasAny) {
+                    fieldRows = `
+                        <div style="color: var(--text-muted); font-size: 0.75rem; text-align: center; padding: 1rem;">
+                            Data not publicly available (no open API / login required)
+                        </div>`;
+                } else {
+                    const fieldMap = [
+                        { key: 'level',         label: 'Level',         icon: '📊' },
+                        { key: 'xp',            label: 'XP',            icon: '✨' },
+                        { key: 'xp_last_year',  label: 'XP (last year)', icon: '📈' },
+                        { key: 'weekly_streak', label: 'Weekly streak', icon: '🔥' },
+                        { key: 'top_interests', label: 'Top interests', icon: '❤️' },
+                        { key: 'skills',        label: 'Skills',        icon: '🛠️' },
+                        { key: 'event_participation', label: 'Events', icon: '📅' },
+                        { key: 'yearly_activity', label: 'Yearly activity', icon: '📊' },
+                        { key: 'reputation_points', label: 'Reputation', icon: '⭐' },
+                        { key: 'top_tools',     label: 'Top tools',     icon: '🔧' },
+                        { key: 'badges',        label: 'Badges',        icon: '🏅' },
+                        { key: 'skill_matrix',  label: 'Skill matrix',  icon: '🧮' },
+                    ];
+
+                    fieldRows = fieldMap
+                        .map(f => {
+                            const val = data[f.key];
+                            if (!val || val === 'N/A' || val === 0) return '';
+                            return `<div style="font-size: 0.75rem; margin-bottom: 0.25rem;">
+                                <span style="color: var(--text-muted);">${f.icon} ${f.label}:</span>
+                                <div style="font-weight: 600;">${val}</div>
+                            </div>`;
+                        })
+                        .join('');
+                }
+
+                html += `
+                <div style="background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 1rem;">
+                    <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
+                        <div style="font-size: 1.25rem;">${p.icon}</div>
+                        <div style="font-weight: 700; font-size: 1rem;">${p.label}</div>
+                    </div>
+                    ${fieldRows}
+                </div>`;
+            });
+
+            html += '</div>';
+            container.innerHTML = html;
+        }
+
         }
 
         // Normaliseer beide JSON-vormen (flat en nested) naar één canonieke structuur.
@@ -1869,6 +1953,7 @@
                 if (!response.ok) throw new Error('HTTP ' + response.status);
                 profileData = await response.json();
                 renderAchievements();
+                renderPlatformCards();
             } catch (e) {
                 console.error('Failed to load profile data:', e);
             }

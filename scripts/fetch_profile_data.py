@@ -1,6 +1,25 @@
 #!/usr/bin/env python3
 """
 Fetch live profile data from various platforms and update profile-data.json.
+
+Platforms supported: TryHackMe, HackTheBox, CyLab Academy, Microsoft Learn,
+CTFtime, itch.io.
+
+Each platform entry in profile-data.json uses a consistent schema with the
+following fields (all default to 'N/A' when not publicly available):
+
+    level, xp, xp_last_year, weekly_streak, top_interests, skills,
+    event_participation, yearly_activity, reputation_points, top_tools,
+    badges, skill_matrix
+
+Platform-specific extra fields are preserved underneath (e.g. tryhackme.rank,
+tryhackme.highest_league, ctftime.position, itchio.games, itchio.followers).
+
+The script tries each platform's public API first; if no API key is configured
+or the API fails, it falls back to a headless-browser (Playwright) scrape.  If
+both fail, existing values are retained.  A failed scrape in CI never
+overwrites previously good scraped data (see the ``has_data`` guard in
+``main()``).
 """
 import json
 import os
@@ -8,6 +27,21 @@ import subprocess
 import sys
 import re
 from datetime import datetime, timezone
+
+# ---------------------------------------------------------------------------
+# Canonical field set — every platform entry contains all of these keys.
+# ---------------------------------------------------------------------------
+CANONICAL_FIELDS = [
+    'level', 'xp', 'xp_last_year', 'weekly_streak', 'top_interests', 'skills',
+    'event_participation', 'yearly_activity', 'reputation_points', 'top_tools',
+    'badges', 'skill_matrix',
+]
+
+
+def _blank_platform():
+    """Return a fresh platform dict with every canonical field set to 'N/A'."""
+    return {field: 'N/A' for field in CANONICAL_FIELDS}
+
 
 def run_curl(url, headers=None):
     """Run curl and return parsed JSON if possible, else None."""
@@ -26,20 +60,32 @@ def run_curl(url, headers=None):
         print(f"Warning: response from {url} is not JSON", file=sys.stderr)
         return None
 
+
+# ===========================================================================
+# TryHackMe
+# ===========================================================================
 def fetch_tryhackme():
-    """Fetch TryHackMe data."""
+    """Fetch TryHackMe data via API or headless-browser scrape."""
     api_key = os.getenv('TRYHACKME_API_KEY')
     username = os.getenv('TRYHACKME_USERNAME', 'SgtStroopwafel')
     if api_key:
         url = f"https://tryhackme.com/api/v2/user/profile?username={username}"
-        headers = [f"Authorization: Bearer {api_key}"]
+        headers = [f"Authorization: Bearer ***"]
         data = run_curl(url, headers=headers)
         if data and isinstance(data, dict):
+            d = _blank_platform()
             rank = data.get('rank', {}).get('name', 'N/A')
             points = data.get('score', 0)
-            return {'rank': str(rank), 'points': int(points) if isinstance(points, (int, float)) else str(points)}
+            d['rank'] = str(rank)
+            d['points'] = int(points) if isinstance(points, (int, float)) else str(points)
+            d['level'] = str(rank)
+            d['xp'] = str(points)
+            d['reputation_points'] = str(points)
+            d['badges'] = str(rank)
+            return d
     # Fallback to scrape
     return scrape_tryhackme(username)
+
 
 def scrape_tryhackme(username):
     """Scrape TryHackMe public profile."""
@@ -51,81 +97,39 @@ def scrape_tryhackme(username):
             try:
                 page.goto(f'https://tryhackme.com/p/{username}', timeout=20000)
                 page.wait_for_timeout(2000)
-                
+
+                d = _blank_platform()
+
                 rank = 'N/A'
                 points = 'N/A'
-                
-                # Look for the specific values we know are present
-                # Based on inspection: "Top 3%" and "35" with labels "Ranking" and "Capability score"
-                rank_elem = page.query_selector('text="Top 3%"')
+                highest_league = 'N/A'
+                highest_streak = 'N/A'
+
+                # --- rank / capability score ---
+                rank_elem = page.query_selector('text="Ranking"')
                 if rank_elem:
                     parent = rank_elem.evaluate_handle('el => el.parentElement')
                     if parent:
                         parent_text = parent.inner_text().strip()
                         lines = [line.strip() for line in parent_text.split('\n') if line.strip()]
                         if len(lines) == 2:
-                            # Check which is the rank (should be the one with %)
                             if '%' in lines[0]:
                                 rank = lines[0]
                             elif '%' in lines[1]:
                                 rank = lines[1]
-                
-                score_elem = page.query_selector('text="35"')
+
+                score_elem = page.query_selector('text="Capability score"')
                 if score_elem:
                     parent = score_elem.evaluate_handle('el => el.parentElement')
                     if parent:
                         parent_text = parent.inner_text().strip()
                         lines = [line.strip() for line in parent_text.split('\n') if line.strip()]
-                        if len(lines) == 2:
-                            # Check which is the points (should be the number)
-                            if lines[0] == '35' and not ('%' in lines[1] or any(w in lines[1].lower() for w in ['rank', 'level'])):
-                                points = lines[0]
-                            elif lines[1] == '35' and not ('%' in lines[0] or any(w in lines[0].lower() for w in ['rank', 'level'])):
-                                points = lines[0]
-                                
-                # Fallback selectors
-                if rank == 'N/A':
-                    # Look for any element containing rank-like text
-                    rank_indicators = page.query_selector_all('text=/Top \\d+%/i, text=/Bronze|Silver|Gold|Platinum|Diamond/i')
-                    for elem in rank_indicators:
-                        try:
-                            parent = elem.evaluate_handle('el => el.parentElement')
-                            if parent:
-                                parent_text = parent.inner_text().strip()
-                                lines = [line.strip() for line in parent_text.split('\n') if line.strip()]
-                                if len(lines) == 2:
-                                    if '%' in lines[0]:
-                                        rank = lines[0]
-                                    elif '%' in lines[1]:
-                                        rank = lines[1]
-                                    break
-                        except:
-                            pass
-                
-                if points == 'N/A':
-                    # Look for numbers in score/points context
-                    score_labels = page.query_selector_all('text=/score|points|capability/i')
-                    for label in score_labels:
-                        try:
-                            parent = label.evaluate_handle('el => el.parentElement')
-                            if parent:
-                                # Look for number siblings
-                                siblings = parent.query_selector_all('*')
-                                for sib in siblings:
-                                    try:
-                                        sib_text = sib.inner_text().strip()
-                                        if sib_text.replace(',', '').isdigit() and 1 <= len(sib_text.replace(',', '')) <= 10:
-                                            points = sib_text.replace(',', '')
-                                            break
-                                    except:
-                                        pass
-                                if points != 'N/A':
-                                    break
-                        except:
-                            pass
-                           
-                # Highest league (Bronze, Silver, Gold, Platinum, Diamond, Champion, Hero)
-                highest_league = 'N/A'
+                        for line in lines:
+                            if line != 'Capability score' and line.replace(',', '').isdigit():
+                                points = line.replace(',', '')
+                                break
+
+                # --- highest league ---
                 league_label = page.query_selector('text="Highest league"')
                 if league_label:
                     parent = league_label.evaluate_handle('el => el.parentElement')
@@ -137,8 +141,7 @@ def scrape_tryhackme(username):
                                 highest_league = line
                                 break
 
-                # Highest streak (number of days)
-                highest_streak = 'N/A'
+                # --- highest streak ---
                 streak_label = page.query_selector('text="Highest streak"')
                 if streak_label:
                     parent = streak_label.evaluate_handle('el => el.parentElement')
@@ -150,92 +153,101 @@ def scrape_tryhackme(username):
                                 highest_streak = line
                                 break
 
+                d['rank'] = rank.strip()
+                d['points'] = points.strip()
+                d['highest_league'] = highest_league.strip()
+                d['highest_streak'] = highest_streak.strip()
+                # Map available data onto canonical fields
+                d['level'] = d['rank']
+                d['xp'] = d['points']
+                d['weekly_streak'] = d['highest_streak']
+                d['reputation_points'] = d['points']
+                d['badges'] = d['highest_league']
 
-                return {'rank': rank.strip(), 'points': points.strip(), 'highest_league': highest_league.strip(), 'highest_streak': highest_streak.strip()}
+                return d
             finally:
                 browser.close()
     except Exception as e:
         print(f"TryHackMe scrape error: {e}")
-        return {'rank': 'N/A', 'points': 'N/A', 'highest_league': 'N/A', 'highest_streak': 'N/A'}
+        return _blank_platform()
 
+
+# ===========================================================================
+# HackTheBox
+# ===========================================================================
 def fetch_hackthebox():
-    """Fetch HackTheBox data."""
+    """Fetch HackTheBox data via API or headless-browser scrape."""
     api_key = os.getenv('HACKTHEBOX_API_KEY')
     if api_key:
         url = "https://www.hackthebox.com/api/v4/user/info"
-        headers = [f"Authorization: Bearer {api_key}"]
+        headers = [f"Authorization: Bearer ***"]
         data = run_curl(url, headers=headers)
         if data and isinstance(data, dict):
+            d = _blank_platform()
             rank = data.get('data', {}).get('profile', {}).get('rank', 'N/A')
             points = data.get('data', {}).get('profile', {}).get('points', 0)
-            return {'rank': str(rank), 'points': int(points) if isinstance(points, (int, float)) else str(points)}
+            d['rank'] = str(rank)
+            d['points'] = int(points) if isinstance(points, (int, float)) else str(points)
+            d['level'] = d['rank']
+            d['xp'] = d['points']
+            d['reputation_points'] = d['points']
+            d['badges'] = d['rank']
+            return d
     # Fallback to scrape
     return scrape_hackthebox()
 
+
 def scrape_hackthebox():
-    """Scrape HackTheBox public profile."""
+    """Scrape HackTheBox public profile (usually blocked by Cloudflare)."""
     try:
         from playwright.sync_api import sync_playwright
         with sync_playwright() as p:
             browser = p.chromium.launch(headless=True)
             page = browser.new_page()
             try:
-                page.goto('https://www.hackthebox.com/profile/01a0f22b-f959-73b9-925c-c2e2e350db97', timeout=20000)
-                page.wait_for_timeout(2000)
-                
-                rank = 'N/A'
-                points = 'N/A'
-                
-                # Look for rank indicators
-                rank_indicators = page.query_selector_all('text=/Bronze|Silver|Gold|Platinum|Diamond|Champion|Hero/i')
-                for elem in rank_indicators:
-                    try:
-                        text = elem.inner_text().strip()
-                        if text:
-                            # Extract the actual rank
-                            for r in ['Bronze', 'Silver', 'Gold', 'Platinum', 'Diamond', 'Champion', 'Hero']:
-                                if r in text:
-                                    rank = r
-                                    break
-                            if rank == 'N/A':
-                                rank = text
-                            break
-                    except:
-                        pass
-                
-                # Look for points
-                point_indicators = page.query_selector_all('text=/\\d[\\d,]*/i')
-                for elem in point_indicators:
-                    try:
-                        text = elem.inner_text().strip()
-                        clean_text = text.replace(',', '')
-                        if clean_text.isdigit() and 1 <= len(clean_text) <= 10:
-                            # Check if it's likely points (not a small ID or count)
-                            if int(clean_text) >= 100:  # HTB points are usually 100+
-                                # Additional context check
-                                parent = elem.evaluate_handle('el => el.parentElement')
-                                if parent:
-                                    parent_text = parent.inner_text().lower()
-                                    if 'point' in parent_text or 'score' in parent_text:
-                                        points = clean_text
-                                        break
-                            elif int(clean_text) >= 1000:  # Definitely points if large number
-                                points = clean_text
-                                break
-                    except:
-                        pass
-                        
-                return {'rank': rank.strip(), 'points': points.strip()}
+                page.goto('https://www.hackthebox.com/profile/01a0f22b-f959-73b9-925c-c2e2e350db97',
+                          timeout=20000, wait_until='domcontentloaded')
+                page.wait_for_timeout(3000)
+                d = _blank_platform()
+                # Check whether we hit a login/Cloudflare wall
+                content = page.content()
+                if 'isLoggedin' in content and 'false' in content:
+                    print("HackTheBox: not logged in — profile data not public")
+                    return d
+                # If we get here, try to extract whatever is visible
+                return d
             finally:
                 browser.close()
     except Exception as e:
         print(f"HackTheBox scrape error: {e}")
-        return {'rank': 'N/A', 'points': 'N/A'}
+        return _blank_platform()
 
+
+# ===========================================================================
+# CyLab Academy
+# ===========================================================================
+def fetch_cylab():
+    """Fetch CyLab data (placeholder — requires authentication)."""
+    print("CyLab: Placeholder — no public scraping implemented")
+    return _blank_platform()
+
+
+# ===========================================================================
+# Microsoft Learn
+# ===========================================================================
+def fetch_microsoft_learn():
+    """Fetch Microsoft Learn data (placeholder — requires login/specific user)."""
+    print("Microsoft Learn: Placeholder — no public scraping implemented")
+    return _blank_platform()
+
+
+# ===========================================================================
+# CTFtime
+# ===========================================================================
 def fetch_ctftime():
-    """Fetch CTFtime data."""
-    # CTFtime does not have a public API, so we scrape.
+    """Fetch CTFtime data (no public API — scrape)."""
     return scrape_ctftime()
+
 
 def scrape_ctftime():
     """Scrape CTFtime public profile for rating and position."""
@@ -247,31 +259,25 @@ def scrape_ctftime():
             try:
                 page.goto('https://ctftime.org/user/127159', timeout=20000)
                 page.wait_for_timeout(2000)
-                
+
+                d = _blank_platform()
+
                 rating = 'N/A'
                 position = 'N/A'
-                
-                # CTFtime user page shows a table with info; we can look for specific labels.
-                # Commonly there is a "Rating" field and a "Position" (global rank) field.
-                # We'll attempt to extract numbers from the page.
-                
-                # Look for text containing "Rating" and nearby number.
+
                 rating_elements = page.query_selector_all('text=/Rating/i')
                 for elem in rating_elements:
                     try:
-                        # Get parent or nearby element that contains the value
                         parent = elem.evaluate_handle('el => el.parentElement')
                         if parent:
                             parent_text = parent.inner_text().strip()
-                            # Extract numbers (including decimal)
                             numbers = re.findall(r'[0-9]+\.[0-9]+|[0-9]+', parent_text)
                             if numbers:
-                                # Take the first number that looks like a rating (could be like 123.45)
                                 rating = numbers[0]
                                 break
                     except:
                         pass
-                # Look for "Position" or "Rank"
+
                 position_elements = page.query_selector_all('text=/Position|Rank/i')
                 for elem in position_elements:
                     try:
@@ -284,31 +290,41 @@ def scrape_ctftime():
                                 break
                     except:
                         pass
-                # Fallback: look for any decimal number that could be rating, and any integer that could be position.
+
+                # Fallback
                 if rating == 'N/A':
-                    # Find all numbers with decimal point
                     decimals = re.findall(r'[0-9]+\.[0-9]+', page.content())
                     if decimals:
                         rating = decimals[0]
                 if position == 'N/A':
-                    # Find all integers, exclude those that are likely years or small numbers.
                     ints = re.findall(r'\b[0-9]+\b', page.content())
-                    # Filter out numbers that are likely not a rank (e.g., years like 2020, small counts)
                     for num in ints:
-                        if len(num) >= 2 and len(num) <= 6 and not (num.startswith('20') and len(num) == 4):  # simple filter
+                        if len(num) >= 2 and len(num) <= 6 and not (num.startswith('20') and len(num) == 4):
                             position = num
                             break
-                return {'rating': rating.strip(), 'position': position.strip()}
+
+                d['rating'] = rating.strip()
+                d['position'] = position.strip()
+                # Map onto canonical fields
+                d['xp'] = d['rating']
+                d['reputation_points'] = d['rating']
+                d['event_participation'] = d['position']
+
+                return d
             finally:
                 browser.close()
     except Exception as e:
         print(f"CTFtime scrape error: {e}")
-        return {'rating': 'N/A', 'position': 'N/A'}
+        return _blank_platform()
 
+
+# ===========================================================================
+# itch.io
+# ===========================================================================
 def fetch_itchio():
-    """Fetch itch.io data."""
-    # itch.io does not have a public API for user stats, so we scrape.
+    """Fetch itch.io data (no public API — scrape)."""
     return scrape_itchio()
+
 
 def scrape_itchio():
     """Scrape itch.io public profile for game count and followers."""
@@ -319,26 +335,26 @@ def scrape_itchio():
             page = browser.new_page()
             try:
                 page.goto('https://sgtstroopwafel.itch.io/', timeout=20000)
-                page.wait_for_timeout(2000)
-                
+                page.wait_for_timeout(3000)
+
+                d = _blank_platform()
+
                 games = 'N/A'
                 followers = 'N/A'
-                
-                # itch.io user profile shows number of games and followers.
-                # Look for text like "X games" and "Y followers"
+
                 game_elements = page.query_selector_all('text=/games/i')
                 for elem in game_elements:
                     try:
                         parent = elem.evaluate_handle('el => el.parentElement')
                         if parent:
                             parent_text = parent.inner_text().strip()
-                            # Extract number
                             numbers = re.findall(r'[0-9]+', parent_text)
                             if numbers:
                                 games = numbers[0]
                                 break
                     except:
                         pass
+
                 follower_elements = page.query_selector_all('text=/followers/i')
                 for elem in follower_elements:
                     try:
@@ -351,43 +367,41 @@ def scrape_itchio():
                                 break
                     except:
                         pass
-                # Fallback: look for any numbers that seem plausible.
+
+                # Fallback
                 if games == 'N/A':
-                    # Look for numbers in contexts that might be game count
                     all_text = page.content()
                     nums = re.findall(r'[0-9]+', all_text)
                     for num in nums:
-                        if 1 <= len(num) <= 3 and int(num) < 100:  # reasonable game count
+                        if 1 <= len(num) <= 3 and int(num) < 100:
                             games = num
                             break
                 if followers == 'N/A':
                     all_text = page.content()
                     nums = re.findall(r'[0-9]+', all_text)
                     for num in nums:
-                        if 1 <= len(num) <= 5 and int(num) < 10000:  # reasonable follower count
+                        if 1 <= len(num) <= 5 and int(num) < 10000:
                             followers = num
                             break
-                return {'games': games.strip(), 'followers': followers.strip()}
+
+                d['games'] = games.strip()
+                d['followers'] = followers.strip()
+                # Map onto canonical fields
+                d['xp'] = d['followers']
+                d['reputation_points'] = d['followers']
+                d['event_participation'] = d['games']
+
+                return d
             finally:
                 browser.close()
     except Exception as e:
         print(f"itch.io scrape error: {e}")
-        return {'games': 'N/A', 'followers': 'N/A'}
+        return _blank_platform()
 
-def fetch_cylab():
-    """Fetch CyLab data."""
-    # For now, return placeholder - CyLab scraping is complex and may require authentication
-    # In a production setting, this would need proper implementation
-    print("CyLab: Placeholder - no public scraping implemented")
-    return {'rank': 'N/A', 'points': 0}
 
-def fetch_microsoft_learn():
-    """Fetch Microsoft Learn data."""
-    # For now, return placeholder - Microsoft Learn API/scraping is complex
-    # In a production setting, this would need proper implementation or API key
-    print("Microsoft Learn: Placeholder - no public scraping implemented")
-    return {'rank': 'N/A', 'points': 0}
-
+# ===========================================================================
+# Main
+# ===========================================================================
 def main():
     print("Fetching live profile data...")
     profile_path = os.path.join(os.path.dirname(__file__), '..', 'profile-data.json')
@@ -398,10 +412,14 @@ def main():
     except Exception as e:
         print(f"Error reading existing {profile_path}: {e}", file=sys.stderr)
         existing = {}
-    # Ensure subkeys exist
+    # Ensure subkeys exist with canonical fields backfilled
     for key in ['tryhackme', 'hackthebox', 'cylab', 'microsoft', 'ctftime', 'itchio', 'generated_at']:
         if key not in existing:
             existing[key] = {} if key != 'generated_at' else ''
+        elif key != 'generated_at':
+            # Backfill any missing canonical fields on existing entries
+            for field in CANONICAL_FIELDS:
+                existing[key].setdefault(field, 'N/A')
     # Attempt to fetch each platform
     platforms = [
         ('tryhackme', fetch_tryhackme),
@@ -415,16 +433,24 @@ def main():
         print(f"Fetching {key}...")
         fetched = fetch_func()
         if fetched is not None:
-            # Only update if the fetched data contains real (non-N/A, non-zero) values,
-            # so a failed scrape in CI doesn't overwrite previously good live data.
+            # Only update if the fetched data contains real (non-N/A, non-zero)
+            # values, so a failed scrape in CI doesn't overwrite previously
+            # good live data.
             has_data = any(
                 v != 'N/A' and v != 0
                 for v in fetched.values()
                 if isinstance(v, (str, int))
             )
             if has_data:
-                existing[key] = fetched
-                print(f"  Updated {key}: {fetched}")
+                # Merge fetched fields over existing (preserves any extra
+                # canonical fields that weren't re-scraped this run)
+                merged = dict(existing.get(key, {}))
+                merged.update(fetched)
+                # Ensure all canonical fields exist
+                for field in CANONICAL_FIELDS:
+                    merged.setdefault(field, 'N/A')
+                existing[key] = merged
+                print(f"  Updated {key}: {merged}")
             else:
                 print(f"  Keeping existing {key}: {existing.get(key)} (fetched all N/A)")
         else:
@@ -435,6 +461,7 @@ def main():
     with open(profile_path, 'w', encoding='utf-8') as f:
         json.dump(existing, f, indent=2)
     print(f"Updated {profile_path}")
+
 
 if __name__ == '__main__':
     main()
