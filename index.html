@@ -534,6 +534,42 @@
             font-size: 0.85rem;
         }
 
+        /* Skill Matrix */
+        .skill-matrix-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+        .skill-matrix-cell {
+            background: var(--surface2);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 0.75rem 0.5rem;
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--text);
+        }
+        .skill-matrix-cell .skill-level {
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--accent);
+        }
+        .skill-matrix-cell .skill-label {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-top: 0.25rem;
+            display: block;
+        }
+        .skill-matrix-empty {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
         /* Timeline animation */
         .timeline-item {
             opacity: 0;
@@ -1103,6 +1139,12 @@
 </div>
 </section>
 <section class="card">
+<h2 data-i18n="skill_matrix_title">Skill Matrix</h2>
+<p class="about-text" data-i18n="skill_matrix_sub">Live-updating skill matrix from TryHackMe profile data.</p>
+<div id="skill-matrix-container">
+<p class="about-text">Loading skill matrix...</p>
+</div>
+</section><section class="card">
 <h2 data-i18n="languages">Talen</h2>
 <div class="lang-item">
 <span class="lang-name" data-i18n="lang_nl">Nederlands</span>
@@ -1191,6 +1233,15 @@
                 exp_zonnepanelen: "Zonnepanelen",
                 exp_sterkstroom: "Sterkstroom",
                 skills: "Vaardigheden",
+                skill_matrix_title: "Skill Matrix",
+                skill_matrix_sub: "Live-updating skill matrix van TryHackMe.",
+                skill_matrix_unavailable: "Geen skill matrix data beschikbaar",
+                skill_matrix_source: "Bron: TryHackMe live profieldata",
+                skill_entry_level: "Entry level",
+                skill_foundational: "Foundational",
+                skill_security_analyst: "Security Analyst",
+                skill_penetration_tester: "Penetration Tester",
+                skill_security_engineer: "Security Engineer",
                 languages: "Talen",
                 lang_nl: "Nederlands",
                 lang_de: "Duits",
@@ -1302,6 +1353,15 @@
                 exp_zonnepanelen: "Solar Panels",
                 exp_sterkstroom: "High Voltage",
                 skills: "Skills",
+                skill_matrix_title: "Skill Matrix",
+                skill_matrix_sub: "Live-updating skill matrix from TryHackMe.",
+                skill_matrix_unavailable: "No skill matrix data available",
+                skill_matrix_source: "Source: TryHackMe live profile data",
+                skill_entry_level: "Entry level",
+                skill_foundational: "Foundational",
+                skill_security_analyst: "Security Analyst",
+                skill_penetration_tester: "Penetration Tester",
+                skill_security_engineer: "Security Engineer",
                 languages: "Languages",
                 lang_nl: "Dutch",
                 lang_de: "German",
@@ -1989,7 +2049,54 @@
 
 
 
-        // Normaliseer beide JSON-vormen (flat en nested) naar één canonieke structuur.
+        
+        // Live-updating skill matrix from TryHackMe profile data.
+        function renderSkillMatrix() {
+            const container = document.getElementById('skill-matrix-container');
+            if (!container || !profileData) return;
+
+            const t = translations[currentLang] || {};
+            const thm = profileData.tryhackme;
+            const matrix = thm && thm.skill_matrix && thm.skill_matrix !== 'N/A'
+                ? thm.skill_matrix.split(', ').filter(Boolean)
+                : [];
+
+            if (matrix.length === 0) {
+                container.innerHTML = '<div class="skill-matrix-empty">' + (t.skill_matrix_unavailable || 'No skill matrix data available') + '</div>';
+                return;
+            }
+
+            const labels = {
+                'Entry level': t.skill_entry_level || 'Entry level',
+                'Foundational': t.skill_foundational || 'Foundational',
+                'Security Analyst': t.skill_security_analyst || 'Security Analyst',
+                'Penetration Tester': t.skill_penetration_tester || 'Penetration Tester',
+                'Security Engineer': t.skill_security_engineer || 'Security Engineer',
+            };
+
+            const colors = {
+                'Entry level': '#4ecdc4',
+                'Foundational': '#45b7d1',
+                'Security Analyst': '#96ceb4',
+                'Penetration Tester': '#ffeead',
+                'Security Engineer': '#ff6b6b',
+            };
+
+            let html = '<div class="skill-matrix-grid">';
+            matrix.forEach(level => {
+                html += '<div class="skill-matrix-cell">' +
+                    '<div class="skill-level">' + level + '</div>' +
+                    '<span class="skill-label">' + (labels[level] || level) + '</span>' +
+                '</div>';
+            });
+            html += '</div>';
+
+            html += '<p style="font-size: 0.7rem; color: var(--text-muted); margin-top: 0.5rem;">' +
+                (t.skill_matrix_source || 'Source: TryHackMe live profile data') + '</p>';
+
+            container.innerHTML = html;
+        }
+// Normaliseer beide JSON-vormen (flat en nested) naar één canonieke structuur.
         // Garandeert altijd: stats.repos (array), stats.skills (object),
         // stats.contributions (array), stats.stats {total_repos,total_stars,languages}.
         function normalizeGitHubData(raw) {
@@ -2215,6 +2322,7 @@
                 profileData = await response.json();
                 renderAchievements();
                 renderPlatformCards();
+                renderSkillMatrix();
             } catch (e) {
                 console.error('Failed to load profile data:', e);
             }
