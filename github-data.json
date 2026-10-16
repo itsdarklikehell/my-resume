@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-15T10:55:37.357342Z",
+  "generated_at": "2026-10-16T07:30:18.649868Z",
   "user": {
     "login": "itsdarklikehell",
     "name": "Bauke Molenaar",
@@ -234,7 +234,7 @@
       "language": "HTML",
       "stars": 0,
       "description": "Digitale resume van Bauke Molenaar",
-      "updated_at": "2026-10-14T22:23:36Z",
+      "updated_at": "2026-10-16T07:29:45Z",
       "url": "https://github.com/itsdarklikehell/my-resume",
       "topics": []
     },
@@ -433,103 +433,121 @@
     {
       "type": "PushEvent",
       "repo": "itsdarklikehell/my-resume",
-      "date": "2026-10-14T22:20:25Z",
+      "date": "2026-10-14T18:32:23Z",
       "url": "https://github.com/itsdarklikehell/my-resume"
     },
     {
       "type": "PushEvent",
       "repo": "itsdarklikehell/my-resume",
-      "date": "2026-10-14T22:12:56Z",
+      "date": "2026-10-14T17:46:26Z",
+      "url": "https://github.com/itsdarklikehell/my-resume"
+    },
+    {
+      "type": "PushEvent",
+      "repo": "itsdarklikehell/awesome-claude-code",
+      "date": "2026-10-15T00:28:56Z",
+      "url": "https://github.com/itsdarklikehell/awesome-claude-code"
+    },
+    {
+      "type": "PushEvent",
+      "repo": "itsdarklikehell/my-resume",
+      "date": "2026-10-14T21:44:43Z",
       "url": "https://github.com/itsdarklikehell/my-resume"
     },
     {
       "type": "PushEvent",
       "repo": "itsdarklikehell/my-resume",
-      "date": "2026-10-14T21:12:24Z",
+      "date": "2026-10-14T16:02:28Z",
       "url": "https://github.com/itsdarklikehell/my-resume"
     },
     {
       "type": "PushEvent",
       "repo": "itsdarklikehell/my-resume",
-      "date": "2026-10-14T20:52:19Z",
+      "date": "2026-10-14T13:49:29Z",
       "url": "https://github.com/itsdarklikehell/my-resume"
     },
     {
       "type": "PushEvent",
       "repo": "itsdarklikehell/my-resume",
-      "date": "2026-10-14T20:30:51Z",
-      "url": "https://github.com/itsdarklikehell/my-resume"
-    },
-    {
-      "type": "CreateEvent",
-      "repo": "itsdarklikehell/skills-getting-started-with-github-copilot",
-      "date": "2026-10-13T14:19:32Z",
-      "url": "https://github.com/itsdarklikehell/skills-getting-started-with-github-copilot"
-    },
-    {
-      "type": "PushEvent",
-      "repo": "itsdarklikehell/my-resume",
-      "date": "2026-10-14T20:06:50Z",
+      "date": "2026-10-14T15:55:27Z",
       "url": "https://github.com/itsdarklikehell/my-resume"
     },
     {
       "type": "PushEvent",
       "repo": "itsdarklikehell/my-resume",
-      "date": "2026-10-14T20:24:30Z",
+      "date": "2026-10-14T21:10:27Z",
       "url": "https://github.com/itsdarklikehell/my-resume"
     },
     {
       "type": "PushEvent",
       "repo": "itsdarklikehell/my-resume",
-      "date": "2026-10-14T19:34:07Z",
+      "date": "2026-10-14T13:34:13Z",
       "url": "https://github.com/itsdarklikehell/my-resume"
     },
     {
       "type": "PushEvent",
       "repo": "itsdarklikehell/my-resume",
-      "date": "2026-10-14T19:09:57Z",
+      "date": "2026-10-14T20:48:34Z",
       "url": "https://github.com/itsdarklikehell/my-resume"
     },
     {
       "type": "PushEvent",
       "repo": "itsdarklikehell/my-resume",
-      "date": "2026-10-14T19:02:30Z",
+      "date": "2026-10-14T13:07:48Z",
       "url": "https://github.com/itsdarklikehell/my-resume"
     },
     {
       "type": "PushEvent",
       "repo": "itsdarklikehell/my-resume",
-      "date": "2026-10-14T18:37:17Z",
+      "date": "2026-10-14T10:31:16Z",
       "url": "https://github.com/itsdarklikehell/my-resume"
     },
     {
       "type": "PushEvent",
       "repo": "itsdarklikehell/my-resume",
-      "date": "2026-10-14T19:18:20Z",
+      "date": "2026-10-14T19:25:38Z",
       "url": "https://github.com/itsdarklikehell/my-resume"
     },
     {
       "type": "PushEvent",
       "repo": "itsdarklikehell/my-resume",
-      "date": "2026-10-14T17:28:05Z",
-      "url": "https://github.com/itsdarklikehell/my-resume"
-    },
-    {
-      "type": "CreateEvent",
-      "repo": "itsdarklikehell/my-resume",
-      "date": "2026-10-14T18:09:28Z",
+      "date": "2026-10-14T19:10:32Z",
       "url": "https://github.com/itsdarklikehell/my-resume"
     },
     {
       "type": "PushEvent",
       "repo": "itsdarklikehell/my-resume",
-      "date": "2026-10-14T18:14:07Z",
+      "date": "2026-10-14T12:03:49Z",
       "url": "https://github.com/itsdarklikehell/my-resume"
     },
     {
       "type": "PushEvent",
       "repo": "itsdarklikehell/my-resume",
-      "date": "2026-10-14T17:46:25Z",
+      "date": "2026-10-14T19:02:57Z",
+      "url": "https://github.com/itsdarklikehell/my-resume"
+    },
+    {
+      "type": "PushEvent",
+      "repo": "itsdarklikehell/my-resume",
+      "date": "2026-10-14T18:48:59Z",
+      "url": "https://github.com/itsdarklikehell/my-resume"
+    },
+    {
+      "type": "PushEvent",
+      "repo": "itsdarklikehell/my-resume",
+      "date": "2026-10-14T11:41:15Z",
+      "url": "https://github.com/itsdarklikehell/my-resume"
+    },
+    {
+      "type": "PushEvent",
+      "repo": "itsdarklikehell/my-resume",
+      "date": "2026-10-14T16:04:56Z",
+      "url": "https://github.com/itsdarklikehell/my-resume"
+    },
+    {
+      "type": "PushEvent",
+      "repo": "itsdarklikehell/my-resume",
+      "date": "2026-10-14T18:13:22Z",
       "url": "https://github.com/itsdarklikehell/my-resume"
     }
   ],
