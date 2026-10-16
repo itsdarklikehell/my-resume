@@ -1933,6 +1933,7 @@ const translations = {
             } else if (heroUpdated) {
                 heroUpdated.textContent = '';
             }
+            setSectionTimestamp('gource', githubData.generated_at)
             return failed;
         }
 
