@@ -1587,6 +1587,31 @@
                             achievements.push({ icon: ptsIcon, name: ptsName, desc: ptsDesc, unlocked: true });
                         }
                     }
+
+                    // TryHackMe highest league badge
+                    if (thm.highest_league && thm.highest_league !== 'N/A') {
+                        let leagueIcon, leagueName, leagueDesc;
+                        const league = thm.highest_league;
+                        if (league === 'Diamond' || league === 'Champion' || league === 'Hero') { leagueIcon = '💎'; leagueName = 'Elite'; leagueDesc = 'TryHackMe highest league: ' + league; }
+                        else if (league === 'Platinum') { leagueIcon = '🥈'; leagueName = 'Platinum'; leagueDesc = 'TryHackMe highest league: Platinum'; }
+                        else if (league === 'Gold') { leagueIcon = '🥇'; leagueName = 'Gold'; leagueDesc = 'TryHackMe highest league: Gold'; }
+                        else if (league === 'Silver') { leagueIcon = '🥈'; leagueName = 'Silver'; leagueDesc = 'TryHackMe highest league: Silver'; }
+                        else if (league === 'Bronze') { leagueIcon = '🥉'; leagueName = 'Bronze'; leagueDesc = 'TryHackMe highest league: Bronze'; }
+                        else { leagueIcon = '🏆'; leagueName = 'League'; leagueDesc = 'TryHackMe highest league: ' + league; }
+                        achievements.push({ icon: leagueIcon, name: leagueName, desc: leagueDesc, unlocked: true });
+                    }
+
+                    // TryHackMe highest streak badge
+                    if (thm.highest_streak && thm.highest_streak !== 'N/A') {
+                        const streak = parseInt(thm.highest_streak);
+                        if (!isNaN(streak) && streak > 0) {
+                            let streakIcon, streakName, streakDesc;
+                            if (streak >= 30) { streakIcon = '🔥'; streakName = 'Dedicated'; streakDesc = 'TryHackMe highest streak: ' + streak + ' days'; }
+                            else if (streak >= 7) { streakIcon = '📅'; streakName = 'Consistent'; streakDesc = 'TryHackMe highest streak: ' + streak + ' days'; }
+                            else { streakIcon = '📅'; streakName = 'Streak'; streakDesc = 'TryHackMe highest streak: ' + streak + ' days'; }
+                            achievements.push({ icon: streakIcon, name: streakName, desc: streakDesc, unlocked: true });
+                        }
+                    }
                 }
 
                 // Activity achievements

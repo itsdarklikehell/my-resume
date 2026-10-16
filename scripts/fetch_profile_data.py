@@ -123,13 +123,40 @@ def scrape_tryhackme(username):
                                     break
                         except:
                             pass
-                            
-                return {'rank': rank.strip(), 'points': points.strip()}
+                           
+                # Highest league (Bronze, Silver, Gold, Platinum, Diamond, Champion, Hero)
+                highest_league = 'N/A'
+                league_label = page.query_selector('text="Highest league"')
+                if league_label:
+                    parent = league_label.evaluate_handle('el => el.parentElement')
+                    if parent:
+                        parent_text = parent.inner_text().strip()
+                        lines_l = [line.strip() for line in parent_text.split('\n') if line.strip()]
+                        for line in lines_l:
+                            if line != 'Highest league':
+                                highest_league = line
+                                break
+
+                # Highest streak (number of days)
+                highest_streak = 'N/A'
+                streak_label = page.query_selector('text="Highest streak"')
+                if streak_label:
+                    parent = streak_label.evaluate_handle('el => el.parentElement')
+                    if parent:
+                        parent_text = parent.inner_text().strip()
+                        lines_l = [line.strip() for line in parent_text.split('\n') if line.strip()]
+                        for line in lines_l:
+                            if line != 'Highest streak' and line.isdigit():
+                                highest_streak = line
+                                break
+
+
+                return {'rank': rank.strip(), 'points': points.strip(), 'highest_league': highest_league.strip(), 'highest_streak': highest_streak.strip()}
             finally:
                 browser.close()
     except Exception as e:
         print(f"TryHackMe scrape error: {e}")
-        return {'rank': 'N/A', 'points': 'N/A'}
+        return {'rank': 'N/A', 'points': 'N/A', 'highest_league': 'N/A', 'highest_streak': 'N/A'}
 
 def fetch_hackthebox():
     """Fetch HackTheBox data."""
