@@ -88,4 +88,4 @@ If an agent detects:
 
 ---
 *Guidelines version: 1.0*
-*Last updated: $(date -u +"%Y-%m-%d %H:%M:%S UTC")*
+*Last updated: 2026-10-18 14:35 UTC*
