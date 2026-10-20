@@ -2,6 +2,7 @@
 
 <html lang="nl">
 <head>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: https:; media-src 'self'; connect-src 'self' https://api.github.com https://*.github.io;">
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Bauke Molenaar — CV</title>
@@ -82,7 +83,7 @@
 <button class="lang-toggle" onclick="toggleLang()" title="Toggle language" aria-label="Toggle language">🌐 <span id="lang-label">NL</span></button>
 <div class="container">
 <header class="header">
-<img alt="Bauke Molenaar" class="header-avatar" src="profile.jpg"/>
+<img loading="lazy" alt="Bauke Molenaar" class="header-avatar" src="profile.jpg"/>
 <div class="header-info">
 <h1>Bauke Molenaar</h1>
 <p class="tagline" data-i18n="tagline">Technisch professional met een passie voor ICT en probleemoplossing</p>
@@ -98,7 +99,7 @@
 <div class="main-col"><section class="card">
 <h2 data-i18n="about">Over Mij</h2>
 <div style="display: flex; gap: 1.5rem; align-items: flex-start; flex-wrap: wrap;">
-<img alt="Bauke Molenaar" src="profile.jpg" style="width: 150px; height: 150px; border-radius: 12px; object-fit: cover; border: 3px solid var(--accent); flex-shrink: 0;"/>
+<img loading="lazy" alt="Bauke Molenaar" src="profile.jpg" style="width: 150px; height: 150px; border-radius: 12px; object-fit: cover; border: 3px solid var(--accent); flex-shrink: 0;"/>
 <p class="about-text" data-i18n="about_text" style="flex: 1; min-width: 250px;">
                             Praktisch ingestelde technisch professional met ruime ervaring in elektrische systemen, 
                             zonnepanelen en tweewielers. Hands-on achtergrond met technische precisie, analytisch 
@@ -425,7 +426,7 @@
 <p class="about-text" data-i18n="activity_video_note" style="font-size: 0.8rem; margin-bottom: 0.75rem;">
                         Gevisualiseerde commit-historie van mijn GitHub-werk.
                     </p>
-<video controls="" playsinline="" preload="metadata" style="width: 100%; border-radius: 8px; border: 1px solid var(--border); background: #000;">
+<video loading="lazy" controls="" playsinline="" preload="none" style="width: 100%; border-radius: 8px; border: 1px solid var(--border); background: #000;">
 <source src="gource.mp4" type="video/mp4"/>
 </video>
 <div class="section-updated" id="gource-updated"></div>
