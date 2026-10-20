@@ -1,0 +1,13 @@
+{
+  "name": "my-resume-improve",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "lint": "eslint src/**/*.js script.js",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "eslint": "^8.57.0",
+    "vitest": "^1.6.0"
+  }
+}
