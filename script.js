@@ -2011,54 +2011,105 @@ const translations = {
 
         async function loadGitHubData() {
             try {
-                const response = await fetch('github-data.json', { cache: 'no-cache' });
-                if (!response.ok) throw new Error('HTTP ' + response.status);
-                const raw = await response.json();
+                // Fetch all data directly from GitHub API
+                const [userResp, reposResp, eventsResp] = await Promise.all([
+                    fetch('https://api.github.com/users/itsdarklikehell', { cache: 'no-cache', headers: { 'Accept': 'application/vnd.github+json' } }),
+                    fetch('https://api.github.com/users/itsdarklikehell/repos?per_page=100&sort=updated', { cache: 'no-cache', headers: { 'Accept': 'application/vnd.github+json' } }),
+                    fetch('https://api.github.com/users/itsdarklikehell/events/public?per_page=100', { cache: 'no-cache', headers: { 'Accept': 'application/vnd.github+json' } })
+                ]);
+
+                if (!userResp.ok) throw new Error('User API HTTP ' + userResp.status);
+                if (!reposResp.ok) throw new Error('Repos API HTTP ' + reposResp.status);
+
+                const user = await userResp.json();
+                const repos = await reposResp.json();
+                const events = eventsResp.ok ? await eventsResp.json() : [];
+
+                // Build repos array in expected format
+                const reposFormatted = (Array.isArray(repos) ? repos : []).map(r => ({
+                    name: r.name,
+                    language: r.language,
+                    stars: r.stargazers_count || 0,
+                    description: r.description || '',
+                    updated_at: r.updated_at,
+                    url: r.html_url,
+                    topics: r.topics || [],
+                    fork: r.fork || false,
+                    forks: r.forks_count || 0
+                }));
+
+                // Build contributions from events
+                const contributions = [];
+                const seen = new Set();
+                (Array.isArray(events) ? events : []).forEach(ev => {
+                    if (['PushEvent', 'CreateEvent', 'PullRequestEvent', 'IssuesEvent', 'ReleaseEvent'].includes(ev.type)) {
+                        const date = ev.created_at;
+                        if (!seen.has(date)) {
+                            seen.add(date);
+                            contributions.push({
+                                type: ev.type,
+                                repo: ev.repo ? ev.repo.name : '',
+                                date: date,
+                                url: ev.repo ? 'https://github.com/' + ev.repo.name : ''
+                            });
+                        }
+                    }
+                });
+
+                // Derive skills from repo languages
+                const langCounts = {};
+                reposFormatted.forEach(r => {
+                    if (r.language) {
+                        langCounts[r.language] = (langCounts[r.language] || 0) + 1;
+                    }
+                });
+                const skills = {};
+                Object.entries(langCounts).forEach(([lang, count]) => {
+                    skills[lang] = count;
+                });
+
+                const raw = {
+                    generated_at: new Date().toISOString(),
+                    user: {
+                        login: user.login,
+                        name: user.name || user.login,
+                        bio: user.bio || '',
+                        public_repos: user.public_repos || 0,
+                        followers: user.followers || 0,
+                        following: user.following || 0,
+                        created_at: user.created_at,
+                        avatar_url: user.avatar_url
+                    },
+                    repos: reposFormatted,
+                    contributions: contributions,
+                    skills: skills,
+                    stats: {
+                        total_repos: user.public_repos || reposFormatted.length,
+                        total_stars: reposFormatted.reduce((a, r) => a + (r.stars || 0), 0),
+                        languages: Object.keys(langCounts).length
+                    }
+                };
+
                 githubData = normalizeGitHubData(raw);
                 if (!githubData) throw new Error('onverwachte datastructuur');
+
+                // Also fetch live activity from GitHub API for heatmap (already included above)
+                console.log('Live GitHub data fetched:', reposFormatted.length, 'repos,', contributions.length, 'contributions');
+
+                const failed = renderAll();
+                if (failed.length) {
+                    showDataError('Sommige secties konden niet getoond worden: ' + failed.join(', '));
+                    setFallbackForPlaceholders();
+                }
             } catch (e) {
                 console.error('Failed to load GitHub data:', e);
                 showDataError('Live data kon niet geladen worden: ' + (e && e.message ? e.message : e));
                 setFallbackForPlaceholders();
                 return;
             }
-
-            // Also fetch live activity from GitHub API for heatmap + live activity
-            try {
-                const eventsResp = await fetch('https://api.github.com/users/itsdarklikehell/events/public?per_page=100', {
-                    cache: 'no-cache',
-                    headers: { 'Accept': 'application/vnd.github+json' }
-                });
-                if (eventsResp.ok) {
-                    const events = await eventsResp.json();
-                    const liveContribs = [];
-                    events.forEach(ev => {
-                        if (['PushEvent', 'CreateEvent', 'PullRequestEvent', 'IssuesEvent'].includes(ev.type)) {
-                            liveContribs.push({ date: ev.created_at });
-                        }
-                    });
-                    // Merge live contributions into githubData (dedupe by date)
-                    const existing = githubData.stats ? githubData.stats.contributions || [] : [];
-                    const seen = new Set(existing.map(c => c.date));
-                    liveContribs.forEach(c => { if (!seen.has(c.date)) existing.push(c); });
-                    if (githubData.stats) githubData.stats.contributions = existing;
-                    if (githubData.stats && githubData.stats.contributions) {
-                        githubData.stats.total_contributions = githubData.stats.contributions.length;
-                    }
-                    console.log('Live GitHub activity fetched:', liveContribs.length, 'new events');
-                }
-            } catch (e) {
-                console.warn('Live GitHub API fetch failed (rate limit or network):', e);
-            }
-
-            const failed = renderAll();
-            if (failed.length) {
-                showDataError('Sommige secties konden niet getoond worden: ' + failed.join(', '));
-                setFallbackForPlaceholders();
-            }
         }
 
-        async function loadProfileData() {
+async function loadProfileData() {
             try {
                 const response = await fetch('profile-data.json', { cache: 'no-cache' });
                 if (!response.ok) throw new Error('HTTP ' + response.status);
