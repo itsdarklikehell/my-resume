@@ -2157,13 +2157,7 @@ async function loadProfileData() {
             document.documentElement.setAttribute('data-palette', savedPalette);
         }
 
-        // Wire toggles
-        const langBtn = document.querySelector('.lang-toggle');
-        if (langBtn) langBtn.addEventListener('click', toggleLang);
-        const themeBtn = document.querySelector('.theme-toggle');
-        if (themeBtn) themeBtn.addEventListener('click', toggleTheme);
-        const paletteBtn = document.querySelector('.palette-toggle');
-        if (paletteBtn) paletteBtn.addEventListener('click', togglePalette);
+        // Donut chart
         function renderDonut() {
             const skills = gSkills();
             if (!skills) return;
@@ -2209,3 +2203,20 @@ async function loadProfileData() {
         }
 
         loadGitHubData().then(() => loadProfileData());
+
+// Wire interactive toggles (runs after DOM is parsed due to defer)
+(function () {
+    function bind() {
+        const langBtn = document.querySelector('.lang-toggle');
+        if (langBtn) langBtn.addEventListener('click', toggleLang);
+        const themeBtn = document.querySelector('.theme-toggle');
+        if (themeBtn) themeBtn.addEventListener('click', toggleTheme);
+        const paletteBtn = document.querySelector('.palette-toggle');
+        if (paletteBtn) paletteBtn.addEventListener('click', togglePalette);
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', bind);
+    } else {
+        bind();
+    }
+})();
