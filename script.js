@@ -397,8 +397,86 @@ const translations = {
                 share_linkedin: "LinkedIn",
                 share_twitter: "Twitter",
                 share_whatsapp: "WhatsApp",
-                last_updated: "Last updated"
-            },
+                last_updated: "Last updated",
+                exp_devries_role: "Assistent-monteur montage (sterkstroom)",
+    exp_devries_company: "De Vries",
+    exp_devries_period: "2009 — 2020",
+    exp_devries_1: "Montage van elektrische (sterkstroom) installaties",
+    exp_fiets_mient_role: "Fietstechnicus",
+    exp_fiets_mient_company: "Fietsenwinkel Mient de Vries",
+    exp_fiets_mient_period: "2013 — 2014",
+    exp_fiets_mient_1: "Tweewieler herstel en onderhoud",
+    exp_fiets_estafette_role: "Fietstechnicus",
+    exp_fiets_estafette_company: "Kringloop Bedrijf Estafette",
+    exp_fiets_estafette_period: "2012 — 2013",
+    exp_fiets_estafette_1: "Tweewieler herstel en verkoop",
+    exp_degraaf_role: "Assistent-monteur elektro (computernetwerken en telecommunicatie)",
+    exp_degraaf_company: "de graaf uitzendbureau",
+    exp_degraaf_period: "2009",
+    exp_degraaf_1: "Installatie en onderhoud van computernetwerken en telecommunicatie",
+    exp_creyfs_magazijn_role: "Magazijnmedewerker koel-/vriesproducten",
+    exp_creyfs_magazijn_company: "creyf's uitzendbureau",
+    exp_creyfs_magazijn_period: "2009",
+    exp_creyfs_magazijn_1: "Magazijnbeheer en orderpicking",
+    exp_creyfs_schoonmaker_role: "Industrieel schoonmaker",
+    exp_creyfs_schoonmaker_company: "creyf's uitzendbureau",
+    exp_creyfs_schoonmaker_period: "2009",
+    exp_creyfs_schoonmaker_1: "Industriële schoonmaakwerkzaamheden",
+    exp_unistar_role: "Assistent-monteur montage (sterkstroom)",
+    exp_unistar_company: "Unistar Personeelsdiensten BV",
+    exp_unistar_period: "2009",
+    exp_unistar_1: "Montage van elektrische (sterkstroom) installaties",
+    exp_unistar_dak_role: "Monteur installatietechniek en dakwerk",
+    exp_unistar_dak_company: "Unistar",
+    exp_unistar_dak_period: "2008 — 2009",
+    exp_unistar_dak_1: "Installatietechniek en dakwerk",
+    exp_technicum_zwak1_role: "Assistent-monteur montage (zwakstroom)",
+    exp_technicum_zwak1_company: "Technicum",
+    exp_technicum_zwak1_period: "2007 — 2008",
+    exp_technicum_zwak1_1: "Montage van elektrische (zwakstroom) installaties",
+    exp_technicum_zwak2_role: "Assistent-monteur montage (zwakstroom)",
+    exp_technicum_zwak2_company: "Technicum",
+    exp_technicum_zwak2_period: "2007",
+    exp_technicum_zwak2_1: "Montage van elektrische (zwakstroom) installaties",
+    exp_technicum_net_a_role: "Assistent-monteur elektro (computernetwerken en telecommunicatie)",
+    exp_technicum_net_a_company: "Technicum",
+    exp_technicum_net_a_period: "2006",
+    exp_technicum_net_a_1: "Installatie van computernetwerken en telecommunicatie",
+    exp_technicum_net_b_role: "Assistent-monteur elektro (computernetwerken en telecommunicatie)",
+    exp_technicum_net_b_company: "Technicum",
+    exp_technicum_net_b_period: "2006",
+    exp_technicum_net_b_1: "Installatie van computernetwerken en telecommunicatie",
+    exp_technicum_net_c_role: "Assistent-monteur elektro (computernetwerken en telecommunicatie)",
+    exp_technicum_net_c_company: "Technicum",
+    exp_technicum_net_c_period: "2006",
+    exp_technicum_net_c_1: "Installatie van computernetwerken en telecommunicatie",
+    exp_technicum_net_d_role: "Assistent-monteur elektro (computernetwerken en telecommunicatie)",
+    exp_technicum_net_d_company: "Technicum",
+    exp_technicum_net_d_period: "2006",
+    exp_technicum_net_d_1: "Installatie van computernetwerken en telecommunicatie",
+    exp_dit_role: "Elektromonteur (elektrische installaties)",
+    exp_dit_company: "DIT Technical Services Heerenveen",
+    exp_dit_period: "2006",
+    exp_dit_1: "Montage van elektrische installaties",
+    exp_mageon_role: "Assistent-monteur elektriciteitsnetten",
+    exp_mageon_company: "MAGEON-BV Technisch Personeel",
+    exp_mageon_period: "2006",
+    exp_mageon_1: "Werken aan elektriciteitsnetten",
+    exp_technicum_net2_role: "Assistent-monteur elektriciteitsnetten",
+    exp_technicum_net2_company: "Technicum",
+    exp_technicum_net2_period: "2005 — 2006",
+    exp_technicum_net2_1: "Werken aan elektriciteitsnetten",
+    exp_technicum_volt1_role: "Elektromonteur (elektrische installaties)",
+    exp_technicum_volt1_company: "Technicum uitzendbureau",
+    exp_technicum_volt1_period: "2005",
+    exp_technicum_volt1_1: "Montage van elektrische installaties",
+    exp_technicum_net3_role: "Assistent-monteur elektro (computernetwerken en telecommunicatie)",
+    exp_technicum_net3_company: "Technicum uitzendbureau",
+    exp_technicum_net3_period: "2004 — 2005",
+    exp_technicum_net3_1: "Installatie van computernetwerken en telecommunicatie",
+    print_cv_nl: "Print CV (NL)",
+    print_cv_en: "Print CV (EN)",
+},
             de: {
                 tagline: "Technischer Fachmann mit Leidenschaft für IT und Problemlösung",
                 about: "Über mich",
@@ -1327,7 +1405,7 @@ const translations = {
 
                 // TryHackMe achievements from live profile data
                 if (profileData && profileData.tryhackme) {
-                    const thm = profileData.tryhackme;
+                    const thm = (profileData && profileData.tryhackme) ? profileData.tryhackme : null;
                     if (thm.rank && thm.rank !== 'N/A') {
                         const pctMatch = thm.rank.match(/(\d+)/);
                         if (pctMatch) {
@@ -1395,7 +1473,7 @@ const translations = {
 
                 // Microsoft Learn badges from live profile data
                 if (profileData && profileData.microsoft) {
-                    const ms = profileData.microsoft;
+                    const ms = (profileData && profileData.microsoft) ? profileData.microsoft : null;
                     if (ms.badges && ms.badges !== 'N/A' && parseInt(ms.badges) > 0) {
                         achievements.push({ icon: '🏅', name: t.ach_ms_badges_n || 'Microsoft Learn Badges', desc: 'Microsoft Learn: ' + ms.badges + ' badges', unlocked: true });
                     }
@@ -1567,7 +1645,7 @@ const translations = {
 
             html += '</div>';
             container.innerHTML = html;
-            setSectionTimestamp('platform-cards', profileData.generated_at);
+            setSectionTimestamp('platform-cards', profileData ? profileData.generated_at : null);
         }
 
 
@@ -1582,7 +1660,7 @@ const translations = {
             if (!container || !profileData) return;
 
             const t = translations[currentLang] || {};
-            const thm = profileData.tryhackme;
+            const thm = (profileData && profileData.tryhackme) ? profileData.tryhackme : null;
             const matrix = thm && thm.skill_matrix && thm.skill_matrix !== 'N/A'
                 ? thm.skill_matrix.split(', ').filter(Boolean)
                 : [];
@@ -1621,7 +1699,7 @@ const translations = {
                 (t.skill_matrix_source || 'Source: TryHackMe live profile data') + '</p>';
 
             container.innerHTML = html;
-            setSectionTimestamp('skill-matrix', profileData.generated_at);
+            setSectionTimestamp('skill-matrix', profileData ? profileData.generated_at : null);
         }
 // Normaliseer beide JSON-vormen (flat en nested) naar één canonieke structuur.
         // Garandeert altijd: stats.repos (array), stats.skills (object),
@@ -1909,7 +1987,7 @@ const translations = {
             const footerUpdated = document.getElementById('footer-updated');
             if (footerUpdated && profileData && profileData.generated_at) {
                 const t = translations[currentLang];
-                const date = new Date(profileData.generated_at);
+                const date = new Date((profileData && profileData.generated_at) ? profileData.generated_at : Date.now());
                 footerUpdated.textContent = (t.last_updated || 'Last updated') + ': ' +
                     date.toLocaleDateString(currentLang === 'nl' ? 'nl-NL' : 'en-US') + ' ' +
                     date.toLocaleTimeString(currentLang === 'nl' ? 'nl-NL' : 'en-US');
@@ -1920,7 +1998,7 @@ const translations = {
             const heroUpdated = document.getElementById('hero-updated');
             if (heroUpdated && profileData && profileData.generated_at) {
                 const t = translations[currentLang];
-                const date = new Date(profileData.generated_at);
+                const date = new Date((profileData && profileData.generated_at) ? profileData.generated_at : Date.now());
                 heroUpdated.textContent = (t.last_updated || 'Last updated') + ': ' +
                     date.toLocaleDateString(currentLang === 'nl' ? 'nl-NL' : 'en-US') + ' ' +
                     date.toLocaleTimeString(currentLang === 'nl' ? 'nl-NL' : 'en-US');
