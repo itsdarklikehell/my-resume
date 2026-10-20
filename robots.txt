@@ -1,2 +1,3 @@
 User-agent: *
 Allow: /
+Sitemap: https://itsdarklikehell.github.io/my-resume/sitemap.xml

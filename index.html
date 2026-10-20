@@ -7,6 +7,8 @@
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Bauke Molenaar — CV</title>
 <meta content="Bauke Molenaar — Technisch professional met een passie voor ICT en probleemoplossing" name="description"/>
+<meta content="Bauke Molenaar" name="author"/>
+<meta content="elektrotechniek, zonnepanelen, NEN 1010, ICT, Python, Shell, Bash, Linux, Docker, GitHub Actions, TypeScript, JavaScript" name="keywords"/>
 <meta content="Bauke Molenaar — CV" property="og:title"/>
 <meta content="Technisch professional met een passie voor ICT en probleemoplossing" property="og:description"/>
 <meta content="https://itsdarklikehell.github.io/my-resume/og-image.png" property="og:image"/>
@@ -19,11 +21,13 @@
 <meta content="Bauke Molenaar — CV" name="twitter:title"/>
 <meta content="Technisch professional met een passie voor ICT en probleemoplossing" name="twitter:description"/>
 <meta content="https://itsdarklikehell.github.io/my-resume/og-image.png" name="twitter:image"/>
+<meta content="Bauke Molenaar — technisch professional" name="twitter:image:alt"/>
 <link href="favicon-32.png" rel="icon" sizes="32x32" type="image/png"/>
 <link href="favicon-16.png" rel="icon" sizes="16x16" type="image/png"/>
 <link href="favicon.ico" rel="icon"/>
 <link href="apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/>
 <link href="site.webmanifest" rel="manifest"/>
+<link rel="preload" as="image" href="profile.jpg" fetchpriority="high"/>
 <link rel="stylesheet" href="styles.css"/>
 <link href="https://itsdarklikehell.github.io/my-resume/" rel="canonical"/>
 <script type="application/ld+json">
@@ -33,7 +37,9 @@
   "name": "Bauke Molenaar",
   "alternateName": "SgtStroopwafel",
   "jobTitle": "Technisch professional",
+  "description": "Technisch professional met een passie voor ICT en probleemoplossing",
   "url": "https://itsdarklikehell.github.io/my-resume/",
+  "mainEntityOfPage": "https://itsdarklikehell.github.io/my-resume/",
   "image": "https://itsdarklikehell.github.io/my-resume/og-image.png",
   "email": "mailto:bauke.molenaar@gmail.com",
   "telephone": "+31636065494",
@@ -83,7 +89,7 @@
 <button class="lang-toggle" onclick="toggleLang()" title="Toggle language" aria-label="Toggle language">🌐 <span id="lang-label">NL</span></button>
 <div class="container">
 <header class="header">
-<img loading="lazy" alt="Bauke Molenaar" class="header-avatar" src="profile.jpg"/>
+<img loading="eager" fetchpriority="high" alt="Bauke Molenaar" class="header-avatar" src="profile.jpg" width="460" height="460"/>
 <div class="header-info">
 <h1>Bauke Molenaar</h1>
 <p class="tagline" data-i18n="tagline">Technisch professional met een passie voor ICT en probleemoplossing</p>
@@ -98,10 +104,10 @@
 </div>
 </header>
 <div class="grid">
-<div class="main-col"><section class="card">
+<div class="main-col" id="main-col"><section class="card">
 <h2 data-i18n="about">Over Mij</h2>
 <div style="display: flex; gap: 1.5rem; align-items: flex-start; flex-wrap: wrap;">
-<img loading="lazy" alt="Bauke Molenaar" src="profile.jpg" style="width: 150px; height: 150px; border-radius: 12px; object-fit: cover; border: 3px solid var(--accent); flex-shrink: 0;"/>
+<img loading="lazy" alt="Bauke Molenaar" src="profile.jpg" width="460" height="460" style="width: 150px; height: 150px; border-radius: 12px; object-fit: cover; border: 3px solid var(--accent); flex-shrink: 0;"/>
 <p class="about-text" data-i18n="about_text" style="flex: 1; min-width: 250px;">
                             Praktisch ingestelde technisch professional met ruime ervaring in elektrische systemen, 
                             zonnepanelen en tweewielers. Hands-on achtergrond met technische precisie, analytisch 
@@ -428,7 +434,7 @@
 <p class="about-text" data-i18n="activity_video_note" style="font-size: 0.8rem; margin-bottom: 0.75rem;">
                         Gevisualiseerde commit-historie van mijn GitHub-werk.
                     </p>
-<video loading="lazy" controls="" playsinline="" preload="none" style="width: 100%; border-radius: 8px; border: 1px solid var(--border); background: #000;">
+<video loading="lazy" controls="" playsinline="" preload="none" width="1920" height="1080" style="width: 100%; border-radius: 8px; border: 1px solid var(--border); background: #000;">
 <source src="gource.mp4" type="video/mp4"/>
 </video>
 <div class="section-updated" id="gource-updated"></div>
@@ -439,10 +445,10 @@
 <div class="download-group">
   <a class="download-btn lang-nl" href="javascript:void(0);" onclick="window.print();" download="" target="_blank">🇳🇱 <span data-i18n="download_pdf_nl">Download CV (NL)</span></a>
   <a class="download-btn lang-en" href="javascript:void(0);" onclick="window.print();" download="" target="_blank">🇬🇧 <span data-i18n="download_pdf_en">Download CV (EN)</span></a>
-  <a class="download-btn lang-nl" onclick="downloadJSON()" target="_blank">🇳🇱 <span data-i18n="download_json">Download JSON</span></a>
-  <a class="download-btn lang-en" onclick="downloadJSON()" target="_blank" style="margin-top: 0.5rem;">🇬🇧 <span data-i18n="download_json">Download JSON</span></a>
-   <a class="download-btn lang-nl" onclick="window.print()" target="_blank">🇳🇱 <span data-i18n="print_cv_nl">Print CV (NL)</span></a>
-   <a class="download-btn lang-en" onclick="window.print()" target="_blank" style="margin-top: 0.5rem;">🇬🇧 <span data-i18n="print_cv_en">Print CV (EN)</span></a>
+  <a class="download-btn lang-nl" href="javascript:void(0)" onclick="downloadJSON()" target="_blank">🇳🇱 <span data-i18n="download_json">Download JSON</span></a>
+  <a class="download-btn lang-en" href="javascript:void(0)" onclick="downloadJSON()" target="_blank" style="margin-top: 0.5rem;">🇬🇧 <span data-i18n="download_json">Download JSON</span></a>
+   <a class="download-btn lang-nl" href="javascript:void(0)" onclick="window.print()" target="_blank">🇳🇱 <span data-i18n="print_cv_nl">Print CV (NL)</span></a>
+   <a class="download-btn lang-en" href="javascript:void(0)" onclick="window.print()" target="_blank" style="margin-top: 0.5rem;">🇬🇧 <span data-i18n="print_cv_en">Print CV (EN)</span></a>
 </div>
 </section>
 <section class="card no-print">
