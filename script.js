@@ -2157,7 +2157,13 @@ async function loadProfileData() {
             document.documentElement.setAttribute('data-palette', savedPalette);
         }
 
-        // Donut chart
+        // Wire toggles
+        const langBtn = document.querySelector('.lang-toggle');
+        if (langBtn) langBtn.addEventListener('click', toggleLang);
+        const themeBtn = document.querySelector('.theme-toggle');
+        if (themeBtn) themeBtn.addEventListener('click', toggleTheme);
+        const paletteBtn = document.querySelector('.palette-toggle');
+        if (paletteBtn) paletteBtn.addEventListener('click', togglePalette);
         function renderDonut() {
             const skills = gSkills();
             if (!skills) return;
