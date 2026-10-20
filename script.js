@@ -2012,10 +2012,11 @@ const translations = {
         async function loadGitHubData() {
             try {
                 // Fetch all data directly from GitHub API
-                const [userResp, reposResp, eventsResp] = await Promise.all([
+                const [userResp, reposResp, eventsResp, orgReposResp] = await Promise.all([
                     fetch('https://api.github.com/users/itsdarklikehell', { cache: 'no-cache', headers: { 'Accept': 'application/vnd.github+json' } }),
                     fetch('https://api.github.com/users/itsdarklikehell/repos?per_page=100&sort=updated', { cache: 'no-cache', headers: { 'Accept': 'application/vnd.github+json' } }),
-                    fetch('https://api.github.com/users/itsdarklikehell/events/public?per_page=100', { cache: 'no-cache', headers: { 'Accept': 'application/vnd.github+json' } })
+                    fetch('https://api.github.com/users/itsdarklikehell/events/public?per_page=100', { cache: 'no-cache', headers: { 'Accept': 'application/vnd.github+json' } }),
+                    fetch('https://api.github.com/orgs/itsdarklikehell-interactive/repos?per_page=100&sort=updated', { cache: 'no-cache', headers: { 'Accept': 'application/vnd.github+json' } })
                 ]);
 
                 if (!userResp.ok) throw new Error('User API HTTP ' + userResp.status);
@@ -2024,9 +2025,11 @@ const translations = {
                 const user = await userResp.json();
                 const repos = await reposResp.json();
                 const events = eventsResp.ok ? await eventsResp.json() : [];
+                const orgRepos = orgReposResp.ok ? await orgReposResp.json() : [];
 
-                // Build repos array in expected format
-                const reposFormatted = (Array.isArray(repos) ? repos : []).map(r => ({
+                // Build repos array in expected format (personal + org)
+                const allRepos = [...(Array.isArray(repos) ? repos : []), ...(Array.isArray(orgRepos) ? orgRepos : [])];
+                const reposFormatted = allRepos.map(r => ({
                     name: r.name,
                     language: r.language,
                     stars: r.stargazers_count || 0,
@@ -2056,16 +2059,21 @@ const translations = {
                     }
                 });
 
-                // Derive skills from repo languages
+                // Derive skills from repo languages (personal + org)
                 const langCounts = {};
                 reposFormatted.forEach(r => {
                     if (r.language) {
                         langCounts[r.language] = (langCounts[r.language] || 0) + 1;
                     }
                 });
+                const totalLangRepos = Object.values(langCounts).reduce((a, b) => a + b, 0) || 1;
                 const skills = {};
                 Object.entries(langCounts).forEach(([lang, count]) => {
-                    skills[lang] = count;
+                    skills[lang] = {
+                        percentage: Math.round((count / totalLangRepos) * 100),
+                        repos: count,
+                        stars: reposFormatted.filter(r => r.language === lang).reduce((a, r) => a + (r.stars || 0), 0)
+                    };
                 });
 
                 const raw = {
