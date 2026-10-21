@@ -1126,6 +1126,8 @@ const translations = {
         }
 
         function renderSkills() {
+            const btn = document.getElementById('skill-sort-toggle');
+            if (btn) btn.textContent = 'Auto-sort: ' + (window.autoSortSkills ? 'ON' : 'OFF');
             const container = document.getElementById('skills-container');
             const skills = gSkills();
             if (!skills) {
@@ -1142,7 +1144,9 @@ const translations = {
             };
 
             const skillLevel = pct => pct >= 70 ? 'Advanced' : pct >= 40 ? 'Intermediate' : 'Beginner';
-            container.innerHTML = Object.entries(skills).map(([lang, data]) => `
+            let entries = Object.entries(skills);
+            if (window.autoSortSkills !== false) entries = entries.slice().sort((a, b) => b[1].percentage - a[1].percentage);
+            container.innerHTML = entries.map(([lang, data]) => `
                 <div class="skill-bar">
                     <div class="skill-header">
                         <span>${langNames[lang] || lang}</span>
@@ -2200,6 +2204,15 @@ async function loadProfileData() {
         }
         window.toggleExperience = toggleExperience;
 
+        window.autoSortSkills = localStorage.getItem('autoSortSkills') !== 'false';
+        function toggleSkillSort() {
+            window.autoSortSkills = !window.autoSortSkills;
+            localStorage.setItem('autoSortSkills', window.autoSortSkills);
+            const btn = document.getElementById('skill-sort-toggle');
+            if (btn) btn.textContent = 'Auto-sort: ' + (window.autoSortSkills ? 'ON' : 'OFF');
+            renderSkills();
+        }
+        window.toggleSkillSort = toggleSkillSort;
         function sendEmail(e) {
             e.preventDefault();
             const form = e.target;
