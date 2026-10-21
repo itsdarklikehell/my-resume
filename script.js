@@ -2175,7 +2175,9 @@ async function loadProfileData() {
             const circumference = 2 * Math.PI * radius;
             let offset = 0;
             let svg = '<svg width="' + size + '" height="' + size + '" viewBox="0 0 ' + size + ' ' + size + '">';
-            for (const [lang, data] of Object.entries(skills)) {
+            let skillEntries = Object.entries(skills);
+            if (window.autoSortSkills !== false) skillEntries = skillEntries.slice().sort((a, b) => b[1].percentage - a[1].percentage);
+            for (const [lang, data] of skillEntries) {
                 const percentage = data.repos / total;
                 const dashLength = percentage * circumference;
                 const color = colors[lang] || '#9ca3b4';
@@ -2184,7 +2186,7 @@ async function loadProfileData() {
             }
             svg += '</svg>';
             chart.innerHTML = svg + '<div class="donut-center"><div class="donut-total">' + total + '</div><div class="donut-label">' + (currentLang === 'nl' ? 'Repos' : 'Repos') + '</div></div>';
-            legend.innerHTML = Object.entries(skills).map(([lang, data]) => '<div class="legend-item"><div class="legend-color" style="background: ' + (colors[lang] || '#9ca3b4') + ';"></div><span class="legend-label">' + (langNames[lang] || lang) + '</span><span class="legend-value">' + data.repos + ' repos (' + data.percentage + '%)</span></div>').join('');
+            legend.innerHTML = skillEntries.map(([lang, data]) => '<div class="legend-item"><div class="legend-color" style="background: ' + (colors[lang] || '#9ca3b4') + ';"></div><span class="legend-label">' + (langNames[lang] || lang) + '</span><span class="legend-value">' + data.repos + ' repos (' + data.percentage + '%)</span></div>').join('');
                     }
 
         function downloadJSON() {
