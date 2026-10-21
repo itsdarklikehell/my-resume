@@ -162,6 +162,12 @@
             flex-wrap: wrap;
         }
 
+        .header h1 {
+            display: inline-block;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--accent);
+        }
+
         .header-avatar {
             width: 100px;
             height: 100px;
