@@ -110,6 +110,7 @@ const translations = {
                 platform_devto: "DEV.to",
                 platform_leetcode: "LeetCode",
                 platform_stackoverflow: "Stack Overflow",
+                platform_stackapps: "Stack Apps",
                 platform_cards: "Platformkaarten",
                 level: "Niveau",
                 xp: "XP",
@@ -123,6 +124,21 @@ const translations = {
                 top_tools: "Top tools",
                 badges: "Badges",
                 skill_matrix: "Vaardighedenmatrix",
+                respects: "Respect",
+                follows: "Volgend",
+                games: "Spelletjes",
+                app_count: "Apps",
+                projects: "Projecten",
+                articles: "Artikelen",
+                followers: "Volgers",
+                machines_owned: "Eigen machines",
+                country: "Land",
+                member_since: "Lid sinds",
+                next_rank: "Volgende rang",
+                apps_published: "Gepubliceerde apps",
+                communities: "Community's",
+                sites_active: "Actieve sites",
+                reached: "Bereikt",
                 data_not_available: "Gegevens niet publiek beschikbaar (geen open API / login vereist)",
                 last_refreshed: "Laatst vernieuwd",
                 repos_showcase: "GitHub Repositories",
@@ -351,6 +367,7 @@ const translations = {
                 platform_devto: "DEV.to",
                 platform_leetcode: "LeetCode",
                 platform_stackoverflow: "Stack Overflow",
+                platform_stackapps: "Stack Apps",
                 platform_cards: "Platform Cards",
                 level: "Level",
                 xp: "XP",
@@ -364,6 +381,21 @@ const translations = {
                 top_tools: "Top tools",
                 badges: "Badges",
                 skill_matrix: "Skill matrix",
+                respects: "Respects",
+                follows: "Following",
+                games: "Games",
+                app_count: "Apps",
+                projects: "Projects",
+                articles: "Articles",
+                followers: "Followers",
+                machines_owned: "Machines owned",
+                country: "Country",
+                member_since: "Member since",
+                next_rank: "Next rank",
+                apps_published: "Apps published",
+                communities: "Communities",
+                sites_active: "Active sites",
+                reached: "Reached",
                 data_not_available: "Data not publicly available (no open API / login required)",
                 last_refreshed: "Last refreshed",
                 repos_showcase: "GitHub Repositories",
@@ -671,6 +703,7 @@ const translations = {
                 platform_devto: "DEV.to",
                 platform_leetcode: "LeetCode",
                 platform_stackoverflow: "Stack Overflow",
+                platform_stackapps: "Stack Apps",
                 platform_cards: "Plattformkarten",
                 level: "Level",
                 xp: "XP",
@@ -684,6 +717,21 @@ const translations = {
                 top_tools: "Top Tools",
                 badges: "Abzeichen",
                 skill_matrix: "Skill-Matrix",
+                respects: "Respekte",
+                follows: "Folgt",
+                games: "Spiele",
+                app_count: "Apps",
+                projects: "Projekte",
+                articles: "Artikel",
+                followers: "Follower",
+                machines_owned: "Eigene Machines",
+                country: "Land",
+                member_since: "Mitglied seit",
+                next_rank: "Nächster Rang",
+                apps_published: "Veröffentlichte Apps",
+                communities: "Communities",
+                sites_active: "Aktive Sites",
+                reached: "Erreicht",
                 data_not_available: "Daten nicht öffentlich verfügbar (keine offene API / Login erforderlich)",
                 last_refreshed: "Zuletzt aktualisiert",
                 repos_showcase: "GitHub-Repositorys",
@@ -913,6 +961,7 @@ const translations = {
                 platform_devto: "DEV.to",
                 platform_leetcode: "LeetCode",
                 platform_stackoverflow: "Stack Overflow",
+                platform_stackapps: "Stack Apps",
                 platform_cards: "Cartes de plateforme",
                 level: "Niveau",
                 xp: "XP",
@@ -926,6 +975,21 @@ const translations = {
                 top_tools: "Outils principaux",
                 badges: "Badges",
                 skill_matrix: "Matrice de compétences",
+                respects: "Respect",
+                follows: "Abonnements",
+                games: "Jeux",
+                app_count: "Apps",
+                projects: "Projets",
+                articles: "Articles",
+                followers: "Abonnés",
+                machines_owned: "Machines possédées",
+                country: "Pays",
+                member_since: "Membre depuis",
+                next_rank: "Rang suivant",
+                apps_published: "Apps publiées",
+                communities: "Communautés",
+                sites_active: "Sites actifs",
+                reached: "Atteints",
                 data_not_available: "Données non publiques (pas d'API ouverte / connexion requise)",
                 last_refreshed: "Dernière actualisation",
                 repos_showcase: "Dépôts GitHub",
@@ -1405,7 +1469,7 @@ const translations = {
                 const ownRepos = gOwnRepos();
                 const ownStars = gOwnStars();
                 const languages = stats.languages;
-                const followers = githubData.github_user ? githubData.github_user.followers : 0;
+                const followers = githubData.user ? githubData.user.followers : 0;
                 const totalForks = stats.total_forks || 0;
 
                 if (ownRepos >= 100) achievements.push({ icon: '🏆', name: t.ach_centurion_n, desc: t.ach_centurion, unlocked: true });
@@ -1561,6 +1625,7 @@ const translations = {
                 devto:       '#0a0a0a',
                 leetcode:    '#f59e0b',
                 stackoverflow: '#f48024',
+                stackapps:   '#4b6bdc',
             };
 
             const platforms = [
@@ -1574,6 +1639,7 @@ const translations = {
                 { key: 'devto',       label: t.platform_devto || 'DEV.to',       icon: '📝' },
                 { key: 'leetcode',    label: t.platform_leetcode || 'LeetCode',    icon: '🟢' },
                 { key: 'stackoverflow', label: t.platform_stackoverflow || 'Stack Overflow', icon: '🧱' },
+                { key: 'stackapps', label: t.platform_stackapps || 'Stack Apps', icon: '📦' },
             ];
 
             let html = '<div class="platform-grid">';
@@ -1626,6 +1692,21 @@ const translations = {
                         { key: 'question_count', label: t.question_count || 'Questions', icon: '❓' },
                         { key: 'game_rating', label: t.game_rating || 'Game rating', icon: '⭐' },
                         { key: 'game_jams', label: t.game_jams || 'Game jams', icon: '🎮' },
+                        { key: 'games', label: t.games || 'Games', icon: '🎮' },
+                        { key: 'app_count', label: t.app_count || 'Apps', icon: '📦' },
+                        { key: 'projects', label: t.projects || 'Projects', icon: '📁' },
+                        { key: 'articles', label: t.articles || 'Articles', icon: '📰' },
+                        { key: 'respects', label: t.respects || 'Respects', icon: '👏' },
+                        { key: 'follows', label: t.follows || 'Following', icon: '🔗' },
+                        { key: 'followers', label: t.followers || 'Followers', icon: '👥' },
+                        { key: 'machines_owned', label: t.machines_owned || 'Machines owned', icon: '🖥️' },
+                        { key: 'country', label: t.country || 'Country', icon: '🌍' },
+                        { key: 'member_since', label: t.member_since || 'Member since', icon: '📅' },
+                        { key: 'next_rank', label: t.next_rank || 'Next rank', icon: '⬆️' },
+                        { key: 'apps_published', label: t.apps_published || 'Apps published', icon: '📦' },
+                        { key: 'communities', label: t.communities || 'Communities', icon: '🌐' },
+                        { key: 'sites_active', label: t.sites_active || 'Active sites', icon: '🔗' },
+                        { key: 'reached', label: t.reached || 'Reached', icon: '👁️' },
                     ];
 
                     fieldRows = fieldMap
@@ -1738,7 +1819,8 @@ const translations = {
                                 : (Array.isArray(raw.contributions) ? raw.contributions : []);
             const skills = (s.skills && typeof s.skills === 'object' && !Array.isArray(s.skills)) ? s.skills
                          : ((raw.skills && typeof raw.skills === 'object' && !Array.isArray(raw.skills)) ? raw.skills : {});
-            const user = (raw.github_user && typeof raw.github_user === 'object') ? raw.github_user : {};
+            const user = (raw.user && typeof raw.user === 'object') ? raw.user
+                        : ((raw.github_user && typeof raw.github_user === 'object') ? raw.github_user : {});
 
             const starsFromRepos = repos.reduce((a, r) => a + num(r && r.stars), 0);
             const forks = repos.filter(r => r && r.fork);
@@ -1762,7 +1844,7 @@ const translations = {
                         total_forks: num(inner.total_forks) || own.reduce((a, r) => a + num(r && r.forks), 0)
                     }
                 },
-                github_user: {
+                user: {
                     followers: num(user.followers),
                     following: num(user.following),
                     total_repos: num(user.total_repos) || repos.length
@@ -2039,7 +2121,7 @@ const translations = {
                 githubData = normalizeGitHubData(raw);
                 if (!githubData) throw new Error('onverwachte datastructuur');
 
-                console.log('GitHub data loaded from github-data.json:', (githubData.repos || []).length, 'repos');
+                console.log('GitHub data loaded from github-data.json:', gRepos().length, 'repos');
 
                 const failed = renderAll();
                 if (failed.length) {

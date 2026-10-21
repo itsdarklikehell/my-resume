@@ -10,7 +10,8 @@
                                 : (Array.isArray(raw.contributions) ? raw.contributions : []);
             const skills = (s.skills && typeof s.skills === 'object' && !Array.isArray(s.skills)) ? s.skills
                          : ((raw.skills && typeof raw.skills === 'object' && !Array.isArray(raw.skills)) ? raw.skills : {});
-            const user = (raw.github_user && typeof raw.github_user === 'object') ? raw.github_user : {};
+            const user = (raw.user && typeof raw.user === 'object') ? raw.user
+                        : ((raw.github_user && typeof raw.github_user === 'object') ? raw.github_user : {});
 
             const starsFromRepos = repos.reduce((a, r) => a + num(r && r.stars), 0);
             const forks = repos.filter(r => r && r.fork);
@@ -34,7 +35,7 @@
                         total_forks: num(inner.total_forks) || own.reduce((a, r) => a + num(r && r.forks), 0)
                     }
                 },
-                github_user: {
+                user: {
                     followers: num(user.followers),
                     following: num(user.following),
                     total_repos: num(user.total_repos) || repos.length

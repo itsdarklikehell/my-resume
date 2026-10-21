@@ -50,5 +50,9 @@ next-env.d.ts
 *.db
 *.db-*
 
+# Python
+__pycache__/
+*.py[cod]
+
 # Vercel
 .vercel

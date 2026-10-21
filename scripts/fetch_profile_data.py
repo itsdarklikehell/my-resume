@@ -41,12 +41,33 @@ CANONICAL_FIELDS = [
     'top_languages', 'recent_articles', 'comment_count',
     'gold_badges', 'silver_badges', 'bronze_badges', 'top_tags',
     'answer_count', 'question_count', 'game_rating', 'game_jams',
+    # Authenticated-source fields
+    'respects', 'follows', 'followers', 'machines_owned', 'country',
+    'member_since', 'next_rank', 'apps_published', 'communities',
+    'games', 'sites_active', 'reached',
 ]
 
 
 def _blank_platform():
     """Return a fresh platform dict with every canonical field set to 'N/A'."""
     return {field: 'N/A' for field in CANONICAL_FIELDS}
+
+
+def _jwt_subject(token):
+    """Return the ``sub`` claim of a JWT, or None if it cannot be decoded.
+
+    HackTheBox API keys are JWTs; the subject is the numeric labs user id
+    needed to address the v4 profile endpoint.
+    """
+    try:
+        import base64
+        payload = token.split('.')[1]
+        payload += '=' * (-len(payload) % 4)
+        claims = json.loads(base64.urlsafe_b64decode(payload))
+        subject = claims.get('sub')
+        return str(subject) if subject else None
+    except Exception:
+        return None
 
 
 def run_curl(url, headers=None):
@@ -410,23 +431,43 @@ def scrape_tryhackme(username):
 # HackTheBox
 # ===========================================================================
 def fetch_hackthebox():
-    """Fetch HackTheBox data via API or headless-browser scrape."""
-    api_key = os.getenv('HACKTHEBOX_API_KEY')
+    """Fetch HackTheBox data via API or headless-browser scrape.
+
+    The HTB API key is a JWT whose ``sub`` claim is the numeric labs user id,
+    so the profile endpoint can be addressed without a second hard-coded id.
+    """
+    api_key = os.getenv('HACKTHEBOX_API_KEY') or os.getenv('HTB_API_KEY')
     if api_key:
-        url = "https://www.hackthebox.com/api/v4/user/info"
-        headers = [f"Authorization: Bearer ***"]
-        data = run_curl(url, headers=headers)
-        if data and isinstance(data, dict):
-            d = _blank_platform()
-            rank = data.get('data', {}).get('profile', {}).get('rank', 'N/A')
-            points = data.get('data', {}).get('profile', {}).get('points', 0)
-            d['rank'] = str(rank)
-            d['points'] = int(points) if isinstance(points, (int, float)) else str(points)
-            d['level'] = d['rank']
-            d['xp'] = d['points']
-            d['reputation_points'] = d['points']
-            d['badges'] = d['rank']
-            return d
+        user_id = os.getenv('HACKTHEBOX_USER_ID') or _jwt_subject(api_key)
+        if user_id:
+            url = f"https://labs.hackthebox.com/api/v4/profile/{user_id}"
+            headers = [f"Authorization: Bearer {api_key}"]
+            data = run_curl(url, headers=headers)
+            profile = data.get('profile') if isinstance(data, dict) else None
+            if isinstance(profile, dict):
+                d = _blank_platform()
+                rank = profile.get('rank', 'N/A')
+                points = profile.get('points', 0)
+                respects = profile.get('respects', 0)
+                follows = profile.get('user_follows', 0)
+                followers = profile.get('followed_by_count', 0)
+                machines = (profile.get('user_owns', 0) or 0) + (profile.get('system_owns', 0) or 0)
+                d['rank'] = str(rank)
+                d['points'] = str(points)
+                d['level'] = str(rank)
+                d['xp'] = str(points)
+                d['reputation_points'] = str(respects)
+                d['badges'] = str(rank)
+                d['next_rank'] = str(profile.get('next_rank', 'N/A'))
+                d['respects'] = str(respects)
+                d['follows'] = str(follows)
+                d['followers'] = str(followers)
+                d['machines_owned'] = str(machines)
+                d['country'] = str(profile.get('country_name', 'N/A'))
+                d['github'] = str(profile.get('github', 'N/A'))
+                d['member_since'] = str(profile.get('joined_date', 'N/A'))[:10]
+                return d
+            print("HackTheBox: profile endpoint returned no profile — falling back to scrape")
     # Fallback to scrape
     return scrape_hackthebox()
 
@@ -579,8 +620,35 @@ def scrape_ctftime():
 # itch.io
 # ===========================================================================
 def fetch_itchio():
-    """Fetch itch.io data (no public API — scrape)."""
-    return scrape_itchio()
+    """Fetch itch.io data.
+
+    The public profile renders no counters for this account, so the metric
+    source is the authenticated API: ``my-games`` is the one documented route
+    that answers for the key holder and reports published games.
+    """
+    api_key = os.getenv('ICHIO_API_KEY')
+    d = scrape_itchio()
+    if not api_key:
+        return d
+
+    # Confirmed route: GET /api/1/key/my-games with a bearer token.
+    result = subprocess.run(
+        ['curl', '-s', '-H', f'Authorization: Bearer {api_key}',
+         'https://itch.io/api/1/key/my-games'],
+        capture_output=True, text=True, timeout=30)
+    if result.returncode != 0 or not result.stdout:
+        return d
+    try:
+        payload = json.loads(result.stdout)
+    except ValueError:
+        return d
+    if not isinstance(payload, dict):
+        return d
+
+    games = payload.get('games')
+    if isinstance(games, dict):
+        d['games_published'] = str(len(games))
+    return d
 
 
 def scrape_itchio():
@@ -599,53 +667,24 @@ def scrape_itchio():
                 games = 'N/A'
                 followers = 'N/A'
 
-                game_elements = page.query_selector_all('text=/games/i')
-                for elem in game_elements:
-                    try:
-                        parent = elem.evaluate_handle('el => el.parentElement')
-                        if parent:
-                            parent_text = parent.inner_text().strip()
-                            numbers = re.findall(r'[0-9]+', parent_text)
-                            if numbers:
-                                games = numbers[0]
-                                break
-                    except:
-                        pass
+                # The itch.io profile renders its counters as "<n> games" /
+                # "<n> followers" inside the visible text. Read them from the
+                # rendered text only — never from raw HTML, whose numbers come
+                # from CSS/JS and would fabricate statistics.
+                page_text = page.evaluate('() => document.body.innerText')
 
-                follower_elements = page.query_selector_all('text=/followers/i')
-                for elem in follower_elements:
-                    try:
-                        parent = elem.evaluate_handle('el => el.parentElement')
-                        if parent:
-                            parent_text = parent.inner_text().strip()
-                            numbers = re.findall(r'[0-9]+', parent_text)
-                            if numbers:
-                                followers = numbers[0]
-                                break
-                    except:
-                        pass
+                games_match = re.search(r'([\d.,]+)\s*games?\b', page_text, re.IGNORECASE)
+                if games_match:
+                    games = games_match.group(1).replace(',', '')
 
-                # Fallback
-                if games == 'N/A':
-                    all_text = page.content()
-                    nums = re.findall(r'[0-9]+', all_text)
-                    for num in nums:
-                        if 1 <= len(num) <= 3 and int(num) < 100:
-                            games = num
-                            break
-                if followers == 'N/A':
-                    all_text = page.content()
-                    nums = re.findall(r'[0-9]+', all_text)
-                    for num in nums:
-                        if 1 <= len(num) <= 5 and int(num) < 10000:
-                            followers = num
-                            break
+                followers_match = re.search(r'([\d.,]+)\s*followers?\b', page_text, re.IGNORECASE)
+                if followers_match:
+                    followers = followers_match.group(1).replace(',', '')
 
                 d['games'] = games.strip()
                 d['followers'] = followers.strip()
                 # --- game rating ---
                 game_rating = 'N/A'
-                page_text = page.evaluate('() => document.body.innerText')
                 rating_match = re.search(r'(\d[\.,]\d)\s*/\s*5', page_text)
                 if rating_match:
                     game_rating = rating_match.group(1).replace(',', '.')
@@ -653,15 +692,17 @@ def scrape_itchio():
 
                 # --- game jams ---
                 game_jams = 'N/A'
-                jam_match = re.search(r'(\d+)\s+jam', page_text, re.IGNORECASE)
+                jam_match = re.search(r'(\d+)\s*jam', page_text, re.IGNORECASE)
                 if jam_match:
                     game_jams = jam_match.group(1)
                 d['game_jams'] = game_jams
 
-                # Map onto canonical fields
-                d['xp'] = d['followers']
-                d['reputation_points'] = d['followers']
-                d['event_participation'] = d['games']
+                # Map onto canonical fields. itch.io exposes no XP or reputation
+                # metric, so those stay N/A rather than being aliased to the
+                # follower count.
+                d['xp'] = 'N/A'
+                d['reputation_points'] = 'N/A'
+                d['event_participation'] = 'N/A'
 
                 return d
             finally:
@@ -719,50 +760,76 @@ def fetch_codewars():
 # DEV.to
 # ===========================================================================
 def fetch_devto():
-    """Fetch DEV.to data via public API."""
+    """Fetch DEV.to data via public API.
+
+    The public ``by_username`` endpoint only returns identity fields — it does
+    not expose post/follower counts, so article and comment listings are used
+    to derive real activity numbers instead of reporting fabricated zeros.
+    """
     username = os.getenv('DEVTO_USERNAME', 'itsdarklikehell')
+    api_key = os.getenv('DEV_TO_API_KEY') or os.getenv('DEVTO_API_KEY')
+    headers = [f"api-key: {api_key}"] if api_key else None
     url = f"https://dev.to/api/users/by_username?url={username}"
-    data = run_curl(url)
+    data = run_curl(url, headers=headers)
     if data and isinstance(data, dict):
         d = _blank_platform()
-        posts = data.get('post_count', 0)
-        followers = data.get('followers_count', 0)
-        d['xp'] = str(posts)
-        d['reputation_points'] = str(followers)
-        d['event_participation'] = str(posts)
-        d['skills'] = 'N/A'
-        d['badges'] = str(posts)
+        posts = _devto_list_count(
+            f"https://dev.to/api/articles?username={username}&per_page=100", headers)
+        comments = _devto_list_count(
+            f"https://dev.to/api/comments?username={username}&per_page=100", headers)
+        # DEV.to exposes no XP, reputation or badge metric. Map the confirmed
+        # article/comment counts onto their own rows instead of aliasing them
+        # onto fields DEV.to does not have.
+        d['articles'] = str(posts) if posts is not None else 'N/A'
+        d['xp'] = 'N/A'
+        d['reputation_points'] = 'N/A'
+        d['event_participation'] = 'N/A'
+        d['badges'] = 'N/A'
+        d['comment_count'] = str(comments) if comments is not None else 'N/A'
+        d['recent_articles'] = 'N/A'
+        d['member_since'] = str(data.get('joined_at', 'N/A'))
+        d['github'] = str(data.get('github_username', 'N/A'))
         # --- recent articles ---
-        recent_articles = 'N/A'
         try:
             import json as _json
             articles_url = f"https://dev.to/api/articles?username={username}&per_page=5"
-            articles_cmd = ['curl', '-s', articles_url]
+            articles_cmd = ['curl', '-s']
+            if headers:
+                for header in headers:
+                    articles_cmd.extend(['-H', header])
+            articles_cmd.append(articles_url)
             articles_result = subprocess.run(articles_cmd, capture_output=True, text=True, timeout=30)
             if articles_result.returncode == 0:
                 articles = _json.loads(articles_result.stdout)
                 if isinstance(articles, list) and articles:
                     titles = [a.get('title', '') for a in articles if a.get('title')]
-                    recent_articles = ' | '.join(titles[:5])
+                    d['recent_articles'] = ' | '.join(titles[:5])
         except Exception:
             pass
-        d['recent_articles'] = recent_articles
-
-        # --- comment count ---
-        comment_count = 'N/A'
-        try:
-            comments_url = f"https://dev.to/api/comments?username={username}"
-            comments_cmd = ['curl', '-s', comments_url]
-            comments_result = subprocess.run(comments_cmd, capture_output=True, text=True, timeout=30)
-            if comments_result.returncode == 0:
-                comments = _json.loads(comments_result.stdout)
-                if isinstance(comments, list):
-                    comment_count = str(len(comments))
-        except Exception:
-            pass
-        d['comment_count'] = comment_count
         return d
     return _blank_platform()
+
+
+def _devto_list_count(url, headers=None):
+    """Return the number of items in a DEV.to list endpoint, or None on error.
+
+    A failed request returns a JSON error object rather than a list, so the
+    type is checked before counting — otherwise the count would silently
+    become the number of keys in the error payload.
+    """
+    try:
+        cmd = ['curl', '-s']
+        for header in headers or []:
+            cmd.extend(['-H', header])
+        cmd.append(url)
+        result = subprocess.run(cmd, capture_output=True, text=True, timeout=30)
+        if result.returncode == 0:
+            payload = json.loads(result.stdout)
+            if isinstance(payload, list):
+                return len(payload)
+    except Exception:
+        pass
+    return None
 
 
 # ===========================================================================
@@ -868,53 +935,186 @@ def scrape_leetcode(username):
 # Stack Overflow
 # ===========================================================================
 def fetch_stackoverflow():
-    """Fetch Stack Overflow data via public API (needs user ID)."""
-    user_id = os.getenv('STACKOVERFLOW_USER_ID', '9409286')
-    if not user_id:
-        print("Stack Overflow: STACKOVERFLOW_USER_ID not set — skipping")
+    """Fetch Stack Exchange network data via API (needs user ID).
+
+    Stack Exchange public profile URLs use the network-wide ``account_id``
+    (e.g. 7015377), while the API addresses a profile by the per-site
+    ``user_id``.  Querying account_id as a user_id returns an unrelated
+    account, so every site the user belongs to is queried with its own id
+    and the results are aggregated.
+    """
+    api_key = os.getenv('STACK_API_KEY')
+    sites = _se_site_user_ids(api_key)
+    if not sites:
+        sites = {'stackoverflow': os.getenv('STACKOVERFLOW_USER_ID', '9409286')}
+
+    gold = silver = bronze = 0
+    reputation = 0
+    answers = 0
+    questions = 0
+    tag_names = []
+    active = 0
+
+    for site, user_id in sites.items():
+        base = f"https://api.stackexchange.com/2.3/users/{user_id}"
+        suffix = f"?site={site}"
+        if api_key:
+            suffix += f"&key={api_key}"
+        data = run_curl(base + suffix)
+        items = data.get('items', []) if isinstance(data, dict) else []
+        if not items:
+            continue
+        active += 1
+        profile = items[0]
+        counts = profile.get('badge_counts') or {}
+        gold += counts.get('gold', 0) or 0
+        silver += counts.get('silver', 0) or 0
+        bronze += counts.get('bronze', 0) or 0
+        reputation += profile.get('reputation', 0) or 0
+
+        # The default profile filter omits answer_count/question_count, so the
+        # totals endpoints are queried explicitly for real post counts.
+        for kind in ('answers', 'questions'):
+            totals_url = (f"https://api.stackexchange.com/2.3/users/{user_id}"
+                          f"/{kind}?site={site}&filter=total"
+                          + (f"&key={api_key}" if api_key else ""))
+            totals = run_curl(totals_url)
+            total = totals.get('total', 0) if isinstance(totals, dict) else 0
+            if kind == 'answers':
+                answers += total or 0
+            else:
+                questions += total or 0
+
+        if not tag_names:
+            tags_url = (f"https://api.stackexchange.com/2.3/users/{user_id}"
+                        f"/tags?site={site}&pagesize=5&sort=popular"
+                        + (f"&key={api_key}" if api_key else ""))
+            tags_resp = run_curl(tags_url)
+            tag_items = tags_resp.get('items', []) if isinstance(tags_resp, dict) else []
+            tag_names = [t.get('name', '') for t in tag_items if t.get('name')]
+
+    if not active:
         return _blank_platform()
-    url = f"https://api.stackexchange.com/2.3/users/{user_id}?site=stackoverflow&filter=withbody"
-    data = run_curl(url)
-    if data and isinstance(data, dict):
-        items = data.get('items', [])
-        if items:
-            profile = items[0]
-            d = _blank_platform()
-            rep = profile.get('reputation', 0)
-            badges = profile.get('badge_counts', {})
-            gold = badges.get('gold', 0) if isinstance(badges, dict) else 0
-            silver = badges.get('silver', 0) if isinstance(badges, dict) else 0
-            bronze = badges.get('bronze', 0) if isinstance(badges, dict) else 0
-            total_badges = gold + silver + bronze
-            q_count = profile.get('question_count', 0)
-            a_count = profile.get('answer_count', 0)
-            d['reputation_points'] = str(rep)
-            d['badges'] = str(total_badges)
-            d['badges_count'] = str(total_badges)
-            d['gold_badges'] = str(gold)
-            d['silver_badges'] = str(silver)
-            d['bronze_badges'] = str(bronze)
-            d['xp'] = str(rep)
-            d['event_participation'] = str(q_count + a_count)
-            d['answer_count'] = str(a_count)
-            d['question_count'] = str(q_count)
-            # --- top tags ---
-            top_tags = 'N/A'
+
+    d = _blank_platform()
+    total_badges = gold + silver + bronze
+    d['reputation_points'] = str(reputation)
+    d['badges'] = str(total_badges)
+    d['badges_count'] = str(total_badges)
+    d['gold_badges'] = str(gold)
+    d['silver_badges'] = str(silver)
+    d['bronze_badges'] = str(bronze)
+    d['xp'] = 'N/A'
+    d['event_participation'] = str(answers + questions)
+    d['answer_count'] = str(answers)
+    d['question_count'] = str(questions)
+    d['top_tags'] = ', '.join(tag_names) if tag_names else 'N/A'
+    d['sites_active'] = str(active)
+    d['communities'] = ', '.join(sorted(sites.keys()))
+    return d
+
+
+def _se_site_user_ids(api_key):
+    """Return {site: user_id} for every Stack Exchange site the user belongs to.
+
+    The StackApps profile page lists the account link for every community the
+    user participates in, which is where the per-site user ids come from.
+    """
+    user_id = os.getenv('STACK_USER_ID', '167126')
+    result = subprocess.run(
+        ['curl', '-sL', f'https://stackapps.com/users/{user_id}'],
+        capture_output=True, text=True, timeout=30)
+    if result.returncode != 0 or not result.stdout:
+        return {}
+    html = result.stdout
+    sites = {}
+    for match in re.finditer(r'https?://([a-z0-9.]+)\.com/users/(\d+)/', html):
+        site, site_user_id = match.group(1), match.group(2)
+        if site == 'stackexchange':
+            continue  # account_id namespace, not a per-site id
+        sites.setdefault(site, site_user_id)
+    return sites
+
+
+# ===========================================================================
+# Stack Apps
+# ===========================================================================
+def fetch_stackapps():
+    """Fetch Stack Apps data from the public profile page and RSS feed.
+
+    Stack Apps has no public JSON API, but the user page exposes reputation
+    statistics and the per-user feed lists published applications.
+    """
+    user_id = os.getenv('STACK_USER_ID', '167126')
+    result = subprocess.run(
+        ['curl', '-sL', f'https://stackapps.com/users/{user_id}'],
+        capture_output=True, text=True, timeout=30)
+    if result.returncode != 0 or not result.stdout:
+        return _blank_platform()
+    html = result.stdout
+
+    d = _blank_platform()
+    stats = _html_stats(html)
+    if not stats:
+        return d
+    d['reputation_points'] = str(stats.get('reputation', 0))
+    d['xp'] = 'N/A'
+    d['answer_count'] = str(stats.get('answers', 0))
+    d['question_count'] = str(stats.get('questions', 0))
+    d['event_participation'] = str(stats.get('answers', 0) + stats.get('questions', 0))
+    d['reached'] = str(stats.get('reached', 0))
+    d['communities'] = str(_stackapps_community_count(html))
+    d['apps_published'] = str(_stackapps_app_count(user_id))
+    return d
+
+
+def _html_stats(html):
+    """Extract reputation/answers/questions/reached counts from HTML.
+
+    The stats are read from the profile's "Stats" block, whose layout is a
+    fixed sequence of label/value pairs. Matching the sequence as a whole
+    avoids picking up unrelated numbers from the marketing header (for example
+    the site-wide "184 communities for the curious" tagline).
+    """
+    stats = {}
+    flat = re.sub(r'<[^>]+>', ' ', html)
+    flat = re.sub(r'\s+', ' ', flat)
+
+    block = re.search(
+        r'([\d.,]+)\s+reputation\s+([\d.,]+)\s+reached\s+'
+        r'([\d.,]+)\s+answers\s+([\d.,]+)\s+questions',
+        flat, re.IGNORECASE)
+    if block:
+        for key, raw in zip(('reputation', 'reached', 'answers', 'questions'), block.groups()):
             try:
-                tags_url = f"https://api.stackexchange.com/2.3/users/{user_id}/tags?site=stackoverflow&pagesize=5&sort=popular"
-                tags_cmd = ['curl', '-s', tags_url]
-                tags_result = subprocess.run(tags_cmd, capture_output=True, text=True, timeout=30)
-                if tags_result.returncode == 0:
-                    tags_resp = json.loads(tags_result.stdout)
-                    tag_items = tags_resp.get('items', [])
-                    if tag_items:
-                        tag_names = [t.get('name', '') for t in tag_items if t.get('name')]
-                        top_tags = ', '.join(tag_names)
-            except Exception:
-                pass
-            d['top_tags'] = top_tags
-            return d
-    return _blank_platform()
+                stats[key] = int(raw.replace(',', ''))
+            except ValueError:
+                stats[key] = 0
+    return stats
+
+
+def _stackapps_community_count(html):
+    """Count the communities the profile lists under its "Communities" section.
+
+    The "View all" link points at the network accounts tab, and each listed
+    community is one link to a per-site user profile.
+    """
+    sites = set()
+    for match in re.finditer(r'https?://([a-z0-9.]+)\.com/users/\d+/"', html):
+        site = match.group(1)
+        if site != 'stackexchange':
+            sites.add(site)
+    return len(sites)
+
+
+def _stackapps_app_count(user_id):
+    """Count published applications in the Stack Apps per-user RSS feed."""
+    result = subprocess.run(
+        ['curl', '-sL', f'https://stackapps.com/feeds/user/{user_id}'],
+        capture_output=True, text=True, timeout=30)
+    if result.returncode != 0 or not result.stdout:
+        return 0
+    return len(re.findall(r'<entry>', result.stdout))
 
 
 
@@ -929,7 +1129,7 @@ def main():
         print(f"Error reading existing {profile_path}: {e}", file=sys.stderr)
         existing = {}
     # Ensure subkeys exist with canonical fields backfilled
-    for key in ['tryhackme', 'hackthebox', 'cylab', 'microsoft', 'ctftime', 'itchio', 'codewars', 'devto', 'leetcode', 'stackoverflow', 'generated_at']:
+    for key in ['tryhackme', 'hackthebox', 'cylab', 'microsoft', 'ctftime', 'itchio', 'codewars', 'devto', 'leetcode', 'stackoverflow', 'stackapps', 'generated_at']:
         if key not in existing:
             existing[key] = {} if key != 'generated_at' else ''
         elif key != 'generated_at':
@@ -948,6 +1148,7 @@ def main():
         ('devto', fetch_devto),
         ('leetcode', fetch_leetcode),
         ('stackoverflow', fetch_stackoverflow),
+        ('stackapps', fetch_stackapps),
     ]
     for key, fetch_func in platforms:
         print(f"Fetching {key}...")
@@ -957,7 +1158,7 @@ def main():
             # values, so a failed scrape in CI doesn't overwrite previously
             # good live data.
             has_data = any(
-                v != 'N/A' and v != 0
+                v != 'N/A' and v != 0 and v != '0'
                 for v in fetched.values()
                 if isinstance(v, (str, int))
             )

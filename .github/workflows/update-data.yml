@@ -25,7 +25,7 @@ jobs:
           python-version: '3.11'
 
       - name: Install Playwright
-        run: pip install playwright
+        run: pip install playwright==1.48.0
 
       - name: Install Playwright browsers
         run: playwright install chromium
@@ -48,6 +48,16 @@ jobs:
         run: python scripts/fetch_github_data.py
 
       - name: Fetch profile data
+        env:
+          # Platform API keys — stored as repository secrets, never in the repo.
+          HACKTHEBOX_API_KEY: ${{ secrets.HACKTHEBOX_API_KEY }}
+          DEV_TO_API_KEY: ${{ secrets.DEV_TO_API_KEY }}
+          STACK_API_KEY: ${{ secrets.STACK_API_KEY }}
+          ICHIO_API_KEY: ${{ secrets.ICHIO_API_KEY }}
+          # Non-secret identifiers
+          STACK_USER_ID: ${{ vars.STACK_USER_ID }}
+          STACKOVERFLOW_USER_ID: ${{ vars.STACKOVERFLOW_USER_ID }}
+          DEVTO_USERNAME: ${{ vars.DEVTO_USERNAME }}
         run: python scripts/fetch_profile_data.py
 
       - name: Commit and push changes
