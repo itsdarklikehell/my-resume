@@ -1112,3 +1112,5 @@ section#certificates-section:not(.expanded) .timeline-item:nth-child(n+4) { disp
 
 /* Collapse skills list to 3 unless expanded */
 #skills-container:not(.expanded) .skill-bar:nth-child(n+4) { display: none !important; }
+
+#repos-showcase-section:not(.expanded) .repo-card:nth-child(n+5) { display: none !important; }
