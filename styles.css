@@ -1106,5 +1106,5 @@
   }
 }
 
-/* Collapse work experience to 4 most recent entries */
-section.card:has(h2[data-i18n="experience"]) .timeline-item:nth-child(n+5) { display: none !important; }
+/* Collapse work experience to 4 most recent entries unless expanded */
+section.card:has(h2[data-i18n="experience"]):not(.expanded) .timeline-item:nth-child(n+5) { display: none !important; }

@@ -2193,6 +2193,13 @@ async function loadProfileData() {
             URL.revokeObjectURL(url);
         }
 
+        function toggleExperience(btn) {
+            const card = btn.closest('section.card');
+            card.classList.toggle('expanded');
+            btn.textContent = card.classList.contains('expanded') ? 'Show less' : 'Show more';
+        }
+        window.toggleExperience = toggleExperience;
+
         function sendEmail(e) {
             e.preventDefault();
             const form = e.target;
