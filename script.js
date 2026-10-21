@@ -2024,98 +2024,13 @@ const translations = {
 
         async function loadGitHubData() {
             try {
-                // Fetch all data directly from GitHub API
-                const [userResp, reposResp, eventsResp, orgReposResp] = await Promise.all([
-                    fetch('https://api.github.com/users/itsdarklikehell', { cache: 'no-cache', headers: { 'Accept': 'application/vnd.github+json' } }),
-                    fetch('https://api.github.com/users/itsdarklikehell/repos?per_page=100&sort=updated', { cache: 'no-cache', headers: { 'Accept': 'application/vnd.github+json' } }),
-                    fetch('https://api.github.com/users/itsdarklikehell/events/public?per_page=100', { cache: 'no-cache', headers: { 'Accept': 'application/vnd.github+json' } }),
-                    fetch('https://api.github.com/orgs/itsdarklikehell-interactive/repos?per_page=100&sort=updated', { cache: 'no-cache', headers: { 'Accept': 'application/vnd.github+json' } })
-                ]);
-
-                if (!userResp.ok) throw new Error('User API HTTP ' + userResp.status);
-                if (!reposResp.ok) throw new Error('Repos API HTTP ' + reposResp.status);
-
-                const user = await userResp.json();
-                const repos = await reposResp.json();
-                const events = eventsResp.ok ? await eventsResp.json() : [];
-                const orgRepos = orgReposResp.ok ? await orgReposResp.json() : [];
-
-                // Build repos array in expected format (personal + org)
-                const allRepos = [...(Array.isArray(repos) ? repos : []), ...(Array.isArray(orgRepos) ? orgRepos : [])];
-                const reposFormatted = allRepos.map(r => ({
-                    name: r.name,
-                    language: r.language,
-                    stars: r.stargazers_count || 0,
-                    description: r.description || '',
-                    updated_at: r.updated_at,
-                    url: r.html_url,
-                    topics: r.topics || [],
-                    fork: r.fork || false,
-                    forks: r.forks_count || 0
-                }));
-
-                // Build contributions from events
-                const contributions = [];
-                const seen = new Set();
-                (Array.isArray(events) ? events : []).forEach(ev => {
-                    if (['PushEvent', 'CreateEvent', 'PullRequestEvent', 'IssuesEvent', 'ReleaseEvent'].includes(ev.type)) {
-                        const date = ev.created_at;
-                        if (!seen.has(date)) {
-                            seen.add(date);
-                            contributions.push({
-                                type: ev.type,
-                                repo: ev.repo ? ev.repo.name : '',
-                                date: date,
-                                url: ev.repo ? 'https://github.com/' + ev.repo.name : ''
-                            });
-                        }
-                    }
-                });
-
-                // Derive skills from repo languages (personal + org)
-                const langCounts = {};
-                reposFormatted.forEach(r => {
-                    if (r.language) {
-                        langCounts[r.language] = (langCounts[r.language] || 0) + 1;
-                    }
-                });
-                const totalLangRepos = Object.values(langCounts).reduce((a, b) => a + b, 0) || 1;
-                const skills = {};
-                Object.entries(langCounts).forEach(([lang, count]) => {
-                    skills[lang] = {
-                        percentage: Math.round((count / totalLangRepos) * 100),
-                        repos: count,
-                        stars: reposFormatted.filter(r => r.language === lang).reduce((a, r) => a + (r.stars || 0), 0)
-                    };
-                });
-
-                const raw = {
-                    generated_at: new Date().toISOString(),
-                    user: {
-                        login: user.login,
-                        name: user.name || user.login,
-                        bio: user.bio || '',
-                        public_repos: user.public_repos || 0,
-                        followers: user.followers || 0,
-                        following: user.following || 0,
-                        created_at: user.created_at,
-                        avatar_url: user.avatar_url
-                    },
-                    repos: reposFormatted,
-                    contributions: contributions,
-                    skills: skills,
-                    stats: {
-                        total_repos: user.public_repos || reposFormatted.length,
-                        total_stars: reposFormatted.reduce((a, r) => a + (r.stars || 0), 0),
-                        languages: Object.keys(langCounts).length
-                    }
-                };
-
+                const resp = await fetch('github-data.json', { cache: 'no-cache' });
+                if (!resp.ok) throw new Error('github-data.json HTTP ' + resp.status);
+                const raw = await resp.json();
                 githubData = normalizeGitHubData(raw);
                 if (!githubData) throw new Error('onverwachte datastructuur');
 
-                // Also fetch live activity from GitHub API for heatmap (already included above)
-                console.log('Live GitHub data fetched:', reposFormatted.length, 'repos,', contributions.length, 'contributions');
+                console.log('GitHub data loaded from github-data.json:', (githubData.repos || []).length, 'repos');
 
                 const failed = renderAll();
                 if (failed.length) {
