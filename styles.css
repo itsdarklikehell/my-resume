@@ -711,6 +711,8 @@
             .no-print, .last-updated { display: none !important; }
             #featured-section { display: block !important; }
             .timeline-item { opacity: 1; transform: none; animation: none; page-break-inside: avoid; }
+            /* Print: collapse work experience to 4 most recent entries */
+            section.card:has(h2[data-i18n="experience"]) .timeline-item:nth-child(n+5) { display: none !important; }
             .donut-chart { display: none; }
             .donut-legend { display: flex; }
             .card { page-break-inside: avoid; margin-bottom: 0.6rem !important; padding: 0.7rem !important; }
