@@ -2215,6 +2215,13 @@ async function loadProfileData() {
             renderSkills();
         }
         window.toggleSkillSort = toggleSkillSort;
+        function toggleSkillsMore(btn) {
+            const c = document.getElementById('skills-container');
+            c.classList.toggle('expanded');
+            btn.textContent = c.classList.contains('expanded') ? 'Show less' : 'Show more';
+        }
+        window.toggleSkillsMore = toggleSkillsMore;
+
         function sendEmail(e) {
             e.preventDefault();
             const form = e.target;
