@@ -1651,7 +1651,10 @@ const translations = {
                         <div class="card-icon" style="color: ${accent};">${p.icon}</div>
                         <div class="card-name">${p.label}</div>
                     </div>
-                    ${fieldRows}
+                    <details class="stats-popup">
+                        <summary style="cursor:pointer;font-size:.8rem;opacity:.8;">📊 ${t.stats || 'Stats'}</summary>
+                        ${fieldRows}
+                    </details>
                     <div class="card-footer">${t.last_refreshed || 'Last refreshed'}: ${refreshedStr}</div>
                 </div>`;
             });
