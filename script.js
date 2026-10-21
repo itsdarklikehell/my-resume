@@ -1167,6 +1167,12 @@ const translations = {
             document.getElementById('stat-repos').textContent = gOwnRepos();
             document.getElementById('stat-stars').textContent = gOwnStars();
             document.getElementById('stat-langs').textContent = stats.languages;
+            if (githubData.user) {
+                const f = document.getElementById('stat-followers');
+                if (f) f.textContent = githubData.user.followers || 0;
+                const fw = document.getElementById('stat-following');
+                if (fw) fw.textContent = githubData.user.following || 0;
+            }
 
             // Contextregel: hoeveel forks eronder liggen
             const note = document.getElementById('stats-note');
