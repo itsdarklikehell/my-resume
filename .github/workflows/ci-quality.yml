@@ -51,8 +51,9 @@ jobs:
         with:
           node-version: '20.18.0'
       - name: Run Lighthouse CI
+        # LHCI_GITHUB_APP_TOKEN is optional; results are written to .lighthouseci/reports
+        env:
+          CHROME_PATH: /usr/bin/google-chrome-stable
         run: |
           npm install -g @lhci/cli@0.14.0
           lhci autorun
-        env:
-          LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
