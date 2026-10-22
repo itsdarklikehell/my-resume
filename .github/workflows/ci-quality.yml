@@ -1,0 +1,58 @@
+name: CI Quality
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4.2.2
+
+      - name: Setup Node
+        uses: actions/setup-node@v4.3.0
+        with:
+          node-version: '20.18.0'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Validate HTML
+        run: |
+          npx --yes html-validate@9.1.0 --formatter stylish \
+            --config .htmlvalidate.json index.html 404.html
+
+      - name: Lint CSS
+        run: |
+          npm install --no-save stylelint@16.10.0 stylelint-config-standard@36.0.1
+          npx stylelint "styles.css" --config .stylelintrc.json
+
+      - name: Lint JavaScript
+        run: |
+          npx eslint --rule '{"no-unused-vars":"warn"}' script.js sw.js src/*.js
+
+      - name: Unit tests
+        run: npm test -- --passWithNoTests
+
+  lighthouse:
+    runs-on: ubuntu-24.04
+    needs: validate
+    steps:
+      - uses: actions/checkout@v4.2.2
+      - name: Setup Node
+        uses: actions/setup-node@v4.3.0
+        with:
+          node-version: '20.18.0'
+      - name: Run Lighthouse CI
+        run: |
+          npm install -g @lhci/cli@0.14.0
+          lhci autorun
+        env:
+          LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}

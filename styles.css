@@ -707,7 +707,7 @@
             /* Printbreedte is ~816px, net onder de 860px mobile-breakpoint.
                Zonder deze regel klapt de layout naar 1 kolom en wordt de PDF
                8 pagina's i.p.v. 3. */
-            .grid { grid-template-columns: 1fr 300px !important; gap: 1.25rem !important; }
+            .grid { grid-template-columns: 1fr 240px !important; gap: 1rem !important; }
             .container { padding: 0 !important; max-width: none !important; }
             body { background: #fff; color: #000; font-size: 10pt; }
             .card, .header { border-color: #ddd; background: #fff; box-shadow: none; }
@@ -719,7 +719,12 @@
             .timeline-item { opacity: 1; transform: none; animation: none; page-break-inside: avoid; }
             .donut-chart { display: none; }
             .donut-legend { display: flex; }
-            .card { page-break-inside: avoid; margin-bottom: 0.6rem !important; padding: 0.7rem !important; }
+            /* Only small blocks avoid a page break. A section taller than a
+               page (the work-experience timeline) would otherwise be pushed
+               to a fresh page and leave the previous one half empty. */
+            .card { margin-bottom: 0.6rem !important; padding: 0.7rem !important; }
+            .card h2 { break-after: avoid; page-break-after: avoid; }
+            .timeline-item { break-inside: avoid; page-break-inside: avoid; }
             .footer { page-break-before: avoid; margin-top: 0.5rem !important; font-size: 8pt !important; }
             h2 { page-break-after: avoid; font-size: 12pt !important; margin-bottom: 0.5rem !important; }
             video { display: none !important; }
@@ -1112,11 +1117,71 @@
   }
 }
 
-/* Collapse work experience to 4 most recent entries unless expanded */
-section.card:has(h2[data-i18n="experience"]):not(.expanded) .timeline-item:nth-child(n+5) { display: none !important; }
-section#certificates-section:not(.expanded) .timeline-item:nth-child(n+4) { display: none !important; }
+/* On-screen collapse. These rules are scoped to @media screen so a printed
+   CV always shows every entry — the paper version must not be truncated. */
+@media screen {
+  /* Collapse work experience to 4 most recent entries unless expanded */
+  section.card:has(h2[data-i18n="experience"]):not(.expanded) .timeline-item:nth-child(n+5) { display: none !important; }
+  section#certificates-section:not(.expanded) .timeline-item:nth-child(n+4) { display: none !important; }
 
-/* Collapse skills list to 3 unless expanded */
-#skills-container:not(.expanded) .skill-bar:nth-child(n+4) { display: none !important; }
+  /* Collapse skills list to 3 unless expanded */
+  #skills-container:not(.expanded) .skill-bar:nth-child(n+4) { display: none !important; }
 
-#repos-showcase-section:not(.expanded) .repo-card:nth-child(n+5) { display: none !important; }
+  #repos-showcase-section:not(.expanded) .repo-card:nth-child(n+5) { display: none !important; }
+
+  /* Collapse the expertise tags to 4 unless expanded */
+  #expertise-section:not(.expanded) .tags .tag:nth-child(n+5) { display: none !important; }
+}
+
+/* Print: the collapse buttons have no meaning on paper. */
+@media print {
+  .show-more-btn { display: none !important; }
+
+  /* Compact the work-experience timeline so the whole CV fits on paper.
+     Older agency roles keep their title, company and period but drop the
+     bullet detail — the full descriptions stay on the website. */
+  section.card:has(h2[data-i18n="experience"]) .timeline-item {
+    padding-bottom: 0.45rem;
+    padding-left: 1.1rem;
+  }
+  section.card:has(h2[data-i18n="experience"]) .timeline-item .role { font-size: 0.92rem; margin-bottom: 0.05rem; }
+  section.card:has(h2[data-i18n="experience"]) .timeline-item .company { font-size: 0.8rem; margin-bottom: 0.05rem; }
+  section.card:has(h2[data-i18n="experience"]) .timeline-item .period { font-size: 0.76rem; margin-bottom: 0.15rem; }
+  section.card:has(h2[data-i18n="experience"]) .timeline-item ul li { font-size: 0.82rem; padding: 0.02rem 0; }
+
+  /* Entries 5 and up (children 6+ of the section) are shown as one-liners:
+     the four most recent roles keep their bullet detail, the earlier ones
+     become a compact role/company/date list. */
+  section.card:has(h2[data-i18n="experience"]) .timeline-item:nth-child(n+6) ul { display: none !important; }
+  section.card:has(h2[data-i18n="experience"]) .timeline-item:nth-child(n+6) { padding-bottom: 0.25rem; }
+  section.card:has(h2[data-i18n="experience"]) .timeline-item:nth-child(n+6) .role,
+  section.card:has(h2[data-i18n="experience"]) .timeline-item:nth-child(n+6) .company,
+  section.card:has(h2[data-i18n="experience"]) .timeline-item:nth-child(n+6) .period {
+    display: inline;
+    font-size: 0.8rem;
+    margin-right: 0.3rem;
+  }
+  section.card:has(h2[data-i18n="experience"]) .timeline-item:nth-child(n+6) .period { margin-bottom: 0; }
+
+  /* Tighten the certificate timeline the same way. */
+  section#certificates-section .timeline-item { padding-bottom: 0.4rem; }
+  section#certificates-section .timeline-item ul li { font-size: 0.82rem; padding: 0.02rem 0; }
+
+  /* Compact the featured projects and the skills list. */
+  #featured-container .project-item { margin-bottom: 0.4rem !important; }
+  #featured-container .project-desc { font-size: 8.5pt !important; }
+  #featured-container .project-tech { font-size: 8pt !important; }
+  .skill-bar { margin-bottom: 0.4rem !important; }
+  .skill-bar .bar { height: 5px !important; }
+  .card p.about-text { margin-bottom: 0.4rem !important; }
+  .card ul { margin-top: 0.3rem !important; margin-bottom: 0.3rem !important; }
+
+  /* Compact the header: keep the photo, name, contact line and intro, but
+     drop the vertical padding and the avatar size. */
+  .header { padding: 0.9rem !important; margin-bottom: 0.8rem !important; }
+  .header-avatar { width: 78px !important; height: 78px !important; }
+  .header h1 { font-size: 1.5rem !important; margin-bottom: 0.2rem !important; }
+  .header-contact { gap: 0.3rem 0.9rem !important; margin-top: 0.3rem !important; }
+  .header-info .about-text { font-size: 9pt !important; line-height: 1.35 !important; }
+}
+

@@ -1,18 +1,33 @@
+import globals from 'globals';
+
 export default [
   {
-    files: ['script.js'],
+    files: ['script.js', 'sw.js'],
     languageOptions: {
       ecmaVersion: 2022,
       sourceType: 'script',
+      globals: {
+        ...globals.browser,
+        ...globals.serviceworker,
+      },
     },
-    rules: {},
+    rules: {
+      'no-unused-vars': 'warn',
+      'no-undef': 'error',
+    },
   },
   {
     files: ['src/**/*.js'],
     languageOptions: {
       ecmaVersion: 2022,
       sourceType: 'module',
+      globals: {
+        ...globals.browser,
+      },
     },
-    rules: {},
+    rules: {
+      'no-unused-vars': 'warn',
+      'no-undef': 'error',
+    },
   },
 ];

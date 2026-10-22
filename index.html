@@ -479,7 +479,7 @@
 <a class="share-btn" href="#" onclick="navigator.clipboard.writeText('https://itsdarklikehell.github.io/my-resume/');return false;">🔗 <span data-i18n="share_copy">Copy link</span></a>
 </div>
 </section>
-<section class="card">
+<section class="card" id="expertise-section">
 <h2 data-i18n="expertise">Expertise</h2>
 <div class="tags">
 <span class="tag">NEN 1010</span>
@@ -490,6 +490,7 @@
 <span class="tag" data-i18n="exp_zonnepanelen">Zonnepanelen</span>
 <span class="tag" data-i18n="exp_sterkstroom">Sterkstroom</span>
 </div>
+<button class="show-more-btn" onclick="toggleExperience(this)" style="margin-top:.5rem;cursor:pointer;">Show more</button>
 </section>
 <section class="card">
 <h2 data-i18n="skills">Vaardigheden</h2>
@@ -509,7 +510,7 @@
 <div id="skills-container">
 <p class="about-text">Loading skills...</p>
 </div>
-<button class="show-more-btn" onclick="toggleSkillsMore(this)" style="margin-top:.5rem;cursor:pointer;">Show more</button>
+<button class="show-more-btn" onclick="toggleSkillsMore(this)" data-toggle-target="skills-container" style="margin-top:.5rem;cursor:pointer;">Show more</button>
 </div>
 <div class="section-updated" id="skills-updated"></div>
 </section><section class="card">

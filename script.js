@@ -254,6 +254,14 @@ const translations = {
                 share_linkedin: "LinkedIn",
                 share_twitter: "Twitter",
                 share_whatsapp: "WhatsApp",
+                share_facebook: "Facebook",
+                share_telegram: "Telegram",
+                share_email: "E-mail",
+                share_copy: "Link kopiëren",
+                show_more: "Meer tonen",
+                show_less: "Minder tonen",
+                auto_sort_on: "Automatisch sorteren: AAN",
+                auto_sort_off: "Automatisch sorteren: UIT",
                 last_updated: "Laatst bijgewerkt"
             },
             en: {
@@ -433,6 +441,14 @@ const translations = {
                 share_linkedin: "LinkedIn",
                 share_twitter: "Twitter",
                 share_whatsapp: "WhatsApp",
+                share_facebook: "Facebook",
+                share_telegram: "Telegram",
+                share_email: "Email",
+                share_copy: "Copy link",
+                show_more: "Show more",
+                show_less: "Show less",
+                auto_sort_on: "Auto-sort: ON",
+                auto_sort_off: "Auto-sort: OFF",
                 last_updated: "Last updated",
     exp_devries_role: "Assistant Installation Technician (high voltage)",
     exp_devries_company: "De Vries",
@@ -769,6 +785,14 @@ const translations = {
                 share_linkedin: "LinkedIn",
                 share_twitter: "Twitter",
                 share_whatsapp: "WhatsApp",
+                share_facebook: "Facebook",
+                share_telegram: "Telegram",
+                share_email: "E-Mail",
+                share_copy: "Link kopieren",
+                show_more: "Mehr anzeigen",
+                show_less: "Weniger anzeigen",
+                auto_sort_on: "Auto-Sortierung: AN",
+                auto_sort_off: "Auto-Sortierung: AUS",
                 last_updated: "Zuletzt aktualisiert"
             },
             fr: {
@@ -1027,6 +1051,14 @@ const translations = {
                 share_linkedin: "LinkedIn",
                 share_twitter: "Twitter",
                 share_whatsapp: "WhatsApp",
+                share_facebook: "Facebook",
+                share_telegram: "Telegram",
+                share_email: "E-mail",
+                share_copy: "Copier le lien",
+                show_more: "Afficher plus",
+                show_less: "Afficher moins",
+                auto_sort_on: "Tri auto : ACTIVÉ",
+                auto_sort_off: "Tri auto : DÉSACTIVÉ",
                 last_updated: "Dernière mise à jour"
             }
         };
@@ -1070,6 +1102,10 @@ const translations = {
         document.querySelectorAll('.lang-fr').forEach(el => {
             el.style.display = currentLang === 'fr' ? '' : 'none';
         });
+        // Refresh the language-dependent toggle labels
+        document.querySelectorAll('.show-more-btn').forEach(btn => updateToggleLabel(btn));
+        const sortBtn = document.getElementById('skill-sort-toggle');
+        if (sortBtn) sortBtn.textContent = skillSortLabel();
         }
 
         function toggleLang() {
@@ -1191,7 +1227,7 @@ const translations = {
 
         function renderSkills() {
             const btn = document.getElementById('skill-sort-toggle');
-            if (btn) btn.textContent = 'Auto-sort: ' + (window.autoSortSkills ? 'ON' : 'OFF');
+            if (btn) btn.textContent = skillSortLabel();
             const container = document.getElementById('skills-container');
             const skills = gSkills();
             if (!skills) {
@@ -2208,23 +2244,54 @@ async function loadProfileData() {
         function toggleExperience(btn) {
             const card = btn.closest('section.card');
             card.classList.toggle('expanded');
-            btn.textContent = card.classList.contains('expanded') ? 'Show less' : 'Show more';
+            updateToggleLabel(btn);
         }
         window.toggleExperience = toggleExperience;
+
+        // Toggle buttons show "Show more"/"Show less" depending on whether the
+        // list they belong to is currently expanded, in the active language.
+        // Buttons that control a container other than their own section name
+        // it via data-toggle-target.
+        function updateToggleLabel(btn) {
+            // The skill-sort button reuses the .show-more-btn styling but shows
+            // the sort state instead of a show-more label.
+            if (btn.id === 'skill-sort-toggle') {
+                btn.textContent = skillSortLabel();
+                return;
+            }
+            const t = translations[currentLang] || {};
+            const target = btn.getAttribute('data-toggle-target');
+            const expanded = target
+                ? !!document.getElementById(target)?.classList.contains('expanded')
+                : !!btn.closest('section.card')?.classList.contains('expanded');
+            btn.textContent = expanded ? (t.show_less || 'Show less') : (t.show_more || 'Show more');
+        }
+        window.updateToggleLabel = updateToggleLabel;
 
         window.autoSortSkills = localStorage.getItem('autoSortSkills') !== 'false';
         function toggleSkillSort() {
             window.autoSortSkills = !window.autoSortSkills;
             localStorage.setItem('autoSortSkills', window.autoSortSkills);
             const btn = document.getElementById('skill-sort-toggle');
-            if (btn) btn.textContent = 'Auto-sort: ' + (window.autoSortSkills ? 'ON' : 'OFF');
+            if (btn) btn.textContent = skillSortLabel();
             renderSkills();
         }
         window.toggleSkillSort = toggleSkillSort;
+
+        // The sort button reflects the persisted preference, in the active
+        // language — not a hardcoded "Auto-sort: ON".
+        function skillSortLabel() {
+            const t = translations[currentLang] || {};
+            return window.autoSortSkills
+                ? (t.auto_sort_on || 'Auto-sort: ON')
+                : (t.auto_sort_off || 'Auto-sort: OFF');
+        }
+        window.skillSortLabel = skillSortLabel;
+
         function toggleSkillsMore(btn) {
             const c = document.getElementById('skills-container');
             c.classList.toggle('expanded');
-            btn.textContent = c.classList.contains('expanded') ? 'Show less' : 'Show more';
+            updateToggleLabel(btn);
         }
         window.toggleSkillsMore = toggleSkillsMore;
 

@@ -3,11 +3,14 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "lint": "eslint src/**/*.js script.js",
-    "test": "vitest run"
+    "lint": "eslint script.js sw.js src/**/*.js",
+    "lint:fix": "eslint --fix script.js sw.js src/**/*.js",
+    "test": "vitest run --passWithNoTests",
+    "check": "npm run lint && npm test"
   },
   "devDependencies": {
     "eslint": "^8.57.0",
+    "globals": "^15.14.0",
     "vitest": "^1.6.0"
   }
 }
