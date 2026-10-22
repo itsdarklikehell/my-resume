@@ -25,21 +25,16 @@ jobs:
         run: npm ci
 
       - name: Validate HTML
-        run: |
-          npx --yes html-validate@9.1.0 --formatter stylish \
-            --config .htmlvalidate.json index.html 404.html
+        run: npm run lint:html
 
       - name: Lint CSS
-        run: |
-          npm install --no-save stylelint@16.10.0 stylelint-config-standard@36.0.1
-          npx stylelint "styles.css" --config .stylelintrc.json
+        run: npm run lint:css
 
       - name: Lint JavaScript
-        run: |
-          npx eslint --rule '{"no-unused-vars":"warn"}' script.js sw.js src/*.js
+        run: npm run lint
 
       - name: Unit tests
-        run: npm test -- --passWithNoTests
+        run: npm test
 
   lighthouse:
     runs-on: ubuntu-24.04

@@ -5,12 +5,17 @@
   "scripts": {
     "lint": "eslint script.js sw.js src/**/*.js",
     "lint:fix": "eslint --fix script.js sw.js src/**/*.js",
+    "lint:html": "html-validate --config .htmlvalidate.json index.html 404.html",
+    "lint:css": "stylelint styles.css --config .stylelintrc.json",
     "test": "vitest run --passWithNoTests",
-    "check": "npm run lint && npm test"
+    "check": "npm run lint && npm run lint:html && npm run lint:css && npm test"
   },
   "devDependencies": {
     "eslint": "^8.57.0",
     "globals": "^15.14.0",
+    "html-validate": "9.1.0",
+    "stylelint": "16.10.0",
+    "stylelint-config-standard": "36.0.1",
     "vitest": "^1.6.0"
   }
 }
