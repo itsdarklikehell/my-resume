@@ -11,9 +11,6 @@ permissions:
   contents: write
   pages: write
   id-token: write
-  repo: read
-  read:org: read
-  read:user: read
 
 jobs:
   update-data:
