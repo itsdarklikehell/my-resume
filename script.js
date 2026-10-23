@@ -365,42 +365,559 @@ const translations = {
                 contact: "Contact",
                 send: "Send",
                 download_json: "Download JSON",
-        
+                cert_am_role: "AM driver's license",
+                cert_am_company: "—",
+                cert_am_period: "—",
+                cert_am_desc: "Valid driver's license",
+                cert_b_role: "Category B driver's license (available)",
+                cert_et_role: "Electrical engineering (LTS/VBO)",
+                cert_et_company: "—",
+                cert_et_period: "Aug. 2006 — Jul. 2008",
+                cert_et_desc: "Diploma obtained",
+                cert_ft_role: "Bicycle technician (vocational training)",
+                cert_ft_company: "—",
+                cert_ft_period: "Jan. 2012 — Feb. 2014",
+                cert_ft_desc: "Diploma obtained",
+                cert_msi_role: "High-voltage installation technician (MSI)",
+                cert_msi_company: "—",
+                cert_msi_period: "Aug. 2009 — Dec. 2012",
+                cert_msi_desc: "Diploma obtained",
+                cert_psm_role: "Professional Scrum Master",
+                cert_psm_company: "Startel",
+                cert_psm_period: "Jan. 2025 — Present",
+                cert_psm_desc: "Professional Scrum Master course",
+                cert_vca_role: "Basic Safety VCA",
+                cert_vca_company: "Various",
+                cert_vca_period: "Sep. 2010 — Sep. 2020",
+                cert_vca_desc: "Basic Safety VCA course",
+                exp_creyfs_magazijn_role: "Warehouse worker refrigerated/frozen products",
+                exp_creyfs_magazijn_company: "creyf's employment agency",
+                exp_creyfs_magazijn_period: "2009",
+                exp_creyfs_magazijn_1: "Warehouse management and order picking",
+                exp_creyfs_schoonmaker_role: "Industrial cleaner",
+                exp_creyfs_schoonmaker_company: "creyf's employment agency",
+                exp_creyfs_schoonmaker_period: "2009",
+                exp_creyfs_schoonmaker_1: "Industrial cleaning work",
+                exp_degraaf_role: "Assistant electrician (computer networks and telecommunications)",
+                exp_degraaf_company: "de graaf employment agency",
+                exp_degraaf_period: "2009",
+                exp_degraaf_1: "Installation and maintenance of computer networks and telecommunications",
+                exp_devries_role: "Assistant installation technician (high-voltage)",
+                exp_devries_company: "De Vries",
+                exp_devries_period: "2009 — 2020",
+                exp_devries_1: "Installation of electrical (high-voltage) systems",
+                exp_dit_role: "Electrician (electrical installations)",
+                exp_dit_company: "DIT Technical Services Heerenveen",
+                exp_dit_period: "2006",
+                exp_dit_1: "Installation of electrical systems",
+                exp_fiets_estafette_role: "Bicycle technician",
+                exp_fiets_estafette_company: "Thrift company Estafette",
+                exp_fiets_estafette_period: "2012 — 2013",
+                exp_fiets_estafette_1: "Bicycle repair and sales",
+                exp_fiets_mient_role: "Bicycle technician",
+                exp_fiets_mient_company: "Bicycle shop Mient de Vries",
+                exp_fiets_mient_period: "2013 — 2014",
+                exp_fiets_mient_1: "Bicycle repair and maintenance",
+                exp_mageon_role: "Assistant electrician electricity networks",
+                exp_mageon_company: "MAGEON-BV Technical Personnel",
+                exp_mageon_period: "2006",
+                exp_mageon_1: "Working on electricity networks",
+                exp_technicum_net2_role: "Assistant electrician electricity networks",
+                exp_technicum_net2_company: "Technicum",
+                exp_technicum_net2_period: "2005 — 2006",
+                exp_technicum_net2_1: "Working on electricity networks",
+                exp_technicum_volt1_role: "Electrician (electrical installations)",
+                exp_technicum_volt1_company: "Technicum employment agency",
+                exp_technicum_volt1_period: "2005",
+                exp_technicum_volt1_1: "Installation of electrical systems",
+                exp_technicum_net3_role: "Assistant electrician (computer networks and telecommunications)",
+                exp_technicum_net3_company: "Technicum employment agency",
+                exp_technicum_net3_period: "2004 — 2005",
+                exp_technicum_net3_1: "Installation of computer networks and telecommunications",
+                exp_technicum_net_a_role: "Assistant electrician (computer networks and telecommunications)",
+                exp_technicum_net_a_company: "Technicum",
+                exp_technicum_net_a_period: "2006",
+                exp_technicum_net_a_1: "Installation of computer networks and telecommunications",
+                exp_technicum_net_b_role: "Assistant electrician (computer networks and telecommunications)",
+                exp_technicum_net_b_company: "Technicum",
+                exp_technicum_net_b_period: "2006",
+                exp_technicum_net_b_1: "Installation of computer networks and telecommunications",
+                exp_technicum_net_c_role: "Assistant electrician (computer networks and telecommunications)",
+                exp_technicum_net_c_company: "Technicum",
+                exp_technicum_net_c_period: "2006",
+                exp_technicum_net_c_1: "Installation of computer networks and telecommunications",
+                exp_technicum_net_d_role: "Assistant electrician (computer networks and telecommunications)",
+                exp_technicum_net_d_company: "Technicum",
+                exp_technicum_net_d_period: "2006",
+                exp_technicum_net_d_1: "Installation of computer networks and telecommunications",
+                exp_technicum_zwak1_role: "Assistant installation technician (low-voltage)",
+                exp_technicum_zwak1_company: "Technicum",
+                exp_technicum_zwak1_period: "2007 — 2008",
+                exp_technicum_zwak1_1: "Installation of electrical (low-voltage) systems",
+                exp_technicum_zwak2_role: "Assistant installation technician (low-voltage)",
+                exp_technicum_zwak2_company: "Technicum",
+                exp_technicum_zwak2_period: "2007",
+                exp_technicum_zwak2_1: "Installation of electrical (low-voltage) systems",
+                exp_unistar_role: "Assistant installation technician (high-voltage)",
+                exp_unistar_company: "Unistar Personnel Services BV",
+                exp_unistar_period: "2009",
+                exp_unistar_1: "Installation of electrical (high-voltage) systems",
+                exp_unistar_dak_role: "Installation technology and roofer",
+                exp_unistar_dak_company: "Unistar",
+                exp_unistar_dak_period: "2008 — 2009",
+                exp_unistar_dak_1: "Installation technology and roofing",
+                print_cv_nl: "Print CV (NL)",
+                print_cv_en: "Print CV (EN)",
+                repos_showcase: "GitHub Repositories",
+                share_copy: "Copy link",
+                share_email: "Email",
+                share_facebook: "Facebook",
+                share_linkedin: "LinkedIn",
+                share_telegram: "Telegram",
+                share_twitter: "Twitter",
+                share_whatsapp: "WhatsApp",
+        },
 
+        de: {
+            tagline: "Technischer Fachmann mit einer Leidenschaft für IT und Problemlösung",
+            about: "Über Mich",
+            about_text: "Praktisch veranlagter Techniker mit umfassender Erfahrung in Elektroinstallationen, Solaranlagen und Motorrädern. Praktischer Hintergrund mit technischer Präzision, analytischem Denken und einem scharfen Auge für Prozessverbesserung. Selbst beigebrachte Shell/Bash, Python und JavaScript/TypeScript mit starkem Ehrgeiz, als IT-Experte zu wachsen.",
+            projects: "Projekte",
+            experience: "Berufserfahrung",
+            education: "Ausbildung",
+            activity: "Live-Aktivität",
+            certificates: "Zertifikate & Wege",
+            skills: "Fähigkeiten",
+            skill_matrix_title: "Skills-Matrix",
+            skill_matrix_sub: "Live-updating Skills-Matrix von TryHackMe.",
+            languages: "Sprachen",
+            footer: "© 2026 Bauke Molenaar — Made with ❤️",
+            last_updated: "Zuletzt aktualisiert",
+            share: "Teilen",
+            download: "CV herunterladen",
+            download_json: "JSON herunterladen",
+            expertise: "Fachgebiete",
+            featured: "Hervorgehobene Arbeit",
+            repos_showcase: "GitHub-Repositorien",
+            profiles: "Profile",
+            stat_repos: "Eigene Projekte",
+            stat_stars: "Sterne",
+            stat_langs: "Sprachen",
+            lang_nl: "Niederländisch",
+            lang_de: "Deutsch",
+            lang_en: "Englisch",
+            lang_native: "Muttersprache",
+            lang_basic: "Grundkenntnisse",
+            lang_fair: "Ausreichend",
+            lang_good: "Gut",
+            lang_professional: "Fließend",
+            present: "Heute",
+            show_more: "Mehr anzeigen",
+            show_less: "Weniger anzeigen",
+            auto_sort_on: "Automatische Sortierung: AN",
+            auto_sort_off: "Automatische Sortierung: AUS",
+            print_cv_nl: "CV drucken (NL)",
+            print_cv_en: "CV drucken (EN)",
+            share_linkedin: "LinkedIn",
+            share_twitter: "Twitter",
+            share_whatsapp: "WhatsApp",
+            share_facebook: "Facebook",
+            share_telegram: "Telegram",
+            share_email: "E-Mail",
+            share_copy: "Link kopieren",
+            contact: "Kontakt",
+            send: "Senden",
+            repos_none: "Keine Repositorien gefunden",
+            repo_no_desc: "Keine Beschreibung",
+            repo_stars: "Sterne",
+            repo_forks: "Gabeln",
+            repo_language: "Sprache",
+            repo_updated: "Aktualisiert",
+            repo_topics: "Tags",
+            skill_entry_level: "Einsteiger",
+            skill_foundational: "Grundlagen",
+            skill_security_analyst: "Security Analyst",
+            skill_penetration_tester: "Penetration Tester",
+            skill_security_engineer: "Security Engineer",
+            skill_matrix_unavailable: "Keine Skills-Matrix-Daten verfügbar",
+            skill_matrix_source: "Quelle: TryHackMe Live-Profildaten",
+            profiles_unavailable: "Profilstats temporär nicht verfügbar",
+            platform_tryhackme: "TryHackMe",
+            platform_ctftime: "CTFtime",
+            platform_itchio: "itch.io",
+            platform_hackthebox: "HackTheBox",
+            platform_cylab: "CyLab",
+            platform_microsoft: "Microsoft Learn",
+            platform_codewars: "Codewars",
+            platform_devto: "DEV.to",
+            platform_stackoverflow: "Stack Overflow",
+            data_not_available: "Daten nicht öffentlich verfügbar",
+            last_refreshed: "Zuletzt aktualisiert",
+            active: "Aktiv",
+            inactive: "Inaktiv",
+        },
 
+        fr: {
+            tagline: "Professionnel technique passionné d'informatique et de résolution de problèmes",
+            about: "À Propos",
+            about_text: "Professionnel technique pragmatique avec une grande expérience en systèmes électriques, panneaux solaires et motocyclettes. Connaissance pratique avec précision technique, pensée analytique et œil attentif à l'amélioration des processus. Shell/Bash, Python et JavaScript/TypeScript autodidactes avec une forte envie de grandir en tant que professionnel informatique.",
+            projects: "Projets",
+            experience: "Expérience Professionnelle",
+            education: "Éducation",
+            activity: "Activité en Direct",
+            certificates: "Certificats & Parcours",
+            skills: "Compétences",
+            skill_matrix_title: "Matrice de Compétences",
+            skill_matrix_sub: "Matrice de compétences en direct de TryHackMe.",
+            languages: "Langues",
+            footer: "© 2026 Bauke Molenaar — Made with ❤️",
+            last_updated: "Dernière mise à jour",
+            share: "Partager",
+            download: "Télécharger le CV",
+            download_json: "Télécharger JSON",
+            expertise: "Expertise",
+            featured: "Travail mis en avant",
+            repos_showcase: "Dépôts GitHub",
+            profiles: "Profils",
+            stat_repos: "Projets personnels",
+            stat_stars: "Étoiles",
+            stat_langs: "Langues",
+            lang_nl: "Néerlandais",
+            lang_de: "Allemand",
+            lang_en: "Anglais",
+            lang_native: "Langue maternelle",
+            lang_basic: "Base",
+            lang_fair: "Correct",
+            lang_good: "Bon",
+            lang_professional: "Courant",
+            present: "Présent",
+            show_more: "Afficher plus",
+            show_less: "Afficher moins",
+            auto_sort_on: "Tri automatique : ACTIVÉ",
+            auto_sort_off: "Tri automatique : DÉSACTIVÉ",
+            print_cv_nl: "Imprimer le CV (NL)",
+            print_cv_en: "Imprimer le CV (EN)",
+            share_linkedin: "LinkedIn",
+            share_twitter: "Twitter",
+            share_whatsapp: "WhatsApp",
+            share_facebook: "Facebook",
+            share_telegram: "Telegram",
+            share_email: "E-mail",
+            share_copy: "Copier le lien",
+            contact: "Contact",
+            send: "Envoyer",
+            repos_none: "Aucun dépôt trouvé",
+            repo_no_desc: "Aucune description",
+            repo_stars: "Étoiles",
+            repo_forks: "Forks",
+            repo_language: "Langage",
+            repo_updated: "Mis à jour",
+            repo_topics: "Étiquettes",
+            skill_entry_level: "Débutant",
+            skill_foundational: "Fondamental",
+            skill_security_analyst: "Analyste Sécurité",
+            skill_penetration_tester: "Testeur d'Intrusion",
+            skill_security_engineer: "Ingénieur Sécurité",
+            skill_matrix_unavailable: "Aucune donnée de matrice de compétences",
+            skill_matrix_source: "Source: Données de profil en direct TryHackMe",
+            profiles_unavailable: "Statistiques de profil temporairement indisponibles",
+            platform_tryhackme: "TryHackMe",
+            platform_ctftime: "CTFtime",
+            platform_itchio: "itch.io",
+            platform_hackthebox: "HackTheBox",
+            platform_cylab: "CyLab",
+            platform_microsoft: "Microsoft Learn",
+            platform_codewars: "Codewars",
+            platform_devto: "DEV.to",
+            platform_stackoverflow: "Stack Overflow",
+            data_not_available: "Données non disponibles publiquement",
+            last_refreshed: "Dernière actualisation",
+            active: "Actif",
+            inactive: "Inactif",
+        },
+    };
 
-... [OUTPUT TRUNCATED - 97 chars omitted out of 50,028 total] ...
+    // --- state ---
+    let currentLang = 'nl';
+    let githubData = null;
+    let profileData = null;
 
-                      })
-                        .join('');
+    // --- language detection from URL or browser ---
+    const urlParams = new URLSearchParams(window.location.search);
+    const urlLang = urlParams.get('lang');
+
+    function detectLang() {
+        const nav = navigator.language || navigator.userLanguage || 'nl';
+        if (nav.startsWith('de')) return 'de';
+        if (nav.startsWith('fr')) return 'fr';
+        if (nav.startsWith('en')) return 'en';
+        return 'nl';
+    }
+
+    function applyLang(lang) {
+        currentLang = lang;
+        const t = translations[currentLang] || translations.nl;
+        const labelEl = document.getElementById('lang-label');
+        if (labelEl) labelEl.textContent = lang.toUpperCase();
+
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            if (t[key]) {
+                if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                    el.placeholder = t[key];
+                } else {
+                    el.textContent = t[key];
                 }
+            }
+        });
 
-                html += `
-                <div class="platform-card" style="border-left: 4px solid ${accent};">
-                    <div class="card-header">
-                        <div class="card-icon" style="color: ${accent};">${p.icon}</div>
-                        <div class="card-name">${p.label}</div>
-                    </div>
-                    <details class="stats-popup">
-                        <summary style="cursor:pointer;font-size:.8rem;opacity:.8;">📊 ${t.stats || 'Stats'}</summary>
-                        ${fieldRows}
-                    </details>
-                    <div class="card-footer">${t.last_refreshed || 'Last refreshed'}: ${refreshedStr}</div>
-                </div>`;
-            });
+        document.documentElement.lang = currentLang;
+        localStorage.setItem('lang', currentLang);
+    }
 
-            html += '</div>';
-            container.innerHTML = html;
-            setSectionTimestamp('platform-cards', profileData ? profileData.generated_at : null);
+    function toggleLang() {
+        const order = ['nl', 'en', 'de', 'fr'];
+        const idx = order.indexOf(currentLang);
+        const next = order[(idx + 1) % order.length];
+        applyLang(next);
+    }
+
+    // --- theme ---
+    function toggleTheme() {
+        const el = document.documentElement;
+        const cur = el.getAttribute('data-theme') || 'dark';
+        const next = cur === 'dark' ? 'light' : 'dark';
+        el.setAttribute('data-theme', next);
+        document.querySelector('.theme-toggle').textContent = next === 'light' ? '☀️' : '🌙';
+        localStorage.setItem('theme', next);
+    }
+
+    // --- palette ---
+    function togglePalette() {
+        const el = document.documentElement;
+        const cur = el.getAttribute('data-palette') || '';
+        const palettes = ['', 'nord', 'dracula', 'solarized', 'ocean'];
+        const idx = palettes.indexOf(cur);
+        const next = palettes[(idx + 1) % palettes.length];
+        if (next) {
+            el.setAttribute('data-palette', next);
+        } else {
+            el.removeAttribute('data-palette');
         }
+        localStorage.setItem('palette', next || '');
+    }
 
+    // --- language color for repo chips ---
+    function getLangColor(language) {
+        const colors = {
+            'JavaScript': '#f7df1e',
+            'Python': '#3776ab',
+            'TypeScript': '#3178c6',
+            'Shell': '#4ecdc4',
+            'HTML': '#e34c26',
+            'CSS': '#264de4',
+            'Lua': '#2a2258',
+            'Rust': '#dea584',
+        };
+        return colors[language] || '#9ca3b4';
+    }
 
+    // --- render functions ---
+    function renderProjects() {
+        const container = document.getElementById('projects-container');
+        const repos = gRepos();
+        if (!container || !repos || !repos.length) {
+            if (container) container.innerHTML = '<p class="about-text">' + (translations[currentLang].repos_none || 'No repositories found') + '</p>';
+            return;
+        }
+        const t = translations[currentLang];
+        const own = repos.filter(r => !r.fork).sort((a, b) => (b.stars || 0) - (a.stars || 0));
+        const top = own.slice(0, 6);
+        const html = top.map(repo => {
+            const langColor = repo.language ? getLangColor(repo.language) : '#9ca3b4';
+            const topicsHtml = (repo.topics || []).slice(0, 3).map(tag =>
+                `<span class="repo-topic">${escapeHtml(tag)}</span>`
+            ).join('');
+            const desc = repo.description ? escapeHtml(repo.description) : t.repo_no_desc;
+            return `<div class="repo-card">
+                <a href="${encodeURI(repo.url)}" target="_blank" rel="noopener" style="text-decoration: none; color: inherit; display: block;">
+                    <div class="repo-header">
+                        <div class="repo-name">${escapeHtml(repo.name)}</div>
+                        <div class="repo-meta">
+                            ${repo.stars ? `<span class="repo-stars">⭐ ${Number(repo.stars)}</span>` : ''}
+                        </div>
+                    </div>
+                    ${desc ? `<div class="repo-desc">${desc}</div>` : ''}
+                    <div class="repo-footer">
+                        ${repo.language && repo.language !== 'Unknown' ? `<span class="repo-lang" style="color:${langColor};">● ${escapeHtml(repo.language)}</span>` : ''}
+                        ${topicsHtml}
+                    </div>
+                </a>
+            </div>`;
+        }).join('');
+        container.innerHTML = html;
+        setSectionTimestamp('projects', githubData ? githubData.generated_at : null);
+    }
 
+    function renderSkills() {
+        const container = document.getElementById('skills-container');
+        const skills = gSkills();
+        if (!container || !skills) return;
+        const entries = Object.entries(skills);
+        if (window.autoSortSkills !== false) {
+            entries.sort((a, b) => (b[1].percentage || 0) - (a[1].percentage || 0));
+        }
+        const html = entries.map(([lang, data]) => {
+            const pct = data.percentage || 0;
+            return `<div class="skill-item">
+                <div class="skill-name">${escapeHtml(lang)}</div>
+                <div class="skill-bar"><div class="skill-fill" style="width:${pct}%;"></div></div>
+                <div class="skill-value">${data.repos || 0} repos (${pct}%)</div>
+            </div>`;
+        }).join('');
+        container.innerHTML = html;
+        setSectionTimestamp('skills', githubData ? githubData.generated_at : null);
+    }
 
+    function renderStats() {
+        const t = translations[currentLang];
+        const st = gTotals();
+        const elRepos = document.getElementById('stat-repos');
+        const elStars = document.getElementById('stat-stars');
+        const elLangs = document.getElementById('stat-langs');
+        const elFollowing = document.getElementById('stat-following');
+        const elFollowers = document.getElementById('stat-followers');
+        if (elRepos) elRepos.textContent = st.own_repos != null ? st.own_repos : 0;
+        if (elStars) elStars.textContent = st.own_stars != null ? st.own_stars : 0;
+        if (elLangs) elLangs.textContent = st.languages != null ? st.languages : Object.keys(gSkills()).length;
+        if (elFollowing) elFollowing.textContent = (githubData && githubData.user && githubData.user.following != null) ? githubData.user.following : 0;
+        if (elFollowers) elFollowers.textContent = (githubData && githubData.user && githubData.user.followers != null) ? githubData.user.followers : 0;
+        const note = document.getElementById('stats-note');
+        if (note) note.textContent = t.last_refreshed + ': ' + (githubData ? githubData.generated_at : '—');
+        setSectionTimestamp('stats', githubData ? githubData.generated_at : null);
+    }
 
+    function renderContributions() {
+        const container = document.getElementById('contributions-container');
+        const contributions = gContributions();
+        if (!container || !contributions || !contributions.length) {
+            if (container) container.innerHTML = '<p class="about-text">No recent activity.</p>';
+            return;
+        }
+        const t = translations[currentLang];
+        const html = contributions.slice(0, 10).map(c => {
+            const action = t[c.action] || c.action;
+            const repo = escapeHtml(c.repo || '');
+            return `<div class="contribution-item">
+                <span class="contrib-action">${action}</span>
+                <span class="contrib-repo">${repo}</span>
+            </div>`;
+        }).join('');
+        container.innerHTML = html;
+        setSectionTimestamp('contributions', githubData ? githubData.generated_at : null);
+    }
 
-        
-        // Live-updating skill matrix from TryHackMe profile data.
+    function renderContributionHeatmap() {
+        const container = document.getElementById('contribution-heatmap');
+        const contributions = gContributions();
+        if (!container || !contributions || !contributions.length) {
+            if (container) container.innerHTML = '<p class="about-text">No contribution data.</p>';
+            return;
+        }
+        const byDay = {};
+        contributions.forEach(c => {
+            const day = (c.date || '').slice(0, 10);
+            byDay[day] = (byDay[day] || 0) + 1;
+        });
+        const days = Object.entries(byDay).sort();
+        const max = Math.max(...days.map(d => d[1]), 1);
+        const html = days.map(([day, count]) => {
+            const intensity = Math.round((count / max) * 100);
+            return `<div class="heatmap-cell" style="opacity:${intensity / 100};" title="${escapeHtml(day)}: ${count}"></div>`;
+        }).join('');
+        container.innerHTML = '<div class="heatmap-grid">' + html + '</div>';
+        setSectionTimestamp('heatmap', githubData ? githubData.generated_at : null);
+    }
+
+    function renderAchievements() {
+        const container = document.getElementById('achievements-container');
+        if (!container || !profileData) return;
+        const t = translations[currentLang];
+        const items = [];
+        const thm = profileData.tryhackme;
+        const ms = profileData.microsoft;
+        if (thm && thm.badges && thm.badges !== 'N/A') {
+            items.push({ label: t.ach_thm_bronze_n || 'TryHackMe Badge', value: thm.badges });
+        }
+        if (ms && ms.badges && ms.badges !== 'N/A') {
+            items.push({ label: t.ach_ms_badges_n || 'Microsoft Learn Badges', value: ms.badges });
+        }
+        if (!items.length) {
+            container.innerHTML = '<p class="about-text">No achievements available.</p>';
+            return;
+        }
+        const html = items.map(it => `<div class="achievement-item"><div class="ach-label">${escapeHtml(it.label)}</div><div class="ach-value">${escapeHtml(it.value)}</div></div>`).join('');
+        container.innerHTML = html;
+        setSectionTimestamp('achievements', profileData.generated_at || null);
+    }
+
+    function renderProfiles() {
+        const container = document.getElementById('profiles-container');
+        if (!container || !profileData) return;
+        const t = translations[currentLang];
+        const links = [];
+        if (profileData.github) links.push({ name: 'GitHub', url: profileData.github });
+        if (profileData.tryhackme_url) links.push({ name: 'TryHackMe', url: profileData.tryhackme_url });
+        if (!links.length) {
+            container.innerHTML = '<p class="about-text">' + (t.profiles_unavailable || 'Profile statistics temporarily unavailable') + '</p>';
+            return;
+        }
+        const html = links.map(l => `<a href="${escapeHtml(l.url)}" target="_blank" rel="noopener" class="profile-link">${escapeHtml(l.name)}</a>`).join('');
+        container.innerHTML = html;
+        setSectionTimestamp('profiles', profileData.generated_at || null);
+    }
+
+    function renderPlatformCards() {
+        const container = document.getElementById('platform-cards-container');
+        if (!container || !profileData) return;
+        const t = translations[currentLang];
+        const platforms = [
+            { key: 'tryhackme', label: t.platform_tryhackme || 'TryHackMe', icon: '🎯', data: profileData.tryhackme },
+            { key: 'ctftime', label: t.platform_ctftime || 'CTFtime', icon: '🚩', data: profileData.ctftime },
+            { key: 'itchio', label: t.platform_itchio || 'itch.io', icon: '🎮', data: profileData.itchio },
+            { key: 'codewars', label: t.platform_codewars || 'Codewars', icon: '⚔️', data: profileData.codewars },
+            { key: 'devto', label: t.platform_devto || 'DEV.to', icon: '📝', data: profileData.devto },
+            { key: 'stackoverflow', label: t.platform_stackoverflow || 'Stack Overflow', icon: '❓', data: profileData.stackoverflow },
+            { key: 'stackapps', label: t.platform_stackapps || 'Stack Apps', icon: '🧩', data: profileData.stackapps },
+            { key: 'microsoft', label: t.platform_microsoft || 'Microsoft Learn', icon: '🟦', data: profileData.microsoft },
+        ];
+        const html = platforms.map(p => {
+            if (!p.data) return '';
+            const d = p.data;
+            const hasReal = Object.values(d).some(v => v && v !== 'N/A' && v !== '0' && v !== 0);
+            if (!hasReal) return '';
+            let fieldRows = '';
+            for (const [k, v] of Object.entries(d)) {
+                if (v && v !== 'N/A' && k !== 'github') {
+                    fieldRows += `<div class="field-row"><span class="field-key">${escapeHtml(k)}:</span> <span class="field-val">${escapeHtml(v)}</span></div>`;
+                }
+            }
+            const refreshed = d.generated_at ? new Date(d.generated_at).toLocaleDateString() : '';
+            return `<div class="platform-card" style="border-left: 4px solid var(--accent);">
+                <div class="card-header">
+                    <div class="card-icon" style="color: var(--accent);">${p.icon}</div>
+                    <div class="card-name">${p.label}</div>
+                </div>
+                <details class="stats-popup">
+                    <summary style="cursor:pointer;font-size:.8rem;opacity:.8;">📊 ${t.stats || 'Stats'}</summary>
+                    ${fieldRows}
+                </details>
+                <div class="card-footer">${t.last_refreshed || 'Last refreshed'}: ${refreshed}</div>
+            </div>`;
+        }).join('');
+        container.innerHTML = html || '<p class="about-text">No platform data available.</p>';
+        setSectionTimestamp('platform-cards', profileData.generated_at || null);
+    }
         function renderSkillMatrix() {
             const container = document.getElementById('skill-matrix-container');
             if (!container || !profileData) return;
