@@ -367,10 +367,11 @@ const translations = {
                 download_json: "Download JSON",
         
 
-... [OUTPUT TRUNCATED - 82,594 chars omitted out of 132,520 total] ...
 
-              </div>`;
-                        })
+
+... [OUTPUT TRUNCATED - 97 chars omitted out of 50,028 total] ...
+
+                      })
                         .join('');
                 }
 
@@ -910,7 +911,7 @@ async function loadProfileData() {
             window.location.href = 'mailto:bauke.molenaar@gmail.com?subject=' + subject + '&body=' + body;
         }
 
-        loadGitHubData().then(() => loadProfileData());
+        loadGitHubData().then(() => { loadProfileData().then(() => renderAll()); });
 
 // Wire interactive toggles (runs after DOM is parsed due to defer)
 (function () {
