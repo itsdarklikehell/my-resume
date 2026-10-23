@@ -512,5 +512,48 @@
     "games": "N/A",
     "sites_active": "N/A",
     "reached": "0"
+  },
+  "volunteer": {
+    "activities": [
+      {
+        "title": "CTF Challenge Organizer",
+        "description": "Organized a local Capture The Flag challenge for 40+ students, designing problem sets across crypto, web, and binary exploitation.",
+        "date": "2025"
+      },
+      {
+        "title": "Security Workshop Mentor",
+        "description": "Mentored junior students in OWASP Top 10 topics and secure coding practices during monthly campus security workshops.",
+        "date": "2024-2025"
+      },
+      {
+        "title": "Cybersecurity Awareness Ambassador",
+        "description": "Developed and delivered awareness materials on phishing, password hygiene, and safe browsing habits to the student body.",
+        "date": "2024"
+      }
+    ]
+  },
+  "courses": {
+    "paths": [
+      {
+        "title": "TryHackMe Path: Junior Penetration Tester",
+        "description": "Completed the full Jr. Penetration Tester path covering networking, web vulnerabilities, and basic exploitation techniques.",
+        "completed_at": "2025"
+      },
+      {
+        "title": "OSCP Preparation",
+        "description": "Self-study preparation for the Offensive Security Certified Professional certification, focusing on systematic exploit development and report writing.",
+        "completed_at": "2025"
+      },
+      {
+        "title": "Microsoft Learn: Azure Security Fundamentals",
+        "description": "Completed the AZ-500 preparation track covering identity, platform, data, and hybrid security concepts.",
+        "completed_at": "2024"
+      },
+      {
+        "title": "Open Source Security Bootcamp",
+        "description": "Intensive 8-week program on open source security auditing, code review, and vulnerability disclosure coordination.",
+        "completed_at": "2024"
+      }
+    ]
   }
 }

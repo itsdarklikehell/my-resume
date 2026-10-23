@@ -141,6 +141,31 @@ const translations = {
                 reached: "Bereikt",
                 data_not_available: "Gegevens niet publiek beschikbaar (geen open API / login vereist)",
                 last_refreshed: "Laatst vernieuwd",
+                skill_proficiency: "Skill proficiency",
+                writing_articles: "Schrijven & artikelen",
+                itchio_games: "Games itch.io",
+                community_volunteer: "Community & vrijwilligerswerk",
+                courses_learning: "Cursussen & leerpaden",
+                skill_proficiency_title: "Skill proficiency badges",
+                writing_articles_title: "Schrijven & artikelen",
+                itchio_games_title: "Games itch.io",
+                community_volunteer_title: "Community & vrijwilligerswerk",
+                courses_learning_title: "Cursussen & leerpaden",
+                skill_proficiency_sub: "Hoe ver ken je je zelf? (1 = beginner, 5 = expert)",
+                writing_articles_sub: "Artikelen en schrijfwerk uit jeeong.",
+                itchio_games_sub: "Spelletjes en projecten vanito.",
+                community_volunteer_sub: "Vrijwilligerswerk en community-contributes.",
+                courses_learning_sub: "Cursussen en leerpaden die je hebt gevolgd.",
+                skill_proficiency_empty: "Geen skill proficiency data.",
+                writing_articles_empty: "Geen artikelen beschikbaar.",
+                itchio_games_empty: "Geen games beschikbaar.",
+                volunteer_empty: "Geen vrijwilligerswerk beschikbaar.",
+                courses_empty: "Geen cursussen beschikbaar.",
+                proficiency_level_1: "1 (Beginner)",
+                proficiency_level_2: "2 (Intermediate)",
+                proficiency_level_3: "3 (Advanced)",
+                proficiency_level_4: "4 (Proficient)",
+                proficiency_level_5: "5 (Expert)",
                 repos_showcase: "GitHub Repositories",
                 repo_stars: "Sterren",
                 repo_forks: "Forks",
@@ -476,7 +501,32 @@ const translations = {
                 share_telegram: "Telegram",
                 share_twitter: "Twitter",
                 share_whatsapp: "WhatsApp",
-        },
+                skill_proficiency: "Skill proficiency",
+                writing_articles: "Writing & articles",
+                itchio_games: "itch.io games & projects",
+                community_volunteer: "Community & volunteer",
+                courses_learning: "Courses & learning paths",
+                skill_proficiency_title: "Skill proficiency badges",
+                writing_articles_title: "Writing & articles",
+                itchio_games_title: "itch.io games & projects",
+                community_volunteer_title: "Community & volunteer",
+                courses_learning_title: "Courses & learning paths",
+                skill_proficiency_sub: "How proficient are you? (1 = beginner, 5 = expert)",
+                writing_articles_sub: "Articles and writing samples from recent years.",
+                itchio_games_sub: "Games and projects on itch.io.",
+                community_volunteer_sub: "Volunteer work and community contributions.",
+                courses_learning_sub: "Courses and learning paths you have followed.",
+                skill_proficiency_empty: "No skill proficiency data.",
+                writing_articles_empty: "No articles available.",
+                itchio_games_empty: "No games available.",
+                volunteer_empty: "No volunteer work available.",
+                courses_empty: "No courses available.",
+                proficiency_level_1: "1 (Beginner)",
+                proficiency_level_2: "2 (Intermediate)",
+                proficiency_level_3: "3 (Advanced)",
+                proficiency_level_4: "4 (Proficient)",
+                proficiency_level_5: "5 (Expert)",
+            },
 
         de: {
             tagline: "Technischer Fachmann mit einer Leidenschaft für IT und Problemlösung",
@@ -555,6 +605,31 @@ const translations = {
             last_refreshed: "Zuletzt aktualisiert",
             active: "Aktiv",
             inactive: "Inaktiv",
+            skill_proficiency: "Skill proficiency",
+            writing_articles: "Schreiben & Artikel",
+            itchio_games: "Spiele auf itch.io",
+            community_volunteer: "Community & Ehrenamt",
+            courses_learning: "Kurse & Lernpfade",
+            skill_proficiency_title: "Skill proficiency badges",
+            writing_articles_title: "Schreiben & Artikel",
+            itchio_games_title: "Spiele auf itch.io",
+            community_volunteer_title: "Community & Ehrenamt",
+            courses_learning_title: "Kurse & Lernpfade",
+            skill_proficiency_sub: "Wie gut sind Sie? (1 = Anfänger, 5 = Experte)",
+            writing_articles_sub: "Schriften und Schreibwerk aus den letzten Jahren.",
+            itchio_games_sub: "Spiele und Projekte auf itch.io.",
+            community_volunteer_sub: "Ehrenamtliche Tätigkeiten und community Beiträge.",
+            courses_learning_sub: "Abgelegte Kurse und Lernpfade.",
+            skill_proficiency_empty: "Keine Skill proficiency Daten.",
+            writing_articles_empty: "Keine Artikel verfügbar.",
+            itchio_games_empty: "Keine Spiele verfügbar.",
+            volunteer_empty: "Keine Ehrenamtliche Tätigkeiten verfügbar.",
+            courses_empty: "Keine Kurse verfügbar.",
+            proficiency_level_1: "1 (Anfänger)",
+            proficiency_level_2: "2 (Fortgeschritten)",
+            proficiency_level_3: "3 (Kompetent)",
+            proficiency_level_4: "4 (Professionell)",
+            proficiency_level_5: "5 (Experte)",
         },
 
         fr: {
@@ -1208,6 +1283,155 @@ const translations = {
                 });
         }
 
+        // Skill proficiency badges: 1-5 scale for GitHub languages.
+        function renderProficiency() {
+            const section = document.getElementById('proficiency-section');
+            const container = document.getElementById('proficiency-container');
+            if (!section || !container) return;
+            const t = translations[currentLang];
+            const skills = githubData.stats && githubData.stats.skills ? githubData.stats.skills : {};
+            const items = Object.entries(skills).sort((a, b) => (b[1].percentage || 0) - (a[1].percentage || 0));
+            if (!items.length) {
+                container.innerHTML = '<p class="about-text">' + (t.proficiency_empty || 'No proficiency data available') + '</p>';
+                section.style.display = '';
+                return;
+            }
+            const html = items.slice(0, 10).map(([name, data]) => {
+                const pct = Math.round(data.percentage || 0);
+                const level = pct >= 80 ? 5 : pct >= 60 ? 4 : pct >= 40 ? 3 : pct >= 20 ? 2 : 1;
+                return `<div class="card">
+                    <div class="card-header">
+                        <div class="card-icon">${escapeHtml(name.charAt(0))}</div>
+                        <div class="card-name">${escapeHtml(name)}</div>
+                    </div>
+                    <div class="profile-proficiency">
+                        <div class="profile-proficiency-bar-wrap">
+                            <div class="profile-proficiency-bar" style="width:${pct}%"></div>
+                        </div>
+                        <div class="profile-proficiency-level">${level}</div>
+                    </div>
+                </div>`;
+            }).join('');
+            container.innerHTML = html;
+            setSectionTimestamp('proficiency', githubData.generated_at);
+            section.style.display = '';
+        }
+
+        // DEV.to articles.
+        function renderArticles() {
+            const section = document.getElementById('articles-section');
+            const container = document.getElementById('articles-container');
+            if (!section || !container) return;
+            const t = translations[currentLang];
+            const articles = profileData.devto && profileData.devto.articles ? profileData.devto.articles : [];
+            if (!articles || articles.length === 0) {
+                container.innerHTML = '<p class="about-text">' + (t.writing_articles_empty || 'No articles available') + '</p>';
+                section.style.display = '';
+                return;
+            }
+            const html = articles.slice(0, 5).map(a => {
+                const date = a.published_at ? new Date(a.published_at).toLocaleDateString(currentLang === 'nl' ? 'nl-NL' : 'en-US') : '';
+                return `<div class="card article-item">
+                    <a href="${escapeHtml(a.url || '#')}" target="_blank" rel="noopener">
+                        <div class="card-header">
+                            <div class="card-icon">📝</div>
+                            <div class="card-name">${escapeHtml(a.title || 'Untitled')}</div>
+                        </div>
+                        <div class="about-text">${escapeHtml(a.excerpt || a.summary || '')}</div>
+                        ${date ? `<div class="card-footer">${escapeHtml(date)}</div>` : ''}
+                    </a>
+                </div>`;
+            }).join('');
+            container.innerHTML = html;
+            setSectionTimestamp('articles', profileData.generated_at);
+            section.style.display = '';
+        }
+
+        // itch.io games/projects.
+        function renderItchioGames() {
+            const section = document.getElementById('itchio-section');
+            const container = document.getElementById('itchio-container');
+            if (!section || !container) return;
+            const t = translations[currentLang];
+            const games = profileData.itchio && profileData.itchio.games ? profileData.itchio.games : [];
+            if (!games || games.length === 0) {
+                container.innerHTML = '<p class="about-text">' + (t.itchio_games_empty || 'No itch.io games available') + '</p>';
+                section.style.display = '';
+                return;
+            }
+            const html = games.slice(0, 3).map(g => {
+                const desc = g.description ? escapeHtml(g.description) : t.itchio_games_empty;
+                return `<div class="card itchio-item">
+                    <a href="${escapeHtml(g.url || '#')}" target="_blank" rel="noopener">
+                        <div class="card-header">
+                            <div class="card-icon">🎮</div>
+                            <div class="card-name">${escapeHtml(g.title || 'Untitled')}</div>
+                        </div>
+                        <div class="about-text">${desc}</div>
+                    </a>
+                </div>`;
+            }).join('');
+            container.innerHTML = html;
+            setSectionTimestamp('itchio', profileData.generated_at);
+            section.style.display = '';
+        }
+
+        // Volunteer & community activities.
+        function renderVolunteer() {
+            const section = document.getElementById('volunteer-section');
+            const container = document.getElementById('volunteer-container');
+            if (!section || !container) return;
+            const t = translations[currentLang];
+            const items = profileData.volunteer && profileData.volunteer.activities ? profileData.volunteer.activities : [];
+            if (!items || items.length === 0) {
+                container.innerHTML = '<p class="about-text">' + (t.volunteer_empty || 'No volunteer activity available') + '</p>';
+                section.style.display = '';
+                return;
+            }
+            const html = items.slice(0, 5).map(v => {
+                const date = v.date ? escapeHtml(v.date) : '';
+                return `<div class="card volunteer-item">
+                    <div class="card-header">
+                        <div class="card-icon">🤝</div>
+                        <div class="card-name">${escapeHtml(v.title || 'Volunteer Activity')}</div>
+                    </div>
+                    <div class="about-text">${escapeHtml(v.description || '')}</div>
+                    ${date ? `<div class="card-footer">${escapeHtml(date)}</div>` : ''}
+                </div>`;
+            }).join('');
+            container.innerHTML = html;
+            setSectionTimestamp('volunteer', profileData.generated_at);
+            section.style.display = '';
+        }
+
+        // Courses & learning paths.
+        function renderCourses() {
+            const section = document.getElementById('courses-section');
+            const container = document.getElementById('courses-container');
+            if (!section || !container) return;
+            const t = translations[currentLang];
+            const items = profileData.courses && profileData.courses.paths ? profileData.courses.paths : [];
+            if (!items || items.length === 0) {
+                container.innerHTML = '<p class="about-text">' + (t.courses_empty || 'No courses available') + '</p>';
+                section.style.display = '';
+                return;
+            }
+            const html = items.slice(0, 5).map(c => {
+                const date = c.completed_at ? escapeHtml(c.completed_at) : '';
+                return `<div class="card course-item">
+                    <div class="card-header">
+                        <div class="card-icon">📚</div>
+                        <div class="card-name">${escapeHtml(c.title || 'Course')}</div>
+                    </div>
+                    <div class="about-text">${escapeHtml(c.description || '')}</div>
+                    ${date ? `<div class="card-footer">${escapeHtml(date)}</div>` : ''}
+                </div>`;
+            }).join('');
+            container.innerHTML = html;
+            setSectionTimestamp('courses', profileData.generated_at);
+            section.style.display = '';
+        }
+
         // Helper: set "last updated" timestamp beneath a live-data block.
         function setSectionTimestamp(containerId, timestamp) {
             const el = document.getElementById(containerId + '-updated');
@@ -1236,7 +1460,12 @@ const translations = {
                 ['contributions', renderContributions],
                 ['heatmap', renderContributionHeatmap],
                 ['achievements', renderAchievements],
-                ['profiles', renderProfiles]
+                ['profiles', renderProfiles],
+                ['proficiency', renderProficiency],
+                ['articles', renderArticles],
+                ['itchio', renderItchioGames],
+                ['volunteer', renderVolunteer],
+                ['courses', renderCourses]
             ];
             const failed = [];
             steps.forEach(([name, fn]) => {

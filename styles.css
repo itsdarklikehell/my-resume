@@ -857,16 +857,178 @@
 .card-empty {
   color: var(--text-muted);
   font-size: 0.75rem;
-  text-align: center;
   padding: 1rem;
+  text-align: center;
 }
 
 .card-footer {
-  font-size: 0.65rem;
-  color: var(--text-muted);
-  margin-top: auto;
-  padding-top: 0.5rem;
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
   border-top: 1px solid var(--border);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+/* Proficiency badges (skill proficiency section) */
+.profile-proficiency {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+.profile-proficiency-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.profile-proficiency-name {
+  font-weight: 600;
+  font-size: 0.85rem;
+  min-width: 8rem;
+  flex-shrink: 0;
+}
+.profile-proficiency-bar-wrap {
+  flex: 1;
+  height: 8px;
+  background: var(--surface2);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.profile-proficiency-bar {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.6s ease;
+}
+.profile-proficiency-level {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  min-width: 2rem;
+  text-align: right;
+}
+
+/* Writing / articles list */
+.article-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--border);
+}
+.article-item:last-child {
+  border-bottom: none;
+}
+.article-item a {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--accent);
+  text-decoration: none;
+}
+.article-item a:hover {
+  text-decoration: underline;
+}
+.article-item .article-date {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
+.itchio-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.itchio-item:last-child {
+  border-bottom: none;
+}
+
+.itchio-item a {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.itchio-item a:hover {
+  text-decoration: underline;
+}
+
+/* itch.io games / projects list */
+.game-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid var(--border);
+}
+.game-item:last-child {
+  border-bottom: none;
+}
+.game-item a {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--accent);
+  text-decoration: none;
+}
+.game-item a:hover {
+  text-decoration: underline;
+}
+.game-item .game-platform {
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Volunteer / community entries */
+.volunteer-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid var(--border);
+}
+.volunteer-item:last-child {
+  border-bottom: none;
+}
+.volunteer-item .volunteer-role {
+  font-weight: 600;
+  color: var(--accent);
+}
+.volunteer-item .volunteer-org {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+.volunteer-item .volunteer-period {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
+/* Courses / learning paths */
+.course-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid var(--border);
+}
+.course-item:last-child {
+  border-bottom: none;
+}
+.course-item .course-name {
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+.course-item .course-provider {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+.course-item .course-period {
+  font-size: 0.7rem;
+  color: var(--text-muted);
 }
 
 /* Mobile: single column stack */
