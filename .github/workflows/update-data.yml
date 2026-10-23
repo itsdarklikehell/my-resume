@@ -31,9 +31,11 @@ jobs:
         run: playwright install chromium
 
       - name: Setup GitHub CLI
+        env:
+          GH_PAT: ${{ secrets.GH_PAT }}
         run: |
           gh auth setup-git
-          echo "${{ secrets.GH_PAT }}" | gh auth login --with-token
+          echo "$GH_PAT" | gh auth login --with-token
 
       - name: Sync with main
         run: |
