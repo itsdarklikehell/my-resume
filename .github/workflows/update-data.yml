@@ -32,10 +32,10 @@ jobs:
 
       - name: Setup GitHub CLI
         env:
-          GH_PAT: ${{ secrets.GH_PAT }}
+          GH_TOKEN: ${{ secrets.GH_PAT }}
         run: |
           gh auth setup-git
-          echo "$GH_PAT" | gh auth login --with-token
+          gh auth status
 
       - name: Sync with main
         run: |
