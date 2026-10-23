@@ -43,6 +43,8 @@ jobs:
           git reset --hard origin/main
       
       - name: Fetch GitHub data
+        env:
+          GH_TOKEN: ${{ secrets.GH_PAT }}
         run: python scripts/fetch_github_data.py
 
       - name: Fetch profile data
