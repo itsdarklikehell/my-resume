@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-26T12:20:02.044985Z",
+  "generated_at": "2026-10-27T11:40:02.837018Z",
   "user": {
     "login": "itsdarklikehell",
     "name": "Bauke Molenaar",
@@ -28,9 +28,9 @@
     {
       "name": "pwnspeaker",
       "language": "Python",
-      "stars": 20,
+      "stars": 21,
       "description": "A python plugin for pwnagotchi that enables it to utilize tts to speak.",
-      "updated_at": "2026-10-18T06:08:41Z",
+      "updated_at": "2026-10-26T16:57:12Z",
       "url": "https://github.com/itsdarklikehell-interactive/pwnspeaker",
       "topics": []
     },
@@ -148,7 +148,7 @@
       "language": "JavaScript",
       "stars": 0,
       "description": "Digitale resume van Bauke Molenaar",
-      "updated_at": "2026-10-25T10:49:39Z",
+      "updated_at": "2026-10-27T10:58:28Z",
       "url": "https://github.com/itsdarklikehell/my-resume",
       "topics": [
         "cv",
@@ -688,7 +688,7 @@
     "Python": {
       "percentage": 38,
       "repos": 11,
-      "stars": 260
+      "stars": 261
     },
     "Shell": {
       "percentage": 94,
@@ -718,7 +718,7 @@
   },
   "stats": {
     "total_repos": 57,
-    "total_stars": 283,
+    "total_stars": 284,
     "languages": 6
   }
 }
