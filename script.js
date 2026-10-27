@@ -1344,16 +1344,22 @@ const translations = {
 
         // DEV.to articles.
         function renderArticles() {
+            console.log('DBG-ART step0 entry');
             const section = document.getElementById('articles-section');
+            console.log('DBG-ART step1 section=', !!section);
             const container = document.getElementById('articles-container');
+            console.log('DBG-ART step2 container=', !!container);
             if (!section || !container) return;
             const t = translations[currentLang];
-            const articles = profileData.devto && profileData.devto.articles ? profileData.devto.articles : [];
+            console.log('DBG-ART step3 t=', !!t, 'currentLang=', currentLang);
+            const articles = (profileData && profileData.devto && Array.isArray(profileData.devto.articles)) ? profileData.devto.articles : [];
+            console.log('DBG-ART step4 articles=', JSON.stringify(articles));
             if (!articles || articles.length === 0) {
                 container.innerHTML = '<p class="about-text">' + (t.writing_articles_empty || 'No articles available') + '</p>';
                 section.style.display = '';
                 return;
             }
+            console.log('DBG-ART step5 before map');
             const html = articles.slice(0, 5).map(a => {
                 const date = a.published_at ? new Date(a.published_at).toLocaleDateString(currentLang === 'nl' ? 'nl-NL' : 'en-US') : '';
                 return `<div class="card article-item">
@@ -1378,7 +1384,7 @@ const translations = {
             const container = document.getElementById('itchio-container');
             if (!section || !container) return;
             const t = translations[currentLang];
-            const games = profileData.itchio && profileData.itchio.games ? profileData.itchio.games : [];
+            const games = (profileData && profileData.itchio && Array.isArray(profileData.itchio.games)) ? profileData.itchio.games : [];
             if (!games || games.length === 0) {
                 container.innerHTML = '<p class="about-text">' + (t.itchio_games_empty || 'No itch.io games available') + '</p>';
                 section.style.display = '';

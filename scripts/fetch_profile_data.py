@@ -681,7 +681,7 @@ def scrape_itchio():
                 if followers_match:
                     followers = followers_match.group(1).replace(',', '')
 
-                d['games'] = games.strip()
+                d['games'] = [];
                 d['followers'] = followers.strip()
                 # --- game rating ---
                 game_rating = 'N/A'
@@ -780,7 +780,7 @@ def fetch_devto():
         # DEV.to exposes no XP, reputation or badge metric. Map the confirmed
         # article/comment counts onto their own rows instead of aliasing them
         # onto fields DEV.to does not have.
-        d['articles'] = str(posts) if posts is not None else 'N/A'
+        d['articles'] = [];
         d['xp'] = 'N/A'
         d['reputation_points'] = 'N/A'
         d['event_participation'] = 'N/A'

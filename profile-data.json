@@ -240,7 +240,7 @@
     "reached": "N/A"
   },
   "itchio": {
-    "games": "N/A",
+    "games": [],
     "followers": "N/A",
     "level": "N/A",
     "xp": "N/A",
@@ -376,7 +376,7 @@
     "sites_active": "N/A",
     "reached": "N/A",
     "github": "itsdarklikehell",
-    "articles": "0"
+    "articles": []
   },
   "leetcode": {
     "level": "N/A",
