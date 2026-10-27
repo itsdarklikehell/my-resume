@@ -1413,7 +1413,7 @@ const translations = {
             const container = document.getElementById('volunteer-container');
             if (!section || !container) return;
             const t = translations[currentLang];
-            const items = profileData.volunteer && profileData.volunteer.activities ? profileData.volunteer.activities : [];
+            const items = (profileData && profileData.volunteer && Array.isArray(profileData.volunteer.activities)) ? profileData.volunteer.activities : [];
             if (!items || items.length === 0) {
                 container.innerHTML = '<p class="about-text">' + (t.volunteer_empty || 'No volunteer activity available') + '</p>';
                 section.style.display = '';
@@ -1441,7 +1441,7 @@ const translations = {
             const container = document.getElementById('courses-container');
             if (!section || !container) return;
             const t = translations[currentLang];
-            const items = profileData.courses && profileData.courses.paths ? profileData.courses.paths : [];
+            const items = (profileData && profileData.courses && Array.isArray(profileData.courses.paths)) ? profileData.courses.paths : [];
             if (!items || items.length === 0) {
                 container.innerHTML = '<p class="about-text">' + (t.courses_empty || 'No courses available') + '</p>';
                 section.style.display = '';
@@ -1542,12 +1542,6 @@ const translations = {
                 if (!githubData) throw new Error('onverwachte datastructuur');
 
                 console.log('GitHub data loaded from github-data.json:', gRepos().length, 'repos');
-
-                const failed = renderAll();
-                if (failed.length) {
-                    showDataError('Sommige secties konden niet getoond worden: ' + failed.join(', '));
-                    setFallbackForPlaceholders();
-                }
             } catch (e) {
                 console.error('Failed to load GitHub data:', e);
                 showDataError('Live data kon niet geladen worden: ' + (e && e.message ? e.message : e));
@@ -1688,7 +1682,13 @@ async function loadProfileData() {
             window.location.href = 'mailto:bauke.molenaar@gmail.com?subject=' + subject + '&body=' + body;
         }
 
-        loadGitHubData().then(() => { loadProfileData().then(() => renderAll()); });
+        loadGitHubData().then(() => { return loadProfileData(); }).then(() => {
+            const failed = renderAll();
+            if (failed.length) {
+                showDataError('Sommige secties konden niet getoond worden: ' + failed.join(', '));
+                setFallbackForPlaceholders();
+            }
+        });
 
 // Wire interactive toggles (runs after DOM is parsed due to defer)
 (function () {
