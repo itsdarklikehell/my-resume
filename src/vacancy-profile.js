@@ -102,6 +102,15 @@ export function renderVacancyProfile({ container, repos = [], lang = 'nl' }) {
     });
   };
   render();
+  if (selected !== 'general') {
+    const projectSelect = document.querySelector('#projects-container [data-profile]');
+    const projectFilter = getProjectFilterForRole(selected);
+    if (projectSelect && projectSelect.value !== projectFilter) {
+      projectSelect.value = projectFilter;
+      projectSelect.dispatchEvent(new Event('change', { bubbles: true }));
+    }
+    window.dispatchEvent(new CustomEvent('resume-profile-change', { detail: { profile: projectFilter } }));
+  }
 }
 function safeProjectUrl(value) {
   try {
