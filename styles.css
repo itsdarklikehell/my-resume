@@ -1890,3 +1890,101 @@ html:not([lang="nl"]) .download-btn.lang-nl {
   .main-col, .sidebar, .card, .dynamic-insights, .dynamic-skill-map, .dynamic-skill-row { min-width: 0; max-width: 100%; box-sizing: border-box; }
   .dynamic-skill-projects { justify-content: flex-start; }
 }
+
+
+/* Portfolio terminal: responsive, keyboard-friendly and local-only. */
+.portfolio-terminal {
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: #11151d;
+  color: #e8edf5;
+  box-shadow: 0 8px 24px rgb(0 0 0 / 12%);
+}
+.portfolio-terminal-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.7rem 0.85rem;
+  border-bottom: 1px solid #2e3440;
+  background: #1b202b;
+}
+.portfolio-terminal-bar > span:not(.portfolio-terminal-prompt) {
+  width: 0.6rem;
+  height: 0.6rem;
+  border-radius: 50%;
+  background: #697386;
+}
+.portfolio-terminal-bar > span:nth-child(1) { background: #ff6b6b; }
+.portfolio-terminal-bar > span:nth-child(2) { background: #ffd166; }
+.portfolio-terminal-bar > span:nth-child(3) { background: #4ecdc4; }
+.portfolio-terminal-prompt {
+  margin-left: auto;
+  color: #aab5c5;
+  font-size: 0.8rem;
+}
+.portfolio-terminal-output {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  max-height: 230px;
+  min-height: 90px;
+  overflow-y: auto;
+  padding: 0.85rem;
+  overflow-wrap: anywhere;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.88rem;
+}
+.portfolio-terminal-output p { margin: 0.25rem 0 0; color: #c8d2e1; }
+.portfolio-terminal-command { color: #7ee787; overflow-wrap: anywhere; }
+.portfolio-terminal-form {
+  display: grid;
+  grid-template-columns: minmax(0, auto) minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.75rem;
+  border-top: 1px solid #2e3440;
+}
+.portfolio-terminal-form label {
+  color: #7ee787;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.8rem;
+}
+.portfolio-terminal-form input {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  padding: 0.6rem;
+  border: 1px solid #3a4352;
+  border-radius: 6px;
+  background: #0d1117;
+  color: #f0f6fc;
+  font: inherit;
+}
+.portfolio-terminal-form button { white-space: nowrap; }
+.portfolio-terminal-form input:focus-visible,
+.portfolio-terminal-form button:focus-visible { outline: 2px solid #7ee787; outline-offset: 2px; }
+
+/* Keep the donut's centre label aligned to the actual chart box on narrow screens. */
+.donut-chart > .donut-center {
+  inset: 0;
+  display: flex;
+  width: auto;
+  height: auto;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.1rem;
+  transform: none;
+  pointer-events: none;
+}
+.donut-chart > svg { position: absolute; inset: 0; }
+
+@media (max-width: 480px) {
+  .portfolio-terminal-form {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+  .portfolio-terminal-form label { grid-column: 1 / -1; }
+  .portfolio-terminal-form button { padding-inline: 0.7rem; }
+}
