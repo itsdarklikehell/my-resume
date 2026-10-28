@@ -98,7 +98,7 @@ export function renderVacancyProfile({ container, repos = [], lang = 'nl' }) {
         projectSelect.value = projectFilter;
         projectSelect.dispatchEvent(new Event('change', { bubbles: true }));
       }
-      window.dispatchEvent(new CustomEvent('resume-profile-change', { detail: { profile: projectFilter } }));
+      window.dispatchEvent(new CustomEvent('resume-profile-change', { detail: { profile: projectFilter, role: selected } }));
     });
   };
   render();
@@ -109,7 +109,7 @@ export function renderVacancyProfile({ container, repos = [], lang = 'nl' }) {
       projectSelect.value = projectFilter;
       projectSelect.dispatchEvent(new Event('change', { bubbles: true }));
     }
-    window.dispatchEvent(new CustomEvent('resume-profile-change', { detail: { profile: projectFilter } }));
+    window.dispatchEvent(new CustomEvent('resume-profile-change', { detail: { profile: projectFilter, role: selected } }));
   }
 }
 function safeProjectUrl(value) {
