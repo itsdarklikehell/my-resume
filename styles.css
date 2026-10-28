@@ -1677,7 +1677,8 @@ html:not([lang="nl"]) .download-btn.lang-nl {
 }
 .dynamic-skill-map {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(145px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 145px), 1fr));
+  min-width: 0;
   gap: 0.4rem;
   margin-top: 0.7rem;
 }
@@ -1692,9 +1693,9 @@ html:not([lang="nl"]) .download-btn.lang-nl {
   font-size: 0.78rem;
   overflow-wrap: anywhere;
 }
-.dynamic-skill-row span:last-child {
-  color: var(--text-muted);
-  white-space: nowrap;
+.dynamic-skill-row > span:first-child {
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 .dynamic-timeline { display: grid; gap: 0.7rem; }
 .dynamic-timeline-item {
@@ -1803,8 +1804,8 @@ html:not([lang="nl"]) .download-btn.lang-nl {
 .dynamic-timeline-heading { display: flex; align-items: center; justify-content: flex-end; flex-wrap: wrap; gap: .75rem; margin-bottom: .75rem; }
 .dynamic-timeline-heading label { display: flex; align-items: center; gap: .45rem; color: var(--text-muted); font-size: .85rem; }
 .dynamic-timeline-heading select { max-width: 100%; padding: .35rem .5rem; border: 1px solid var(--border); border-radius: .45rem; background: var(--surface); color: var(--text); }
-.dynamic-skill-projects { display: flex; justify-content: flex-end; flex-wrap: wrap; gap: .35rem; }
-.dynamic-skill-projects a { display: inline-block; padding: .15rem .4rem; border: 1px solid var(--border); border-radius: .4rem; color: var(--accent); font-size: .78rem; text-decoration: none; }
+.dynamic-skill-projects { display: flex; justify-content: flex-end; flex-wrap: wrap; gap: .35rem; width: 100%; max-width: 100%; min-width: 0; box-sizing: border-box; }
+.dynamic-skill-projects a { display: inline-block; max-width: 100%; min-width: 0; padding: .15rem .4rem; border: 1px solid var(--border); border-radius: .4rem; color: var(--accent); font-size: .78rem; text-decoration: none; overflow-wrap: anywhere; word-break: break-word; }
 .dynamic-skill-projects a:hover { text-decoration: underline; }
 [data-source-freshness][data-freshness="stale"] { color: var(--accent3); }
 [data-source-freshness][data-freshness="unknown"] { color: var(--text-muted); }
@@ -1879,4 +1880,10 @@ html:not([lang="nl"]) .download-btn.lang-nl {
 }
 @media print {
   .portfolio-enhancements-card, .portfolio-recruiter-panel { display: none !important; }
+}
+
+@media (max-width: 640px) {
+  .container { padding-left: 1rem; padding-right: 1rem; }
+  .main-col, .sidebar, .card, .dynamic-insights, .dynamic-skill-map, .dynamic-skill-row { min-width: 0; max-width: 100%; box-sizing: border-box; }
+  .dynamic-skill-projects { justify-content: flex-start; }
 }
