@@ -313,7 +313,7 @@ export function renderPortfolioEnhancements({ container, repos = [], profileData
   const terminalOutput = container.querySelector('[data-terminal-output]');
   const terminalProjects = selectCaseStudyRepos(repos, 5);
   const runTerminalCommand = rawCommand => {
-    const command = rawCommand.trim().toLowerCase().split(/\\s+/)[0];
+    const command = rawCommand.trim().toLowerCase().split(/\s+/)[0];
     const lines = [];
     if (!command) lines.push(terminalLabels.empty);
     else if (command === 'help') lines.push(terminalLabels.help);
@@ -343,7 +343,7 @@ export function renderPortfolioEnhancements({ container, repos = [], profileData
     event.preventDefault();
     const command = terminalInput.value;
     runTerminalCommand(command);
-    if (command.trim()) updateAnalyticsTotal(recordLocalEvent('terminal_command_' + command.trim().toLowerCase().split(/\\s+/)[0].replace(/[^a-z0-9_-]/g, '').slice(0, 24)));
+    if (command.trim()) updateAnalyticsTotal(recordLocalEvent('terminal_command_' + command.trim().toLowerCase().split(/\s+/)[0].replace(/[^a-z0-9_-]/g, '').slice(0, 24)));
     terminalInput.value = '';
   });
 
