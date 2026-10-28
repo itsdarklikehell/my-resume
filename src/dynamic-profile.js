@@ -110,6 +110,7 @@ export function buildSkillProjectMap(repos) {
 }
 
 const safeHref = value => {
+  if (!value) return '#';
   try {
     const url = new URL(String(value || ''), window.location.href);
     return url.protocol === 'https:' ? url.href : '#';
