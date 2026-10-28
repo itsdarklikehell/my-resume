@@ -18,7 +18,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4.3.0
         with:
-          node-version: '20.18.0'
+          node-version: '22.23.0'.18.0'
           cache: npm
 
       - name: Install dependencies
@@ -47,7 +47,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4.3.0
         with:
-          node-version: '20.18.0'
+          node-version: '22.23.0'.18.0'
       - name: Run Lighthouse CI
         # LHCI_GITHUB_APP_TOKEN is optional; results are written to .lighthouseci/reports
         env:
