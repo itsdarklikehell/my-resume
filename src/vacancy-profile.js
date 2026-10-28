@@ -1,4 +1,4 @@
-import { classifyRepo, filterAndSortRepos } from './dynamic-profile.js';
+import { filterAndSortRepos } from './dynamic-profile.js';
 
 const PROFILES = {
   general: {
