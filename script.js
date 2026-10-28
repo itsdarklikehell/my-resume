@@ -1,4 +1,5 @@
 import { translations } from './src/i18n/translations.js';
+import { getTranslations } from './src/i18n/get-translations.js';
 
 // --- state ---
 let currentLang = 'nl';
@@ -19,7 +20,7 @@ function detectLang() {
 
 function applyLang(lang) {
   currentLang = lang;
-  const t = { ...translations.nl, ...(translations[currentLang] || {}) };
+  const t = getTranslations(currentLang, translations);
   const labelEl = document.getElementById('lang-label');
   if (labelEl) labelEl.textContent = lang.toUpperCase();
 
@@ -106,7 +107,7 @@ function renderProjects() {
         '</p>';
     return;
   }
-  const t = { ...translations.nl, ...(translations[currentLang] || {}) };
+  const t = getTranslations(currentLang, translations);
   const own = repos
     .filter(r => !r.fork)
     .sort((a, b) => (b.stars || 0) - (a.stars || 0));
@@ -165,7 +166,7 @@ function renderSkills() {
 }
 
 function renderStats() {
-  const t = { ...translations.nl, ...(translations[currentLang] || {}) };
+  const t = getTranslations(currentLang, translations);
   const st = gTotals();
   const elRepos = document.getElementById('stat-repos');
   const elStars = document.getElementById('stat-stars');
@@ -202,7 +203,7 @@ function renderContributions() {
       container.innerHTML = '<p class="about-text">No recent activity.</p>';
     return;
   }
-  const t = { ...translations.nl, ...(translations[currentLang] || {}) };
+  const t = getTranslations(currentLang, translations);
   const html = contributions
     .slice(0, 10)
     .map(c => {
@@ -249,7 +250,7 @@ function renderContributionHeatmap() {
 function renderAchievements() {
   const container = document.getElementById('achievements-container');
   if (!container || !profileData) return;
-  const t = { ...translations.nl, ...(translations[currentLang] || {}) };
+  const t = getTranslations(currentLang, translations);
   const items = [];
   const thm = profileData.tryhackme;
   const ms = profileData.microsoft;
@@ -283,7 +284,7 @@ function renderAchievements() {
 function renderProfiles() {
   const container = document.getElementById('profiles-container');
   if (!container || !profileData) return;
-  const t = { ...translations.nl, ...(translations[currentLang] || {}) };
+  const t = getTranslations(currentLang, translations);
   const links = [];
   if (profileData.github)
     links.push({ name: 'GitHub', url: profileData.github });
@@ -309,7 +310,7 @@ function renderProfiles() {
 function renderPlatformCards() {
   const container = document.getElementById('platform-cards-container');
   if (!container || !profileData) return;
-  const t = { ...translations.nl, ...(translations[currentLang] || {}) };
+  const t = getTranslations(currentLang, translations);
   const platforms = [
     {
       key: 'tryhackme',
@@ -398,7 +399,7 @@ function renderSkillMatrix() {
   const container = document.getElementById('skill-matrix-container');
   if (!container || !profileData) return;
 
-  const t = { ...translations.nl, ...(translations[currentLang] || {}) };
+  const t = getTranslations(currentLang, translations);
   const thm =
     profileData && profileData.tryhackme ? profileData.tryhackme : null;
   const matrix =
@@ -614,7 +615,7 @@ function escapeHtml(v) {
 // Bewust vóór de categorielijst, zodat het beste werk niet verdwijnt
 // tussen honderden repos in de categorieën.
 function renderFeatured() {
-  const t = { ...translations.nl, ...(translations[currentLang] || {}) };
+  const t = getTranslations(currentLang, translations);
   const section = document.getElementById('featured-section');
   const container = document.getElementById('featured-container');
   if (!section || !container) return;
@@ -708,7 +709,7 @@ function renderGitHubRepos() {
     return;
   }
 
-  const t = { ...translations.nl, ...(translations[currentLang] || {}) };
+  const t = getTranslations(currentLang, translations);
   // Sort by stars desc, filter out forks first (own repos), then show top 12
   const own = repos
     .filter(r => !r.fork)
@@ -786,7 +787,7 @@ function renderProficiency() {
   const section = document.getElementById('proficiency-section');
   const container = document.getElementById('proficiency-container');
   if (!section || !container) return;
-  const t = { ...translations.nl, ...(translations[currentLang] || {}) };
+  const t = getTranslations(currentLang, translations);
   const skills =
     githubData.stats && githubData.stats.skills ? githubData.stats.skills : {};
   const items = Object.entries(skills).sort(
@@ -833,7 +834,7 @@ function renderArticles() {
   const container = document.getElementById('articles-container');
   console.log('DBG-ART step2 container=', !!container);
   if (!section || !container) return;
-  const t = { ...translations.nl, ...(translations[currentLang] || {}) };
+  const t = getTranslations(currentLang, translations);
   console.log('DBG-ART step3 t=', !!t, 'currentLang=', currentLang);
   const articles =
     profileData &&
@@ -881,7 +882,7 @@ function renderItchioGames() {
   const section = document.getElementById('itchio-section');
   const container = document.getElementById('itchio-container');
   if (!section || !container) return;
-  const t = { ...translations.nl, ...(translations[currentLang] || {}) };
+  const t = getTranslations(currentLang, translations);
   const games =
     profileData && profileData.itchio && Array.isArray(profileData.itchio.games)
       ? profileData.itchio.games
@@ -921,7 +922,7 @@ function renderVolunteer() {
   const section = document.getElementById('volunteer-section');
   const container = document.getElementById('volunteer-container');
   if (!section || !container) return;
-  const t = { ...translations.nl, ...(translations[currentLang] || {}) };
+  const t = getTranslations(currentLang, translations);
   const items =
     profileData &&
     profileData.volunteer &&
@@ -960,7 +961,7 @@ function renderCourses() {
   const section = document.getElementById('courses-section');
   const container = document.getElementById('courses-container');
   if (!section || !container) return;
-  const t = { ...translations.nl, ...(translations[currentLang] || {}) };
+  const t = getTranslations(currentLang, translations);
   const items =
     profileData &&
     profileData.courses &&
@@ -1000,7 +1001,7 @@ function setSectionTimestamp(containerId, timestamp) {
   if (!el) return;
   if (timestamp) {
     const date = new Date(timestamp);
-    const t = { ...translations.nl, ...(translations[currentLang] || {}) };
+    const t = getTranslations(currentLang, translations);
     el.textContent =
       (t.last_updated || 'Last updated') +
       ': ' +
@@ -1044,7 +1045,7 @@ function renderAll() {
   // Dynamic footer "last edited" date from profile data
   const footerUpdated = document.getElementById('footer-updated');
   if (footerUpdated && profileData && profileData.generated_at) {
-    const t = { ...translations.nl, ...(translations[currentLang] || {}) };
+    const t = getTranslations(currentLang, translations);
     const date = new Date(
       profileData && profileData.generated_at
         ? profileData.generated_at
@@ -1062,7 +1063,7 @@ function renderAll() {
   // Dynamic hero "last updated" badge
   const heroUpdated = document.getElementById('hero-updated');
   if (heroUpdated && profileData && profileData.generated_at) {
-    const t = { ...translations.nl, ...(translations[currentLang] || {}) };
+    const t = getTranslations(currentLang, translations);
     const date = new Date(
       profileData && profileData.generated_at
         ? profileData.generated_at
@@ -1288,7 +1289,7 @@ function updateToggleLabel(btn) {
     btn.textContent = skillSortLabel();
     return;
   }
-  const t = { ...translations.nl, ...(translations[currentLang] || {}) };
+  const t = getTranslations(currentLang, translations);
   const target = btn.getAttribute('data-toggle-target');
   const expanded = target
     ? !!document.getElementById(target)?.classList.contains('expanded')
@@ -1312,7 +1313,7 @@ window.toggleSkillSort = toggleSkillSort;
 // The sort button reflects the persisted preference, in the active
 // language — not a hardcoded "Auto-sort: ON".
 function skillSortLabel() {
-  const t = { ...translations.nl, ...(translations[currentLang] || {}) };
+  const t = getTranslations(currentLang, translations);
   return window.autoSortSkills
     ? t.auto_sort_on || 'Auto-sort: ON'
     : t.auto_sort_off || 'Auto-sort: OFF';
