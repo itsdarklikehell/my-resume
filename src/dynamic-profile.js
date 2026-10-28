@@ -7,7 +7,7 @@ const LABELS = {
     projects: 'projecten', updated: 'Bijgewerkt', language: 'Taal', topics: 'Onderwerpen',
     skills: 'Vaardigheden uit projecten', timeline: 'Recente projectactiviteit',
     noResults: 'Geen projecten gevonden voor deze selectie.', refreshed: 'Brondata vernieuwd',
-    allSkills: 'Vaardigheden worden afgeleid van repositorytaal en onderwerpen; dit is geen vaardigheidsmeting.',
+    allSkills: 'Vaardigheden worden afgeleid van repositorytaal en onderwerpen; dit is geen vaardigheidsmeting.', period: 'Activiteitsperiode', allTime: 'Alle beschikbare datums', last30: 'Afgelopen 30 dagen', last90: 'Afgelopen 90 dagen', last365: 'Afgelopen 12 maanden', stale: 'Brongegevens zijn mogelijk verouderd', unknownFreshness: 'Verversingsdatum van bron onbekend', thm: 'TryHackMe-activiteitssignalen', rooms: 'rooms afgerond', paths: 'paden afgerond', noTimeline: 'Geen projectupdates in deze periode.',
     noDescription: 'Geen beschrijving beschikbaar', starsLabel: 'sterren',
   },
   en: {
@@ -18,7 +18,7 @@ const LABELS = {
     projects: 'projects', updated: 'Updated', language: 'Language', topics: 'Topics',
     skills: 'Project-backed skills', timeline: 'Recent project activity',
     noResults: 'No projects found for this selection.', refreshed: 'Source data refreshed',
-    allSkills: 'Skills are inferred from repository languages and topics; this is not a skill-level assessment.',
+    allSkills: 'Skills are inferred from repository languages and topics; this is not a skill-level assessment.', period: 'Activity period', allTime: 'All available dates', last30: 'Last 30 days', last90: 'Last 90 days', last365: 'Last 12 months', stale: 'Source data may be outdated', unknownFreshness: 'Source refresh date unavailable', thm: 'TryHackMe activity signals', rooms: 'rooms completed', paths: 'paths completed', noTimeline: 'No project updates in this period.',
     noDescription: 'No description available', starsLabel: 'stars',
   },
   de: {
@@ -29,7 +29,7 @@ const LABELS = {
     projects: 'Projekte', updated: 'Aktualisiert', language: 'Sprache', topics: 'Themen',
     skills: 'Durch Projekte belegte Kenntnisse', timeline: 'Letzte Projektaktivität',
     noResults: 'Keine Projekte für diese Auswahl gefunden.', refreshed: 'Quelldaten aktualisiert',
-    allSkills: 'Kenntnisse werden aus Repository-Sprache und Themen abgeleitet; dies ist keine Kompetenzbewertung.',
+    allSkills: 'Kenntnisse werden aus Repository-Sprache und Themen abgeleitet; dies ist keine Kompetenzbewertung.', period: 'Aktivitätszeitraum', allTime: 'Alle verfügbaren Daten', last30: 'Letzte 30 Tage', last90: 'Letzte 90 Tage', last365: 'Letzte 12 Monate', stale: 'Quelldaten sind möglicherweise veraltet', unknownFreshness: 'Aktualisierungsdatum unbekannt', thm: 'TryHackMe-Aktivitätssignale', rooms: 'abgeschlossene Räume', paths: 'abgeschlossene Pfade', noTimeline: 'Keine Projektaktualisierungen in diesem Zeitraum.',
     noDescription: 'Keine Beschreibung verfügbar', starsLabel: 'Sterne',
   },
   fr: {
@@ -40,7 +40,7 @@ const LABELS = {
     projects: 'projets', updated: 'Mis à jour', language: 'Langage', topics: 'Sujets',
     skills: 'Compétences illustrées par les projets', timeline: 'Activité récente des projets',
     noResults: 'Aucun projet trouvé pour cette sélection.', refreshed: 'Données source actualisées',
-    allSkills: 'Les compétences sont déduites du langage et des sujets des dépôts ; ce n’est pas une mesure du niveau.',
+    allSkills: 'Les compétences sont déduites du langage et des sujets des dépôts ; ce n’est pas une mesure du niveau.', period: 'Période d’activité', allTime: 'Toutes les dates disponibles', last30: '30 derniers jours', last90: '90 derniers jours', last365: '12 derniers mois', stale: 'Les données source sont peut-être obsolètes', unknownFreshness: 'Date d’actualisation inconnue', thm: 'Indicateurs d’activité TryHackMe', rooms: 'salles terminées', paths: 'parcours terminés', noTimeline: 'Aucune mise à jour de projet pendant cette période.',
     noDescription: 'Aucune description disponible', starsLabel: 'étoiles',
   },
 };
@@ -91,6 +91,20 @@ export function filterAndSortRepos(repos, { profile = 'all', query = '', sort = 
   });
 }
 
+export function getFreshnessState(generatedAt, now = Date.now(), maxAgeDays = 7) {
+  if (!validDate(generatedAt)) return 'unknown';
+  const age = now - validDate(generatedAt).getTime();
+  if (age < -60 * 60 * 1000) return 'unknown';
+  return age > maxAgeDays * 86400000 ? 'stale' : 'fresh';
+}
+
+export function getTimelineRepos(repos, period = 'all', now = Date.now()) {
+  const safe = (Array.isArray(repos) ? repos : []).filter(repo => repo && !repo.fork && validDate(repo.updated_at));
+  const days = ({ '30d': 30, '90d': 90, '365d': 365 })[period];
+  const selected = days ? safe.filter(repo => Date.parse(repo.updated_at) >= now - days * 86400000) : safe;
+  return selected.sort((a, b) => Date.parse(b.updated_at) - Date.parse(a.updated_at));
+}
+
 export function buildSkillProjectMap(repos) {
   const map = new Map();
   (Array.isArray(repos) ? repos : []).forEach(repo => {
@@ -136,7 +150,7 @@ function dateLabel(value, locale) {
   return date ? date.toLocaleDateString(locale, { year: 'numeric', month: 'short', day: 'numeric' }) : '';
 }
 
-export function renderDynamicProjects({ container, repos, generatedAt, lang = 'nl' }) {
+export function renderDynamicProjects({ container, repos, generatedAt, profileData = null, lang = 'nl' }) {
   if (!container) return;
   const t = LABELS[lang] || LABELS.nl;
   const locale = ({ nl: 'nl-NL', en: 'en-GB', de: 'de-DE', fr: 'fr-FR' })[lang] || 'nl-NL';
@@ -192,8 +206,10 @@ export function renderDynamicProjects({ container, repos, generatedAt, lang = 'n
     </section>
     <section class="dynamic-insights" aria-label="${escapeHtml(t.timeline)}">
       <h3>${escapeHtml(t.timeline)}</h3>
+      <div class="dynamic-timeline-heading"><label>${escapeHtml(t.period)} <select data-timeline-period><option value="all">${escapeHtml(t.allTime)}</option><option value="30d">${escapeHtml(t.last30)}</option><option value="90d">${escapeHtml(t.last90)}</option><option value="365d">${escapeHtml(t.last365)}</option></select></label></div>
       <div class="dynamic-timeline" data-timeline></div>
     </section>
+    <section class="dynamic-insights" aria-label="${escapeHtml(t.thm)}"><h3>${escapeHtml(t.thm)}</h3><div data-thm-signals></div></section>
     <p class="section-updated" data-source-freshness></p>
   `;
 
@@ -231,20 +247,34 @@ export function renderDynamicProjects({ container, repos, generatedAt, lang = 'n
     }).join('') : `<p class="about-text">${escapeHtml(t.noResults)}</p>`;
     const skillMap = buildSkillProjectMap(filtered);
     container.querySelector('[data-skill-map]').innerHTML = skillMap.length
-      ? skillMap.slice(0, 18).map(([skill, projects]) => `<div class="dynamic-skill-row"><span>${escapeHtml(skill)}</span><span>${projects.length} ${t.projects}</span></div>`).join('')
+      ? skillMap.slice(0, 18).map(([skill, projects]) => `<div class="dynamic-skill-row"><span>${escapeHtml(skill)}</span><span class="dynamic-skill-projects">${projects.slice(0, 4).map(repo => `<a href="${escapeHtml(safeHref(repo.url))}" target="_blank" rel="noopener noreferrer">${escapeHtml(repo.name || 'Project')}</a>`).join('')}</span></div>`).join('')
       : `<p class="about-text">${escapeHtml(t.noResults)}</p>`;
-    const timeline = filtered.filter(repo => validDate(repo.updated_at))
-      .sort((a, b) => Date.parse(b.updated_at) - Date.parse(a.updated_at)).slice(0, 5);
-    container.querySelector('[data-timeline]').innerHTML = timeline.length
-      ? timeline.map(repo => `<div class="dynamic-timeline-item"><span class="dynamic-timeline-dot"></span><div><strong>${escapeHtml(repo.name || '')}</strong><span>${escapeHtml(dateLabel(repo.updated_at, locale))}</span></div></div>`).join('')
-      : `<p class="about-text">${escapeHtml(t.noResults)}</p>`;
+    const timelineSelect = container.querySelector('[data-timeline-period]');
+    const drawTimeline = () => {
+      const timeline = getTimelineRepos(filtered, timelineSelect.value).slice(0, 12);
+      container.querySelector('[data-timeline]').innerHTML = timeline.length
+        ? timeline.map(repo => `<div class="dynamic-timeline-item"><span class="dynamic-timeline-dot"></span><div><strong><a href="${escapeHtml(safeHref(repo.url))}" target="_blank" rel="noopener noreferrer">${escapeHtml(repo.name || '')}</a></strong><span>${escapeHtml(dateLabel(repo.updated_at, locale))}</span></div></div>`).join('')
+        : `<p class="about-text">${escapeHtml(t.noTimeline)}</p>`;
+    };
+    drawTimeline();
+    const thm = profileData && profileData.tryhackme ? profileData.tryhackme : {};
+    const thmBits = [];
+    if (hasValue(thm.rank)) thmBits.push(`<span class="repo-topic">Rank: ${escapeHtml(thm.rank)}</span>`);
+    if (hasValue(thm.rooms_completed)) thmBits.push(`<span class="repo-topic">${escapeHtml(thm.rooms_completed)} ${escapeHtml(t.rooms)}</span>`);
+    if (hasValue(thm.paths_completed)) thmBits.push(`<span class="repo-topic">${escapeHtml(thm.paths_completed)} ${escapeHtml(t.paths)}</span>`);
+    if (hasValue(thm.top_tools)) thmBits.push(...String(thm.top_tools).split(/,\\s*/).filter(hasValue).slice(0, 8).map(tool => `<span class="repo-topic">${escapeHtml(tool)}</span>`));
+    container.querySelector('[data-thm-signals]').innerHTML = thmBits.length ? thmBits.join('') : `<p class="about-text">${escapeHtml(t.noResults)}</p>`;
+    const freshnessState = getFreshnessState(generatedAt);
     const freshness = dateLabel(generatedAt, locale);
-    container.querySelector('[data-source-freshness]').textContent = freshness ? `${t.refreshed}: ${freshness}` : '';
+    const freshnessEl = container.querySelector('[data-source-freshness]');
+    freshnessEl.textContent = freshness ? `${t.refreshed}: ${freshness}${freshnessState === 'stale' ? ' · ' + t.stale : ''}` : t.unknownFreshness;
+    freshnessEl.dataset.freshness = freshnessState;
     refreshUrl();
     window.dispatchEvent(new CustomEvent('resume-profile-change', { detail: { profile: state.profile } }));
   };
 
   profileSelect.addEventListener('change', drawResults);
+  container.querySelector('[data-timeline-period]').addEventListener('change', drawResults);
   queryInput.addEventListener('input', drawResults);
   sortSelect.addEventListener('change', drawResults);
   container.querySelector('[data-copy]').addEventListener('click', async () => {
