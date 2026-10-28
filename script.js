@@ -36,6 +36,14 @@ function applyLang(lang) {
 
   document.documentElement.lang = currentLang;
   localStorage.setItem('lang', currentLang);
+  if (githubData && profileData) {
+    renderAll();
+    renderPlatformCards();
+    renderSkillMatrix();
+  }
+  document.querySelectorAll('.show-more-btn').forEach(updateToggleLabel);
+  const sortButton = document.getElementById('skill-sort-toggle');
+  if (sortButton) sortButton.textContent = skillSortLabel();
 }
 
 function toggleLang() {
