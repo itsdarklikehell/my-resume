@@ -700,7 +700,7 @@ function renderGitHubRepos() {
       const langColor = repo.language ? getLangColor(repo.language) : '#9ca3b4';
       const updated = repo.updated_at
         ? new Date(repo.updated_at).toLocaleDateString(
-            currentLang === 'nl' ? 'nl-NL' : 'en-US'
+            ({ nl: 'nl-NL', en: 'en-GB', de: 'de-DE', fr: 'fr-FR' })[currentLang] || 'nl-NL'
           )
         : '';
       const topicsHtml = (repo.topics || [])
@@ -828,7 +828,7 @@ function renderArticles() {
     .map(a => {
       const date = a.published_at
         ? new Date(a.published_at).toLocaleDateString(
-            currentLang === 'nl' ? 'nl-NL' : 'en-US'
+            ({ nl: 'nl-NL', en: 'en-GB', de: 'de-DE', fr: 'fr-FR' })[currentLang] || 'nl-NL'
           )
         : '';
       return `<div class="card article-item">
