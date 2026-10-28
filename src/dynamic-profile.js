@@ -241,6 +241,7 @@ export function renderDynamicProjects({ container, repos, generatedAt, lang = 'n
     const freshness = dateLabel(generatedAt, locale);
     container.querySelector('[data-source-freshness]').textContent = freshness ? `${t.refreshed}: ${freshness}` : '';
     refreshUrl();
+    window.dispatchEvent(new CustomEvent('resume-profile-change', { detail: { profile: state.profile } }));
   };
 
   profileSelect.addEventListener('change', drawResults);
