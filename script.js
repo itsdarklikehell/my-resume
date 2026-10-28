@@ -1200,29 +1200,35 @@ function renderDonut() {
     skillEntries = skillEntries
       .slice()
       .sort((a, b) => b[1].percentage - a[1].percentage);
+  // Leave a small transparent gap between segments so tiny slices read
+  // as short arcs instead of looking like stray dots on the ring.
+  const segmentGap = 2.5;
   for (const [lang, data] of skillEntries) {
-    const percentage = data.repos / total;
-    const dashLength = percentage * circumference;
+    const percentage = total > 0 ? data.repos / total : 0;
+    const fullDashLength = percentage * circumference;
+    const dashLength = Math.max(0, fullDashLength - segmentGap);
     const color = colors[lang] || '#9ca3b4';
-    svg +=
-      '<circle cx="' +
-      size / 2 +
-      '" cy="' +
-      size / 2 +
-      '" r="' +
-      radius +
-      '" fill="none" stroke="' +
-      color +
-      '" stroke-width="' +
-      strokeWidth +
-      '" stroke-dasharray="' +
-      dashLength +
-      ' ' +
-      (circumference - dashLength) +
-      '" stroke-dashoffset="' +
-      -offset +
-      '" />';
-    offset += dashLength;
+    if (dashLength > 0) {
+      svg +=
+        '<circle cx="' +
+        size / 2 +
+        '" cy="' +
+        size / 2 +
+        '" r="' +
+        radius +
+        '" fill="none" stroke="' +
+        color +
+        '" stroke-width="' +
+        strokeWidth +
+        '" stroke-linecap="butt" stroke-dasharray="' +
+        dashLength +
+        ' ' +
+        (circumference - dashLength) +
+        '" stroke-dashoffset="' +
+        -offset +
+        '" />';
+    }
+    offset += fullDashLength;
   }
   svg += '</svg>';
   chart.innerHTML =
