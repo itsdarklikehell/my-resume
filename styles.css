@@ -1564,6 +1564,10 @@ html:not([lang="nl"]) .download-btn.lang-nl {
 }
 
 
+.stat-item[hidden] {
+  display: none !important;
+}
+
 /* Dynamic, data-driven project explorer */
 .dynamic-project-intro {
   color: var(--text-muted);
