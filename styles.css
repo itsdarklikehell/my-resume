@@ -1731,3 +1731,70 @@ html:not([lang="nl"]) .download-btn.lang-nl {
   .dynamic-project-card { break-inside: avoid; }
   .dynamic-insights { break-inside: avoid; }
 }
+
+
+/* Vacancy-specific CV summary */
+.vacancy-profile {
+  margin-top: 0.85rem;
+  padding: 1rem;
+  border: 1px solid var(--border, rgba(148, 163, 184, 0.28));
+  border-radius: 0.85rem;
+  background: var(--card-bg, rgba(148, 163, 184, 0.06));
+}
+.vacancy-profile-controls {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin-bottom: 0.75rem;
+}
+.vacancy-profile-controls label {
+  color: var(--text-muted);
+  font-size: 0.88rem;
+}
+.vacancy-profile-controls select {
+  max-width: 100%;
+  padding: 0.45rem 0.6rem;
+  border: 1px solid var(--border, #64748b);
+  border-radius: 0.5rem;
+  color: var(--text-color, inherit);
+  background: var(--bg-color, transparent);
+}
+.vacancy-profile h3 {
+  margin: 0 0 0.35rem;
+  font-size: 1.05rem;
+}
+.vacancy-profile-summary {
+  margin: 0 0 0.7rem;
+  line-height: 1.55;
+}
+.vacancy-profile-skills, .vacancy-profile-evidence {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.5rem;
+}
+.vacancy-profile-chip {
+  display: inline-block;
+  padding: 0.22rem 0.55rem;
+  border-radius: 999px;
+  border: 1px solid var(--border, rgba(148, 163, 184, 0.35));
+  font-size: 0.82rem;
+}
+.vacancy-profile-evidence a {
+  display: inline-block;
+  padding: 0.25rem 0.55rem;
+  border-radius: 0.45rem;
+  background: var(--surface, rgba(148, 163, 184, 0.1));
+  text-decoration: none;
+}
+.vacancy-profile-evidence a:hover { text-decoration: underline; }
+.vacancy-profile-note {
+  margin: 0.65rem 0 0;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+@media print {
+  .vacancy-profile-controls { display: none !important; }
+  .vacancy-profile { break-inside: avoid; }
+}

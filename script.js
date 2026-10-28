@@ -1,6 +1,7 @@
 import { translations } from './src/i18n/translations.js';
 import { getTranslations } from './src/i18n/get-translations.js';
 import { renderDynamicProjects } from './src/dynamic-profile.js';
+import { renderVacancyProfile } from './src/vacancy-profile.js';
 
 // --- state ---
 let currentLang = 'nl';
@@ -992,7 +993,7 @@ function applyResumeProfile(profile) {
   if (!originalMainColumnOrder) originalMainColumnOrder = Array.from(mainColumn.children);
   originalMainColumnOrder.forEach(section => mainColumn.appendChild(section));
   document.documentElement.dataset.profile = profile || 'all';
-  if (!['cyber', 'automation'].includes(profile)) return;
+  if (!['cyber', 'automation', 'electrical'].includes(profile)) return;
 
   const educationHeading = mainColumn.querySelector('h2[data-i18n="education"]');
   const educationSection = educationHeading ? educationHeading.closest('section.card') : null;
@@ -1009,6 +1010,7 @@ window.addEventListener('resume-profile-change', event => {
 
 function renderAll() {
   const steps = [
+    ['vacancy-profile', () => renderVacancyProfile({ container: document.getElementById('vacancy-profile'), repos: gRepos(), lang: currentLang })],
     ['featured', renderFeatured],
     ['certificates', renderCertificates],
     ['projects', () => renderDynamicProjects({
