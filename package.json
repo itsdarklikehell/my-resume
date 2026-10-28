@@ -7,13 +7,14 @@
     "lint:fix": "eslint --fix script.js sw.js src/**/*.js",
     "lint:html": "html-validate --config .htmlvalidate.json index.html 404.html",
     "lint:css": "stylelint styles.css --config .stylelintrc.json",
-    "test": "vitest run --passWithNoTests",
+    "test": "vitest run",
     "format": "prettier --write script.js sw.js src/**/*.js styles.css",
     "format:check": "prettier --check script.js sw.js src/**/*.js styles.css",
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "check": "npm run lint && npm run lint:html && npm run lint:css && npm test && npm run format:check"
+    "check": "npm run lint && npm run lint:html && npm run lint:css && npm test && npm run build",
+    "test:watch": "vitest"
   },
   "devDependencies": {
     "eslint": "^8.57.0",
