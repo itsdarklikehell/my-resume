@@ -59,8 +59,10 @@ describe('portfolio enhancements', () => {
     const matches = buildVacancyMatch('Experience with Burp Suite.', [], {
       tryhackme: { top_tools: 'Burp Suite, Wireshark' },
     });
-    expect(matches.find(item => item.skill === 'Cybersecurity')).toBeUndefined();
-    expect(matches).toHaveLength(0);
+    expect(matches).toHaveLength(1);
+    expect(matches[0].skill).toBe('Burp Suite');
+    expect(matches[0].status).toBe('related');
+    expect(matches[0].platformEvidence).toBe(true);
   });
 
   it('orders development milestones by valid repository update date', () => {
