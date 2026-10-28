@@ -978,6 +978,29 @@ function setSectionTimestamp(containerId, timestamp) {
   }
 }
 
+let originalMainColumnOrder = null;
+
+function applyResumeProfile(profile) {
+  const mainColumn = document.getElementById('main-col');
+  if (!mainColumn) return;
+  if (!originalMainColumnOrder) originalMainColumnOrder = Array.from(mainColumn.children);
+  originalMainColumnOrder.forEach(section => mainColumn.appendChild(section));
+  document.documentElement.dataset.profile = profile || 'all';
+  if (!['cyber', 'automation'].includes(profile)) return;
+
+  const educationHeading = mainColumn.querySelector('h2[data-i18n="education"]');
+  const educationSection = educationHeading ? educationHeading.closest('section.card') : null;
+  if (!educationSection) return;
+  ['projects-section', 'featured-section', 'repos-showcase-section'].forEach(id => {
+    const section = document.getElementById(id);
+    if (section && section.parentElement === mainColumn) mainColumn.insertBefore(section, educationSection);
+  });
+}
+
+window.addEventListener('resume-profile-change', event => {
+  applyResumeProfile(event.detail && event.detail.profile);
+});
+
 function renderAll() {
   const steps = [
     ['featured', renderFeatured],
