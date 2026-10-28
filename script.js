@@ -1,5 +1,6 @@
 import { translations } from './src/i18n/translations.js';
 import { getTranslations } from './src/i18n/get-translations.js';
+import { renderDynamicProjects } from './src/dynamic-profile.js';
 
 // --- state ---
 let currentLang = 'nl';
@@ -1017,7 +1018,13 @@ function renderAll() {
   const steps = [
     ['featured', renderFeatured],
     ['certificates', renderCertificates],
-    ['projects', renderProjects],
+    ['projects', () => renderDynamicProjects({
+      container: document.getElementById('projects-container'),
+      repos: gRepos(),
+      skills: gSkills(),
+      generatedAt: githubData ? githubData.generated_at : null,
+      lang: currentLang,
+    })],
     ['repos', renderGitHubRepos],
     ['gource', renderGource],
     ['skills', renderSkills],
