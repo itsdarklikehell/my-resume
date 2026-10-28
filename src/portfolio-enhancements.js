@@ -321,7 +321,7 @@ export function renderPortfolioEnhancements({ container, repos = [], profileData
       if (!link) return;
       const inlineAction = link.getAttribute('onclick') || '';
       let eventName = null;
-      if (/\\.pdf(?:$|[?#])/i.test(link.href)) eventName = 'cv_pdf_download';
+      if (/\.pdf(?:$|[?#])/i.test(link.href)) eventName = 'cv_pdf_download';
       else if (inlineAction.includes('downloadJSON')) eventName = 'cv_json_download';
       else if (inlineAction.includes('window.print')) eventName = 'cv_print';
       else if (link.closest('.portfolio-role-links')) eventName = 'role_link_clicked';
