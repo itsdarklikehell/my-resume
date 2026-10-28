@@ -356,8 +356,14 @@ function renderPlatformCards() {
             </div>`;
     })
     .join('');
+  const emptyMessage = ({
+    nl: 'Geen platformgegevens beschikbaar.',
+    en: 'No platform data available.',
+    de: 'Keine Plattformdaten verfügbar.',
+    fr: 'Aucune donnée de plateforme disponible.',
+  })[currentLang] || 'Geen platformgegevens beschikbaar.';
   container.innerHTML =
-    html || '<p class="about-text">No platform data available.</p>';
+    html || `<p class="about-text">${emptyMessage}</p>`;
   setSectionTimestamp('platform-cards', profileData.generated_at || null);
 }
 function renderSkillMatrix() {
@@ -970,9 +976,9 @@ function setSectionTimestamp(containerId, timestamp) {
     el.textContent =
       (t.last_updated || 'Last updated') +
       ': ' +
-      date.toLocaleDateString(currentLang === 'nl' ? 'nl-NL' : 'en-US') +
+      date.toLocaleDateString(({ nl: 'nl-NL', en: 'en-GB', de: 'de-DE', fr: 'fr-FR' })[currentLang] || 'nl-NL') +
       ' ' +
-      date.toLocaleTimeString(currentLang === 'nl' ? 'nl-NL' : 'en-US');
+      date.toLocaleTimeString(({ nl: 'nl-NL', en: 'en-GB', de: 'de-DE', fr: 'fr-FR' })[currentLang] || 'nl-NL');
   } else {
     el.textContent = '';
   }
@@ -1047,9 +1053,9 @@ function renderAll() {
     footerUpdated.textContent =
       (t.last_updated || 'Last updated') +
       ': ' +
-      date.toLocaleDateString(currentLang === 'nl' ? 'nl-NL' : 'en-US') +
+      date.toLocaleDateString(({ nl: 'nl-NL', en: 'en-GB', de: 'de-DE', fr: 'fr-FR' })[currentLang] || 'nl-NL') +
       ' ' +
-      date.toLocaleTimeString(currentLang === 'nl' ? 'nl-NL' : 'en-US');
+      date.toLocaleTimeString(({ nl: 'nl-NL', en: 'en-GB', de: 'de-DE', fr: 'fr-FR' })[currentLang] || 'nl-NL');
   } else if (footerUpdated) {
     footerUpdated.textContent = '';
   }
@@ -1065,9 +1071,9 @@ function renderAll() {
     heroUpdated.textContent =
       (t.last_updated || 'Last updated') +
       ': ' +
-      date.toLocaleDateString(currentLang === 'nl' ? 'nl-NL' : 'en-US') +
+      date.toLocaleDateString(({ nl: 'nl-NL', en: 'en-GB', de: 'de-DE', fr: 'fr-FR' })[currentLang] || 'nl-NL') +
       ' ' +
-      date.toLocaleTimeString(currentLang === 'nl' ? 'nl-NL' : 'en-US');
+      date.toLocaleTimeString(({ nl: 'nl-NL', en: 'en-GB', de: 'de-DE', fr: 'fr-FR' })[currentLang] || 'nl-NL');
   } else if (heroUpdated) {
     heroUpdated.textContent = '';
   }
