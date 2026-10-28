@@ -435,7 +435,7 @@ function renderSkillMatrix() {
     html +=
       '<div class="skill-matrix-cell">' +
       '<div class="skill-level">' +
-      level +
+      escapeHtml(level) +
       '</div>' +
       '<span class="skill-label">' +
       (labels[level] || level) +
@@ -1130,10 +1130,13 @@ async function loadProfileData() {
 // ?lang=nl|en heeft voorrang: de PDF-generator rendert via een verse
 // Chrome-instantie zonder localStorage, dus de taal moet via de URL mee.
 // Ook handig als deelbare taalspecifieke link.
-const savedLang =
-  urlLang === 'nl' || urlLang === 'en'
-    ? urlLang
-    : localStorage.getItem('lang') || detectLang();
+const supportedLanguages = ['nl', 'en', 'de', 'fr'];
+const storedLang = localStorage.getItem('lang');
+const savedLang = supportedLanguages.includes(urlLang)
+  ? urlLang
+  : supportedLanguages.includes(storedLang)
+    ? storedLang
+    : detectLang();
 applyLang(savedLang);
 
 const savedTheme = localStorage.getItem('theme') || 'dark';
