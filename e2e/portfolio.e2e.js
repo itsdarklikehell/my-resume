@@ -26,14 +26,17 @@ test('language, theme and palette controls respond to clicks', async ({ page }) 
   await page.goto('?lang=nl');
   await expect(page.locator('#portfolio-cases-title')).toBeVisible({ timeout: 20_000 });
 
+  await page.evaluate(() => window.scrollTo(0, 0));
   await page.locator('.lang-toggle').click();
   await expect(page.locator('#lang-label')).toHaveText('EN');
   await expect(page.locator('html')).toHaveAttribute('lang', 'en');
 
   const initialTheme = await page.locator('html').getAttribute('data-theme');
+  await page.evaluate(() => window.scrollTo(0, 0));
   await page.locator('.theme-toggle').click();
   await expect(page.locator('html')).not.toHaveAttribute('data-theme', initialTheme || '');
 
+  await page.evaluate(() => window.scrollTo(0, 0));
   await page.locator('.palette-toggle').click();
   await expect(page.locator('html')).toHaveAttribute('data-palette', 'nord');
 });
