@@ -109,6 +109,15 @@ export function buildSkillProjectMap(repos) {
   return [...map.entries()].sort((a, b) => b[1].length - a[1].length || a[0].localeCompare(b[0]));
 }
 
+const safeHref = value => {
+  try {
+    const url = new URL(String(value || ''), window.location.href);
+    return url.protocol === 'https:' ? url.href : '#';
+  } catch {
+    return '#';
+  }
+};
+
 const escapeHtml = value => String(value ?? '')
   .replace(/&/g, '&amp;')
   .replace(/</g, '&lt;')
@@ -127,7 +136,7 @@ function dateLabel(value, locale) {
   return date ? date.toLocaleDateString(locale, { year: 'numeric', month: 'short', day: 'numeric' }) : '';
 }
 
-export function renderDynamicProjects({ container, repos, skills = {}, generatedAt, lang = 'nl' }) {
+export function renderDynamicProjects({ container, repos, generatedAt, lang = 'nl' }) {
   if (!container) return;
   const t = LABELS[lang] || LABELS.nl;
   const locale = ({ nl: 'nl-NL', en: 'en-GB', de: 'de-DE', fr: 'fr-FR' })[lang] || 'nl-NL';
@@ -209,7 +218,7 @@ export function renderDynamicProjects({ container, repos, skills = {}, generated
         .map(topic => `<span class="repo-topic">${escapeHtml(topic)}</span>`).join('');
       return `<article class="dynamic-project-card">
         <div class="dynamic-project-heading">
-          <a href="${escapeHtml(repo.url || '#')}" target="_blank" rel="noopener noreferrer">${escapeHtml(repo.name || 'Untitled project')}</a>
+          <a href="${escapeHtml(safeHref(repo.url))}" target="_blank" rel="noopener noreferrer">${escapeHtml(repo.name || 'Untitled project')}</a>
           <span class="dynamic-project-stars">${Number(repo.stars) > 0 ? `★ ${Number(repo.stars)}` : ''}</span>
         </div>
         <p>${escapeHtml(hasValue(repo.description) ? repo.description : t.noDescription)}</p>
