@@ -59,7 +59,6 @@ export function classifyRepo(repo) {
   const text = normalize([
     repo?.name,
     repo?.description,
-    repo?.language,
     ...(Array.isArray(repo?.topics) ? repo.topics : []),
   ].join(' '));
   const categories = [];
