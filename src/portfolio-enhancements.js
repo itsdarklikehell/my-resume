@@ -19,6 +19,7 @@ const SKILL_CATALOG = [
   { label: 'HTML/CSS', aliases: ['html', 'css', 'responsive design'], cv: true },
   { label: 'Cybersecurity', aliases: ['cybersecurity', 'cyber security', 'penetration testing', 'pentesting', 'security testing'], cv: true },
   { label: 'Wi-Fi auditing', aliases: ['wi-fi auditing', 'wifi auditing', 'wireless security', 'pwnagotchi'], cv: false },
+  { label: 'Burp Suite', aliases: ['burp suite', 'burpsuite'], cv: false },
   { label: 'Automation', aliases: ['automation', 'automatisering', 'scripting', 'workflow automation'], cv: true },
   { label: 'Elektrotechniek', aliases: ['electrical engineering', 'elektrotechniek', 'electrical installations', 'elektro-installaties'], cv: true },
   { label: 'Zonnepanelen', aliases: ['solar panels', 'zonnepanelen', 'photovoltaic', 'pv systems'], cv: true },
