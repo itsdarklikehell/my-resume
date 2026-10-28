@@ -2,6 +2,7 @@ import { translations } from './src/i18n/translations.js';
 import { getTranslations } from './src/i18n/get-translations.js';
 import { renderDynamicProjects } from './src/dynamic-profile.js';
 import { renderVacancyProfile } from './src/vacancy-profile.js';
+import { renderPortfolioEnhancements } from './src/portfolio-enhancements.js';
 
 // --- state ---
 let currentLang = 'nl';
@@ -1019,6 +1020,7 @@ function renderAll() {
       profileData,
       lang: currentLang,
     })],
+    ['portfolio-enhancements', () => renderPortfolioEnhancements({ container: document.getElementById('portfolio-enhancements'), repos: gRepos(), profileData, lang: currentLang })],
     ['vacancy-profile', () => renderVacancyProfile({ container: document.getElementById('vacancy-profile'), repos: gRepos(), lang: currentLang })],
     ['repos', renderGitHubRepos],
     ['gource', renderGource],
