@@ -262,7 +262,7 @@ export function renderDynamicProjects({ container, repos, generatedAt, profileDa
     if (hasValue(thm.rank)) thmBits.push(`<span class="repo-topic">Rank: ${escapeHtml(thm.rank)}</span>`);
     if (hasValue(thm.rooms_completed)) thmBits.push(`<span class="repo-topic">${escapeHtml(thm.rooms_completed)} ${escapeHtml(t.rooms)}</span>`);
     if (hasValue(thm.paths_completed)) thmBits.push(`<span class="repo-topic">${escapeHtml(thm.paths_completed)} ${escapeHtml(t.paths)}</span>`);
-    if (hasValue(thm.top_tools)) thmBits.push(...String(thm.top_tools).split(/,\\s*/).filter(hasValue).slice(0, 8).map(tool => `<span class="repo-topic">${escapeHtml(tool)}</span>`));
+    if (hasValue(thm.top_tools)) thmBits.push(...String(thm.top_tools).split(/,\s*/).filter(hasValue).slice(0, 8).map(tool => `<span class="repo-topic">${escapeHtml(tool)}</span>`));
     container.querySelector('[data-thm-signals]').innerHTML = thmBits.length ? thmBits.join('') : `<p class="about-text">${escapeHtml(t.noResults)}</p>`;
     const freshnessState = getFreshnessState(generatedAt);
     const freshness = dateLabel(generatedAt, locale);
