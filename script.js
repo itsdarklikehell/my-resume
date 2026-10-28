@@ -97,53 +97,6 @@ function getLangColor(language) {
 }
 
 // --- render functions ---
-function renderProjects() {
-  const container = document.getElementById('projects-container');
-  const repos = gRepos();
-  if (!container || !repos || !repos.length) {
-    if (container)
-      container.innerHTML =
-        '<p class="about-text">' +
-        (translations[currentLang].repos_none || 'No repositories found') +
-        '</p>';
-    return;
-  }
-  const t = getTranslations(currentLang, translations);
-  const own = repos
-    .filter(r => !r.fork)
-    .sort((a, b) => (b.stars || 0) - (a.stars || 0));
-  const top = own.slice(0, 6);
-  const html = top
-    .map(repo => {
-      const langColor = repo.language ? getLangColor(repo.language) : '#9ca3b4';
-      const topicsHtml = (repo.topics || [])
-        .slice(0, 3)
-        .map(tag => `<span class="repo-topic">${escapeHtml(tag)}</span>`)
-        .join('');
-      const desc = repo.description
-        ? escapeHtml(repo.description)
-        : t.repo_no_desc;
-      return `<div class="repo-card">
-                <a href="${encodeURI(repo.url)}" target="_blank" rel="noopener" style="text-decoration: none; color: inherit; display: block;">
-                    <div class="repo-header">
-                        <div class="repo-name">${escapeHtml(repo.name)}</div>
-                        <div class="repo-meta">
-                            ${repo.stars ? `<span class="repo-stars">⭐ ${Number(repo.stars)}</span>` : ''}
-                        </div>
-                    </div>
-                    ${desc ? `<div class="repo-desc">${desc}</div>` : ''}
-                    <div class="repo-footer">
-                        ${repo.language && repo.language !== 'Unknown' ? `<span class="repo-lang" style="color:${langColor};">● ${escapeHtml(repo.language)}</span>` : ''}
-                        ${topicsHtml}
-                    </div>
-                </a>
-            </div>`;
-    })
-    .join('');
-  container.innerHTML = html;
-  setSectionTimestamp('projects', githubData ? githubData.generated_at : null);
-}
-
 function renderSkills() {
   const container = document.getElementById('skills-container');
   const skills = gSkills();
@@ -1021,7 +974,6 @@ function renderAll() {
     ['projects', () => renderDynamicProjects({
       container: document.getElementById('projects-container'),
       repos: gRepos(),
-      skills: gSkills(),
       generatedAt: githubData ? githubData.generated_at : null,
       lang: currentLang,
     })],
