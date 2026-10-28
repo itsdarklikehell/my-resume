@@ -119,6 +119,9 @@ const LABELS = {
   },
 };
 
+let analyticsPageViewRecorded = false;
+let analyticsClickTrackingInstalled = false;
+
 const escapeHtml = value => String(value ?? '').replace(/[&<>"']/g, char => ({
   '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
 })[char]);
@@ -308,6 +311,26 @@ export function renderPortfolioEnhancements({ container, repos = [], profileData
   const analyticsTotal = container.querySelector('[data-local-event-total]');
   const updateAnalyticsTotal = events => { if (analyticsTotal) analyticsTotal.textContent = String(totalEvents(events)); };
   updateAnalyticsTotal(getLocalAnalytics());
+  if (!analyticsPageViewRecorded) {
+    updateAnalyticsTotal(recordLocalEvent('role_view_' + currentRole));
+    analyticsPageViewRecorded = true;
+  }
+  if (!analyticsClickTrackingInstalled) {
+    document.addEventListener('click', event => {
+      const link = event.target.closest('a');
+      if (!link) return;
+      const inlineAction = link.getAttribute('onclick') || '';
+      let eventName = null;
+      if (/\\.pdf(?:$|[?#])/i.test(link.href)) eventName = 'cv_pdf_download';
+      else if (inlineAction.includes('downloadJSON')) eventName = 'cv_json_download';
+      else if (inlineAction.includes('window.print')) eventName = 'cv_print';
+      else if (link.closest('.portfolio-role-links')) eventName = 'role_link_clicked';
+      else if (link.closest('#projects-container, #repos-showcase-container, #featured-container, #portfolio-enhancements')) eventName = 'project_or_evidence_opened';
+      else if (link.closest('#profiles-container, #platform-cards-container')) eventName = 'profile_link_opened';
+      if (eventName) updateAnalyticsTotal(recordLocalEvent(eventName));
+    }, true);
+    analyticsClickTrackingInstalled = true;
+  }
 
   const recruiterButton = container.querySelector('[data-recruiter-toggle]');
   const setRecruiterMode = enabled => {
@@ -384,5 +407,5 @@ export function renderPortfolioEnhancements({ container, repos = [], profileData
     updateAnalyticsTotal({});
     container.querySelector('[data-analytics-status]').textContent = t.analyticsReset;
   });
-  updateAnalyticsTotal(recordLocalEvent('portfolio_enhancements_loaded'));
+  // No external analytics endpoint is configured; events remain in this browser.
 }
