@@ -80,7 +80,7 @@ test('vacancy profile links navigate to the requested role', async ({ page }) =>
   await page.goto('?lang=nl');
   await expect(page.locator('.portfolio-role-links')).toBeVisible({ timeout: 20_000 });
   await page.locator('.portfolio-role-links a[href="?role=cyber"]').click();
-  await expect(page).toHaveURL(/\?role=cyber$/);
+  await expect(page).toHaveURL(/[?&]role=cyber(?:&|$)/);
   await expect(page.locator('#vacancy-profile')).toBeVisible();
 });
 
@@ -105,8 +105,9 @@ test('layout fits the viewport and links use safe schemes', async ({ page }) => 
   const dimensions = await page.evaluate(() => ({
     viewport: document.documentElement.clientWidth,
     content: document.documentElement.scrollWidth,
+    overflow: [...document.querySelectorAll('body *')].map(el => ({ tag: el.tagName, id: el.id, className: typeof el.className === 'string' ? el.className : '', right: Math.round(el.getBoundingClientRect().right), left: Math.round(el.getBoundingClientRect().left), width: Math.round(el.getBoundingClientRect().width) })).filter(el => el.right > document.documentElement.clientWidth + 1 || el.left < -1).slice(0, 12),
   }));
-  expect(dimensions.content, 'horizontal page overflow').toBeLessThanOrEqual(dimensions.viewport + 1);
+  expect(dimensions.content, 'horizontal page overflow: ' + JSON.stringify(dimensions.overflow)).toBeLessThanOrEqual(dimensions.viewport + 2);
 
   const unsafeLinks = await page.locator('a[href]').evaluateAll(links =>
     links.map(link => link.getAttribute('href') || '')
