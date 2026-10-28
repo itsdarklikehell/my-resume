@@ -6,6 +6,7 @@ export const translations = {
     about_text:
       'Praktisch ingestelde technisch professional met ruime ervaring in elektrische systemen, zonnepanelen en tweewielers. Hands-on achtergrond met technische precisie, analytisch denkvermogen en een scherp oog voor procesverbetering. Zelfstandig Shell/Bash, Python en JavaScript/TypeScript aangeleerd met een sterke drive om te groeien als ICT-professional.',
     projects: 'Projecten',
+    dynamic_projects_intro: 'Filter projecten op profiel, zoekterm of actualiteit. De selectie is deelbaar via de URL.',
     experience: 'Werkervaring',
     exp_strowonen_role:
       'Monteur Sterkstroom Installaties & Algemeen Medewerker',
@@ -316,6 +317,7 @@ export const translations = {
     about_text:
       'Practical technical professional with extensive experience in electrical systems, solar panels and motorcycles. Hands-on background with technical precision, analytical thinking and a sharp eye for process improvement. Self-taught Shell/Bash, Python and JavaScript/TypeScript with a strong drive to grow as an IT professional.',
     projects: 'Projects',
+    dynamic_projects_intro: 'Filter projects by focus, search term or recency. You can share the selected view using its URL.',
     experience: 'Work Experience',
     exp_strowonen_role: 'Electrical Installation Technician & General Worker',
     exp_strowonen_1:
@@ -572,6 +574,7 @@ export const translations = {
     about_text:
       'Praktisch veranlagter Techniker mit umfassender Erfahrung in Elektroinstallationen, Solaranlagen und Motorrädern. Praktischer Hintergrund mit technischer Präzision, analytischem Denken und einem scharfen Auge für Prozessverbesserung. Selbst beigebrachte Shell/Bash, Python und JavaScript/TypeScript mit starkem Ehrgeiz, als IT-Experte zu wachsen.',
     projects: 'Projekte',
+    dynamic_projects_intro: 'Filtern Sie Projekte nach Schwerpunkt, Suchbegriff oder Aktualität. Die Auswahl kann über die URL geteilt werden.',
     experience: 'Berufserfahrung',
     education: 'Ausbildung',
     activity: 'Live-Aktivität',
@@ -679,6 +682,7 @@ export const translations = {
     about_text:
       "Professionnel technique pragmatique avec une grande expérience en systèmes électriques, panneaux solaires et motocyclettes. Connaissance pratique avec précision technique, pensée analytique et œil attentif à l'amélioration des processus. Shell/Bash, Python et JavaScript/TypeScript autodidactes avec une forte envie de grandir en tant que professionnel informatique.",
     projects: 'Projets',
+    dynamic_projects_intro: 'Filtrez les projets par orientation, recherche ou date. La sélection peut être partagée via l’URL.',
     experience: 'Expérience Professionnelle',
     education: 'Éducation',
     activity: 'Activité en Direct',
