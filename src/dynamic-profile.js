@@ -1,6 +1,6 @@
 const LABELS = {
   nl: {
-    profile: 'Profielrichting', all: 'Alle projecten', cyber: 'Cybersecurity',
+    profile: 'Profielrichting', all: 'Alle projecten', cyber: 'Cybersecurity', other: 'Overig',
     automation: 'Automatisering', electrical: 'Elektrotechniek', search: 'Zoek projecten…',
     sort: 'Sorteren', recent: 'Recent bijgewerkt', stars: 'Meeste sterren', name: 'Naam A–Z',
     share: 'Deel deze weergave', copy: 'Kopieer link', copied: 'Link gekopieerd',
@@ -11,7 +11,7 @@ const LABELS = {
     noDescription: 'Geen beschrijving beschikbaar', starsLabel: 'sterren',
   },
   en: {
-    profile: 'Profile focus', all: 'All projects', cyber: 'Cybersecurity',
+    profile: 'Profile focus', all: 'All projects', cyber: 'Cybersecurity', other: 'Other',
     automation: 'Automation', electrical: 'Electrical engineering', search: 'Search projects…',
     sort: 'Sort by', recent: 'Recently updated', stars: 'Most stars', name: 'Name A–Z',
     share: 'Share this view', copy: 'Copy link', copied: 'Link copied',
@@ -22,7 +22,7 @@ const LABELS = {
     noDescription: 'No description available', starsLabel: 'stars',
   },
   de: {
-    profile: 'Profilfokus', all: 'Alle Projekte', cyber: 'Cybersicherheit',
+    profile: 'Profilfokus', all: 'Alle Projekte', cyber: 'Cybersicherheit', other: 'Sonstige',
     automation: 'Automatisierung', electrical: 'Elektrotechnik', search: 'Projekte suchen…',
     sort: 'Sortieren', recent: 'Zuletzt aktualisiert', stars: 'Meiste Sterne', name: 'Name A–Z',
     share: 'Diese Ansicht teilen', copy: 'Link kopieren', copied: 'Link kopiert',
@@ -33,7 +33,7 @@ const LABELS = {
     noDescription: 'Keine Beschreibung verfügbar', starsLabel: 'Sterne',
   },
   fr: {
-    profile: 'Orientation du profil', all: 'Tous les projets', cyber: 'Cybersécurité',
+    profile: 'Orientation du profil', all: 'Tous les projets', cyber: 'Cybersécurité', other: 'Autres',
     automation: 'Automatisation', electrical: 'Électrotechnique', search: 'Rechercher des projets…',
     sort: 'Trier par', recent: 'Mis à jour récemment', stars: 'Plus d’étoiles', name: 'Nom A–Z',
     share: 'Partager cette vue', copy: 'Copier le lien', copied: 'Lien copié',
