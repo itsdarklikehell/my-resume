@@ -101,6 +101,51 @@ test('local analytics can be exported and reset', async ({ page }) => {
   await expect(page.locator('[data-local-event-total]')).toHaveText('0');
 });
 
+test('interactive terminal supports safe commands and clear', async ({ page }) => {
+  await page.goto('?lang=nl');
+  const terminal = page.locator('[data-terminal]');
+  await expect(terminal).toBeVisible({ timeout: 20_000 });
+  const input = page.locator('[data-terminal-input]');
+  const output = page.locator('[data-terminal-output]');
+
+  await input.fill('help');
+  await input.press('Enter');
+  await expect(output).toContainText('help, about, skills, projects, contact, clear');
+
+  await input.fill('skills');
+  await input.press('Enter');
+  await expect(output).toContainText('Python');
+  await expect(output).toContainText('Cybersecurity');
+
+  await input.fill('<img src=x onerror=alert(1)>');
+  await input.press('Enter');
+  await expect(output).toContainText('Unknown command');
+  await expect(output.locator('img')).toHaveCount(0);
+
+  await input.fill('clear');
+  await input.press('Enter');
+  await expect(output.locator('.portfolio-terminal-entry')).toHaveCount(0);
+});
+
+test('donut centre label stays centred on desktop and mobile', async ({ page }) => {
+  await page.goto('?lang=nl');
+  const chart = page.locator('#donut-chart');
+  await expect(chart.locator('.donut-center')).toBeVisible();
+
+  const geometry = await chart.evaluate(element => {
+    const chartRect = element.getBoundingClientRect();
+    const centerRect = element.querySelector('.donut-center').getBoundingClientRect();
+    return {
+      chartX: chartRect.left + chartRect.width / 2,
+      chartY: chartRect.top + chartRect.height / 2,
+      labelX: centerRect.left + centerRect.width / 2,
+      labelY: centerRect.top + centerRect.height / 2,
+    };
+  });
+  expect(Math.abs(geometry.chartX - geometry.labelX)).toBeLessThanOrEqual(1);
+  expect(Math.abs(geometry.chartY - geometry.labelY)).toBeLessThanOrEqual(1);
+});
+
 test('layout fits the viewport and links use safe schemes', async ({ page }) => {
   await page.goto('?lang=nl');
   await expect(page.locator('#portfolio-cases-title')).toBeVisible({ timeout: 20_000 });
