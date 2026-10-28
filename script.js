@@ -994,7 +994,7 @@ function applyResumeProfile(profile) {
   if (!originalMainColumnOrder) originalMainColumnOrder = Array.from(mainColumn.children);
   originalMainColumnOrder.forEach(section => mainColumn.appendChild(section));
   document.documentElement.dataset.profile = profile || 'all';
-  if (!['cyber', 'automation', 'electrical'].includes(profile)) return;
+  if (!['cyber', 'automation', 'electrical', 'software', 'support'].includes(profile)) return;
 
   const educationHeading = mainColumn.querySelector('h2[data-i18n="education"]');
   const educationSection = educationHeading ? educationHeading.closest('section.card') : null;
@@ -1006,7 +1006,7 @@ function applyResumeProfile(profile) {
 }
 
 window.addEventListener('resume-profile-change', event => {
-  applyResumeProfile(event.detail && event.detail.profile);
+  applyResumeProfile(event.detail && (event.detail.role || event.detail.profile));
 });
 
 function renderAll() {
