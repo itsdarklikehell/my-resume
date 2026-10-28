@@ -1010,7 +1010,6 @@ window.addEventListener('resume-profile-change', event => {
 
 function renderAll() {
   const steps = [
-    ['vacancy-profile', () => renderVacancyProfile({ container: document.getElementById('vacancy-profile'), repos: gRepos(), lang: currentLang })],
     ['featured', renderFeatured],
     ['certificates', renderCertificates],
     ['projects', () => renderDynamicProjects({
@@ -1019,6 +1018,7 @@ function renderAll() {
       generatedAt: githubData ? githubData.generated_at : null,
       lang: currentLang,
     })],
+    ['vacancy-profile', () => renderVacancyProfile({ container: document.getElementById('vacancy-profile'), repos: gRepos(), lang: currentLang })],
     ['repos', renderGitHubRepos],
     ['gource', renderGource],
     ['skills', renderSkills],
