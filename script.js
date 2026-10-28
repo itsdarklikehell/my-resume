@@ -1016,6 +1016,7 @@ function renderAll() {
       container: document.getElementById('projects-container'),
       repos: gRepos(),
       generatedAt: githubData ? githubData.generated_at : null,
+      profileData,
       lang: currentLang,
     })],
     ['vacancy-profile', () => renderVacancyProfile({ container: document.getElementById('vacancy-profile'), repos: gRepos(), lang: currentLang })],
