@@ -202,6 +202,7 @@ export const translations = {
     cert_et_company: '—',
     cert_et_period: 'aug. 2006 — jul. 2008',
     cert_et_desc: 'Diploma behaald',
+    cert_b_role: 'Rijbewijs B (beschikbaar)',
     cert_am_role: 'Rijbewijs AM',
     cert_am_company: '—',
     cert_am_period: '—',
