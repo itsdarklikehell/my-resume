@@ -119,7 +119,7 @@ test('interactive terminal supports safe commands and clear', async ({ page }) =
 
   await input.fill('<img src=x onerror=alert(1)>');
   await input.press('Enter');
-  await expect(output).toContainText('Unknown command');
+  await expect(output).toContainText(/Onbekend commando|Unknown command/);
   await expect(output.locator('img')).toHaveCount(0);
 
   await input.fill('clear');
