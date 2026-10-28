@@ -1863,6 +1863,7 @@ html:not([lang="nl"]) .download-btn.lang-nl {
 .recruiter-mode #volunteer-section,
 .recruiter-mode #courses-section,
 .recruiter-mode #proficiency-section { display: none !important; }
+.recruiter-mode section.card:has(#skill-matrix-container) { display: none !important; }
 .recruiter-mode .container { max-width: 900px; padding-top: 1rem; }
 .recruiter-mode .header { padding: 1.4rem; margin-bottom: 1rem; }
 .recruiter-mode .timeline-item:nth-of-type(n+4) { display: none; }
