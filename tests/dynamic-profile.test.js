@@ -4,6 +4,8 @@ import {
   classifyRepo,
   filterAndSortRepos,
   isAvailableValue,
+  getFreshnessState,
+  getTimelineRepos,
 } from '../src/dynamic-profile.js';
 
 const repos = [
@@ -35,6 +37,25 @@ describe('dynamic profile data', () => {
     const map = buildSkillProjectMap(repos);
     expect(map.find(([skill]) => skill === 'Python')[1]).toHaveLength(2);
     expect(map.find(([skill]) => skill === 'security')[1][0].name).toBe('pwnagotchi-plugins');
+  });
+
+  it('filters timeline projects by selected time window and ignores invalid dates/forks', () => {
+    const now = Date.parse('2026-10-28T00:00:00Z');
+    const entries = [
+      { name: 'today', updated_at: '2026-10-27T12:00:00Z' },
+      { name: 'old', updated_at: '2025-01-01T00:00:00Z' },
+      { name: 'invalid', updated_at: 'not-a-date' },
+      { name: 'fork', fork: true, updated_at: '2026-10-27T12:00:00Z' },
+    ];
+    expect(getTimelineRepos(entries, '30d', now).map(repo => repo.name)).toEqual(['today']);
+    expect(getTimelineRepos(entries, 'all', now).map(repo => repo.name)).toEqual(['today', 'old']);
+  });
+
+  it('marks source data older than seven days as stale and handles missing dates', () => {
+    const now = Date.parse('2026-10-28T00:00:00Z');
+    expect(getFreshnessState('2026-10-27T00:00:00Z', now)).toBe('fresh');
+    expect(getFreshnessState('2026-10-01T00:00:00Z', now)).toBe('stale');
+    expect(getFreshnessState('N/A', now)).toBe('unknown');
   });
 
   it('recognizes placeholders as unavailable data', () => {
