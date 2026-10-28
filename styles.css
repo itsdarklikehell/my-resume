@@ -1562,3 +1562,168 @@ html[lang="nl"] .download-btn.lang-en {
 html:not([lang="nl"]) .download-btn.lang-nl {
   display: none !important;
 }
+
+
+/* Dynamic, data-driven project explorer */
+.dynamic-project-intro {
+  color: var(--text-muted);
+  margin: -0.5rem 0 1rem;
+  font-size: 0.92rem;
+}
+.dynamic-project-controls {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr) minmax(0, 1fr);
+  gap: 0.75rem;
+  margin-bottom: 0.85rem;
+}
+.dynamic-project-controls label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+.dynamic-project-controls select,
+.dynamic-project-controls input,
+.dynamic-share input {
+  width: 100%;
+  min-width: 0;
+  background: var(--bg);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  padding: 0.65rem;
+  font: inherit;
+}
+.dynamic-share {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+.dynamic-share-button {
+  background: var(--surface2);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  padding: 0.5rem 0.8rem;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.dynamic-copy-status {
+  align-self: center;
+  color: var(--accent2);
+  font-size: 0.8rem;
+}
+.dynamic-stats {
+  color: var(--accent2);
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+.dynamic-project-card {
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  padding: 1rem;
+  margin-bottom: 0.75rem;
+  background: var(--surface2);
+  min-width: 0;
+}
+.dynamic-project-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin-bottom: 0.35rem;
+  overflow-wrap: anywhere;
+}
+.dynamic-project-heading a {
+  color: var(--accent);
+  font-weight: 650;
+  text-decoration: none;
+}
+.dynamic-project-heading a:hover { text-decoration: underline; }
+.dynamic-project-stars {
+  color: var(--accent2);
+  font-size: 0.82rem;
+  flex-shrink: 0;
+}
+.dynamic-project-card p {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin-bottom: 0.6rem;
+  overflow-wrap: anywhere;
+}
+.dynamic-project-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 0.8rem;
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  margin-bottom: 0.55rem;
+}
+.dynamic-category { font-size: 0.75rem; }
+.dynamic-insights {
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+}
+.dynamic-insights h3 {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+.dynamic-skill-map {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(145px, 1fr));
+  gap: 0.4rem;
+  margin-top: 0.7rem;
+}
+.dynamic-skill-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.5rem 0.6rem;
+  font-size: 0.78rem;
+  overflow-wrap: anywhere;
+}
+.dynamic-skill-row span:last-child {
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+.dynamic-timeline { display: grid; gap: 0.7rem; }
+.dynamic-timeline-item {
+  display: flex;
+  gap: 0.65rem;
+  align-items: center;
+}
+.dynamic-timeline-dot {
+  width: 0.6rem;
+  height: 0.6rem;
+  border-radius: 50%;
+  background: var(--accent2);
+  flex-shrink: 0;
+}
+.dynamic-timeline-item div {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.25rem 0.75rem;
+  width: 100%;
+  font-size: 0.85rem;
+}
+.dynamic-timeline-item span:last-child { color: var(--text-muted); }
+@media (max-width: 640px) {
+  .dynamic-project-controls { grid-template-columns: 1fr; }
+  .dynamic-share { flex-wrap: wrap; }
+  .dynamic-share input { flex: 1 1 100%; }
+  .dynamic-share-button { flex: 0 0 auto; }
+}
+@media print {
+  .dynamic-project-controls,
+  .dynamic-share,
+  .dynamic-project-intro { display: none !important; }
+  .dynamic-project-card { break-inside: avoid; }
+  .dynamic-insights { break-inside: avoid; }
+}
