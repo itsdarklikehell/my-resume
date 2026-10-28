@@ -127,25 +127,29 @@ function renderStats() {
   const elLangs = document.getElementById('stat-langs');
   const elFollowing = document.getElementById('stat-following');
   const elFollowers = document.getElementById('stat-followers');
-  if (elRepos) elRepos.textContent = st.own_repos != null ? st.own_repos : 0;
-  if (elStars) elStars.textContent = st.own_stars != null ? st.own_stars : 0;
-  if (elLangs)
-    elLangs.textContent =
-      st.languages != null ? st.languages : Object.keys(gSkills()).length;
-  if (elFollowing)
-    elFollowing.textContent =
-      githubData && githubData.user && githubData.user.following != null
-        ? githubData.user.following
-        : 0;
-  if (elFollowers)
-    elFollowers.textContent =
-      githubData && githubData.user && githubData.user.followers != null
-        ? githubData.user.followers
-        : 0;
+  const locale = ({ nl: 'nl-NL', en: 'en-GB', de: 'de-DE', fr: 'fr-FR' })[currentLang] || 'nl-NL';
+  const setStat = (element, value) => {
+    if (!element) return;
+    const available = value !== null && value !== undefined && Number.isFinite(Number(value));
+    const item = element.closest('.stat-item');
+    if (item) item.hidden = !available;
+    element.textContent = available ? Number(value).toLocaleString(locale) : '';
+  };
+  setStat(elRepos, st.own_repos);
+  setStat(elStars, st.own_stars);
+  setStat(elLangs, st.languages != null ? st.languages : Object.keys(gSkills()).length || null);
+  setStat(elFollowing, githubData && githubData.user ? githubData.user.following : null);
+  setStat(elFollowers, githubData && githubData.user ? githubData.user.followers : null);
   const note = document.getElementById('stats-note');
-  if (note)
-    note.textContent =
-      t.last_refreshed + ': ' + (githubData ? githubData.generated_at : '—');
+  const refreshed = githubData && githubData.generated_at
+    ? new Date(githubData.generated_at)
+    : null;
+  if (note) {
+    const stamp = refreshed && !Number.isNaN(refreshed.getTime())
+      ? refreshed.toLocaleString(locale, { dateStyle: 'medium', timeStyle: 'short' })
+      : '';
+    note.textContent = stamp ? t.last_refreshed + ': ' + stamp : '';
+  }
   setSectionTimestamp('stats', githubData ? githubData.generated_at : null);
 }
 
@@ -319,18 +323,25 @@ function renderPlatformCards() {
     .map(p => {
       if (!p.data) return '';
       const d = p.data;
-      const hasReal = Object.values(d).some(
-        v => v && v !== 'N/A' && v !== '0' && v !== 0
+      const isDisplayable = value => {
+        if (value === null || value === undefined) return false;
+        const normalized = String(value).trim().toLowerCase();
+        return normalized !== '' && !['n/a', 'na', 'unknown', 'null', 'undefined', '0', '-'].includes(normalized);
+      };
+      const hasReal = Object.entries(d).some(
+        ([key, value]) => key !== 'generated_at' && key !== 'github' && isDisplayable(value)
       );
       if (!hasReal) return '';
       let fieldRows = '';
       for (const [k, v] of Object.entries(d)) {
-        if (v && v !== 'N/A' && k !== 'github') {
+        if (k !== 'github' && k !== 'generated_at' && isDisplayable(v)) {
           fieldRows += `<div class="field-row"><span class="field-key">${escapeHtml(k)}:</span> <span class="field-val">${escapeHtml(v)}</span></div>`;
         }
       }
-      const refreshed = d.generated_at
-        ? new Date(d.generated_at).toLocaleDateString()
+      const refreshedDate = d.generated_at ? new Date(d.generated_at) : null;
+      const locale = ({ nl: 'nl-NL', en: 'en-GB', de: 'de-DE', fr: 'fr-FR' })[currentLang] || 'nl-NL';
+      const refreshed = refreshedDate && !Number.isNaN(refreshedDate.getTime())
+        ? refreshedDate.toLocaleDateString(locale)
         : '';
       return `<div class="platform-card" style="border-left: 4px solid var(--accent);">
                 <div class="card-header">
@@ -473,9 +484,9 @@ function normalizeGitHubData(raw) {
       },
     },
     user: {
-      followers: num(user.followers),
-      following: num(user.following),
-      total_repos: num(user.total_repos) || repos.length,
+      followers: user.followers == null ? null : num(user.followers),
+      following: user.following == null ? null : num(user.following),
+      total_repos: user.total_repos == null ? repos.length : num(user.total_repos),
     },
     generated_at: raw.generated_at || null,
   };
