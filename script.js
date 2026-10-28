@@ -1114,6 +1114,15 @@ async function loadProfileData() {
     renderSkillMatrix();
   } catch (e) {
     console.error('Failed to load profile data:', e);
+    showDataError(
+      'Profielgegevens konden niet geladen worden: ' +
+        (e && e.message ? e.message : e)
+    );
+    setFallbackForPlaceholders();
+    const matrix = document.getElementById('skill-matrix-container');
+    if (matrix && (matrix.textContent || '').includes('Loading')) {
+      matrix.innerHTML = '<p class="about-text">Profielgegevens tijdelijk niet beschikbaar</p>';
+    }
   }
 }
 
