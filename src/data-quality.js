@@ -91,7 +91,7 @@ function sourceFreshness(sources, fallbackTimestamp, now) {
   if (!sources.length) return freshness(fallbackTimestamp, now);
   const successful = sources
     .map(source => source.lastSuccessfulAt)
-    .filter(Boolean)
+    .filter(value => value && !Number.isNaN(new Date(value).getTime()))
     .sort((left, right) => new Date(left) - new Date(right));
   return successful.length ? freshness(successful[0], now) : { status: 'unknown', ageDays: null };
 }
