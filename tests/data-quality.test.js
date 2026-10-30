@@ -59,7 +59,8 @@ describe('data quality report', () => {
     expect(report.unavailableSources).toBe(1);
     expect(report.retainedSources).toBe(1);
     expect(report.githubSources[0].recordCount).toBe(0);
-    expect(report.profileSources[0].recordCount).toBe(0);
+    expect(report.profileSources[0].recordCount).toBeNull();
+    expect(report.profileSources[0].availableFields).toBe(0);
   });
 
   it('uses last successful source fetch rather than snapshot generation time', () => {
