@@ -181,8 +181,20 @@ export function getSkillEvidence(lang = 'nl') {
   }));
 }
 
-function renderSkillEvidence(lang) {
+function createSkillEvidenceSection(lang) {
   const t = LABELS[lang] || LABELS.nl;
+  const section = document.createElement('section');
+  section.className = 'portfolio-enhancement-block';
+  section.setAttribute('aria-labelledby', 'portfolio-skill-evidence-title');
+
+  const heading = document.createElement('h2');
+  heading.id = 'portfolio-skill-evidence-title';
+  heading.textContent = t.skillEvidence;
+  const intro = document.createElement('p');
+  intro.className = 'about-text';
+  intro.textContent = t.skillEvidenceIntro;
+  section.append(heading, intro);
+
   const filters = [
     ['all', t.skillFilterAll],
     ['automation', t.skillFilterAutomation],
@@ -191,20 +203,53 @@ function renderSkillEvidence(lang) {
     ['security', t.skillFilterSecurity],
     ['integrations', t.skillFilterIntegrations],
   ];
-  return `
-    <section class="portfolio-enhancement-block" aria-labelledby="portfolio-skill-evidence-title">
-      <h2 id="portfolio-skill-evidence-title">${escapeHtml(t.skillEvidence)}</h2>
-      <p class="about-text">${escapeHtml(t.skillEvidenceIntro)}</p>
-      <div class="portfolio-skill-filters" role="group" aria-label="${escapeHtml(t.skillEvidenceFilters)}">
-        ${filters.map(([key, label], index) => `<button type="button" class="portfolio-skill-filter" data-skill-filter="${key}" aria-pressed="${index === 0}">${escapeHtml(label)}</button>`).join('')}
-      </div>
-      <div class="portfolio-skill-evidence-grid">
-        ${getSkillEvidence(lang).map(skill => `<article class="portfolio-skill-evidence-card" data-skill-evidence-card data-skill-category="${skill.category}">
-          <h3>${escapeHtml(skill.label)}</h3>
-          <ul>${skill.proofs.map(proof => `<li><strong>${escapeHtml(proof.project)}</strong><p>${escapeHtml(proof.detail)}</p><a class="portfolio-text-link" href="${escapeHtml(proof.href)}" ${proof.href.startsWith('https:') ? 'target="_blank" rel="noopener noreferrer"' : ''}>${escapeHtml(t.skillOpenCase)} ↗</a></li>`).join('')}</ul>
-        </article>`).join('')}
-      </div>
-    </section>`;
+  const filterGroup = document.createElement('div');
+  filterGroup.className = 'portfolio-skill-filters';
+  filterGroup.setAttribute('role', 'group');
+  filterGroup.setAttribute('aria-label', t.skillEvidenceFilters);
+  filters.forEach(([key, label], index) => {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'portfolio-skill-filter';
+    button.dataset.skillFilter = key;
+    button.setAttribute('aria-pressed', String(index === 0));
+    button.textContent = label;
+    filterGroup.append(button);
+  });
+  section.append(filterGroup);
+
+  const grid = document.createElement('div');
+  grid.className = 'portfolio-skill-evidence-grid';
+  getSkillEvidence(lang).forEach(skill => {
+    const card = document.createElement('article');
+    card.className = 'portfolio-skill-evidence-card';
+    card.dataset.skillEvidenceCard = '';
+    card.dataset.skillCategory = skill.category;
+    const title = document.createElement('h3');
+    title.textContent = skill.label;
+    const list = document.createElement('ul');
+    skill.proofs.forEach(proof => {
+      const item = document.createElement('li');
+      const project = document.createElement('strong');
+      project.textContent = proof.project;
+      const detail = document.createElement('p');
+      detail.textContent = proof.detail;
+      const link = document.createElement('a');
+      link.className = 'portfolio-text-link';
+      link.href = proof.href;
+      link.textContent = t.skillOpenCase + ' ↗';
+      if (proof.href.startsWith('https:')) {
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+      }
+      item.append(project, detail, link);
+      list.append(item);
+    });
+    card.append(title, list);
+    grid.append(card);
+  });
+  section.append(grid);
+  return section;
 }
 
 const FLOWS = {
@@ -469,8 +514,6 @@ export function renderPortfolioEnhancements({ container, repos = [], profileData
       </div>
     </section>
 
-    ${renderSkillEvidence(lang)}
-
     <section class="portfolio-enhancement-block" aria-labelledby="portfolio-matcher-title">
       <h2 id="portfolio-matcher-title">${escapeHtml(t.matcher)}</h2>
       <p class="about-text">${escapeHtml(t.matcherIntro)}</p>
@@ -525,6 +568,10 @@ export function renderPortfolioEnhancements({ container, repos = [], profileData
       <p class="about-text" data-analytics-status aria-live="polite"></p>
     </section>
   `;
+
+  const skillEvidenceSection = createSkillEvidenceSection(lang);
+  const projectCasesSection = container.querySelector('#portfolio-cases-title')?.closest('.portfolio-enhancement-block');
+  projectCasesSection?.after(skillEvidenceSection);
 
   const analyticsTotal = container.querySelector('[data-local-event-total]');
   const updateAnalyticsTotal = events => { if (analyticsTotal) analyticsTotal.textContent = String(totalEvents(events)); };
