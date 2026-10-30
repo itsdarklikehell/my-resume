@@ -54,6 +54,12 @@ describe('normalizeGitHubData', () => {
     expect(normalized.stats.stats.total_forks).toBeNull();
   });
 
+  it('does not infer personal repository totals from a mixed repository list', () => {
+    const normalized = normalizeGitHubData({ repos: [{ name: 'org-project' }] });
+    expect(normalized.stats.stats.total_repos).toBe(1);
+    expect(normalized.user.total_repos).toBeNull();
+  });
+
   it('derives zero counts only from an explicitly available empty collection', () => {
     const normalized = normalizeGitHubData({ repos: [], contributions: [] });
 
