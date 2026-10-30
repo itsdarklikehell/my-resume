@@ -185,10 +185,13 @@ function renderContributions() {
 
 function renderContributionHeatmap() {
   const container = document.getElementById('contribution-heatmap');
+  if (!container) return;
+  // Show when the data file was generated even if GitHub returned no public
+  // events; this is distinct from the date of the latest contribution.
+  setSectionTimestamp('heatmap', githubData ? githubData.generated_at : null);
   const contributions = gContributions();
-  if (!container || !contributions || !contributions.length) {
-    if (container)
-      container.innerHTML = '<p class="about-text">No contribution data.</p>';
+  if (!contributions || !contributions.length) {
+    container.innerHTML = '<p class="about-text">No public contribution activity was returned by GitHub.</p>';
     return;
   }
   const byDay = {};
@@ -205,7 +208,6 @@ function renderContributionHeatmap() {
     })
     .join('');
   container.innerHTML = '<div class="heatmap-grid">' + html + '</div>';
-  setSectionTimestamp('heatmap', githubData ? githubData.generated_at : null);
 }
 
 function renderAchievements() {
@@ -244,28 +246,33 @@ function renderAchievements() {
 
 function renderProfiles() {
   const container = document.getElementById('profiles-container');
-  if (!container || !profileData) return;
-  const t = getTranslations(currentLang, translations);
-  const links = [];
-  if (profileData.github)
-    links.push({ name: 'GitHub', url: profileData.github });
-  if (profileData.tryhackme_url)
-    links.push({ name: 'TryHackMe', url: profileData.tryhackme_url });
-  if (!links.length) {
-    container.innerHTML =
-      '<p class="about-text">' +
-      (t.profiles_unavailable || 'Profile statistics temporarily unavailable') +
-      '</p>';
-    return;
-  }
-  const html = links
+  if (!container) return;
+
+  // Profile URLs are not stored in profile-data.json; derive them from the
+  // public account identifiers instead of treating absent optional fields as
+  // a failed profile-data request.
+  const githubLogin =
+    (githubData && githubData.user && githubData.user.login) || 'itsdarklikehell';
+  const tryhackmeUsername =
+    (profileData && profileData.tryhackme && profileData.tryhackme.username) ||
+    'SgtStroopwafel';
+  const links = [
+    { name: 'GitHub', url: `https://github.com/${encodeURIComponent(githubLogin)}` },
+    { name: 'TryHackMe', url: `https://tryhackme.com/p/${encodeURIComponent(tryhackmeUsername)}` },
+  ];
+
+  container.innerHTML = links
     .map(
-      l =>
-        `<a href="${escapeHtml(l.url)}" target="_blank" rel="noopener" class="profile-link">${escapeHtml(l.name)}</a>`
+      link =>
+        `<a href="${escapeHtml(link.url)}" target="_blank" rel="noopener" class="profile-link">${escapeHtml(link.name)}</a>`
     )
     .join('');
-  container.innerHTML = html;
-  setSectionTimestamp('profiles', profileData.generated_at || null);
+  setSectionTimestamp(
+    'profiles',
+    (profileData && profileData.generated_at) ||
+      (githubData && githubData.generated_at) ||
+      null
+  );
 }
 
 function renderPlatformCards() {
