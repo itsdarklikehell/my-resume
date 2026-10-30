@@ -344,8 +344,8 @@ export const projectPages = {
 };
 
 export const ui = {
-  nl: { back: '← Terug naar portfolio', language: 'Taal', challenge: 'Uitdaging', approach: 'Aanpak', steps: 'Uitvoering', stack: 'Technologie', evidence: 'Bewijs', role: 'Rol en scope', caution: 'Aandachtspunt' },
-  en: { back: '← Back to portfolio', language: 'Language', challenge: 'Challenge', approach: 'Approach', steps: 'Implementation', stack: 'Technology', evidence: 'Evidence', role: 'Role and scope', caution: 'Important note' },
-  de: { back: '← Zurück zum Portfolio', language: 'Sprache', challenge: 'Herausforderung', approach: 'Ansatz', steps: 'Umsetzung', stack: 'Technologien', evidence: 'Belege', role: 'Rolle und Umfang', caution: 'Wichtiger Hinweis' },
-  fr: { back: '← Retour au portfolio', language: 'Langue', challenge: 'Défi', approach: 'Approche', steps: 'Mise en œuvre', stack: 'Technologies', evidence: 'Preuves', role: 'Rôle et périmètre', caution: 'Point important' },
+  nl: { resources: 'Projectbronnen', back: '← Terug naar portfolio', language: 'Taal', challenge: 'Uitdaging', approach: 'Aanpak', steps: 'Uitvoering', stack: 'Technologie', evidence: 'Bewijs', role: 'Rol en scope', caution: 'Aandachtspunt' },
+  en: { resources: 'Project resources', back: '← Back to portfolio', language: 'Language', challenge: 'Challenge', approach: 'Approach', steps: 'Implementation', stack: 'Technology', evidence: 'Evidence', role: 'Role and scope', caution: 'Important note' },
+  de: { resources: 'Projektressourcen', back: '← Zurück zum Portfolio', language: 'Sprache', challenge: 'Herausforderung', approach: 'Ansatz', steps: 'Umsetzung', stack: 'Technologien', evidence: 'Belege', role: 'Rolle und Umfang', caution: 'Wichtiger Hinweis' },
+  fr: { resources: 'Ressources du projet', back: '← Retour au portfolio', language: 'Langue', challenge: 'Défi', approach: 'Approche', steps: 'Mise en œuvre', stack: 'Technologies', evidence: 'Preuves', role: 'Rôle et périmètre', caution: 'Point important' },
 };
