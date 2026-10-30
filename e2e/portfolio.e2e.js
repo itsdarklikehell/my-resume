@@ -163,3 +163,27 @@ test('layout fits the viewport and links use safe schemes', async ({ page }) => 
   );
   expect(unsafeLinks, 'unsafe links should not be present in rendered UI').toEqual([]);
 });
+
+
+test('technical project case study pages load and switch languages', async ({ page }) => {
+  const pageErrors = [];
+  page.on('pageerror', error => pageErrors.push(error.message));
+  const cases = [
+    ['pwnagotchi-control-center.html', 'Pwnagotchi Control Center'],
+    ['pwnagotchi-plugins.html', 'Pwnagotchi Plugins'],
+    ['pwnspeaker.html', 'Pwnspeaker & Pwnassistant'],
+  ];
+
+  for (const [path, title] of cases) {
+    await page.goto(`projects/${path}?lang=nl`);
+    await expect(page.locator('h1')).toHaveText(title);
+    await expect(page.locator('[data-field="steps"] li')).toHaveCount(4);
+    await expect(page.locator('[data-field="links"] a')).toHaveCount(3);
+    await page.locator('select[aria-label="Language"]').selectOption('en');
+    await expect(page.locator('html')).toHaveAttribute('lang', 'en');
+    await expect(page.locator('h1')).toHaveText(title);
+    await expect(page.locator('[data-field="back"]')).toHaveAttribute('href', '../index.html?lang=en#projects-section');
+  }
+
+  expect(pageErrors, 'unexpected project page browser errors').toEqual([]);
+});
