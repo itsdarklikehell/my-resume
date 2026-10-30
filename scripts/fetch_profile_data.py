@@ -1200,9 +1200,12 @@ def main():
             # values, so a failed scrape in CI doesn't overwrite previously
             # good live data.
             has_data = any(
-                v != 'N/A' and v != 0 and v != '0'
+                (v != 'N/A' and v != 0 and v != '0')
                 for v in fetched.values()
                 if isinstance(v, (str, int))
+            ) or any(
+                isinstance(v, (list, dict)) and len(v) > 0
+                for v in fetched.values()
             )
             if has_data:
                 # Merge fetched fields over existing (preserves any extra
