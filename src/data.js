@@ -86,7 +86,7 @@ export function normalizeGitHubData(raw) {
     availability: {
       repos: reposSourceAvailable,
       contributions: contributionsSourceAvailable,
-      skills: skillsPresent && reposSourceAvailable,
+      skills: Boolean(skillsPresent && reposSourceAvailable),
       user: userSourceAvailable,
     },
   };
