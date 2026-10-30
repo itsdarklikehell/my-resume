@@ -20,6 +20,7 @@ async function loadServiceWorker({ cachedResponse = null, networkResponse = null
   });
   const self = {
     location: { origin: 'https://itsdarklikehell.github.io' },
+    clients: { claim: vi.fn().mockResolvedValue(undefined) },
     addEventListener: (name, callback) => { listeners[name] = callback; },
   };
   const source = await readFile(new URL('../sw.js', import.meta.url), 'utf8');
