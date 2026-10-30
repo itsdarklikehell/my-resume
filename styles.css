@@ -2289,3 +2289,61 @@ html:not([lang="nl"]) .download-btn.lang-nl {
   .portfolio-skill-filters { display: none; }
   .portfolio-skill-evidence-card[hidden] { display: block !important; }
 }
+
+
+/* Data quality and source provenance report */
+.portfolio-data-quality-metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 145px), 1fr));
+  gap: .65rem;
+  margin: .9rem 0;
+}
+.portfolio-data-quality-metric,
+.portfolio-data-quality-source,
+.portfolio-data-quality-status-group {
+  min-width: 0;
+  padding: .8rem;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  background: var(--surface2);
+}
+.portfolio-data-quality-metric {
+  display: grid;
+  gap: .35rem;
+}
+.portfolio-data-quality-metric span,
+.portfolio-data-quality-source p {
+  color: var(--text-muted);
+  font-size: .8rem;
+}
+.portfolio-data-quality-metric strong {
+  font-size: 1.25rem;
+  font-variant-numeric: tabular-nums;
+}
+.portfolio-data-quality-freshness {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+  gap: .65rem;
+}
+.portfolio-data-quality-source h3,
+.portfolio-data-quality-status-group h4 {
+  margin: 0 0 .45rem;
+  font-size: .9rem;
+}
+.portfolio-data-quality-source p { margin: .2rem 0; }
+.portfolio-data-quality-subheading {
+  margin: 1rem 0 .5rem;
+  font-size: .95rem;
+}
+.portfolio-data-quality-status-group {
+  margin-top: .55rem;
+}
+.portfolio-data-quality-status-group ul {
+  display: grid;
+  gap: .35rem;
+  padding-left: 1.1rem;
+  margin: 0;
+  color: var(--text-muted);
+  font-size: .82rem;
+  line-height: 1.45;
+}
