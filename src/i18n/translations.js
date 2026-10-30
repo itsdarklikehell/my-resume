@@ -785,14 +785,13 @@ export const translations = {
     auto_sort_off: 'Automatisch sortieren: AUS',
   },
   fr: {
-    tagline:
-      "Professionnel technique passionné d'informatique et de résolution de problèmes",
+    tagline: 'Informatique, automatisation et résolution de problèmes',
     about: 'À Propos',
     recruiter_focus: 'Domaines : Python · Shell/Bash · JavaScript/TypeScript · Linux · automatisation',
     recruiter_projects: 'Voir les projets',
     recruiter_contact: 'Me contacter',
     about_text:
-      "Professionnel technique pragmatique avec une grande expérience en systèmes électriques, panneaux solaires et motocyclettes. Connaissance pratique avec précision technique, pensée analytique et œil attentif à l'amélioration des processus. Shell/Bash, Python et JavaScript/TypeScript autodidactes avec une forte envie de grandir en tant que professionnel informatique.",
+      "Je combine une expérience pratique en installations électriques avec l’apprentissage autonome et des projets personnels en programmation, Linux et automatisation. J’adopte une approche analytique, j’apprends rapidement et j’aime transformer les problèmes techniques en solutions concrètes.",
     projects: 'Projets',
     dynamic_projects_intro: 'Filtrez les projets par orientation, recherche ou date. La sélection peut être partagée via l’URL.',
     experience: 'Expérience Professionnelle',
