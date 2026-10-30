@@ -172,13 +172,17 @@ function renderStats() {
 
 function renderContributions() {
   const container = document.getElementById('contributions-container');
+  if (!container) return;
+  const t = getTranslations(currentLang, translations);
   const contributions = gContributions();
-  if (!container || !contributions || !contributions.length) {
-    if (container)
-      container.innerHTML = '<p class="about-text">No recent activity.</p>';
+  if (!githubData || !githubData.availability?.contributions) {
+    container.textContent = t.activity_unavailable;
     return;
   }
-  const t = getTranslations(currentLang, translations);
+  if (!contributions.length) {
+    container.textContent = t.no_recent_activity;
+    return;
+  }
   const html = contributions
     .slice(0, 10)
     .map(c => {
@@ -204,8 +208,9 @@ function renderContributionHeatmap() {
   if (!container) return;
 
   setSectionTimestamp('heatmap', githubData ? githubData.generated_at : null);
-  if (!githubData) {
-    container.innerHTML = '<p class="about-text">GitHub activity data is unavailable.</p>';
+  if (!githubData || !githubData.availability?.contributions) {
+    const t = getTranslations(currentLang, translations);
+    container.textContent = t.activity_unavailable;
     return;
   }
 
