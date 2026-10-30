@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-30T11:21:12.162341Z",
+  "generated_at": "2026-10-30T12:13:14.058681Z",
   "user": {
     "login": "itsdarklikehell",
     "name": "Bauke Molenaar",
@@ -148,7 +148,7 @@
       "language": "JavaScript",
       "stars": 0,
       "description": "Digitale resume van Bauke Molenaar",
-      "updated_at": "2026-10-30T11:21:01Z",
+      "updated_at": "2026-10-30T11:21:39Z",
       "url": "https://github.com/itsdarklikehell/my-resume",
       "topics": [
         "cv",
@@ -563,6 +563,24 @@
     }
   ],
   "contributions": [
+    {
+      "type": "PushEvent",
+      "repo": "itsdarklikehell/my-resume",
+      "date": "2026-10-28T14:30:54Z",
+      "url": "https://github.com/itsdarklikehell/my-resume"
+    },
+    {
+      "type": "PushEvent",
+      "repo": "itsdarklikehell/my-resume",
+      "date": "2026-10-28T14:29:35Z",
+      "url": "https://github.com/itsdarklikehell/my-resume"
+    },
+    {
+      "type": "PushEvent",
+      "repo": "itsdarklikehell/my-resume",
+      "date": "2026-10-28T16:35:25Z",
+      "url": "https://github.com/itsdarklikehell/my-resume"
+    },
     {
       "type": "PullRequestEvent",
       "repo": "itsdarklikehell/my-resume",
@@ -1143,24 +1161,6 @@
       "type": "PushEvent",
       "repo": "itsdarklikehell/my-resume",
       "date": "2026-10-23T07:51:07Z",
-      "url": "https://github.com/itsdarklikehell/my-resume"
-    },
-    {
-      "type": "IssuesEvent",
-      "repo": "openclaw/openclaw",
-      "date": "2026-10-23T00:54:22Z",
-      "url": "https://github.com/openclaw/openclaw"
-    },
-    {
-      "type": "PushEvent",
-      "repo": "itsdarklikehell/my-resume",
-      "date": "2026-10-21T11:20:53Z",
-      "url": "https://github.com/itsdarklikehell/my-resume"
-    },
-    {
-      "type": "PushEvent",
-      "repo": "itsdarklikehell/my-resume",
-      "date": "2026-10-21T11:10:01Z",
       "url": "https://github.com/itsdarklikehell/my-resume"
     }
   ],
