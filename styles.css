@@ -2289,3 +2289,61 @@ html:not([lang="nl"]) .download-btn.lang-nl {
   .portfolio-skill-filters { display: none; }
   .portfolio-skill-evidence-card[hidden] { display: block !important; }
 }
+
+
+/* Keep essential CV actions immediately visible below the profile header. */
+.top-resume-actions {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 1rem;
+  margin: 0 0 1.5rem;
+  align-items: stretch;
+}
+.top-resume-actions > .card {
+  min-width: 0;
+  margin: 0;
+  padding: 1rem 1.1rem;
+}
+.top-resume-actions h2 {
+  margin: 0 0 .65rem;
+  font-size: 1rem;
+}
+.top-resume-actions .download-group,
+.top-resume-actions .share-buttons {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .5rem;
+  width: 100%;
+}
+.top-resume-actions .download-btn,
+.top-resume-actions .share-btn {
+  display: inline-flex;
+  flex: 0 1 auto;
+  align-items: center;
+  justify-content: center;
+  min-height: 38px;
+  margin: 0 !important;
+  padding: .5rem .75rem;
+  font-size: .82rem;
+  line-height: 1.25;
+}
+@media (max-width: 760px) {
+  .top-resume-actions {
+    grid-template-columns: 1fr;
+    gap: .75rem;
+  }
+}
+@media (max-width: 480px) {
+  .top-resume-actions > .card {
+    padding: .85rem;
+  }
+  .top-resume-actions .download-btn,
+  .top-resume-actions .share-btn {
+    flex: 1 1 calc(50% - .5rem);
+  }
+}
+@media print {
+  .top-resume-actions { display: none !important; }
+}
