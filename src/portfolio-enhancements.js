@@ -372,6 +372,8 @@ function createDataQualitySection({ githubData, profileData, lang, locale }) {
         item.append(label, document.createTextNode(': '), status);
         if (source.recordCount !== null) {
           item.append(document.createTextNode(' · ' + source.recordCount.toLocaleString(locale) + ' ' + t.dataQualityRecordCount));
+        } else if (source.availableFields !== null) {
+          item.append(document.createTextNode(' · ' + source.availableFields.toLocaleString(locale) + ' ' + t.dataQualityFields));
         }
         list.append(item);
       });
@@ -454,6 +456,7 @@ const LABELS = {
     dataQualityInvalidRecords: 'Ongeldige records',
     dataQualityLastUpdated: 'Momentopname',
     dataQualityRecordCount: 'records',
+    dataQualityFields: 'velden',
     facts: 'Controleerbare projectgegevens', openRepo: 'Bekijk repository', language: 'Taal', stars: 'Stars', updated: 'Laatst bijgewerkt', topics: 'Onderwerpen',
     matcher: 'Vacature-match met bewijs', matcherIntro: 'Plak een vacaturetekst. De vergelijking draait lokaal in je browser; de tekst wordt niet verstuurd of opgeslagen.',
     pasteJob: 'Vacaturetekst', matchButton: 'Vergelijk vaardigheden', evidence: 'Projectbewijs gevonden', related: 'Gerelateerd in profiel/cv', missing: 'Niet teruggevonden in huidige gegevens', noSkills: 'Geen bekende vaardigheden uit de vacaturetekst herkend. Probeer een tekst met concrete technologieën of functie-eisen.',
@@ -502,6 +505,7 @@ const LABELS = {
     dataQualityInvalidRecords: 'Invalid records',
     dataQualityLastUpdated: 'Snapshot',
     dataQualityRecordCount: 'records',
+    dataQualityFields: 'fields',
     facts: 'Verifiable project details', openRepo: 'View repository', language: 'Language', stars: 'Stars', updated: 'Last updated', topics: 'Topics',
     matcher: 'Job match with evidence', matcherIntro: 'Paste a job description. Matching runs locally in your browser; the text is not sent or stored.',
     pasteJob: 'Job description', matchButton: 'Compare skills', evidence: 'Project evidence found', related: 'Related in profile/CV', missing: 'Not found in current data', noSkills: 'No known skills were detected. Try including concrete technologies or job requirements.',
@@ -550,6 +554,7 @@ const LABELS = {
     dataQualityInvalidRecords: 'Ungültige Datensätze',
     dataQualityLastUpdated: 'Snapshot',
     dataQualityRecordCount: 'Datensätze',
+    dataQualityFields: 'Felder',
     facts: 'Nachprüfbare Projektdaten', openRepo: 'Repository ansehen', language: 'Sprache', stars: 'Stars', updated: 'Zuletzt aktualisiert', topics: 'Themen',
     matcher: 'Stellenabgleich mit Belegen', matcherIntro: 'Stellentext einfügen. Der Abgleich läuft lokal im Browser; der Text wird weder gesendet noch gespeichert.',
     pasteJob: 'Stellentext', matchButton: 'Fähigkeiten vergleichen', evidence: 'Projektbeleg gefunden', related: 'Im Profil/Lebenslauf verwandt', missing: 'In den aktuellen Daten nicht gefunden', noSkills: 'Keine bekannten Fähigkeiten erkannt. Füge konkrete Technologien oder Anforderungen ein.',
@@ -598,6 +603,7 @@ const LABELS = {
     dataQualityInvalidRecords: 'Enregistrements invalides',
     dataQualityLastUpdated: 'Instantané',
     dataQualityRecordCount: 'enregistrements',
+    dataQualityFields: 'champs',
     facts: 'Détails vérifiables', openRepo: 'Voir le dépôt', language: 'Langage', stars: 'Stars', updated: 'Dernière mise à jour', topics: 'Sujets',
     matcher: 'Correspondance avec preuves', matcherIntro: 'Collez une offre. La comparaison se fait localement dans votre navigateur ; le texte n’est ni envoyé ni stocké.',
     pasteJob: 'Description du poste', matchButton: 'Comparer les compétences', evidence: 'Preuve de projet trouvée', related: 'Élément connexe dans le profil/CV', missing: 'Introuvable dans les données actuelles', noSkills: 'Aucune compétence connue détectée. Ajoutez des technologies ou exigences concrètes.',
