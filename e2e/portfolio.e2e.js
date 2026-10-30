@@ -205,3 +205,24 @@ test('project case studies preserve the saved theme and palette', async ({ page 
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
   await expect(page.locator('html')).toHaveAttribute('data-palette', 'nord');
 });
+
+
+test('skill evidence explorer filters by project-backed category', async ({ page }) => {
+  await page.goto('?lang=nl');
+  await expect(page.getByRole('heading', { name: 'Vaardigheden met projectbewijs' })).toBeVisible({ timeout: 20_000 });
+  const cards = page.locator('[data-skill-evidence-card]');
+  await expect(cards).toHaveCount(11);
+
+  await page.locator('[data-skill-filter="automation"]').click();
+  await expect(page.locator('[data-skill-filter="automation"]')).toHaveAttribute('aria-pressed', 'true');
+  const visibleCategories = await cards.evaluateAll(elements =>
+    elements.filter(element => !element.hidden).map(element => element.dataset.skillCategory)
+  );
+  expect(visibleCategories.length).toBeGreaterThan(0);
+  expect(visibleCategories.every(category => category === 'automation')).toBe(true);
+
+  await page.locator('[data-skill-filter="all"]').click();
+  await expect(cards).toHaveCount(11);
+  const visibleCount = await cards.evaluateAll(elements => elements.filter(element => !element.hidden).length);
+  expect(visibleCount).toBe(11);
+});
