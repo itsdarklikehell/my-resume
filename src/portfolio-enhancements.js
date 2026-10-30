@@ -31,6 +31,182 @@ const SKILL_CATALOG = [
   { label: 'Networking', aliases: ['networking', 'netwerken', 'tcp/ip', 'dns', 'routing'], cv: true },
 ];
 
+const SKILL_EVIDENCE = [
+  {
+    label: 'Shell / Bash',
+    category: 'automation',
+    proofs: [{ project: 'Pwnagotchi Control Center', href: 'projects/pwnagotchi-control-center.html', detail: {
+      nl: 'Menu-gestuurde scripts voor lokale opslaghandelingen en remote beheer via SSH.',
+      en: 'Menu-driven scripts for local storage operations and remote management over SSH.',
+      de: 'Menügesteuerte Skripte für lokale Speicheroperationen und Fernverwaltung über SSH.',
+      fr: 'Scripts pilotés par menu pour les opérations de stockage locales et l’administration à distance via SSH.',
+    }}],
+  },
+  {
+    label: 'Linux',
+    category: 'systems',
+    proofs: [{ project: 'Pwnagotchi Control Center', href: 'projects/pwnagotchi-control-center.html', detail: {
+      nl: 'Gedocumenteerde systeemtools zoals dd, mount, whiptail, wget en SSH in de beheerworkflow.',
+      en: 'Documented system tools such as dd, mount, whiptail, wget and SSH in the management workflow.',
+      de: 'Dokumentierte Systemwerkzeuge wie dd, mount, whiptail, wget und SSH im Verwaltungsablauf.',
+      fr: 'Outils système documentés tels que dd, mount, whiptail, wget et SSH dans le flux de gestion.',
+    }}],
+  },
+  {
+    label: 'Networking',
+    category: 'systems',
+    proofs: [{ project: 'Pwnagotchi Control Center', href: 'projects/pwnagotchi-control-center.html', detail: {
+      nl: 'Verbindingsscripts voor USB-Ethernet, Bluetooth PAN, Ethernet en WLAN, inclusief interface- en connectiviteitscontroles.',
+      en: 'Connection scripts for USB-Ethernet, Bluetooth PAN, Ethernet and WLAN, including interface and connectivity checks.',
+      de: 'Verbindungsskripte für USB-Ethernet, Bluetooth PAN, Ethernet und WLAN einschließlich Schnittstellen- und Verbindungstests.',
+      fr: 'Scripts de connexion pour USB-Ethernet, Bluetooth PAN, Ethernet et WLAN, avec vérification des interfaces et de la connectivité.',
+    }}],
+  },
+  {
+    label: 'Python',
+    category: 'development',
+    proofs: [
+      { project: 'Pwnagotchi Plugins', href: 'projects/pwnagotchi-plugins.html', detail: {
+        nl: 'Python-plugincollectie met gedocumenteerde installatie, configuratie en onderhoud.',
+        en: 'Python plugin collection with documented installation, configuration and maintenance.',
+        de: 'Python-Plugin-Sammlung mit dokumentierter Installation, Konfiguration und Pflege.',
+        fr: 'Collection de plugins Python avec installation, configuration et maintenance documentées.',
+      }},
+      { project: 'Pwnspeaker & Pwnassistant', href: 'projects/pwnspeaker.html', detail: {
+        nl: 'Twee afzonderlijke Python-plugins voor tekst-naar-spraak en een agenda-spraakassistent.',
+        en: 'Two separate Python plugins for text-to-speech and a calendar voice assistant.',
+        de: 'Zwei separate Python-Plugins für Text-to-Speech und einen Kalender-Sprachassistenten.',
+        fr: 'Deux plugins Python distincts pour la synthèse vocale et un assistant vocal de calendrier.',
+      }},
+    ],
+  },
+  {
+    label: 'pytest',
+    category: 'development',
+    proofs: [{ project: 'Pwnagotchi Plugins', href: 'projects/pwnagotchi-plugins.html', detail: {
+      nl: 'De repository beschrijft pytest-controles voor syntax, imports, pluginstructuur en TOML-configuratie.',
+      en: 'The repository documents pytest checks for syntax, imports, plugin structure and TOML configuration.',
+      de: 'Das Repository dokumentiert pytest-Prüfungen für Syntax, Imports, Pluginstruktur und TOML-Konfiguration.',
+      fr: 'Le dépôt documente des tests pytest pour la syntaxe, les imports, la structure des plugins et la configuration TOML.',
+    }}],
+  },
+  {
+    label: 'GitHub Actions',
+    category: 'automation',
+    proofs: [
+      { project: 'Pwnagotchi Plugins', href: 'projects/pwnagotchi-plugins.html', detail: {
+        nl: 'Geautomatiseerde plugincontroles draaien via de CI-workflow van de repository.',
+        en: 'Automated plugin checks run through the repository CI workflow.',
+        de: 'Automatisierte Plugin-Prüfungen laufen über den CI-Workflow des Repositorys.',
+        fr: 'Les vérifications automatisées des plugins sont exécutées par le workflow CI du dépôt.',
+      }},
+      { project: 'my-resume portfolio', href: 'https://github.com/itsdarklikehell/my-resume', detail: {
+        nl: 'CI, kwaliteitscontroles en browser-tests voor de portfolio-website.',
+        en: 'CI, quality checks and browser tests for the portfolio website.',
+        de: 'CI-, Qualitäts- und Browser-Tests für die Portfolio-Website.',
+        fr: 'CI, contrôles qualité et tests navigateur pour le portfolio.',
+      }},
+    ],
+  },
+  {
+    label: 'JavaScript',
+    category: 'development',
+    proofs: [{ project: 'my-resume portfolio', href: 'https://github.com/itsdarklikehell/my-resume', detail: {
+      nl: 'De portfolio gebruikt JavaScript-modules voor rendering, meertaligheid en interactieve onderdelen, met Vitest- en Playwright-tests.',
+      en: 'The portfolio uses JavaScript modules for rendering, internationalization and interactive features, with Vitest and Playwright tests.',
+      de: 'Das Portfolio verwendet JavaScript-Module für Rendering, Mehrsprachigkeit und Interaktionen sowie Vitest- und Playwright-Tests.',
+      fr: 'Le portfolio utilise des modules JavaScript pour le rendu, l’internationalisation et les interactions, avec des tests Vitest et Playwright.',
+    }}],
+  },
+  {
+    label: 'Cybersecurity / Wi-Fi auditing',
+    category: 'security',
+    proofs: [{ project: 'Pwnagotchi Plugins', href: 'projects/pwnagotchi-plugins.html', detail: {
+      nl: 'Plugincollectie voor Pwnagotchi-workflows rond Wi-Fi-auditing; de repository bevat werk van meerdere bijdragers.',
+      en: 'Pwnagotchi plugin collection for Wi-Fi auditing workflows; the repository includes work from multiple contributors.',
+      de: 'Pwnagotchi-Plugin-Sammlung für Wi-Fi-Auditing-Workflows; das Repository enthält Beiträge mehrerer Entwickler.',
+      fr: 'Collection de plugins Pwnagotchi pour les workflows d’audit Wi-Fi ; le dépôt comprend le travail de plusieurs contributeurs.',
+    }}],
+  },
+  {
+    label: 'Google Calendar API & OAuth',
+    category: 'integrations',
+    proofs: [{ project: 'Pwnspeaker & Pwnassistant', href: 'projects/pwnspeaker.html', detail: {
+      nl: 'Pwnassistant koppelt Google Calendar aan een spraakworkflow en vereist OAuth-autorisatie.',
+      en: 'Pwnassistant connects Google Calendar to a voice workflow and requires OAuth authorization.',
+      de: 'Pwnassistant verbindet Google Calendar mit einem Sprachworkflow und benötigt eine OAuth-Autorisierung.',
+      fr: 'Pwnassistant relie Google Calendar à un workflow vocal et nécessite une autorisation OAuth.',
+    }}],
+  },
+  {
+    label: 'Text-to-speech & speech recognition',
+    category: 'integrations',
+    proofs: [{ project: 'Pwnspeaker & Pwnassistant', href: 'projects/pwnspeaker.html', detail: {
+      nl: 'De repository documenteert text-to-speech, spraakherkenning en de bijbehorende systeempakketten.',
+      en: 'The repository documents text-to-speech, speech recognition and the related system packages.',
+      de: 'Das Repository dokumentiert Text-to-Speech, Spracherkennung und die zugehörigen Systempakete.',
+      fr: 'Le dépôt documente la synthèse vocale, la reconnaissance vocale et les paquets système associés.',
+    }}],
+  },
+  {
+    label: 'TOML configuration',
+    category: 'development',
+    proofs: [
+      { project: 'Pwnagotchi Plugins', href: 'projects/pwnagotchi-plugins.html', detail: {
+        nl: 'Plugininstellingen en configuratievoorbeelden worden als TOML-bestanden beheerd en getest.',
+        en: 'Plugin settings and configuration examples are maintained and tested as TOML files.',
+        de: 'Plugin-Einstellungen und Konfigurationsbeispiele werden als TOML-Dateien verwaltet und getestet.',
+        fr: 'Les paramètres et exemples de configuration des plugins sont gérés et testés sous forme de fichiers TOML.',
+      }},
+      { project: 'Pwnagotchi Control Center', href: 'projects/pwnagotchi-control-center.html', detail: {
+        nl: 'De tool past config.toml lokaal en op afstand aan.',
+        en: 'The tool edits config.toml locally and remotely.',
+        de: 'Das Werkzeug bearbeitet config.toml lokal und aus der Ferne.',
+        fr: 'L’outil modifie config.toml localement et à distance.',
+      }},
+    ],
+  },
+];
+
+export function getSkillEvidence(lang = 'nl') {
+  const locale = Object.prototype.hasOwnProperty.call(LABELS, lang) ? lang : 'nl';
+  return SKILL_EVIDENCE.map(skill => ({
+    label: skill.label,
+    category: skill.category,
+    proofs: skill.proofs.map(proof => ({
+      project: proof.project,
+      href: proof.href,
+      detail: proof.detail[locale] || proof.detail.nl,
+    })),
+  }));
+}
+
+function renderSkillEvidence(lang) {
+  const t = LABELS[lang] || LABELS.nl;
+  const filters = [
+    ['all', t.skillFilterAll],
+    ['automation', t.skillFilterAutomation],
+    ['development', t.skillFilterDevelopment],
+    ['systems', t.skillFilterSystems],
+    ['security', t.skillFilterSecurity],
+    ['integrations', t.skillFilterIntegrations],
+  ];
+  return `
+    <section class="portfolio-enhancement-block" aria-labelledby="portfolio-skill-evidence-title">
+      <h2 id="portfolio-skill-evidence-title">${escapeHtml(t.skillEvidence)}</h2>
+      <p class="about-text">${escapeHtml(t.skillEvidenceIntro)}</p>
+      <div class="portfolio-skill-filters" role="group" aria-label="${escapeHtml(t.skillEvidenceFilters)}">
+        ${filters.map(([key, label], index) => `<button type="button" class="portfolio-skill-filter" data-skill-filter="${key}" aria-pressed="${index === 0}">${escapeHtml(label)}</button>`).join('')}
+      </div>
+      <div class="portfolio-skill-evidence-grid">
+        ${getSkillEvidence(lang).map(skill => `<article class="portfolio-skill-evidence-card" data-skill-evidence-card data-skill-category="${skill.category}">
+          <h3>${escapeHtml(skill.label)}</h3>
+          <ul>${skill.proofs.map(proof => `<li><strong>${escapeHtml(proof.project)}</strong><p>${escapeHtml(proof.detail)}</p><a class="portfolio-text-link" href="${escapeHtml(proof.href)}" ${proof.href.startsWith('https:') ? 'target="_blank" rel="noopener noreferrer"' : ''}>${escapeHtml(t.skillOpenCase)} ↗</a></li>`).join('')}</ul>
+        </article>`).join('')}
+      </div>
+    </section>`;
+}
+
 const FLOWS = {
   automation: {
     label: 'Automatisering',
@@ -67,6 +243,16 @@ const FLOWS = {
 const LABELS = {
   nl: {
     cases: 'Project-casestudy’s', casesIntro: 'Automatisch samengesteld uit bestaande repositorygegevens. Resultaten of impact worden niet verondersteld.',
+    skillEvidence: 'Vaardigheden met projectbewijs',
+    skillEvidenceIntro: 'Technologieën die terug te vinden zijn in concrete projecten. Dit is projectbewijs, geen zelf toegekende niveaus of vaardigheidsscores.',
+    skillEvidenceFilters: 'Filter projectbewijs op onderwerp',
+    skillFilterAll: 'Alles',
+    skillFilterAutomation: 'Automatisering',
+    skillFilterDevelopment: 'Softwareontwikkeling',
+    skillFilterSystems: 'Linux & netwerken',
+    skillFilterSecurity: 'Cybersecurity',
+    skillFilterIntegrations: 'Integraties',
+    skillOpenCase: 'Bekijk projectbewijs',
     facts: 'Controleerbare projectgegevens', openRepo: 'Bekijk repository', language: 'Taal', stars: 'Stars', updated: 'Laatst bijgewerkt', topics: 'Onderwerpen',
     matcher: 'Vacature-match met bewijs', matcherIntro: 'Plak een vacaturetekst. De vergelijking draait lokaal in je browser; de tekst wordt niet verstuurd of opgeslagen.',
     pasteJob: 'Vacaturetekst', matchButton: 'Vergelijk vaardigheden', evidence: 'Projectbewijs gevonden', related: 'Gerelateerd in profiel/cv', missing: 'Niet teruggevonden in huidige gegevens', noSkills: 'Geen bekende vaardigheden uit de vacaturetekst herkend. Probeer een tekst met concrete technologieën of functie-eisen.',
@@ -80,6 +266,16 @@ const LABELS = {
   },
   en: {
     cases: 'Project case studies', casesIntro: 'Generated from existing repository data. Outcomes and impact are not assumed.',
+    skillEvidence: 'Skills backed by project evidence',
+    skillEvidenceIntro: 'Technologies that can be traced to concrete projects. This is project evidence, not self-assigned proficiency levels or scores.',
+    skillEvidenceFilters: 'Filter project evidence by topic',
+    skillFilterAll: 'All',
+    skillFilterAutomation: 'Automation',
+    skillFilterDevelopment: 'Software development',
+    skillFilterSystems: 'Linux & networking',
+    skillFilterSecurity: 'Cybersecurity',
+    skillFilterIntegrations: 'Integrations',
+    skillOpenCase: 'View project evidence',
     facts: 'Verifiable project details', openRepo: 'View repository', language: 'Language', stars: 'Stars', updated: 'Last updated', topics: 'Topics',
     matcher: 'Job match with evidence', matcherIntro: 'Paste a job description. Matching runs locally in your browser; the text is not sent or stored.',
     pasteJob: 'Job description', matchButton: 'Compare skills', evidence: 'Project evidence found', related: 'Related in profile/CV', missing: 'Not found in current data', noSkills: 'No known skills were detected. Try including concrete technologies or job requirements.',
@@ -93,6 +289,16 @@ const LABELS = {
   },
   de: {
     cases: 'Projekt-Fallstudien', casesIntro: 'Automatisch aus vorhandenen Repository-Daten erstellt. Ergebnisse werden nicht unterstellt.',
+    skillEvidence: 'Fähigkeiten mit Projektbelegen',
+    skillEvidenceIntro: 'Technologien, die sich konkreten Projekten zuordnen lassen. Dies sind Projektbelege, keine selbst vergebenen Kenntnisstufen oder Bewertungen.',
+    skillEvidenceFilters: 'Projektbelege nach Thema filtern',
+    skillFilterAll: 'Alle',
+    skillFilterAutomation: 'Automatisierung',
+    skillFilterDevelopment: 'Softwareentwicklung',
+    skillFilterSystems: 'Linux & Netzwerke',
+    skillFilterSecurity: 'Cybersicherheit',
+    skillFilterIntegrations: 'Integrationen',
+    skillOpenCase: 'Projektbeleg ansehen',
     facts: 'Nachprüfbare Projektdaten', openRepo: 'Repository ansehen', language: 'Sprache', stars: 'Stars', updated: 'Zuletzt aktualisiert', topics: 'Themen',
     matcher: 'Stellenabgleich mit Belegen', matcherIntro: 'Stellentext einfügen. Der Abgleich läuft lokal im Browser; der Text wird weder gesendet noch gespeichert.',
     pasteJob: 'Stellentext', matchButton: 'Fähigkeiten vergleichen', evidence: 'Projektbeleg gefunden', related: 'Im Profil/Lebenslauf verwandt', missing: 'In den aktuellen Daten nicht gefunden', noSkills: 'Keine bekannten Fähigkeiten erkannt. Füge konkrete Technologien oder Anforderungen ein.',
@@ -106,6 +312,16 @@ const LABELS = {
   },
   fr: {
     cases: 'Études de cas de projets', casesIntro: 'Générées à partir des données existantes des dépôts. Aucun résultat n’est supposé.',
+    skillEvidence: 'Compétences étayées par des projets',
+    skillEvidenceIntro: 'Technologies que l’on peut retrouver dans des projets concrets. Il s’agit de preuves de projet, pas de niveaux ou de scores auto-attribués.',
+    skillEvidenceFilters: 'Filtrer les preuves par thème',
+    skillFilterAll: 'Tout',
+    skillFilterAutomation: 'Automatisation',
+    skillFilterDevelopment: 'Développement logiciel',
+    skillFilterSystems: 'Linux et réseaux',
+    skillFilterSecurity: 'Cybersécurité',
+    skillFilterIntegrations: 'Intégrations',
+    skillOpenCase: 'Voir la preuve du projet',
     facts: 'Détails vérifiables', openRepo: 'Voir le dépôt', language: 'Langage', stars: 'Stars', updated: 'Dernière mise à jour', topics: 'Sujets',
     matcher: 'Correspondance avec preuves', matcherIntro: 'Collez une offre. La comparaison se fait localement dans votre navigateur ; le texte n’est ni envoyé ni stocké.',
     pasteJob: 'Description du poste', matchButton: 'Comparer les compétences', evidence: 'Preuve de projet trouvée', related: 'Élément connexe dans le profil/CV', missing: 'Introuvable dans les données actuelles', noSkills: 'Aucune compétence connue détectée. Ajoutez des technologies ou exigences concrètes.',
@@ -253,6 +469,8 @@ export function renderPortfolioEnhancements({ container, repos = [], profileData
       </div>
     </section>
 
+    ${renderSkillEvidence(lang)}
+
     <section class="portfolio-enhancement-block" aria-labelledby="portfolio-matcher-title">
       <h2 id="portfolio-matcher-title">${escapeHtml(t.matcher)}</h2>
       <p class="about-text">${escapeHtml(t.matcherIntro)}</p>
@@ -331,6 +549,17 @@ export function renderPortfolioEnhancements({ container, repos = [], profileData
     }, true);
     analyticsClickTrackingInstalled = true;
   }
+
+  const skillFilterButtons = [...container.querySelectorAll('[data-skill-filter]')];
+  const skillEvidenceCards = [...container.querySelectorAll('[data-skill-evidence-card]')];
+  skillFilterButtons.forEach(button => button.addEventListener('click', () => {
+    const selected = button.dataset.skillFilter;
+    skillFilterButtons.forEach(other => other.setAttribute('aria-pressed', String(other === button)));
+    skillEvidenceCards.forEach(card => {
+      card.hidden = selected !== 'all' && card.dataset.skillCategory !== selected;
+    });
+    updateAnalyticsTotal(recordLocalEvent('skill_evidence_filter_' + selected));
+  }));
 
   const recruiterButton = container.querySelector('[data-recruiter-toggle]');
   const setRecruiterMode = enabled => {
