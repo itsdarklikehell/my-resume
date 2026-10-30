@@ -723,7 +723,6 @@ export const translations = {
     proficiency_level_3: '3 (Kompetent)',
     proficiency_level_4: '4 (Professionell)',
     proficiency_level_5: '5 (Experte)',
-  },
 
     platform_tryhackme: 'TryHackMe',
     platform_ctftime: 'CTFtime',
