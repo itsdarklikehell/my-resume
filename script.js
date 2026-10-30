@@ -186,31 +186,74 @@ function renderContributions() {
 function renderContributionHeatmap() {
   const container = document.getElementById('contribution-heatmap');
   if (!container) return;
-  // Show when the data file was generated even if GitHub returned no public
-  // events; this is distinct from the date of the latest contribution.
+
   setSectionTimestamp('heatmap', githubData ? githubData.generated_at : null);
-  const contributions = gContributions();
-  if (!contributions || !contributions.length) {
-    container.innerHTML = '<p class="about-text">No public contribution activity was returned by GitHub.</p>';
+  if (!githubData) {
+    container.innerHTML = '<p class="about-text">GitHub activity data is unavailable.</p>';
     return;
   }
-  const byDay = {};
-  contributions.forEach(c => {
-    const day = (c.date || '').slice(0, 10);
-    byDay[day] = (byDay[day] || 0) + 1;
-  });
-  const days = Object.entries(byDay).sort();
-  const max = Math.max(...days.map(d => d[1]), 1);
-  const html = days
-    .map(([day, count]) => {
-      const intensity = Math.round((count / max) * 100);
-      return `<div class="heatmap-cell" style="opacity:${intensity / 100};" title="${escapeHtml(day)}: ${count}"></div>`;
-    })
-    .join('');
-  container.innerHTML = '<div class="heatmap-grid">' + html + '</div>';
-}
 
-function renderAchievements() {
+  // Keep the original 30-day calendar grid. Each square represents one day;
+  // contribution events and repository create/update dates both count.
+  const days = [];
+  const today = new Date();
+  today.setUTCHours(0, 0, 0, 0);
+  for (let i = 29; i >= 0; i -= 1) {
+    const day = new Date(today);
+    day.setUTCDate(day.getUTCDate() - i);
+    days.push(day.toISOString().slice(0, 10));
+  }
+
+  const daySet = new Set(days);
+  const counts = {};
+  const addActivity = value => {
+    if (!value) return;
+    const parsed = new Date(value);
+    if (Number.isNaN(parsed.getTime())) return;
+    const day = parsed.toISOString().slice(0, 10);
+    if (daySet.has(day)) counts[day] = (counts[day] || 0) + 1;
+  };
+
+  gContributions().forEach(contribution => {
+    addActivity(contribution && contribution.date);
+  });
+
+  gRepos().filter(repo => repo && !repo.fork).forEach(repo => {
+    addActivity(repo.created_at || repo.created);
+    addActivity(repo.updated_at || repo.updated);
+  });
+
+  const maxCount = Math.max.apply(null, days.map(day => counts[day] || 0).concat([1]));
+  const totalActivities = days.reduce((sum, day) => sum + (counts[day] || 0), 0);
+  const activeDays = days.filter(day => (counts[day] || 0) > 0).length;
+  const colors = {
+    nl: { ago: '30 dagen geleden', today: 'Vandaag', activity: 'activiteiten', active: 'actieve dagen' },
+    en: { ago: '30 days ago', today: 'Today', activity: 'activities', active: 'active days' },
+    de: { ago: 'Vor 30 Tagen', today: 'Heute', activity: 'Aktivitäten', active: 'aktive Tage' },
+    fr: { ago: 'Il y a 30 jours', today: 'Aujourd’hui', activity: 'activités', active: 'jours actifs' },
+  };
+  const labels = colors[currentLang] || colors.nl;
+
+  let html = '<div role="img" aria-label="GitHub activity over the last 30 days" ' +
+    'style="display:grid;grid-template-columns:repeat(10,minmax(0,1fr));gap:3px;margin-bottom:.5rem;">';
+  days.forEach(day => {
+    const count = counts[day] || 0;
+    const opacity = 0.15 + ((count / maxCount) * 0.85);
+    const background = count > 0
+      ? 'rgba(78,205,196,' + opacity.toFixed(2) + ')'
+      : 'var(--surface2)';
+    html += '<div title="' + escapeHtml(day) + ': ' + count + ' contributions" ' +
+      'style="width:100%;aspect-ratio:1;border-radius:3px;background:' + background + ';"></div>';
+  });
+  html += '</div>';
+  html += '<div style="display:flex;justify-content:space-between;font-size:.7rem;color:var(--text-muted);">' +
+    '<span>' + labels.ago + '</span><span>' + labels.today + '</span></div>';
+  html += '<div style="margin-top:.5rem;font-size:.8rem;color:var(--text-muted);">' +
+    totalActivities + ' ' + labels.activity + ' in the last 30 days · ' +
+    activeDays + ' ' + labels.active + '</div>';
+
+  container.innerHTML = html;
+}function renderAchievements() {
   const container = document.getElementById('achievements-container');
   if (!container || !profileData) return;
   const t = getTranslations(currentLang, translations);
@@ -248,34 +291,173 @@ function renderProfiles() {
   const container = document.getElementById('profiles-container');
   if (!container) return;
 
-  // Profile URLs are not stored in profile-data.json; derive them from the
-  // public account identifiers instead of treating absent optional fields as
-  // a failed profile-data request.
+  const data = profileData || {};
+  const t = getTranslations(currentLang, translations);
+  const isAvailable = value => {
+    if (value === null || value === undefined) return false;
+    const normalized = String(value).trim().toLowerCase();
+    return !['', 'n/a', 'na', 'unknown', 'null', 'undefined', '-'].includes(normalized);
+  };
+  const liveLabels = {
+    nl: { live: '● Live', offline: '○ Geen live data', unavailable: 'Live statistieken niet beschikbaar' },
+    en: { live: '● Live', offline: '○ Offline', unavailable: 'Live data unavailable' },
+    de: { live: '● Live', offline: '○ Keine Live-Daten', unavailable: 'Live-Daten nicht verfügbar' },
+    fr: { live: '● En direct', offline: '○ Hors ligne', unavailable: 'Données en direct indisponibles' },
+  };
+  const labels = liveLabels[currentLang] || liveLabels.nl;
   const githubLogin =
     (githubData && githubData.user && githubData.user.login) || 'itsdarklikehell';
-  const tryhackmeUsername =
-    (profileData && profileData.tryhackme && profileData.tryhackme.username) ||
-    'SgtStroopwafel';
-  const links = [
-    { name: 'GitHub', url: `https://github.com/${encodeURIComponent(githubLogin)}` },
-    { name: 'TryHackMe', url: `https://tryhackme.com/p/${encodeURIComponent(tryhackmeUsername)}` },
+  const thm = data.tryhackme || {};
+  const htb = data.hackthebox || {};
+  const cylab = data.cylab || {};
+  const microsoft = data.microsoft || {};
+  const ctftime = data.ctftime || {};
+  const itchio = data.itchio || {};
+  const codewars = data.codewars || {};
+  const devto = data.devto || {};
+  const leetcode = data.leetcode || {};
+  const stackoverflow = data.stackoverflow || {};
+
+  const githubTotals = gTotals();
+  const githubStats = githubData
+    ? gOwnRepos() + ' own repos · ' + gOwnStars() + ' stars · ' +
+      (githubTotals.languages || Object.keys(gSkills()).length) + ' languages'
+    : labels.unavailable;
+
+  const profiles = [
+    {
+      name: 'GitHub',
+      icon: '🐙',
+      url: 'https://github.com/' + encodeURIComponent(githubLogin),
+      username: githubLogin,
+      stats: githubStats,
+      live: Boolean(githubData),
+    },
+    {
+      name: 'TryHackMe',
+      icon: '🔒',
+      url: 'https://tryhackme.com/p/SgtStroopwafel',
+      username: 'SgtStroopwafel',
+      stats: isAvailable(thm.rank)
+        ? 'Rank: ' + thm.rank + ' · ' + (isAvailable(thm.points) ? thm.points : '—') + ' pts'
+        : labels.unavailable,
+      live: isAvailable(thm.rank) || isAvailable(thm.points),
+    },
+    {
+      name: 'Hack The Box',
+      icon: '📦',
+      url: 'https://profile.hackthebox.com/profile/01a0f22b-f959-73b9-925c-c2e2e350db97',
+      username: 'SgtStroopwafel',
+      stats: isAvailable(htb.rank)
+        ? 'Rank: ' + htb.rank + ' · ' + (isAvailable(htb.points) ? htb.points : '—') + ' pts'
+        : labels.unavailable,
+      live: isAvailable(htb.rank) || isAvailable(htb.points),
+    },
+    {
+      name: 'CyLab Academy',
+      icon: '🎓',
+      url: 'https://learn.cylabacademy.org/users/SgtStroopwafel',
+      username: 'SgtStroopwafel',
+      stats: isAvailable(cylab.rank)
+        ? 'Rank: ' + cylab.rank + ' · ' + (isAvailable(cylab.points) ? cylab.points : '—') + ' pts'
+        : labels.unavailable,
+      live: isAvailable(cylab.rank) || isAvailable(cylab.points),
+    },
+    {
+      name: 'Microsoft Learn',
+      icon: '🎓',
+      url: 'https://learn.microsoft.com/nl-nl/users/baukemolenaar/',
+      username: 'baukemolenaar',
+      stats: isAvailable(microsoft.rank)
+        ? 'Rank: ' + microsoft.rank
+        : 'Microsoft Learn profile',
+      live: isAvailable(microsoft.rank) || isAvailable(microsoft.points),
+    },
+    {
+      name: 'CTFtime',
+      icon: '🏁',
+      url: 'https://ctftime.org/user/127159',
+      username: 'SgtStroopwafel',
+      stats: isAvailable(ctftime.rating)
+        ? 'Rating: ' + ctftime.rating + ' · Position: ' + (isAvailable(ctftime.position) ? ctftime.position : '—')
+        : labels.unavailable,
+      live: isAvailable(ctftime.rating) || isAvailable(ctftime.position),
+    },
+    {
+      name: 'itch.io',
+      icon: '🎮',
+      url: 'https://sgtstroopwafel.itch.io/',
+      username: 'sgtstroopwafel',
+      stats: Array.isArray(itchio.games)
+        ? itchio.games.length + ' published games'
+        : labels.unavailable,
+      live: Array.isArray(itchio.games) && itchio.games.length > 0,
+    },
+    {
+      name: 'Codewars',
+      icon: '⚔️',
+      url: 'https://www.codewars.com/users/itsdarklikehell',
+      username: 'itsdarklikehell',
+      stats: isAvailable(codewars.level)
+        ? 'Level: ' + codewars.level + ' · ' + (isAvailable(codewars.points) ? codewars.points : '—') + ' pt'
+        : labels.unavailable,
+      live: isAvailable(codewars.level) || isAvailable(codewars.points),
+    },
+    {
+      name: 'DEV.to',
+      icon: '📝',
+      url: 'https://dev.to/itsdarklikehell',
+      username: 'itsdarklikehell',
+      stats: isAvailable(devto.xp)
+        ? devto.xp + ' posts · ' + (isAvailable(devto.reputation_points) ? devto.reputation_points : '—') + ' reputation'
+        : isAvailable(devto.member_since)
+          ? 'Member since ' + devto.member_since
+          : labels.unavailable,
+      live: isAvailable(devto.xp),
+    },
+    {
+      name: 'LeetCode',
+      icon: '🟢',
+      url: 'https://leetcode.com/u/SgtStroopwafel',
+      username: 'SgtStroopwafel',
+      stats: isAvailable(leetcode.level) || isAvailable(leetcode.xp)
+        ? 'Solved: ' + (isAvailable(leetcode.xp) ? leetcode.xp : '—') + ' · Level: ' + (isAvailable(leetcode.level) ? leetcode.level : '—')
+        : labels.unavailable,
+      live: isAvailable(leetcode.level) || isAvailable(leetcode.xp),
+    },
+    {
+      name: 'Stack Overflow',
+      icon: '🧱',
+      url: 'https://stackoverflow.com/users/9409286/chuck-norris',
+      username: 'chuck-norris',
+      stats: isAvailable(stackoverflow.reputation_points)
+        ? 'Reputation: ' + stackoverflow.reputation_points
+        : labels.unavailable,
+      live: isAvailable(stackoverflow.reputation_points),
+    },
   ];
 
-  container.innerHTML = links
-    .map(
-      link =>
-        `<a href="${escapeHtml(link.url)}" target="_blank" rel="noopener" class="profile-link">${escapeHtml(link.name)}</a>`
-    )
-    .join('');
+  container.innerHTML = profiles.map(profile =>
+    '<a href="' + escapeHtml(profile.url) + '" target="_blank" rel="noopener" class="activity-card" ' +
+      'style="text-decoration:none;color:inherit;' + (profile.live ? '' : 'opacity:.7;') + '">' +
+      '<div class="activity-icon">' + profile.icon + '</div>' +
+      '<div class="activity-name">' + escapeHtml(profile.name) + '</div>' +
+      '<div class="activity-link">' + escapeHtml(profile.username) + '</div>' +
+      '<div style="color:var(--text-muted);font-size:.75rem;margin-top:.25rem;">' +
+        escapeHtml(profile.stats) + '</div>' +
+      '<div style="color:' + (profile.live ? 'var(--accent2)' : 'var(--text-muted)') +
+        ';font-size:.7rem;margin-top:.15rem;">' +
+        (profile.live ? labels.live : labels.offline) + '</div>' +
+    '</a>'
+  ).join('');
+
   setSectionTimestamp(
     'profiles',
     (profileData && profileData.generated_at) ||
       (githubData && githubData.generated_at) ||
       null
   );
-}
-
-function renderPlatformCards() {
+}function renderPlatformCards() {
   const container = document.getElementById('platform-cards-container');
   if (!container || !profileData) return;
   const t = getTranslations(currentLang, translations);
