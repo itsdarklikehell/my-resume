@@ -187,3 +187,17 @@ test('technical project case study pages load and switch languages', async ({ pa
 
   expect(pageErrors, 'unexpected project page browser errors').toEqual([]);
 });
+
+
+test('project case studies preserve the saved theme and palette', async ({ page }) => {
+  await page.goto('?lang=nl');
+  await page.locator('.theme-toggle').click();
+  await page.locator('.palette-toggle').click();
+  await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
+  await expect(page.locator('html')).toHaveAttribute('data-palette', 'nord');
+
+  await page.goto('projects/pwnagotchi-control-center.html?lang=nl');
+  await expect(page.locator('h1')).toHaveText('Pwnagotchi Control Center');
+  await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
+  await expect(page.locator('html')).toHaveAttribute('data-palette', 'nord');
+});
