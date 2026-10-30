@@ -2032,3 +2032,65 @@ html:not([lang="nl"]) .download-btn.lang-nl {
   .recruiter-link { padding-inline: 0.5rem; text-align: center; }
 }
 @media print { .recruiter-quicklinks { display: none !important; } }
+
+
+/* Curated, evidence-based project case studies for recruiters. */
+.featured-projects {
+  margin: 1rem 0 1.25rem;
+  padding: 1rem;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface2);
+}
+.featured-projects > h3 {
+  margin: 0 0 0.35rem;
+  font-size: 1.08rem;
+}
+.featured-projects-intro { margin-bottom: 0.9rem; }
+.featured-project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr));
+  gap: 0.8rem;
+}
+.featured-project-card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 1rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+}
+.featured-project-topline { margin-bottom: 0.55rem; }
+.featured-project-type {
+  color: var(--accent);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+.featured-project-card h4 {
+  margin: 0 0 0.7rem;
+  font-size: 1rem;
+}
+.featured-project-card p {
+  margin: 0 0 0.65rem;
+  color: var(--text-muted);
+  font-size: 0.84rem;
+  line-height: 1.55;
+}
+.featured-project-card p strong { color: var(--text); }
+.featured-project-link {
+  align-self: flex-start;
+  margin-top: auto;
+  padding-top: 0.35rem;
+  color: var(--accent);
+  font-size: 0.85rem;
+  font-weight: 650;
+  text-decoration: none;
+}
+.featured-project-link:hover { text-decoration: underline; }
+@media print {
+  .featured-projects { break-inside: avoid; background: #fff; }
+  .featured-project-grid { grid-template-columns: 1fr; }
+  .featured-project-card { break-inside: avoid; }
+}
