@@ -1988,3 +1988,47 @@ html:not([lang="nl"]) .download-btn.lang-nl {
   .portfolio-terminal-form label { grid-column: 1 / -1; }
   .portfolio-terminal-form button { padding-inline: 0.7rem; }
 }
+
+
+/* Recruiter-first introduction: clear positioning and immediate next steps. */
+.recruiter-focus {
+  margin-top: 0.65rem;
+  color: var(--text-muted);
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+.recruiter-quicklinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin-top: 1rem;
+}
+.recruiter-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  padding: 0.55rem 0.95rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  font-size: 0.9rem;
+  font-weight: 650;
+  text-decoration: none;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+.recruiter-link:hover {
+  border-color: var(--accent);
+  transform: translateY(-1px);
+}
+.recruiter-link-primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+.recruiter-link-primary:hover { color: #fff; }
+@media (max-width: 600px) {
+  .recruiter-quicklinks { display: grid; grid-template-columns: 1fr 1fr; }
+  .recruiter-link { padding-inline: 0.5rem; text-align: center; }
+}
+@media print { .recruiter-quicklinks { display: none !important; } }
