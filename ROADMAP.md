@@ -7,7 +7,7 @@ This roadmap prioritizes verifiable evidence, data quality and accessibility. St
 - [x] Count only GitHub contribution events in the heatmap; repository creation/update timestamps are not contributions.
 - [x] Add 30-, 90- and 365-day heatmap periods.
 - [x] Label the public-events data coverage limitation clearly.
-- [ ] Expand the GitHub activity source beyond the current recent-events sample where the API and permissions allow it.
+- [x] Increase the retained public-event sample from 20 to 100; the API still limits historical coverage, so the heatmap labels this limitation.
 - [ ] Add a data-quality report for source freshness, missing fields and invalid records.
 - [ ] Review profile fetchers and distinguish unavailable data from genuine zero values.
 
