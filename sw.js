@@ -1,4 +1,5 @@
-const CACHE_NAME = 'resume-cache-v7';
+const CACHE_PREFIX = 'resume-cache-';
+const CACHE_NAME = 'resume-cache-v8';
 const urlsToCache = [
   '/my-resume/',
   '/my-resume/index.html',
@@ -28,7 +29,9 @@ self.addEventListener('activate', event => {
   event.waitUntil(
     caches.keys().then(keys =>
       Promise.all(
-        keys.filter(key => key !== CACHE_NAME).map(key => caches.delete(key))
+        keys
+          .filter(key => key.startsWith(CACHE_PREFIX) && key !== CACHE_NAME)
+          .map(key => caches.delete(key))
       )
     ).then(() => self.clients.claim())
   );
