@@ -110,6 +110,31 @@
 <p class="hero-updated" data-i18n="last_updated" id="hero-updated" style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.25rem;"></p>
 </div>
 </header>
+<div class="top-resume-actions no-print" aria-label="CV-acties">
+<section class="card no-print">
+<h2 data-i18n="download">Download CV</h2>
+<div class="download-group">
+  <a class="download-btn lang-nl" href="bauke-molenaar-cv.pdf" download="bauke-molenaar-cv.pdf" target="_blank">🇳🇱 <span data-i18n="download_pdf_nl">Download CV (NL)</span></a>
+  <a class="download-btn lang-en" href="bauke-molenaar-cv-en.pdf" download="bauke-molenaar-cv-en.pdf" target="_blank">🇬🇧 <span data-i18n="download_pdf_en">Download CV (EN)</span></a>
+  <a class="download-btn lang-nl" href="#" onclick="downloadJSON(); return false;">🇳🇱 <span data-i18n="download_json">Download JSON</span></a>
+  <a class="download-btn lang-en" href="#" onclick="downloadJSON(); return false;" style="margin-top: 0.5rem;">🇬🇧 <span data-i18n="download_json">Download JSON</span></a>
+   <a class="download-btn lang-nl" href="#" onclick="window.print(); return false;">🇳🇱 <span data-i18n="print_cv_nl">Print CV (NL)</span></a>
+   <a class="download-btn lang-en" href="#" onclick="window.print(); return false;" style="margin-top: 0.5rem;">🇬🇧 <span data-i18n="print_cv_en">Print CV (EN)</span></a>
+</div>
+</section>
+<section class="card no-print">
+<h2 data-i18n="share">Delen</h2>
+<div class="share-buttons">
+<a class="share-btn" href="https://www.linkedin.com/sharing/share-offsite/?url=https://itsdarklikehell.github.io/my-resume/" target="_blank">💼 <span data-i18n="share_linkedin">LinkedIn</span></a>
+<a class="share-btn" href="https://twitter.com/intent/tweet?url=https://itsdarklikehell.github.io/my-resume/&amp;text=Bekijk%20mijn%20CV" target="_blank">🐦 <span data-i18n="share_twitter">Twitter</span></a>
+<a class="share-btn" href="https://wa.me/?text=Bekijk%20mijn%20CV%20https://itsdarklikehell.github.io/my-resume/" target="_blank">💬 <span data-i18n="share_whatsapp">WhatsApp</span></a>
+<a class="share-btn" href="https://www.facebook.com/sharer/sharer.php?u=https://itsdarklikehell.github.io/my-resume/" target="_blank">📘 <span data-i18n="share_facebook">Facebook</span></a>
+<a class="share-btn" href="https://t.me/share/url?url=https://itsdarklikehell.github.io/my-resume/&text=Bekijk%20mijn%20CV" target="_blank">✈️ <span data-i18n="share_telegram">Telegram</span></a>
+<a class="share-btn" href="mailto:?subject=Bekijk%20mijn%20CV&body=https://itsdarklikehell.github.io/my-resume/" target="_blank">✉️ <span data-i18n="share_email">Email</span></a>
+<a class="share-btn" href="#" onclick="navigator.clipboard.writeText('https://itsdarklikehell.github.io/my-resume/');return false;">🔗 <span data-i18n="share_copy">Copy link</span></a>
+</div>
+</section>
+</div>
 <div class="grid">
 <div class="main-col" id="main-col"><section class="card">
 <h2 data-i18n="experience">Werkervaring</h2>
@@ -594,29 +619,6 @@
     <p class="about-text">Loading courses...</p>
   </div>
   <div class="section-updated" id="courses-updated"></div>
-</section>
-<section class="card no-print">
-<h2 data-i18n="download">Download CV</h2>
-<div class="download-group">
-  <a class="download-btn lang-nl" href="bauke-molenaar-cv.pdf" download="bauke-molenaar-cv.pdf" target="_blank">🇳🇱 <span data-i18n="download_pdf_nl">Download CV (NL)</span></a>
-  <a class="download-btn lang-en" href="bauke-molenaar-cv-en.pdf" download="bauke-molenaar-cv-en.pdf" target="_blank">🇬🇧 <span data-i18n="download_pdf_en">Download CV (EN)</span></a>
-  <a class="download-btn lang-nl" href="#" onclick="downloadJSON(); return false;">🇳🇱 <span data-i18n="download_json">Download JSON</span></a>
-  <a class="download-btn lang-en" href="#" onclick="downloadJSON(); return false;" style="margin-top: 0.5rem;">🇬🇧 <span data-i18n="download_json">Download JSON</span></a>
-   <a class="download-btn lang-nl" href="#" onclick="window.print(); return false;">🇳🇱 <span data-i18n="print_cv_nl">Print CV (NL)</span></a>
-   <a class="download-btn lang-en" href="#" onclick="window.print(); return false;" style="margin-top: 0.5rem;">🇬🇧 <span data-i18n="print_cv_en">Print CV (EN)</span></a>
-</div>
-</section>
-<section class="card no-print">
-<h2 data-i18n="share">Delen</h2>
-<div class="share-buttons">
-<a class="share-btn" href="https://www.linkedin.com/sharing/share-offsite/?url=https://itsdarklikehell.github.io/my-resume/" target="_blank">💼 <span data-i18n="share_linkedin">LinkedIn</span></a>
-<a class="share-btn" href="https://twitter.com/intent/tweet?url=https://itsdarklikehell.github.io/my-resume/&amp;text=Bekijk%20mijn%20CV" target="_blank">🐦 <span data-i18n="share_twitter">Twitter</span></a>
-<a class="share-btn" href="https://wa.me/?text=Bekijk%20mijn%20CV%20https://itsdarklikehell.github.io/my-resume/" target="_blank">💬 <span data-i18n="share_whatsapp">WhatsApp</span></a>
-<a class="share-btn" href="https://www.facebook.com/sharer/sharer.php?u=https://itsdarklikehell.github.io/my-resume/" target="_blank">📘 <span data-i18n="share_facebook">Facebook</span></a>
-<a class="share-btn" href="https://t.me/share/url?url=https://itsdarklikehell.github.io/my-resume/&text=Bekijk%20mijn%20CV" target="_blank">✈️ <span data-i18n="share_telegram">Telegram</span></a>
-<a class="share-btn" href="mailto:?subject=Bekijk%20mijn%20CV&body=https://itsdarklikehell.github.io/my-resume/" target="_blank">✉️ <span data-i18n="share_email">Email</span></a>
-<a class="share-btn" href="#" onclick="navigator.clipboard.writeText('https://itsdarklikehell.github.io/my-resume/');return false;">🔗 <span data-i18n="share_copy">Copy link</span></a>
-</div>
 </section>
 <section class="card" id="expertise-section">
 <h2 data-i18n="expertise">Expertise</h2>
