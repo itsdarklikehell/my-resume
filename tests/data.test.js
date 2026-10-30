@@ -41,6 +41,42 @@ describe('normalizeGitHubData', () => {
     });
   });
 
+  it('distinguishes unavailable empty payloads from successful zero-record responses', () => {
+    const unavailable = normalizeGitHubData({
+      repos: [],
+      contributions: [],
+      skills: {},
+      user: {},
+      source_status: {
+        user_repositories: { status: 'unavailable', record_count: 0, retained: false },
+        organization_repositories: { status: 'unavailable', record_count: 0, retained: false },
+        contributions: { status: 'unavailable', record_count: 0, retained: false },
+        user_profile: { status: 'unavailable', record_count: 0, retained: false },
+      },
+    });
+    expect(unavailable.availability.repos).toBe(false);
+    expect(unavailable.availability.contributions).toBe(false);
+    expect(unavailable.stats.stats.total_repos).toBeNull();
+    expect(unavailable.user.followers).toBeNull();
+
+    const emptyButAvailable = normalizeGitHubData({
+      repos: [],
+      contributions: [],
+      skills: {},
+      user: { followers: 0, following: 0, public_repos: 0 },
+      source_status: {
+        user_repositories: { status: 'ok', record_count: 0 },
+        organization_repositories: { status: 'ok', record_count: 0 },
+        contributions: { status: 'ok', record_count: 0 },
+        user_profile: { status: 'ok', record_count: 1 },
+      },
+    });
+    expect(emptyButAvailable.availability.repos).toBe(true);
+    expect(emptyButAvailable.availability.contributions).toBe(true);
+    expect(emptyButAvailable.stats.stats.total_repos).toBe(0);
+    expect(emptyButAvailable.user.followers).toBe(0);
+  });
+
   it('does not count missing per-repository metrics as zero', () => {
     const normalized = normalizeGitHubData({
       repos: [
