@@ -1871,9 +1871,9 @@ html:not([lang="nl"]) .download-btn.lang-nl {
 .recruiter-mode .container { max-width: 900px; padding-top: 1rem; }
 .recruiter-mode .header { padding: 1.4rem; margin-bottom: 1rem; }
 .recruiter-mode .timeline-item:nth-of-type(n+4) { display: none; }
-.recruiter-mode .portfolio-enhancement-block:nth-child(3),
-.recruiter-mode .portfolio-enhancement-block:nth-child(6),
-.recruiter-mode .portfolio-enhancement-block:nth-child(7) { display: none; }
+.recruiter-mode .portfolio-enhancement-block:has(#portfolio-demo-title),
+.recruiter-mode .portfolio-enhancement-block:has(#portfolio-history-title),
+.recruiter-mode .portfolio-enhancement-block:has(#portfolio-analytics-title) { display: none; }
 @media (max-width: 600px) {
   .portfolio-match-row { grid-template-columns: 1fr; }
   .portfolio-match-row > div { grid-column: auto; }
