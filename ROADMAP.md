@@ -15,17 +15,19 @@ Acceptance: activity totals are derived only from contribution events; source co
 
 ## Sprint 2 — Evidence-based project case studies
 
-- [ ] Select three representative projects from verified repositories.
-- [ ] Document problem, approach, technologies, challenges and verifiable outcome for each.
-- [ ] Link each case to repository, demo and documentation where available.
-- [ ] Do not invent impact metrics or claim unverified project ownership.
+- [x] Select three representative projects from verified repositories.
+- [x] Document problem, approach, technologies and verifiable workflow for each; avoid unsupported impact claims.
+- [x] Link each case to its repository, technical case study and available development visualization/documentation.
+- [x] Separate repository maintenance and personal changes from the work of other contributors.
+- [x] Publish standalone case-study pages in Dutch, English, German and French.
 
 Acceptance: each case has traceable evidence and clearly separates facts from explanatory context.
 
 ## Sprint 3 — Skills and recruiter experience
 
-- [ ] Expand the skill explorer with Data Analytics, Automation, Development and Cybersecurity filters.
-- [ ] Link skills to repositories and project evidence.
+- [x] Add evidence-backed filters for Automation, Software Development, Linux & Networking, Cybersecurity and Integrations.
+- [x] Link each demonstrated skill to concrete project case studies or repository code.
+- [ ] Add a Data Analytics filter only when relevant SQL, BI or analysis work can be linked as concrete evidence.
 - [ ] Improve terminal commands, keyboard history and completion.
 - [ ] Refine Recruiter Mode and role-specific CV output using verified source data.
 
@@ -36,10 +38,17 @@ Acceptance: skills are described through evidence, not arbitrary proficiency per
 - [ ] Audit keyboard navigation, screen-reader labels and color contrast.
 - [ ] Test narrow mobile layouts and touch targets.
 - [ ] Review loading performance, image delivery and service-worker behavior.
-- [ ] Add end-to-end and regression tests for the new interactions.
+- [x] Add end-to-end and regression tests for the multilingual case-study pages and skill evidence filters.
 - [ ] Review SEO metadata and privacy implications.
 
 Acceptance: CI passes, key journeys work on mobile and desktop, and no personal data is sent to third-party analytics without explicit configuration.
+
+## Recently completed
+
+- PR #8: conceptual Control Center architecture overview.
+- PR #9: three standalone multilingual technical project case studies, Vite multi-page build support, sitemap entries and browser coverage.
+- PR #10: multilingual skill evidence explorer with category filters, project links and evidence-boundary tests.
+- GitHub profile README: aligned the introduction and project highlights with the evidence available in the portfolio.
 
 ## Existing functionality to build on
 
