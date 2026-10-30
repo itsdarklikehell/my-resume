@@ -86,6 +86,15 @@ function normalizeSourceStatus(sourceStatus) {
   }));
 }
 
+function sourceFreshness(sources, fallbackTimestamp, now) {
+  if (!sources.length) return freshness(fallbackTimestamp, now);
+  const successful = sources
+    .map(source => source.lastSuccessfulAt)
+    .filter(Boolean)
+    .sort((left, right) => new Date(left) - new Date(right));
+  return successful.length ? freshness(successful[0], now) : { status: 'unknown', ageDays: null };
+}
+
 export function analyzeDataQuality({ githubData = null, profileData = null, now = new Date() } = {}) {
   const currentTime = now instanceof Date ? now : new Date(now);
   const reposAvailable = githubData?.availability
@@ -113,8 +122,8 @@ export function analyzeDataQuality({ githubData = null, profileData = null, now 
   const totalInvalidRecords = repoQuality.invalidRecords + contributionQuality.invalidRecords;
 
   return {
-    githubFreshness: freshness(githubData?.generated_at, currentTime),
-    profileFreshness: freshness(profileData?.generated_at, currentTime),
+    githubFreshness: sourceFreshness(githubSources, githubData?.generated_at, currentTime),
+    profileFreshness: sourceFreshness(profileSources, profileData?.generated_at, currentTime),
     githubGeneratedAt: githubData?.generated_at || null,
     profileGeneratedAt: profileData?.generated_at || null,
     githubSources,
