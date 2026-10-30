@@ -72,12 +72,12 @@ describe('service worker cache behaviour', () => {
     expect(await response.text()).toContain('unavailable offline');
   });
 
-  it('keeps cache-first behaviour for static assets', async () => {
-    const cached = new Response('cached html', { status: 200 });
+  it('keeps cache-first behaviour for static media assets', async () => {
+    const cached = new Response('cached image', { status: 200 });
     const h = await loadServiceWorker({ cachedResponse: cached });
-    const response = await dispatchFetch(h, 'https://itsdarklikehell.github.io/my-resume/index.html');
+    const response = await dispatchFetch(h, 'https://itsdarklikehell.github.io/my-resume/profile.jpg');
 
-    expect(await response.text()).toBe('cached html');
+    expect(await response.text()).toBe('cached image');
     expect(h.fetchMock).not.toHaveBeenCalled();
   });
 });
