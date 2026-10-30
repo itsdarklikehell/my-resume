@@ -106,17 +106,29 @@ function renderSkills() {
   const container = document.getElementById('skills-container');
   const skills = gSkills();
   if (!container || !skills) return;
+  const labels = {
+    nl: 'van openbare repositories',
+    en: 'of public repositories',
+    de: 'der öffentlichen Repositories',
+    fr: 'des dépôts publics',
+  };
+  const shareLabel = labels[currentLang] || labels.nl;
   const entries = Object.entries(skills);
   if (window.autoSortSkills !== false) {
-    entries.sort((a, b) => (b[1].percentage || 0) - (a[1].percentage || 0));
+    entries.sort((a, b) => (Number.isFinite(b[1].percentage) ? b[1].percentage : -1) -
+      (Number.isFinite(a[1].percentage) ? a[1].percentage : -1));
   }
   const html = entries
     .map(([lang, data]) => {
-      const pct = data.percentage || 0;
+      const pct = Number.isFinite(data.percentage) ? data.percentage : null;
+      const repos = Number.isFinite(data.repos) ? data.repos : null;
+      const width = pct === null ? 0 : Math.max(0, Math.min(100, pct));
+      const value = repos === null ? '—' : repos.toLocaleString();
+      const share = pct === null ? '—' : pct + '% ' + shareLabel;
       return `<div class="skill-item">
                 <div class="skill-name">${escapeHtml(lang)}</div>
-                <div class="skill-bar"><div class="skill-fill" style="width:${pct}%;"></div></div>
-                <div class="skill-value">${data.repos || 0} repos (${pct}%)</div>
+                <div class="skill-bar"><div class="skill-fill" style="width:${width}%;"></div></div>
+                <div class="skill-value">${value} repos (${escapeHtml(share)})</div>
             </div>`;
     })
     .join('');
