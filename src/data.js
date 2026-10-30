@@ -29,10 +29,11 @@ export function normalizeGitHubData(raw) {
   const numberOrNull = value => (
     typeof value === 'number' && Number.isFinite(value) ? value : null
   );
-  const sum = (items, field) => items.reduce((total, item) => {
-    const value = numberOrNull(item && item[field]);
-    return total + (value ?? 0);
-  }, 0);
+  const sum = (items, field) => {
+    const values = items.map(item => numberOrNull(item && item[field]));
+    if (values.some(value => value === null)) return null;
+    return values.reduce((total, value) => total + value, 0);
+  };
   const forks = repos.filter(repo => repo && repo.fork);
   const own = repos.filter(repo => repo && !repo.fork);
   const derived = (value, fallback) => numberOrNull(value) ?? fallback;
