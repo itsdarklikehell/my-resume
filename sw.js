@@ -1,4 +1,4 @@
-const CACHE_NAME = 'resume-cache-v6';
+const CACHE_NAME = 'resume-cache-v7';
 const urlsToCache = [
   '/my-resume/',
   '/my-resume/index.html',
@@ -14,6 +14,7 @@ const urlsToCache = [
   '/my-resume/bauke-molenaar-cv-en.pdf',
   '/my-resume/gource.mp4',
   '/my-resume/profile-data.json',
+  '/my-resume/github-data.json',
 ];
 
 self.addEventListener('install', event => {
