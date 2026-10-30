@@ -1162,7 +1162,7 @@ function renderAll() {
       lang: currentLang,
     })],
     ['interactive-terminal', () => renderInteractiveTerminal({ container: document.getElementById('portfolio-terminal'), repos: gRepos(), lang: currentLang })],
-    ['portfolio-enhancements', () => renderPortfolioEnhancements({ container: document.getElementById('portfolio-enhancements'), repos: gRepos(), profileData, lang: currentLang })],
+    ['portfolio-enhancements', () => renderPortfolioEnhancements({ container: document.getElementById('portfolio-enhancements'), repos: gRepos(), profileData, githubData, lang: currentLang })],
     ['vacancy-profile', () => renderVacancyProfile({ container: document.getElementById('vacancy-profile'), repos: gRepos(), lang: currentLang })],
     ['repos', renderGitHubRepos],
     ['gource', renderGource],
