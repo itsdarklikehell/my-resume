@@ -657,9 +657,10 @@ const gOwnRepos = () => {
 const gOwnStars = () => {
   const t = gTotals();
   if (t.own_stars != null) return t.own_stars;
-  return githubData && githubData.availability && githubData.availability.repos
-    ? gRepos().filter(repo => !repo.fork).reduce((total, repo) => total + (Number.isFinite(repo.stars) ? repo.stars : 0), 0)
-    : null;
+  if (!githubData || !githubData.availability || !githubData.availability.repos) return null;
+  const ownRepos = gRepos().filter(repo => !repo.fork);
+  if (ownRepos.some(repo => !Number.isFinite(repo.stars))) return null;
+  return ownRepos.reduce((total, repo) => total + repo.stars, 0);
 };
 
 // Toon een foutbanner zonder de pagina te slopen
