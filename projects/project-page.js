@@ -14,6 +14,21 @@ if (!root || !page) {
     textContent: 'Project page not found.',
   }));
 } else {
+  // Match the saved appearance from the main portfolio.
+  try {
+    const savedTheme = localStorage.getItem('theme');
+    document.documentElement.setAttribute('data-theme', savedTheme === 'light' ? 'light' : 'dark');
+    const savedPalette = localStorage.getItem('palette');
+    const allowedPalettes = ['nord', 'dracula', 'solarized', 'ocean'];
+    if (allowedPalettes.includes(savedPalette)) {
+      document.documentElement.setAttribute('data-palette', savedPalette);
+    } else {
+      document.documentElement.removeAttribute('data-palette');
+    }
+  } catch {
+    document.documentElement.setAttribute('data-theme', 'dark');
+  }
+
   document.documentElement.lang = lang;
   document.title = `${page.title} | Bauke Molenaar`;
   document.querySelector('meta[name="description"]')?.setAttribute('content', page.intro);
