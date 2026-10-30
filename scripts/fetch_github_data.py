@@ -49,7 +49,7 @@ def _normalize_repo(repo):
     return {
         'name': repo.get('name', ''),
         'language': repo.get('language') or 'Unknown',
-        'stars': repo.get('stargazers_count', 0),
+        'stars': repo.get('stargazers_count'),
         'description': repo.get('description') or '',
         'updated_at': repo.get('updated_at', ''),
         'url': repo.get('html_url', ''),
@@ -221,6 +221,12 @@ def main():
         'user_profile': user_status,
     }
     skills = generate_skill_data(repos)
+    star_values = [repo.get('stars') for repo in repos]
+    total_stars = (
+        sum(star_values)
+        if all(type(value) is int and value >= 0 for value in star_values)
+        else None
+    )
     data = {
         'generated_at': checked_at,
         'source_status': source_status,
@@ -230,10 +236,7 @@ def main():
         'skills': skills,
         'stats': {
             'total_repos': len(repos),
-            'total_stars': sum(
-                repo.get('stars', 0) for repo in repos
-                if isinstance(repo.get('stars'), int)
-            ),
+            'total_stars': total_stars,
             'languages': len(skills),
         },
     }
@@ -243,7 +246,7 @@ def main():
 
     print(f"Generated {output_path}")
     print(f"  Repositories: {len(repos)}")
-    print(f"  Stars: {data['stats']['total_stars']}")
+    print(f"  Stars: {data['stats']['total_stars'] if data['stats']['total_stars'] is not None else 'unavailable'}")
     print(f"  Languages: {len(skills)}")
     print(f"  Contributions: {len(contributions)}")
     for source, status in source_status.items():
