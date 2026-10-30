@@ -25,7 +25,7 @@ function inspectRepositories(repos) {
       invalidRecords += 1;
       return;
     }
-    ['name', 'url', 'updated_at'].forEach(field => {
+    ['name', 'url', 'updated_at', 'stars'].forEach(field => {
       if (!isPresent(repo[field])) missingFields += 1;
     });
     if (isPresent(repo.url)) {
@@ -58,6 +58,8 @@ function inspectContributions(contributions) {
       return;
     }
     if (!isPresent(item.repo)) missingFields += 1;
+    if (!isPresent(item.type)) missingFields += 1;
+    if (!isPresent(item.url)) missingFields += 1;
     if (!isPresent(item.date)) missingFields += 1;
     else if (Number.isNaN(new Date(item.date).getTime())) invalidRecords += 1;
     if (isPresent(item.url)) {
