@@ -88,10 +88,12 @@ function normalizeSourceStatus(sourceStatus) {
 
 export function analyzeDataQuality({ githubData = null, profileData = null, now = new Date() } = {}) {
   const currentTime = now instanceof Date ? now : new Date(now);
-  const reposAvailable = Boolean(githubData?.availability?.repos) ||
-    Array.isArray(githubData?.stats?.repos);
-  const contributionsAvailable = Boolean(githubData?.availability?.contributions) ||
-    Array.isArray(githubData?.stats?.contributions);
+  const reposAvailable = githubData?.availability
+    ? Boolean(githubData.availability.repos)
+    : Array.isArray(githubData?.stats?.repos);
+  const contributionsAvailable = githubData?.availability
+    ? Boolean(githubData.availability.contributions)
+    : Array.isArray(githubData?.stats?.contributions);
   const repos = reposAvailable && Array.isArray(githubData?.stats?.repos)
     ? githubData.stats.repos
     : [];
