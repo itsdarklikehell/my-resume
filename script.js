@@ -4,6 +4,7 @@ import { renderDynamicProjects } from './src/dynamic-profile.js';
 import { renderVacancyProfile } from './src/vacancy-profile.js';
 import { renderPortfolioEnhancements } from './src/portfolio-enhancements.js';
 import { renderInteractiveTerminal } from './src/interactive-terminal.js';
+import { buildContributionHeatmap } from './src/github-activity.js';
 
 // --- state ---
 let currentLang = 'nl';
@@ -183,6 +184,8 @@ function renderContributions() {
   );
 }
 
+let contributionHeatmapPeriod = '30d';
+
 function renderContributionHeatmap() {
   const container = document.getElementById('contribution-heatmap');
   if (!container) return;
@@ -193,67 +196,81 @@ function renderContributionHeatmap() {
     return;
   }
 
-  // Keep the original 30-day calendar grid. Each square represents one day;
-  // contribution events and repository create/update dates both count.
-  const days = [];
-  const today = new Date();
-  today.setUTCHours(0, 0, 0, 0);
-  for (let i = 29; i >= 0; i -= 1) {
-    const day = new Date(today);
-    day.setUTCDate(day.getUTCDate() - i);
-    days.push(day.toISOString().slice(0, 10));
-  }
-
-  const daySet = new Set(days);
-  const counts = {};
-  const addActivity = value => {
-    if (!value) return;
-    const parsed = new Date(value);
-    if (Number.isNaN(parsed.getTime())) return;
-    const day = parsed.toISOString().slice(0, 10);
-    if (daySet.has(day)) counts[day] = (counts[day] || 0) + 1;
+  const labelsByLang = {
+    nl: {
+      title: 'GitHub-bijdragen', ago: 'Begin periode', today: 'Vandaag',
+      activity: 'bijdragen', active: 'actieve dagen', period: 'Periode',
+      periods: { '30d': '30 dagen', '90d': '90 dagen', '365d': '365 dagen' },
+      coverage: 'Gebaseerd op beschikbare openbare GitHub-events. Dit is geen volledige commitgeschiedenis; GitHub beperkt de historische event-feed.',
+      empty: 'Geen bijdragen gevonden in deze periode.',
+    },
+    en: {
+      title: 'GitHub contributions', ago: 'Period start', today: 'Today',
+      activity: 'contributions', active: 'active days', period: 'Period',
+      periods: { '30d': '30 days', '90d': '90 days', '365d': '365 days' },
+      coverage: 'Based on available public GitHub events. This is not a complete commit history; GitHub limits the historical event feed.',
+      empty: 'No contributions found in this period.',
+    },
+    de: {
+      title: 'GitHub-Beiträge', ago: 'Periodenbeginn', today: 'Heute',
+      activity: 'Beiträge', active: 'aktive Tage', period: 'Zeitraum',
+      periods: { '30d': '30 Tage', '90d': '90 Tage', '365d': '365 Tage' },
+      coverage: 'Basiert auf verfügbaren öffentlichen GitHub-Events. Dies ist keine vollständige Commit-Historie; GitHub begrenzt den historischen Event-Feed.',
+      empty: 'Keine Beiträge in diesem Zeitraum gefunden.',
+    },
+    fr: {
+      title: 'Contributions GitHub', ago: 'Début de période', today: 'Aujourd’hui',
+      activity: 'contributions', active: 'jours actifs', period: 'Période',
+      periods: { '30d': '30 jours', '90d': '90 jours', '365d': '365 jours' },
+      coverage: 'Basé sur les événements GitHub publics disponibles. Il ne s’agit pas d’un historique complet des commits ; GitHub limite l’historique des événements.',
+      empty: 'Aucune contribution trouvée pendant cette période.',
+    },
   };
+  const labels = labelsByLang[currentLang] || labelsByLang.nl;
+  const data = buildContributionHeatmap(gContributions(), contributionHeatmapPeriod);
+  const columns = contributionHeatmapPeriod === '30d' ? 10 : 15;
+  const options = Object.entries(labels.periods).map(([value, label]) =>
+    '<option value="' + value + '"' + (value === data.period ? ' selected' : '') + '>' +
+      escapeHtml(label) + '</option>'
+  ).join('');
 
-  gContributions().forEach(contribution => {
-    addActivity(contribution && contribution.date);
-  });
-
-  gRepos().filter(repo => repo && !repo.fork).forEach(repo => {
-    addActivity(repo.created_at || repo.created);
-    addActivity(repo.updated_at || repo.updated);
-  });
-
-  const maxCount = Math.max.apply(null, days.map(day => counts[day] || 0).concat([1]));
-  const totalActivities = days.reduce((sum, day) => sum + (counts[day] || 0), 0);
-  const activeDays = days.filter(day => (counts[day] || 0) > 0).length;
-  const colors = {
-    nl: { ago: '30 dagen geleden', today: 'Vandaag', activity: 'activiteiten', active: 'actieve dagen' },
-    en: { ago: '30 days ago', today: 'Today', activity: 'activities', active: 'active days' },
-    de: { ago: 'Vor 30 Tagen', today: 'Heute', activity: 'Aktivitäten', active: 'aktive Tage' },
-    fr: { ago: 'Il y a 30 jours', today: 'Aujourd’hui', activity: 'activités', active: 'jours actifs' },
-  };
-  const labels = colors[currentLang] || colors.nl;
-
-  let html = '<div role="img" aria-label="GitHub activity over the last 30 days" ' +
-    'style="display:grid;grid-template-columns:repeat(10,minmax(0,1fr));gap:3px;margin-bottom:.5rem;">';
-  days.forEach(day => {
-    const count = counts[day] || 0;
-    const opacity = 0.15 + ((count / maxCount) * 0.85);
+  let html = '<div class="heatmap-controls" style="display:flex;align-items:center;justify-content:space-between;gap:.75rem;flex-wrap:wrap;margin-bottom:.75rem;">' +
+    '<label for="heatmap-period" style="font-size:.8rem;color:var(--text-muted);">' + escapeHtml(labels.period) + '</label>' +
+    '<select id="heatmap-period" aria-label="' + escapeHtml(labels.period) + '" style="max-width:10rem;">' + options + '</select>' +
+    '</div>';
+  html += '<div role="img" aria-label="' + escapeHtml(labels.title + ' — ' + labels.periods[data.period]) + '" ' +
+    'style="display:grid;grid-template-columns:repeat(' + columns + ',minmax(0,1fr));gap:3px;margin-bottom:.5rem;">';
+  data.days.forEach(day => {
+    const count = data.counts[day] || 0;
+    const opacity = count > 0 ? 0.15 + ((count / data.maxCount) * 0.85) : 0;
     const background = count > 0
       ? 'rgba(78,205,196,' + opacity.toFixed(2) + ')'
       : 'var(--surface2)';
-    html += '<div title="' + escapeHtml(day) + ': ' + count + ' contributions" ' +
+    html += '<div title="' + escapeHtml(day) + ': ' + count + ' ' + escapeHtml(labels.activity) + '" ' +
       'style="width:100%;aspect-ratio:1;border-radius:3px;background:' + background + ';"></div>';
   });
   html += '</div>';
   html += '<div style="display:flex;justify-content:space-between;font-size:.7rem;color:var(--text-muted);">' +
-    '<span>' + labels.ago + '</span><span>' + labels.today + '</span></div>';
+    '<span>' + escapeHtml(labels.ago) + '</span><span>' + escapeHtml(labels.today) + '</span></div>';
   html += '<div style="margin-top:.5rem;font-size:.8rem;color:var(--text-muted);">' +
-    totalActivities + ' ' + labels.activity + ' in the last 30 days · ' +
-    activeDays + ' ' + labels.active + '</div>';
+    data.totalActivities + ' ' + escapeHtml(labels.activity) + ' · ' +
+    data.activeDays + ' ' + escapeHtml(labels.active) + '</div>';
+  html += '<p class="about-text" style="font-size:.72rem;margin-top:.5rem;">' +
+    escapeHtml(labels.coverage) + '</p>';
 
   container.innerHTML = html;
-}function renderAchievements() {
+  const periodSelect = container.querySelector('#heatmap-period');
+  if (periodSelect) {
+    periodSelect.addEventListener('change', event => {
+      contributionHeatmapPeriod = ['30d', '90d', '365d'].includes(event.target.value)
+        ? event.target.value
+        : '30d';
+      renderContributionHeatmap();
+    });
+  }
+}
+
+function renderAchievements() {
   const container = document.getElementById('achievements-container');
   if (!container || !profileData) return;
   const t = getTranslations(currentLang, translations);
