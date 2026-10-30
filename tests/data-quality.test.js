@@ -62,6 +62,22 @@ describe('data quality report', () => {
     expect(report.profileSources[0].recordCount).toBe(0);
   });
 
+  it('uses last successful source fetch rather than snapshot generation time', () => {
+    const report = analyzeDataQuality({
+      now: new Date('2026-10-30T12:00:00Z'),
+      githubData: {
+        generated_at: '2026-10-30T11:59:00Z',
+        source_status: {
+          user_repositories: { status: 'unavailable', last_successful_at: '2026-10-10T12:00:00Z' },
+          organization_repositories: { status: 'ok', last_successful_at: '2026-10-28T12:00:00Z' },
+        },
+        stats: { repos: [], contributions: [] },
+      },
+    });
+    expect(report.githubFreshness.status).toBe('stale');
+    expect(report.githubFreshness.ageDays).toBe(20);
+  });
+
   it('does not invent per-source status for legacy snapshots', () => {
     const report = analyzeDataQuality({ githubData: { stats: { repos: [] } }, profileData: {} });
     expect(report.sourceStatusKnown).toBe(false);
