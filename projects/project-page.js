@@ -37,6 +37,9 @@ if (!root || !page) {
   setText('[data-field="caution"]', page.caution);
   setText('[data-field="footer"]', page.footer);
   setText('[data-field="back"]', page.backLabel);
+  setText('[data-field="language-label"]', labels.language);
+  root.querySelector('.project-page-header')?.setAttribute('aria-label', labels.back);
+  root.querySelector('[data-field="links"]')?.setAttribute('aria-label', labels.resources || labels.evidence);
   setText('[data-label="challenge"]', labels.challenge);
   setText('[data-label="approach"]', labels.approach);
   setText('[data-label="steps"]', labels.steps);
