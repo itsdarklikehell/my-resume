@@ -254,6 +254,129 @@ function createSkillEvidenceSection(lang) {
   return section;
 }
 
+function createDataQualitySection({ githubData, profileData, lang, locale }) {
+  const t = LABELS[lang] || LABELS.nl;
+  const report = analyzeDataQuality({ githubData, profileData });
+  const section = document.createElement('section');
+  section.className = 'portfolio-enhancement-block portfolio-data-quality';
+  section.setAttribute('aria-labelledby', 'portfolio-data-quality-title');
+  section.dataset.dataQualityReport = '';
+
+  const heading = document.createElement('h2');
+  heading.id = 'portfolio-data-quality-title';
+  heading.textContent = t.dataQualityTitle;
+  const intro = document.createElement('p');
+  intro.className = 'about-text';
+  intro.textContent = t.dataQualityIntro;
+  section.append(heading, intro);
+
+  const formatTimestamp = value => {
+    if (!value) return t.dataQualityUnknown;
+    const date = new Date(value);
+    return Number.isNaN(date.getTime())
+      ? t.dataQualityUnknown
+      : date.toLocaleString(locale, { dateStyle: 'medium', timeStyle: 'short' });
+  };
+  const freshnessLabel = value => {
+    const labels = {
+      fresh: t.dataQualityFresh,
+      stale: t.dataQualityStale,
+      future: t.dataQualityFuture,
+      unknown: t.dataQualityUnknown,
+    };
+    return labels[value.status] || t.dataQualityUnknown;
+  };
+  const metricGrid = document.createElement('div');
+  metricGrid.className = 'portfolio-data-quality-metrics';
+  const metrics = [
+    [t.dataQualityRepositories, report.repositories],
+    [t.dataQualityContributions, report.contributions],
+    [t.dataQualityProfilePlatforms, report.profilePlatformCount],
+    [t.dataQualityPlatformsWithData, report.profilePlatformsWithData],
+    [t.dataQualityMissingFields, report.missingFields],
+    [t.dataQualityInvalidRecords, report.invalidRecords],
+  ];
+  metrics.forEach(([label, value]) => {
+    const card = document.createElement('div');
+    card.className = 'portfolio-data-quality-metric';
+    const name = document.createElement('span');
+    name.textContent = label;
+    const number = document.createElement('strong');
+    number.textContent = value === null ? t.dataQualityUnknown : Number(value).toLocaleString(locale);
+    card.append(name, number);
+    metricGrid.append(card);
+  });
+  section.append(metricGrid);
+
+  const freshnessGrid = document.createElement('div');
+  freshnessGrid.className = 'portfolio-data-quality-freshness';
+  [
+    [t.dataQualityGithub, report.githubFreshness, report.githubGeneratedAt],
+    [t.dataQualityProfile, report.profileFreshness, report.profileGeneratedAt],
+  ].forEach(([label, freshness, timestamp]) => {
+    const item = document.createElement('div');
+    item.className = 'portfolio-data-quality-source';
+    const title = document.createElement('h3');
+    title.textContent = label;
+    const status = document.createElement('p');
+    status.textContent = freshnessLabel(freshness);
+    const date = document.createElement('p');
+    date.textContent = t.dataQualityLastUpdated + ': ' + formatTimestamp(timestamp);
+    item.append(title, status, date);
+    freshnessGrid.append(item);
+  });
+  section.append(freshnessGrid);
+
+  const sourceStatusHeading = document.createElement('h3');
+  sourceStatusHeading.className = 'portfolio-data-quality-subheading';
+  sourceStatusHeading.textContent = t.dataQualitySources;
+  section.append(sourceStatusHeading);
+
+  if (!report.sourceStatusKnown) {
+    const note = document.createElement('p');
+    note.className = 'about-text';
+    note.textContent = t.dataQualityStatusNotRecorded;
+    section.append(note);
+  } else {
+    const sourceLists = [
+      [t.dataQualityGithub, report.githubSources],
+      [t.dataQualityProfile, report.profileSources],
+    ];
+    sourceLists.forEach(([title, sources]) => {
+      if (!sources.length) return;
+      const group = document.createElement('div');
+      group.className = 'portfolio-data-quality-status-group';
+      const groupTitle = document.createElement('h4');
+      groupTitle.textContent = title;
+      const list = document.createElement('ul');
+      sources.forEach(source => {
+        const item = document.createElement('li');
+        const label = document.createElement('strong');
+        label.textContent = source.name.replaceAll('_', ' ');
+        const status = document.createElement('span');
+        status.textContent = source.retained
+          ? t.dataQualityRetained
+          : source.status === 'ok'
+            ? t.dataQualityAvailable
+            : source.status === 'unavailable'
+              ? t.dataQualityUnavailable
+              : source.status === 'empty'
+                ? t.dataQualityEmpty
+                : t.dataQualityUnknown;
+        item.append(label, document.createTextNode(': '), status);
+        if (source.recordCount !== null) {
+          item.append(document.createTextNode(' · ' + source.recordCount.toLocaleString(locale) + ' ' + t.dataQualityRecordCount));
+        }
+        list.append(item);
+      });
+      group.append(groupTitle, list);
+      section.append(group);
+    });
+  }
+
+  return section;
+}
+
 const FLOWS = {
   automation: {
     label: 'Automatisering',
@@ -566,7 +689,7 @@ function totalEvents(events) {
   return Object.values(events).reduce((sum, value) => sum + (Number(value) || 0), 0);
 }
 
-export function renderPortfolioEnhancements({ container, repos = [], profileData = {}, lang = 'nl' }) {
+export function renderPortfolioEnhancements({ container, repos = [], profileData = {}, githubData = null, lang = 'nl' }) {
   if (!container) return;
   const t = LABELS[lang] || LABELS.nl;
   const locale = ({ nl: 'nl-NL', en: 'en-GB', de: 'de-DE', fr: 'fr-FR' })[lang] || 'nl-NL';
@@ -662,6 +785,8 @@ export function renderPortfolioEnhancements({ container, repos = [], profileData
   const skillEvidenceSection = createSkillEvidenceSection(lang);
   const projectCasesSection = container.querySelector('#portfolio-cases-title')?.closest('.portfolio-enhancement-block');
   projectCasesSection?.after(skillEvidenceSection);
+  const dataQualitySection = createDataQualitySection({ githubData, profileData, lang, locale });
+  skillEvidenceSection.after(dataQualitySection);
 
   const analyticsTotal = container.querySelector('[data-local-event-total]');
   const updateAnalyticsTotal = events => { if (analyticsTotal) analyticsTotal.textContent = String(totalEvents(events)); };
