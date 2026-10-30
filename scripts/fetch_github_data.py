@@ -48,7 +48,7 @@ def fetch_contributions():
     # Get events for the user
     events = run_gh_api('users/itsdarklikehell/events/public')
     contributions = []
-    for event in events[:20]:
+    for event in events[:100]:
         if event.get('type') in ['PushEvent', 'PullRequestEvent', 'IssuesEvent', 'CreateEvent']:
             repo_name = event.get('repo', {}).get('name', '')
             contributions.append({
