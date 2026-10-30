@@ -1,4 +1,4 @@
-const CACHE_NAME = 'resume-cache-v5';
+const CACHE_NAME = 'resume-cache-v6';
 const urlsToCache = [
   '/my-resume/',
   '/my-resume/index.html',
