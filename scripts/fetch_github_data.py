@@ -190,6 +190,14 @@ def generate_skill_data(repos):
     }
 
 
+def sum_known_stars(repos):
+    """Return a complete star total, preserving zero and rejecting partial sums."""
+    values = [repo.get('stars') for repo in repos]
+    if not all(type(value) is int and value >= 0 for value in values):
+        return None
+    return sum(values)
+
+
 def main():
     print("Fetching live GitHub data...")
     output_path = os.path.join(os.path.dirname(__file__), '..', 'github-data.json')
@@ -221,12 +229,7 @@ def main():
         'user_profile': user_status,
     }
     skills = generate_skill_data(repos)
-    star_values = [repo.get('stars') for repo in repos]
-    total_stars = (
-        sum(star_values)
-        if all(type(value) is int and value >= 0 for value in star_values)
-        else None
-    )
+    total_stars = sum_known_stars(repos)
     data = {
         'generated_at': checked_at,
         'source_status': source_status,
