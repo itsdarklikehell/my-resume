@@ -7,7 +7,12 @@ export default defineConfig({
     outDir: 'dist',
     assetsDir: 'assets',
     rollupOptions: {
-      input: 'index.html',
+      input: {
+        main: 'index.html',
+        controlCenter: 'projects/pwnagotchi-control-center.html',
+        plugins: 'projects/pwnagotchi-plugins.html',
+        pwnspeaker: 'projects/pwnspeaker.html',
+      },
     },
   },
 })
