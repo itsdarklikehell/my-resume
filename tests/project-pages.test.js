@@ -14,7 +14,14 @@ describe('technical project case studies', () => {
         expect(page.problem).toBeTruthy();
         expect(page.approach).toBeTruthy();
         expect(page.steps.length).toBeGreaterThanOrEqual(3);
+        for (const [title, description] of page.steps) {
+          expect(title.trim()).toBeTruthy();
+          expect(description.trim()).toBeTruthy();
+        }
         expect(page.stack.length).toBeGreaterThanOrEqual(3);
+        for (const label of page.stack) {
+          expect(label.trim()).toBeTruthy();
+        }
         expect(page.evidence).toBeTruthy();
         expect(page.role).toBeTruthy();
         expect(page.caution).toBeTruthy();
