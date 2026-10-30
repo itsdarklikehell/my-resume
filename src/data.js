@@ -57,7 +57,7 @@ export function normalizeGitHubData(raw) {
     user: {
       followers: numberOrNull(user.followers),
       following: numberOrNull(user.following),
-      total_repos: derived(user.total_repos ?? user.public_repos, reposPresent ? repos.length : null),
+      total_repos: numberOrNull(user.total_repos ?? user.public_repos),
     },
     generated_at: raw.generated_at || null,
     source_status: raw.source_status && typeof raw.source_status === 'object' ? raw.source_status : null,
