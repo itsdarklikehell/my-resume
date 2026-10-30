@@ -590,20 +590,8 @@
 <script>
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
-    // Unregister any stale ServiceWorker registrations (e.g. old root-scope
-    // registration at https://itsdarklikehell.github.io/sw.js that 404s on a
-    // GitHub Pages project site served at /my-resume/).
-    navigator.serviceWorker.getRegistrations().then(regs => {
-      regs.forEach(reg => {
-        reg.unregister().then(ok => {
-          if (ok) console.log('Stale ServiceWorker unregistered:', reg.scope);
-        }).catch(err => {
-          console.log('Failed to unregister ServiceWorker:', err);
-        });
-      });
-    });
-
-    // Register the correct ServiceWorker for the project site scope.
+    // Register only this project site's scoped worker. Do not unregister other
+    // registrations on the shared github.io origin.
     navigator.serviceWorker.register('/my-resume/sw.js', { scope: '/my-resume/' }).then(reg => {
       console.log('ServiceWorker registered:', reg.scope);
     }).catch(err => {
