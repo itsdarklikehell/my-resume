@@ -77,9 +77,8 @@ function normalizeSourceStatus(sourceStatus) {
   return Object.entries(sourceStatus).map(([name, value]) => ({
     name,
     status: isRecord(value) && typeof value.status === 'string' ? value.status : 'unknown',
-    recordCount: isRecord(value) && Number.isInteger(value.record_count ?? value.available_fields)
-      ? (value.record_count ?? value.available_fields)
-      : null,
+    recordCount: isRecord(value) && Number.isInteger(value.record_count) ? value.record_count : null,
+    availableFields: isRecord(value) && Number.isInteger(value.available_fields) ? value.available_fields : null,
     retained: Boolean(isRecord(value) && value.retained),
     checkedAt: isRecord(value) ? value.checked_at || null : null,
     lastSuccessfulAt: isRecord(value) ? value.last_successful_at || null : null,
