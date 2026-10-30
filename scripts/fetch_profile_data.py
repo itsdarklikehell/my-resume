@@ -1160,6 +1160,37 @@ def _stackapps_app_count(user_id):
 
 
 
+def has_public_data(fetched):
+    """Treat a source-provided zero as valid data; only N/A/empty values are absent."""
+    if not isinstance(fetched, dict):
+        return False
+    for value in fetched.values():
+        if isinstance(value, str):
+            if value.strip() and value.strip().upper() != 'N/A':
+                return True
+        elif isinstance(value, (int, float)) and not isinstance(value, bool):
+            return True
+        elif isinstance(value, (list, dict)) and value:
+            return True
+    return False
+
+
+def count_public_fields(fetched):
+    """Count fields with a real public value, including numeric zero."""
+    if not isinstance(fetched, dict):
+        return 0
+    return sum(
+        1 for value in fetched.values()
+        if (
+            isinstance(value, str) and value.strip() and value.strip().upper() != 'N/A'
+        ) or (
+            isinstance(value, (int, float)) and not isinstance(value, bool)
+        ) or (
+            isinstance(value, (list, dict)) and bool(value)
+        )
+    )
+
+
 def main():
     print("Fetching live profile data...")
     profile_path = os.path.join(os.path.dirname(__file__), '..', 'profile-data.json')
@@ -1178,6 +1209,11 @@ def main():
             # Backfill any missing canonical fields on existing entries
             for field in CANONICAL_FIELDS:
                 existing[key].setdefault(field, 'N/A')
+    source_status = existing.get('source_status', {})
+    if not isinstance(source_status, dict):
+        source_status = {}
+    checked_at = datetime.now(timezone.utc).isoformat().replace('+00:00', 'Z')
+
     # Attempt to fetch each platform
     platforms = [
         ('tryhackme', fetch_tryhackme),
@@ -1195,34 +1231,43 @@ def main():
     for key, fetch_func in platforms:
         print(f"Fetching {key}...")
         fetched = fetch_func()
-        if fetched is not None:
-            # Only update if the fetched data contains real (non-N/A, non-zero)
-            # values, so a failed scrape in CI doesn't overwrite previously
-            # good live data.
-            has_data = any(
-                (v != 'N/A' and v != 0 and v != '0')
-                for v in fetched.values()
-                if isinstance(v, (str, int))
-            ) or any(
-                isinstance(v, (list, dict)) and len(v) > 0
-                for v in fetched.values()
-            )
-            if has_data:
-                # Merge fetched fields over existing (preserves any extra
-                # canonical fields that weren't re-scraped this run)
-                merged = dict(existing.get(key, {}))
-                merged.update(fetched)
-                # Ensure all canonical fields exist
-                for field in CANONICAL_FIELDS:
-                    merged.setdefault(field, 'N/A')
-                existing[key] = merged
-                print(f"  Updated {key}: {merged}")
-            else:
-                print(f"  Keeping existing {key}: {existing.get(key)} (fetched all N/A)")
+        previous = source_status.get(key, {})
+        if not isinstance(previous, dict):
+            previous = {}
+        available_fields = count_public_fields(fetched)
+
+        if fetched is not None and has_public_data(fetched):
+            # A numeric zero is a real source value and must not be discarded.
+            merged = dict(existing.get(key, {}))
+            merged.update(fetched)
+            for field in CANONICAL_FIELDS:
+                merged.setdefault(field, 'N/A')
+            existing[key] = merged
+            status = 'ok'
+            last_successful_at = checked_at
+            retained = False
+            print(f"  Updated {key}: {available_fields} public fields")
+        elif fetched is None:
+            status = 'unavailable'
+            last_successful_at = previous.get('last_successful_at')
+            retained = bool(existing.get(key))
+            print(f"  Source unavailable; retaining previous {key} data")
         else:
-            print(f"  Keeping existing {key}: {existing.get(key)}")
-    # Update timestamp
-    existing['generated_at'] = datetime.now(timezone.utc).isoformat().replace('+00:00', 'Z')
+            status = 'empty'
+            last_successful_at = previous.get('last_successful_at')
+            retained = bool(existing.get(key))
+            print(f"  No public values returned; retaining previous {key} data")
+
+        source_status[key] = {
+            'status': status,
+            'checked_at': checked_at,
+            'last_successful_at': last_successful_at,
+            'available_fields': available_fields,
+            'retained': retained,
+        }
+
+    existing['source_status'] = source_status
+    existing['generated_at'] = checked_at
     # Write back
     with open(profile_path, 'w', encoding='utf-8') as f:
         json.dump(existing, f, indent=2)

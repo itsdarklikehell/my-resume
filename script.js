@@ -1,4 +1,5 @@
 import { translations } from './src/i18n/translations.js';
+import { normalizeGitHubData } from './src/data.js';
 import { getTranslations } from './src/i18n/get-translations.js';
 import { renderDynamicProjects } from './src/dynamic-profile.js';
 import { renderVacancyProfile } from './src/vacancy-profile.js';
@@ -105,17 +106,29 @@ function renderSkills() {
   const container = document.getElementById('skills-container');
   const skills = gSkills();
   if (!container || !skills) return;
+  const labels = {
+    nl: 'van openbare repositories',
+    en: 'of public repositories',
+    de: 'der öffentlichen Repositories',
+    fr: 'des dépôts publics',
+  };
+  const shareLabel = labels[currentLang] || labels.nl;
   const entries = Object.entries(skills);
   if (window.autoSortSkills !== false) {
-    entries.sort((a, b) => (b[1].percentage || 0) - (a[1].percentage || 0));
+    entries.sort((a, b) => (Number.isFinite(b[1].percentage) ? b[1].percentage : -1) -
+      (Number.isFinite(a[1].percentage) ? a[1].percentage : -1));
   }
   const html = entries
     .map(([lang, data]) => {
-      const pct = data.percentage || 0;
+      const pct = Number.isFinite(data.percentage) ? data.percentage : null;
+      const repos = Number.isFinite(data.repos) ? data.repos : null;
+      const width = pct === null ? 0 : Math.max(0, Math.min(100, pct));
+      const value = repos === null ? '—' : repos.toLocaleString();
+      const share = pct === null ? '—' : pct + '% ' + shareLabel;
       return `<div class="skill-item">
                 <div class="skill-name">${escapeHtml(lang)}</div>
-                <div class="skill-bar"><div class="skill-fill" style="width:${pct}%;"></div></div>
-                <div class="skill-value">${data.repos || 0} repos (${pct}%)</div>
+                <div class="skill-bar"><div class="skill-fill" style="width:${width}%;"></div></div>
+                <div class="skill-value">${value} repos (${escapeHtml(share)})</div>
             </div>`;
     })
     .join('');
@@ -141,7 +154,7 @@ function renderStats() {
   };
   setStat(elRepos, st.own_repos);
   setStat(elStars, st.own_stars);
-  setStat(elLangs, st.languages != null ? st.languages : Object.keys(gSkills()).length || null);
+  setStat(elLangs, st.languages != null ? st.languages : (githubData?.availability?.skills ? Object.keys(gSkills()).length : null));
   setStat(elFollowing, githubData && githubData.user ? githubData.user.following : null);
   setStat(elFollowers, githubData && githubData.user ? githubData.user.followers : null);
   const note = document.getElementById('stats-note');
@@ -159,13 +172,17 @@ function renderStats() {
 
 function renderContributions() {
   const container = document.getElementById('contributions-container');
+  if (!container) return;
+  const t = getTranslations(currentLang, translations);
   const contributions = gContributions();
-  if (!container || !contributions || !contributions.length) {
-    if (container)
-      container.innerHTML = '<p class="about-text">No recent activity.</p>';
+  if (!githubData || !githubData.availability?.contributions) {
+    container.textContent = t.activity_unavailable;
     return;
   }
-  const t = getTranslations(currentLang, translations);
+  if (!contributions.length) {
+    container.textContent = t.no_recent_activity;
+    return;
+  }
   const html = contributions
     .slice(0, 10)
     .map(c => {
@@ -191,8 +208,9 @@ function renderContributionHeatmap() {
   if (!container) return;
 
   setSectionTimestamp('heatmap', githubData ? githubData.generated_at : null);
-  if (!githubData) {
-    container.innerHTML = '<p class="about-text">GitHub activity data is unavailable.</p>';
+  if (!githubData || !githubData.availability?.contributions) {
+    const t = getTranslations(currentLang, translations);
+    container.textContent = t.activity_unavailable;
     return;
   }
 
@@ -636,77 +654,6 @@ function renderSkillMatrix() {
     profileData ? profileData.generated_at : null
   );
 }
-// Normaliseer beide JSON-vormen (flat en nested) naar één canonieke structuur.
-// Garandeert altijd: stats.repos (array), stats.skills (object),
-// stats.contributions (array), stats.stats {total_repos,total_stars,languages}.
-function normalizeGitHubData(raw) {
-  if (!raw || typeof raw !== 'object') return null;
-  const s = raw.stats && typeof raw.stats === 'object' ? raw.stats : {};
-  const inner = s.stats && typeof s.stats === 'object' ? s.stats : s;
-  const num = v => (typeof v === 'number' && isFinite(v) ? v : 0);
-
-  const repos = Array.isArray(s.repos)
-    ? s.repos
-    : Array.isArray(raw.repos)
-      ? raw.repos
-      : [];
-  const contributions = Array.isArray(s.contributions)
-    ? s.contributions
-    : Array.isArray(raw.contributions)
-      ? raw.contributions
-      : [];
-  const skills =
-    s.skills && typeof s.skills === 'object' && !Array.isArray(s.skills)
-      ? s.skills
-      : raw.skills &&
-          typeof raw.skills === 'object' &&
-          !Array.isArray(raw.skills)
-        ? raw.skills
-        : {};
-  const user =
-    raw.user && typeof raw.user === 'object'
-      ? raw.user
-      : raw.github_user && typeof raw.github_user === 'object'
-        ? raw.github_user
-        : {};
-
-  const starsFromRepos = repos.reduce((a, r) => a + num(r && r.stars), 0);
-  const forks = repos.filter(r => r && r.fork);
-  const own = repos.filter(r => r && !r.fork);
-  const langsFromSkills = Object.keys(skills).length;
-
-  return {
-    stats: {
-      repos: repos,
-      skills: skills,
-      contributions: contributions,
-      stats: {
-        total_repos: num(inner.total_repos) || repos.length,
-        total_stars: num(inner.total_stars) || starsFromRepos,
-        languages: num(inner.languages) || langsFromSkills,
-        // Eigen werk vs forks: de CV toont eigen werk, forks zijn context
-        own_repos: num(inner.own_repos) || own.length,
-        fork_repos: num(inner.fork_repos) || forks.length,
-        own_stars:
-          num(inner.own_stars) ||
-          own.reduce((a, r) => a + num(r && r.stars), 0),
-        fork_stars:
-          num(inner.fork_stars) ||
-          forks.reduce((a, r) => a + num(r && r.stars), 0),
-        total_forks:
-          num(inner.total_forks) ||
-          own.reduce((a, r) => a + num(r && r.forks), 0),
-      },
-    },
-    user: {
-      followers: user.followers == null ? null : num(user.followers),
-      following: user.following == null ? null : num(user.following),
-      total_repos: user.total_repos == null ? repos.length : num(user.total_repos),
-    },
-    generated_at: raw.generated_at || null,
-  };
-}
-
 // Accessors — na normalizeGitHubData is de vorm canoniek, dus deze
 // hoeven geen fallbacks meer te doen. Eén plek i.p.v. tien inline checks.
 const gRepos = () =>
@@ -719,13 +666,18 @@ const gTotals = () =>
   (githubData && githubData.stats && githubData.stats.stats) || {};
 const gOwnRepos = () => {
   const t = gTotals();
-  return t.own_repos != null
-    ? t.own_repos
-    : gRepos().filter(r => !r.fork).length;
+  if (t.own_repos != null) return t.own_repos;
+  return githubData && githubData.availability && githubData.availability.repos
+    ? gRepos().filter(repo => !repo.fork).length
+    : null;
 };
 const gOwnStars = () => {
   const t = gTotals();
-  return t.own_stars != null ? t.own_stars : 0;
+  if (t.own_stars != null) return t.own_stars;
+  if (!githubData || !githubData.availability || !githubData.availability.repos) return null;
+  const ownRepos = gRepos().filter(repo => !repo.fork);
+  if (ownRepos.some(repo => !Number.isFinite(repo.stars))) return null;
+  return ownRepos.reduce((total, repo) => total + repo.stars, 0);
 };
 
 // Toon een foutbanner zonder de pagina te slopen
@@ -1228,7 +1180,7 @@ function renderAll() {
       lang: currentLang,
     })],
     ['interactive-terminal', () => renderInteractiveTerminal({ container: document.getElementById('portfolio-terminal'), repos: gRepos(), lang: currentLang })],
-    ['portfolio-enhancements', () => renderPortfolioEnhancements({ container: document.getElementById('portfolio-enhancements'), repos: gRepos(), profileData, lang: currentLang })],
+    ['portfolio-enhancements', () => renderPortfolioEnhancements({ container: document.getElementById('portfolio-enhancements'), repos: gRepos(), profileData, githubData, lang: currentLang })],
     ['vacancy-profile', () => renderVacancyProfile({ container: document.getElementById('vacancy-profile'), repos: gRepos(), lang: currentLang })],
     ['repos', renderGitHubRepos],
     ['gource', renderGource],

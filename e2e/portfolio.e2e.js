@@ -226,3 +226,15 @@ test('skill evidence explorer filters by project-backed category', async ({ page
   const visibleCount = await cards.evaluateAll(elements => elements.filter(element => !element.hidden).length);
   expect(visibleCount).toBe(11);
 });
+
+
+test('data quality report exposes freshness and validation metrics', async ({ page }) => {
+  await page.goto('?lang=nl');
+  const report = page.locator('[data-quality-report]');
+  await expect(report).toBeVisible({ timeout: 20_000 });
+  await expect(report.getByRole('heading', { name: 'Datakwaliteit & herkomst' })).toBeVisible();
+  await expect(report.getByText('GitHub-gegevens')).toBeVisible();
+  await expect(report.getByText('Profielbronnen')).toBeVisible();
+  await expect(report.getByText('Ontbrekende velden')).toBeVisible();
+  await expect(report.getByText('Ongeldige records')).toBeVisible();
+});

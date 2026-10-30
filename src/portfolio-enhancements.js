@@ -1,3 +1,5 @@
+import { analyzeDataQuality } from './data-quality.js';
+
 const ROLE_LINKS = [
   ['general', 'Algemeen'],
   ['automation', 'Automatisering'],
@@ -252,6 +254,137 @@ function createSkillEvidenceSection(lang) {
   return section;
 }
 
+function createDataQualitySection({ githubData, profileData, lang, locale }) {
+  const t = LABELS[lang] || LABELS.nl;
+  const report = analyzeDataQuality({ githubData, profileData });
+  const section = document.createElement('section');
+  section.className = 'portfolio-enhancement-block portfolio-data-quality';
+  section.setAttribute('aria-labelledby', 'portfolio-data-quality-title');
+  section.setAttribute('data-quality-report', '');
+
+  const heading = document.createElement('h2');
+  heading.id = 'portfolio-data-quality-title';
+  heading.textContent = t.dataQualityTitle;
+  const intro = document.createElement('p');
+  intro.className = 'about-text';
+  intro.textContent = t.dataQualityIntro;
+  section.append(heading, intro);
+
+  const formatTimestamp = value => {
+    if (!value) return t.dataQualityUnknown;
+    const date = new Date(value);
+    return Number.isNaN(date.getTime())
+      ? t.dataQualityUnknown
+      : date.toLocaleString(locale, { dateStyle: 'medium', timeStyle: 'short' });
+  };
+  const freshnessLabel = value => {
+    const labels = {
+      fresh: t.dataQualityFresh,
+      stale: t.dataQualityStale,
+      future: t.dataQualityFuture,
+      unknown: t.dataQualityUnknown,
+    };
+    return labels[value.status] || t.dataQualityUnknown;
+  };
+  const metricGrid = document.createElement('div');
+  metricGrid.className = 'portfolio-data-quality-metrics';
+  const metrics = [
+    [t.dataQualityRepositories, report.repositories],
+    [t.dataQualityContributions, report.contributions],
+    [t.dataQualityProfilePlatforms, report.profilePlatformCount],
+    [t.dataQualityPlatformsWithData, report.profilePlatformsWithData],
+    [t.dataQualityMissingFields, report.missingFields],
+    [t.dataQualityInvalidRecords, report.invalidRecords],
+  ];
+  metrics.forEach(([label, value]) => {
+    const card = document.createElement('div');
+    card.className = 'portfolio-data-quality-metric';
+    const name = document.createElement('span');
+    name.textContent = label;
+    const number = document.createElement('strong');
+    number.textContent = value === null ? t.dataQualityUnknown : Number(value).toLocaleString(locale);
+    card.append(name, number);
+    metricGrid.append(card);
+  });
+  section.append(metricGrid);
+
+  const freshnessGrid = document.createElement('div');
+  freshnessGrid.className = 'portfolio-data-quality-freshness';
+  [
+    [t.dataQualityGithub, report.githubFreshness, report.githubGeneratedAt],
+    [t.dataQualityProfile, report.profileFreshness, report.profileGeneratedAt],
+  ].forEach(([label, freshness, timestamp]) => {
+    const item = document.createElement('div');
+    item.className = 'portfolio-data-quality-source';
+    const title = document.createElement('h3');
+    title.textContent = label;
+    const status = document.createElement('p');
+    status.textContent = freshnessLabel(freshness);
+    const date = document.createElement('p');
+    date.textContent = t.dataQualityLastUpdated + ': ' + formatTimestamp(timestamp);
+    item.append(title, status, date);
+    freshnessGrid.append(item);
+  });
+  section.append(freshnessGrid);
+
+  const sourceStatusHeading = document.createElement('h3');
+  sourceStatusHeading.className = 'portfolio-data-quality-subheading';
+  sourceStatusHeading.textContent = t.dataQualitySources;
+  section.append(sourceStatusHeading);
+
+  if (!report.sourceStatusKnown) {
+    const note = document.createElement('p');
+    note.className = 'about-text';
+    note.textContent = t.dataQualityStatusNotRecorded;
+    section.append(note);
+  } else {
+    const sourceLists = [
+      [t.dataQualityGithub, report.githubSources],
+      [t.dataQualityProfile, report.profileSources],
+    ];
+    sourceLists.forEach(([title, sources]) => {
+      if (!sources.length) return;
+      const group = document.createElement('div');
+      group.className = 'portfolio-data-quality-status-group';
+      const groupTitle = document.createElement('h4');
+      groupTitle.textContent = title;
+      const list = document.createElement('ul');
+      sources.forEach(source => {
+        const item = document.createElement('li');
+        const label = document.createElement('strong');
+        const sourceNames = {
+          user_repositories: t.dataQualityUserRepositories,
+          organization_repositories: t.dataQualityOrganizationRepositories,
+          contributions: t.dataQualityContributions,
+          user_profile: t.dataQualityGithubProfile,
+        };
+        label.textContent = sourceNames[source.name] || source.name.replaceAll('_', ' ');
+        const status = document.createElement('span');
+        status.textContent = source.retained
+          ? t.dataQualityRetained
+          : source.status === 'ok'
+            ? t.dataQualityAvailable
+            : source.status === 'unavailable'
+              ? t.dataQualityUnavailable
+              : source.status === 'empty'
+                ? t.dataQualityEmpty
+                : t.dataQualityUnknown;
+        item.append(label, document.createTextNode(': '), status);
+        if (source.recordCount !== null) {
+          item.append(document.createTextNode(' · ' + source.recordCount.toLocaleString(locale) + ' ' + t.dataQualityRecordCount));
+        } else if (source.availableFields !== null) {
+          item.append(document.createTextNode(' · ' + source.availableFields.toLocaleString(locale) + ' ' + t.dataQualityFields));
+        }
+        list.append(item);
+      });
+      group.append(groupTitle, list);
+      section.append(group);
+    });
+  }
+
+  return section;
+}
+
 const FLOWS = {
   automation: {
     label: 'Automatisering',
@@ -298,6 +431,32 @@ const LABELS = {
     skillFilterSecurity: 'Cybersecurity',
     skillFilterIntegrations: 'Integraties',
     skillOpenCase: 'Bekijk projectbewijs',
+    dataQualityTitle: 'Datakwaliteit & herkomst',
+    dataQualityIntro: 'Een transparant overzicht van bronversheid, volledigheid en recordvalidatie. Een echte nulwaarde blijft nul; ontbrekende data wordt apart behandeld.',
+    dataQualityGithub: 'GitHub-gegevens',
+    dataQualityProfile: 'Profielbronnen',
+    dataQualityFresh: 'Recent bijgewerkt',
+    dataQualityStale: 'Verouderde momentopname',
+    dataQualityUnknown: 'Onbekend',
+    dataQualityFuture: 'Tijdstempel ligt in de toekomst',
+    dataQualityAvailable: 'Beschikbaar',
+    dataQualityUnavailable: 'Bron niet bereikbaar',
+    dataQualityEmpty: 'Geen publieke waarden',
+    dataQualityRetained: 'Eerdere gegevens behouden',
+    dataQualityStatusNotRecorded: 'De huidige JSON-momentopname bevat nog geen status per bron. De volgende succesvolle gegevensupdate vult dit aan.',
+    dataQualityUserRepositories: 'Persoonlijke repositories',
+    dataQualityOrganizationRepositories: 'Organisatierepositories',
+    dataQualityGithubProfile: 'GitHub-profiel',
+    dataQualitySources: 'Bronstatus',
+    dataQualityRepositories: 'Repositories',
+    dataQualityContributions: 'Bijdragen',
+    dataQualityProfilePlatforms: 'Profielplatforms',
+    dataQualityPlatformsWithData: 'Platforms met gegevens',
+    dataQualityMissingFields: 'Ontbrekende velden',
+    dataQualityInvalidRecords: 'Ongeldige records',
+    dataQualityLastUpdated: 'Momentopname',
+    dataQualityRecordCount: 'records',
+    dataQualityFields: 'velden',
     facts: 'Controleerbare projectgegevens', openRepo: 'Bekijk repository', language: 'Taal', stars: 'Stars', updated: 'Laatst bijgewerkt', topics: 'Onderwerpen',
     matcher: 'Vacature-match met bewijs', matcherIntro: 'Plak een vacaturetekst. De vergelijking draait lokaal in je browser; de tekst wordt niet verstuurd of opgeslagen.',
     pasteJob: 'Vacaturetekst', matchButton: 'Vergelijk vaardigheden', evidence: 'Projectbewijs gevonden', related: 'Gerelateerd in profiel/cv', missing: 'Niet teruggevonden in huidige gegevens', noSkills: 'Geen bekende vaardigheden uit de vacaturetekst herkend. Probeer een tekst met concrete technologieën of functie-eisen.',
@@ -321,6 +480,32 @@ const LABELS = {
     skillFilterSecurity: 'Cybersecurity',
     skillFilterIntegrations: 'Integrations',
     skillOpenCase: 'View project evidence',
+    dataQualityTitle: 'Data quality & provenance',
+    dataQualityIntro: 'A transparent view of source freshness, completeness and record validation. A genuine zero remains zero; missing data is handled separately.',
+    dataQualityGithub: 'GitHub data',
+    dataQualityProfile: 'Profile sources',
+    dataQualityFresh: 'Recently updated',
+    dataQualityStale: 'Stale snapshot',
+    dataQualityUnknown: 'Unknown',
+    dataQualityFuture: 'Timestamp is in the future',
+    dataQualityAvailable: 'Available',
+    dataQualityUnavailable: 'Source unavailable',
+    dataQualityEmpty: 'No public values',
+    dataQualityRetained: 'Previous data retained',
+    dataQualityStatusNotRecorded: 'The current JSON snapshot does not yet include per-source status. The next successful data refresh will add it.',
+    dataQualityUserRepositories: 'Personal repositories',
+    dataQualityOrganizationRepositories: 'Organization repositories',
+    dataQualityGithubProfile: 'GitHub profile',
+    dataQualitySources: 'Source status',
+    dataQualityRepositories: 'Repositories',
+    dataQualityContributions: 'Contributions',
+    dataQualityProfilePlatforms: 'Profile platforms',
+    dataQualityPlatformsWithData: 'Platforms with data',
+    dataQualityMissingFields: 'Missing fields',
+    dataQualityInvalidRecords: 'Invalid records',
+    dataQualityLastUpdated: 'Snapshot',
+    dataQualityRecordCount: 'records',
+    dataQualityFields: 'fields',
     facts: 'Verifiable project details', openRepo: 'View repository', language: 'Language', stars: 'Stars', updated: 'Last updated', topics: 'Topics',
     matcher: 'Job match with evidence', matcherIntro: 'Paste a job description. Matching runs locally in your browser; the text is not sent or stored.',
     pasteJob: 'Job description', matchButton: 'Compare skills', evidence: 'Project evidence found', related: 'Related in profile/CV', missing: 'Not found in current data', noSkills: 'No known skills were detected. Try including concrete technologies or job requirements.',
@@ -344,6 +529,32 @@ const LABELS = {
     skillFilterSecurity: 'Cybersicherheit',
     skillFilterIntegrations: 'Integrationen',
     skillOpenCase: 'Projektbeleg ansehen',
+    dataQualityTitle: 'Datenqualität & Herkunft',
+    dataQualityIntro: 'Transparenter Überblick über Aktualität, Vollständigkeit und Datensatzprüfung. Ein echter Nullwert bleibt null; fehlende Daten werden separat behandelt.',
+    dataQualityGithub: 'GitHub-Daten',
+    dataQualityProfile: 'Profilquellen',
+    dataQualityFresh: 'Kürzlich aktualisiert',
+    dataQualityStale: 'Veralteter Snapshot',
+    dataQualityUnknown: 'Unbekannt',
+    dataQualityFuture: 'Zeitstempel liegt in der Zukunft',
+    dataQualityAvailable: 'Verfügbar',
+    dataQualityUnavailable: 'Quelle nicht erreichbar',
+    dataQualityEmpty: 'Keine öffentlichen Werte',
+    dataQualityRetained: 'Vorherige Daten beibehalten',
+    dataQualityStatusNotRecorded: 'Der aktuelle JSON-Snapshot enthält noch keinen Status pro Quelle. Die nächste erfolgreiche Datenaktualisierung ergänzt ihn.',
+    dataQualityUserRepositories: 'Persönliche Repositories',
+    dataQualityOrganizationRepositories: 'Organisations-Repositories',
+    dataQualityGithubProfile: 'GitHub-Profil',
+    dataQualitySources: 'Quellenstatus',
+    dataQualityRepositories: 'Repositories',
+    dataQualityContributions: 'Beiträge',
+    dataQualityProfilePlatforms: 'Profilplattformen',
+    dataQualityPlatformsWithData: 'Plattformen mit Daten',
+    dataQualityMissingFields: 'Fehlende Felder',
+    dataQualityInvalidRecords: 'Ungültige Datensätze',
+    dataQualityLastUpdated: 'Snapshot',
+    dataQualityRecordCount: 'Datensätze',
+    dataQualityFields: 'Felder',
     facts: 'Nachprüfbare Projektdaten', openRepo: 'Repository ansehen', language: 'Sprache', stars: 'Stars', updated: 'Zuletzt aktualisiert', topics: 'Themen',
     matcher: 'Stellenabgleich mit Belegen', matcherIntro: 'Stellentext einfügen. Der Abgleich läuft lokal im Browser; der Text wird weder gesendet noch gespeichert.',
     pasteJob: 'Stellentext', matchButton: 'Fähigkeiten vergleichen', evidence: 'Projektbeleg gefunden', related: 'Im Profil/Lebenslauf verwandt', missing: 'In den aktuellen Daten nicht gefunden', noSkills: 'Keine bekannten Fähigkeiten erkannt. Füge konkrete Technologien oder Anforderungen ein.',
@@ -367,6 +578,32 @@ const LABELS = {
     skillFilterSecurity: 'Cybersécurité',
     skillFilterIntegrations: 'Intégrations',
     skillOpenCase: 'Voir la preuve du projet',
+    dataQualityTitle: 'Qualité et provenance des données',
+    dataQualityIntro: 'Vue transparente de la fraîcheur des sources, de la complétude et de la validation des enregistrements. Un zéro réel reste zéro ; les données absentes sont traitées séparément.',
+    dataQualityGithub: 'Données GitHub',
+    dataQualityProfile: 'Sources de profil',
+    dataQualityFresh: 'Mis à jour récemment',
+    dataQualityStale: 'Instantané obsolète',
+    dataQualityUnknown: 'Inconnu',
+    dataQualityFuture: 'Horodatage dans le futur',
+    dataQualityAvailable: 'Disponible',
+    dataQualityUnavailable: 'Source indisponible',
+    dataQualityEmpty: 'Aucune valeur publique',
+    dataQualityRetained: 'Données précédentes conservées',
+    dataQualityStatusNotRecorded: 'L’instantané JSON actuel ne contient pas encore de statut par source. La prochaine mise à jour réussie l’ajoutera.',
+    dataQualityUserRepositories: 'Dépôts personnels',
+    dataQualityOrganizationRepositories: 'Dépôts de l’organisation',
+    dataQualityGithubProfile: 'Profil GitHub',
+    dataQualitySources: 'État des sources',
+    dataQualityRepositories: 'Dépôts',
+    dataQualityContributions: 'Contributions',
+    dataQualityProfilePlatforms: 'Plateformes de profil',
+    dataQualityPlatformsWithData: 'Plateformes avec données',
+    dataQualityMissingFields: 'Champs manquants',
+    dataQualityInvalidRecords: 'Enregistrements invalides',
+    dataQualityLastUpdated: 'Instantané',
+    dataQualityRecordCount: 'enregistrements',
+    dataQualityFields: 'champs',
     facts: 'Détails vérifiables', openRepo: 'Voir le dépôt', language: 'Langage', stars: 'Stars', updated: 'Dernière mise à jour', topics: 'Sujets',
     matcher: 'Correspondance avec preuves', matcherIntro: 'Collez une offre. La comparaison se fait localement dans votre navigateur ; le texte n’est ni envoyé ni stocké.',
     pasteJob: 'Description du poste', matchButton: 'Comparer les compétences', evidence: 'Preuve de projet trouvée', related: 'Élément connexe dans le profil/CV', missing: 'Introuvable dans les données actuelles', noSkills: 'Aucune compétence connue détectée. Ajoutez des technologies ou exigences concrètes.',
@@ -476,7 +713,7 @@ function totalEvents(events) {
   return Object.values(events).reduce((sum, value) => sum + (Number(value) || 0), 0);
 }
 
-export function renderPortfolioEnhancements({ container, repos = [], profileData = {}, lang = 'nl' }) {
+export function renderPortfolioEnhancements({ container, repos = [], profileData = {}, githubData = null, lang = 'nl' }) {
   if (!container) return;
   const t = LABELS[lang] || LABELS.nl;
   const locale = ({ nl: 'nl-NL', en: 'en-GB', de: 'de-DE', fr: 'fr-FR' })[lang] || 'nl-NL';
@@ -572,6 +809,8 @@ export function renderPortfolioEnhancements({ container, repos = [], profileData
   const skillEvidenceSection = createSkillEvidenceSection(lang);
   const projectCasesSection = container.querySelector('#portfolio-cases-title')?.closest('.portfolio-enhancement-block');
   projectCasesSection?.after(skillEvidenceSection);
+  const dataQualitySection = createDataQualitySection({ githubData, profileData, lang, locale });
+  skillEvidenceSection.after(dataQualitySection);
 
   const analyticsTotal = container.querySelector('[data-local-event-total]');
   const updateAnalyticsTotal = events => { if (analyticsTotal) analyticsTotal.textContent = String(totalEvents(events)); };

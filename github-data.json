@@ -466,7 +466,7 @@
       "name": "hermes-backup",
       "language": "JavaScript",
       "stars": 0,
-      "description": "Hermes agent state backup (config, skills, memories, cron) \u2014 no secrets",
+      "description": "Hermes agent state backup (config, skills, memories, cron) — no secrets",
       "updated_at": "2026-10-20T12:35:21Z",
       "url": "https://github.com/itsdarklikehell-interactive/hermes-backup",
       "topics": []
@@ -475,7 +475,7 @@
       "name": "omarchy-dotfiles",
       "language": "Shell",
       "stars": 0,
-      "description": "Per-host Omarchy dotfiles (chezmoi) \u2014 desktop + laptop",
+      "description": "Per-host Omarchy dotfiles (chezmoi) — desktop + laptop",
       "updated_at": "2026-10-20T12:35:24Z",
       "url": "https://github.com/itsdarklikehell-interactive/omarchy-dotfiles",
       "topics": []
@@ -529,7 +529,7 @@
       "name": "batch_comfytester",
       "language": "Python",
       "stars": 0,
-      "description": "Batch Civitai/ComfyUI model tester \u2014 automated AI image/video generation testing with prompt pools, per-family output sorting, and workflow builders",
+      "description": "Batch Civitai/ComfyUI model tester — automated AI image/video generation testing with prompt pools, per-family output sorting, and workflow builders",
       "updated_at": "2026-10-20T12:35:19Z",
       "url": "https://github.com/itsdarklikehell-interactive/batch_comfytester",
       "topics": []
@@ -538,7 +538,7 @@
       "name": "batch_comfytester-stub",
       "language": "Python",
       "stars": 0,
-      "description": "Batch Civitai/ComfyUI model tester \u2014 automated AI image/video generation testing with prompt pools, per-family output sorting, and workflow builders",
+      "description": "Batch Civitai/ComfyUI model tester — automated AI image/video generation testing with prompt pools, per-family output sorting, and workflow builders",
       "updated_at": "2026-10-20T12:35:16Z",
       "url": "https://github.com/itsdarklikehell-interactive/batch_comfytester-stub",
       "topics": []
@@ -1165,35 +1165,29 @@
     }
   ],
   "skills": {
-    "Python": {
-      "percentage": 38,
-      "repos": 11,
-      "stars": 262
-    },
-    "Shell": {
-      "percentage": 94,
-      "repos": 27,
-      "stars": 23
+    "HTML": {
+      "repos": 3,
+      "percentage": 6
     },
     "JavaScript": {
-      "percentage": 21,
       "repos": 6,
-      "stars": 0
-    },
-    "HTML": {
-      "percentage": 10,
-      "repos": 3,
-      "stars": 0
+      "percentage": 12
     },
     "Lua": {
-      "percentage": 7,
       "repos": 2,
-      "stars": 0
+      "percentage": 4
+    },
+    "Python": {
+      "repos": 11,
+      "percentage": 22
     },
     "Rust": {
-      "percentage": 3,
       "repos": 1,
-      "stars": 0
+      "percentage": 2
+    },
+    "Shell": {
+      "repos": 27,
+      "percentage": 54
     }
   },
   "stats": {

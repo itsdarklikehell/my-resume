@@ -8,8 +8,8 @@ This roadmap prioritizes verifiable evidence, data quality and accessibility. St
 - [x] Add 30-, 90- and 365-day heatmap periods.
 - [x] Label the public-events data coverage limitation clearly.
 - [x] Increase the retained public-event sample from 20 to 100; the API still limits historical coverage, so the heatmap labels this limitation.
-- [ ] Add a data-quality report for source freshness, missing fields and invalid records.
-- [ ] Review profile fetchers and distinguish unavailable data from genuine zero values.
+- [x] Add a data-quality report for source freshness, missing fields and invalid records.
+- [x] Review GitHub and profile fetchers: record source status, retain last-known data on failures and preserve genuine zero values.
 
 Acceptance: activity totals are derived only from contribution events; source coverage and freshness are visible; missing values are not presented as zero.
 
