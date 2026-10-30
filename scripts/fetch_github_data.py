@@ -180,8 +180,12 @@ def generate_skill_data(repos):
         if language == 'Unknown':
             continue
         languages[language] = languages.get(language, 0) + 1
+    total = sum(languages.values())
     return {
-        language: {'repos': count}
+        language: {
+            'repos': count,
+            'percentage': round((count / total) * 100) if total else 0,
+        }
         for language, count in sorted(languages.items())
     }
 
