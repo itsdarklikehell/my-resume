@@ -41,6 +41,19 @@ describe('normalizeGitHubData', () => {
     });
   });
 
+  it('does not count missing per-repository metrics as zero', () => {
+    const normalized = normalizeGitHubData({
+      repos: [
+        { name: 'known', stars: 0, forks: 0 },
+        { name: 'unknown' },
+      ],
+    });
+    expect(normalized.stats.stats.total_repos).toBe(2);
+    expect(normalized.stats.stats.total_stars).toBeNull();
+    expect(normalized.stats.stats.own_stars).toBeNull();
+    expect(normalized.stats.stats.total_forks).toBeNull();
+  });
+
   it('derives zero counts only from an explicitly available empty collection', () => {
     const normalized = normalizeGitHubData({ repos: [], contributions: [] });
 
