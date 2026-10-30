@@ -2094,3 +2094,49 @@ html:not([lang="nl"]) .download-btn.lang-nl {
   .featured-project-grid { grid-template-columns: 1fr; }
   .featured-project-card { break-inside: avoid; }
 }
+
+
+/* Project media: real repository screenshots and clearly labelled history videos. */
+.project-media-gallery {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.45rem;
+  margin: 0.25rem 0 0.75rem;
+}
+.project-media-gallery a {
+  display: block;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface2);
+}
+.project-media-gallery img {
+  display: block;
+  width: 100%;
+  height: 112px;
+  object-fit: cover;
+  object-position: center;
+}
+.project-media-gallery figcaption {
+  grid-column: 1 / -1;
+  color: var(--text-muted);
+  font-size: 0.72rem;
+  line-height: 1.4;
+}
+.project-media-note {
+  margin: 0.25rem 0 0.2rem !important;
+  font-size: 0.75rem !important;
+  color: var(--text-muted);
+}
+.featured-project-media-link {
+  align-self: flex-start;
+  margin: 0 0 0.4rem;
+  color: var(--accent);
+  font-size: 0.8rem;
+  text-decoration: none;
+}
+.featured-project-media-link:hover { text-decoration: underline; }
+@media print {
+  .project-media-gallery img { height: 75px; }
+  .featured-project-media-link { display: none; }
+}
