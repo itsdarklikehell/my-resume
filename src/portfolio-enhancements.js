@@ -260,7 +260,7 @@ function createDataQualitySection({ githubData, profileData, lang, locale }) {
   const section = document.createElement('section');
   section.className = 'portfolio-enhancement-block portfolio-data-quality';
   section.setAttribute('aria-labelledby', 'portfolio-data-quality-title');
-  section.dataset.dataQualityReport = '';
+  section.setAttribute('data-quality-report', '');
 
   const heading = document.createElement('h2');
   heading.id = 'portfolio-data-quality-title';
