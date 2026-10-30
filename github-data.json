@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-30T12:13:14.058681Z",
+  "generated_at": "2026-10-30T12:29:37.808634Z",
   "user": {
     "login": "itsdarklikehell",
     "name": "Bauke Molenaar",
@@ -148,7 +148,7 @@
       "language": "JavaScript",
       "stars": 0,
       "description": "Digitale resume van Bauke Molenaar",
-      "updated_at": "2026-10-30T11:21:39Z",
+      "updated_at": "2026-10-30T12:29:17Z",
       "url": "https://github.com/itsdarklikehell/my-resume",
       "topics": [
         "cv",
@@ -563,6 +563,18 @@
     }
   ],
   "contributions": [
+    {
+      "type": "PullRequestEvent",
+      "repo": "itsdarklikehell/my-resume",
+      "date": "2026-10-30T12:29:12Z",
+      "url": "https://github.com/itsdarklikehell/my-resume"
+    },
+    {
+      "type": "PullRequestEvent",
+      "repo": "itsdarklikehell/my-resume",
+      "date": "2026-10-30T12:18:32Z",
+      "url": "https://github.com/itsdarklikehell/my-resume"
+    },
     {
       "type": "PushEvent",
       "repo": "itsdarklikehell/my-resume",
@@ -1149,18 +1161,6 @@
       "type": "PushEvent",
       "repo": "itsdarklikehell/my-resume",
       "date": "2026-10-23T07:54:59Z",
-      "url": "https://github.com/itsdarklikehell/my-resume"
-    },
-    {
-      "type": "PushEvent",
-      "repo": "itsdarklikehell/my-resume",
-      "date": "2026-10-23T07:53:01Z",
-      "url": "https://github.com/itsdarklikehell/my-resume"
-    },
-    {
-      "type": "PushEvent",
-      "repo": "itsdarklikehell/my-resume",
-      "date": "2026-10-23T07:51:07Z",
       "url": "https://github.com/itsdarklikehell/my-resume"
     }
   ],
