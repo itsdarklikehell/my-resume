@@ -71,6 +71,15 @@ class GitHubSourceStatusTests(unittest.TestCase):
         self.assertEqual(failed_status['status'], 'unavailable')
         self.assertTrue(failed_status['retained'])
 
+    def test_star_totals_preserve_zero_and_reject_partial_data(self):
+        self.assertEqual(fetch_github_data.sum_known_stars([
+            {'stars': 0}, {'stars': 0}
+        ]), 0)
+        self.assertEqual(fetch_github_data.sum_known_stars([]), 0)
+        self.assertIsNone(fetch_github_data.sum_known_stars([
+            {'stars': 4}, {'stars': None}
+        ]))
+
     def test_language_percentages_are_repository_shares(self):
         skills = fetch_github_data.generate_skill_data([
             {'language': 'Python'},
