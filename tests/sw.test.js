@@ -9,7 +9,7 @@ async function loadServiceWorker({ cachedResponse = null, networkResponse = null
     put: vi.fn().mockResolvedValue(undefined),
   };
   const caches = {
-    keys: vi.fn().mockResolvedValue(['resume-cache-v2', 'resume-cache-v3']),
+    keys: vi.fn().mockResolvedValue(['resume-cache-v2', 'other-app-cache', 'resume-cache-v3']),
     delete: vi.fn().mockResolvedValue(true),
     open: vi.fn().mockResolvedValue(cache),
     match: vi.fn().mockResolvedValue(cachedResponse),
@@ -44,6 +44,19 @@ async function dispatchFetch(harness, url = 'https://itsdarklikehell.github.io/m
 }
 
 describe('service worker cache behaviour', () => {
+  it('removes only obsolete caches owned by this app', async () => {
+    const h = await loadServiceWorker();
+    let activation;
+    h.listeners.activate({ waitUntil: promise => { activation = promise; } });
+
+    await activation;
+
+    expect(h.caches.delete.mock.calls).toEqual([
+      ['resume-cache-v2'],
+      ['resume-cache-v3'],
+    ]);
+  });
+
   it('uses fresh network profile data and refreshes the cache', async () => {
     const stale = new Response('stale data', { status: 200 });
     const fresh = new Response('fresh data', { status: 200 });
