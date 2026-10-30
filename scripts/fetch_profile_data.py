@@ -647,6 +647,17 @@ def fetch_itchio():
 
     games = payload.get('games')
     if isinstance(games, dict):
+        games = list(games.values())
+    if isinstance(games, list):
+        d['games'] = [
+            {
+                'title': game.get('title') or game.get('short_text') or 'Untitled',
+                'url': game.get('url') or f"https://{game.get('id')}.itch.io/",
+                'description': game.get('short_text') or game.get('description') or '',
+            }
+            for game in games
+            if isinstance(game, dict) and (game.get('url') or game.get('id'))
+        ]
         d['games_published'] = str(len(games))
     return d
 
@@ -681,7 +692,22 @@ def scrape_itchio():
                 if followers_match:
                     followers = followers_match.group(1).replace(',', '')
 
-                d['games'] = [];
+                # Read actual published game cards from the public profile.
+                game_cards = page.locator('a.game_cell, .game_cell a, a[href*=".itch.io/"]')
+                scraped_games = []
+                for index in range(min(game_cards.count(), 30)):
+                    card = game_cards.nth(index)
+                    href = card.get_attribute('href') or ''
+                    title = (card.get_attribute('title') or card.inner_text() or '').strip()
+                    if not href.startswith('http') or '.itch.io/' not in href or not title:
+                        continue
+                    if any(part in href for part in ['/jam/', '/community/']):
+                        continue
+                    if not any(game.get('url') == href for game in scraped_games):
+                        scraped_games.append({'title': title, 'url': href, 'description': ''})
+                d['games'] = scraped_games
+                if scraped_games:
+                    d['games_published'] = str(len(scraped_games))
                 d['followers'] = followers.strip()
                 # --- game rating ---
                 game_rating = 'N/A'
@@ -773,6 +799,7 @@ def fetch_devto():
     data = run_curl(url, headers=headers)
     if data and isinstance(data, dict):
         d = _blank_platform()
+        articles = _devto_fetch_articles(username, headers, limit=5)
         posts = _devto_list_count(
             f"https://dev.to/api/articles?username={username}&per_page=100", headers)
         comments = _devto_list_count(
@@ -780,7 +807,7 @@ def fetch_devto():
         # DEV.to exposes no XP, reputation or badge metric. Map the confirmed
         # article/comment counts onto their own rows instead of aliasing them
         # onto fields DEV.to does not have.
-        d['articles'] = [];
+        d['articles'] = articles;
         d['xp'] = 'N/A'
         d['reputation_points'] = 'N/A'
         d['event_participation'] = 'N/A'
@@ -789,25 +816,40 @@ def fetch_devto():
         d['recent_articles'] = 'N/A'
         d['member_since'] = str(data.get('joined_at', 'N/A'))
         d['github'] = str(data.get('github_username', 'N/A'))
-        # --- recent articles ---
-        try:
-            import json as _json
-            articles_url = f"https://dev.to/api/articles?username={username}&per_page=5"
-            articles_cmd = ['curl', '-s']
-            if headers:
-                for header in headers:
-                    articles_cmd.extend(['-H', header])
-            articles_cmd.append(articles_url)
-            articles_result = subprocess.run(articles_cmd, capture_output=True, text=True, timeout=30)
-            if articles_result.returncode == 0:
-                articles = _json.loads(articles_result.stdout)
-                if isinstance(articles, list) and articles:
-                    titles = [a.get('title', '') for a in articles if a.get('title')]
-                    d['recent_articles'] = ' | '.join(titles[:5])
-        except Exception:
-            pass
+        # Keep the legacy summary in sync with the actual article cards.
+        if articles:
+            d['recent_articles'] = ' | '.join(a['title'] for a in articles if a.get('title'))
         return d
     return _blank_platform()
+
+
+def _devto_fetch_articles(username, headers=None, limit=5):
+    """Return real DEV.to article records in the shape consumed by the site."""
+    try:
+        cmd = ['curl', '-s']
+        for header in headers or []:
+            cmd.extend(['-H', header])
+        cmd.append(f"https://dev.to/api/articles?username={username}&per_page={limit}")
+        result = subprocess.run(cmd, capture_output=True, text=True, timeout=30)
+        if result.returncode != 0 or not result.stdout:
+            return []
+        payload = json.loads(result.stdout)
+        if not isinstance(payload, list):
+            return []
+        articles = []
+        for item in payload:
+            if not isinstance(item, dict) or not item.get('title') or not item.get('url'):
+                continue
+            articles.append({
+                'title': item['title'],
+                'url': item['url'],
+                'excerpt': item.get('description') or item.get('description_html') or '',
+                'published_at': item.get('published_at') or '',
+            })
+        return articles[:limit]
+    except Exception as exc:
+        print(f"DEV.to articles error: {exc}")
+        return []
 
 
 def _devto_list_count(url, headers=None):
