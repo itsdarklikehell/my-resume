@@ -882,7 +882,6 @@ export const translations = {
     proficiency_level_3: '3 (Avancé)',
     proficiency_level_4: '4 (Compétent)',
     proficiency_level_5: '5 (Expert)',
-  },
     platform_tryhackme: 'TryHackMe',
     platform_ctftime: 'CTFtime',
     platform_itchio: 'itch.io',
