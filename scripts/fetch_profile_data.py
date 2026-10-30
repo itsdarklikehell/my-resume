@@ -652,11 +652,11 @@ def fetch_itchio():
         d['games'] = [
             {
                 'title': game.get('title') or game.get('short_text') or 'Untitled',
-                'url': game.get('url') or f"https://{game.get('id')}.itch.io/",
+                'url': game.get('url') or '',
                 'description': game.get('short_text') or game.get('description') or '',
             }
             for game in games
-            if isinstance(game, dict) and (game.get('url') or game.get('id'))
+            if isinstance(game, dict) and game.get('url')
         ]
         d['games_published'] = str(len(games))
     return d
