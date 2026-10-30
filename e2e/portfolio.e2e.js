@@ -191,6 +191,9 @@ test('technical project case study pages load and switch languages', async ({ pa
 
 test('project case studies preserve the saved theme and palette', async ({ page }) => {
   await page.goto('?lang=nl');
+  // The shared beforeEach init script clears storage on every navigation.
+  // Remove it here so the appearance preference can persist to the case study.
+  await page.removeAllInitScripts();
   await page.locator('.theme-toggle').click();
   await page.locator('.palette-toggle').click();
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
