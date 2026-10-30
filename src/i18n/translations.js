@@ -1,10 +1,13 @@
 export const translations = {
   nl: {
     tagline:
-      'Technisch professional met een passie voor ICT en probleemoplossing',
+      'ICT, automatisering & technisch probleemoplossen',
     about: 'Over Mij',
+    recruiter_focus: 'Focus: Python · Shell/Bash · JavaScript/TypeScript · Linux · automatisering',
+    recruiter_projects: 'Bekijk projecten',
+    recruiter_contact: 'Neem contact op',
     about_text:
-      'Praktisch ingestelde technisch professional met ruime ervaring in elektrische systemen, zonnepanelen en tweewielers. Hands-on achtergrond met technische precisie, analytisch denkvermogen en een scherp oog voor procesverbetering. Zelfstandig Shell/Bash, Python en JavaScript/TypeScript aangeleerd met een sterke drive om te groeien als ICT-professional.',
+      'Ik combineer ruime praktijkervaring in elektrotechniek en installatiewerk met zelfstudie en eigen projecten in programmeren, Linux en automatisering. Ik werk analytisch, leer snel en vertaal technische problemen graag naar praktische oplossingen.',
     projects: 'Projecten',
     dynamic_projects_intro: 'Filter projecten op profiel, zoekterm of actualiteit. De selectie is deelbaar via de URL.',
     experience: 'Werkervaring',
@@ -312,10 +315,13 @@ export const translations = {
     last_updated: 'Laatst bijgewerkt',
   },
   en: {
-    tagline: 'Technical professional with a passion for IT and problem-solving',
+    tagline: 'IT, automation & technical problem-solving',
     about: 'About Me',
+    recruiter_focus: 'Focus: Python · Shell/Bash · JavaScript/TypeScript · Linux · automation',
+    recruiter_projects: 'Explore projects',
+    recruiter_contact: 'Get in touch',
     about_text:
-      'Practical technical professional with extensive experience in electrical systems, solar panels and motorcycles. Hands-on background with technical precision, analytical thinking and a sharp eye for process improvement. Self-taught Shell/Bash, Python and JavaScript/TypeScript with a strong drive to grow as an IT professional.',
+      'I combine hands-on experience in electrical installations with self-directed learning and personal projects in programming, Linux and automation. I take an analytical approach, learn quickly and enjoy turning technical problems into practical solutions.',
     projects: 'Projects',
     dynamic_projects_intro: 'Filter projects by focus, search term or recency. You can share the selected view using its URL.',
     experience: 'Work Experience',
@@ -619,10 +625,13 @@ export const translations = {
   },
   de: {
     tagline:
-      'Technischer Fachmann mit einer Leidenschaft für IT und Problemlösung',
+      'IT, Automatisierung & technische Problemlösung',
     about: 'Über Mich',
+    recruiter_focus: 'Schwerpunkte: Python · Shell/Bash · JavaScript/TypeScript · Linux · Automatisierung',
+    recruiter_projects: 'Projekte ansehen',
+    recruiter_contact: 'Kontakt aufnehmen',
     about_text:
-      'Praktisch veranlagter Techniker mit umfassender Erfahrung in Elektroinstallationen, Solaranlagen und Motorrädern. Praktischer Hintergrund mit technischer Präzision, analytischem Denken und einem scharfen Auge für Prozessverbesserung. Selbst beigebrachte Shell/Bash, Python und JavaScript/TypeScript mit starkem Ehrgeiz, als IT-Experte zu wachsen.',
+      'Ich verbinde praktische Erfahrung in der Elektrotechnik und Installation mit selbstständigem Lernen und eigenen Projekten in Programmierung, Linux und Automatisierung. Ich arbeite analytisch, lerne schnell und setze technische Probleme gern in praktische Lösungen um.',
     projects: 'Projekte',
     dynamic_projects_intro: 'Filtern Sie Projekte nach Schwerpunkt, Suchbegriff oder Aktualität. Die Auswahl kann über die URL geteilt werden.',
     experience: 'Berufserfahrung',
@@ -779,6 +788,9 @@ export const translations = {
     tagline:
       "Professionnel technique passionné d'informatique et de résolution de problèmes",
     about: 'À Propos',
+    recruiter_focus: 'Domaines : Python · Shell/Bash · JavaScript/TypeScript · Linux · automatisation',
+    recruiter_projects: 'Voir les projets',
+    recruiter_contact: 'Me contacter',
     about_text:
       "Professionnel technique pragmatique avec une grande expérience en systèmes électriques, panneaux solaires et motocyclettes. Connaissance pratique avec précision technique, pensée analytique et œil attentif à l'amélioration des processus. Shell/Bash, Python et JavaScript/TypeScript autodidactes avec une forte envie de grandir en tant que professionnel informatique.",
     projects: 'Projets',
