@@ -352,7 +352,13 @@ function createDataQualitySection({ githubData, profileData, lang, locale }) {
       sources.forEach(source => {
         const item = document.createElement('li');
         const label = document.createElement('strong');
-        label.textContent = source.name.replaceAll('_', ' ');
+        const sourceNames = {
+          user_repositories: t.dataQualityUserRepositories,
+          organization_repositories: t.dataQualityOrganizationRepositories,
+          contributions: t.dataQualityContributions,
+          user_profile: t.dataQualityGithubProfile,
+        };
+        label.textContent = sourceNames[source.name] || source.name.replaceAll('_', ' ');
         const status = document.createElement('span');
         status.textContent = source.retained
           ? t.dataQualityRetained
@@ -436,6 +442,9 @@ const LABELS = {
     dataQualityEmpty: 'Geen publieke waarden',
     dataQualityRetained: 'Eerdere gegevens behouden',
     dataQualityStatusNotRecorded: 'De huidige JSON-momentopname bevat nog geen status per bron. De volgende succesvolle gegevensupdate vult dit aan.',
+    dataQualityUserRepositories: 'Persoonlijke repositories',
+    dataQualityOrganizationRepositories: 'Organisatierepositories',
+    dataQualityGithubProfile: 'GitHub-profiel',
     dataQualitySources: 'Bronstatus',
     dataQualityRepositories: 'Repositories',
     dataQualityContributions: 'Bijdragen',
@@ -481,6 +490,9 @@ const LABELS = {
     dataQualityEmpty: 'No public values',
     dataQualityRetained: 'Previous data retained',
     dataQualityStatusNotRecorded: 'The current JSON snapshot does not yet include per-source status. The next successful data refresh will add it.',
+    dataQualityUserRepositories: 'Personal repositories',
+    dataQualityOrganizationRepositories: 'Organization repositories',
+    dataQualityGithubProfile: 'GitHub profile',
     dataQualitySources: 'Source status',
     dataQualityRepositories: 'Repositories',
     dataQualityContributions: 'Contributions',
@@ -526,6 +538,9 @@ const LABELS = {
     dataQualityEmpty: 'Keine öffentlichen Werte',
     dataQualityRetained: 'Vorherige Daten beibehalten',
     dataQualityStatusNotRecorded: 'Der aktuelle JSON-Snapshot enthält noch keinen Status pro Quelle. Die nächste erfolgreiche Datenaktualisierung ergänzt ihn.',
+    dataQualityUserRepositories: 'Persönliche Repositories',
+    dataQualityOrganizationRepositories: 'Organisations-Repositories',
+    dataQualityGithubProfile: 'GitHub-Profil',
     dataQualitySources: 'Quellenstatus',
     dataQualityRepositories: 'Repositories',
     dataQualityContributions: 'Beiträge',
@@ -571,6 +586,9 @@ const LABELS = {
     dataQualityEmpty: 'Aucune valeur publique',
     dataQualityRetained: 'Données précédentes conservées',
     dataQualityStatusNotRecorded: 'L’instantané JSON actuel ne contient pas encore de statut par source. La prochaine mise à jour réussie l’ajoutera.',
+    dataQualityUserRepositories: 'Dépôts personnels',
+    dataQualityOrganizationRepositories: 'Dépôts de l’organisation',
+    dataQualityGithubProfile: 'Profil GitHub',
     dataQualitySources: 'État des sources',
     dataQualityRepositories: 'Dépôts',
     dataQualityContributions: 'Contributions',
