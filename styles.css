@@ -765,16 +765,20 @@ body {
   border-color: var(--accent);
 }
 
-/* Print-friendly: een CV hoort 2-3 pagina's te zijn, niet 11.
-           De volledige projectlijst, heatmap en video zijn scherm-only; de PDF
-           toont uitgelicht werk, ervaring, opleiding en vaardigheden. */
+/* Compact, two-page print CV. Screen layout and content remain unchanged.
+   Print uses A4, tighter spacing and slightly reduced typography to preserve
+   the complete printable resume in a maximum of two pages. */
+@page {
+  size: A4;
+  margin: 8mm;
+}
 @media print {
   /* Printbreedte is ~816px, net onder de 860px mobile-breakpoint.
                Zonder deze regel klapt de layout naar 1 kolom en wordt de PDF
                8 pagina's i.p.v. 3. */
   .grid {
-    grid-template-columns: 1fr 240px !important;
-    gap: 1rem !important;
+    grid-template-columns: minmax(0, 1fr) 205px !important;
+    gap: 0.65rem !important;
   }
   .container {
     padding: 0 !important;
@@ -783,7 +787,9 @@ body {
   body {
     background: #fff;
     color: #000;
-    font-size: 10pt;
+    font-size: 8.2pt;
+    line-height: 1.25;
+    zoom: 0.84;
   }
   .card,
   .header {
@@ -824,8 +830,8 @@ body {
                page (the work-experience timeline) would otherwise be pushed
                to a fresh page and leave the previous one half empty. */
   .card {
-    margin-bottom: 0.6rem !important;
-    padding: 0.7rem !important;
+    margin-bottom: 0.35rem !important;
+    padding: 0.45rem !important;
   }
   .card h2 {
     break-after: avoid;
@@ -842,8 +848,8 @@ body {
   }
   h2 {
     page-break-after: avoid;
-    font-size: 12pt !important;
-    margin-bottom: 0.5rem !important;
+    font-size: 10pt !important;
+    margin-bottom: 0.25rem !important;
   }
   video {
     display: none !important;
@@ -856,10 +862,10 @@ body {
   }
   .project-item,
   .timeline-item {
-    margin-bottom: 0.5rem !important;
+    margin-bottom: 0.25rem !important;
   }
   .about-text {
-    font-size: 9.5pt !important;
+    font-size: 8pt !important;
   }
 }
 
