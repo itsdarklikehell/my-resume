@@ -474,7 +474,14 @@ function renderProfiles() {
       (githubData && githubData.generated_at) ||
       null
   );
-}function renderPlatformCards() {
+}function isInactive(key, d) {
+  if (!d) return true;
+  if (key === 'hackthebox') return (d.points === null || d.points === '0' || d.points === 0) && (d.rank === null || d.rank === 'Noob');
+  if (key === 'cylab') return !d.rank && !d.points;
+  if (key === 'ctftime') return (d.rating === null || d.rating === '1.0' || d.rating === 1) && (d.position === null || d.position === '36' || d.position === 36);
+  return false;
+}
+function renderPlatformCards() {
   const container = document.getElementById('platform-cards-container');
   if (!container || !profileData) return;
   const t = getTranslations(currentLang, translations);
@@ -516,10 +523,16 @@ function renderProfiles() {
       data: profileData.stackoverflow,
     },
     {
-      key: 'stackapps',
-      label: t.platform_stackapps || 'Stack Apps',
-      icon: '🧩',
-      data: profileData.stackapps,
+      key: 'hackthebox',
+      label: t.platform_hackthebox || 'HackTheBox',
+      icon: '📦',
+      data: profileData.hackthebox,
+    },
+    {
+      key: 'cylab',
+      label: t.platform_cylab || 'CyLab Academy',
+      icon: '🎓',
+      data: profileData.cylab,
     },
     {
       key: 'microsoft',
@@ -576,6 +589,7 @@ function renderProfiles() {
                     ${fieldRows}
                 </details>
                 <div class="card-footer">${t.last_refreshed || 'Last refreshed'}: ${refreshed}</div>
+                ${isInactive(p.key, d) ? `<div class="card-footer" style="color: var(--text-muted);">Inactive</div>` : ''}
             </div>`;
     })
     .join('');
