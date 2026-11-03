@@ -1573,19 +1573,7 @@ function toggleSkillsMore(btn) {
 }
 window.toggleSkillsMore = toggleSkillsMore;
 
-function sendEmail(e) {
-  e.preventDefault();
-  const form = e.target;
-  const name = form.name.value,
-    email = form.email.value,
-    message = form.message.value;
-  const subject = encodeURIComponent('CV aanvraag van ' + name);
-  const body = encodeURIComponent(
-    'Naam: ' + name + '\nE-mail: ' + email + '\n\nBericht:\n' + message
-  );
-  window.location.href =
-    'mailto:bauke.molenaar@gmail.com?subject=' + subject + '&body=' + body;
-}
+
 
 loadGitHubData()
   .then(() => {
