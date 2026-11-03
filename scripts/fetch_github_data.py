@@ -95,7 +95,7 @@ def generate_skill_data(repos):
     for lang, stats in langs.items():
         if lang == 'Unknown':
             continue
-        pct = min(95, int((stats['count'] / total) * 100 * 2))  # Scale up a bit
+        pct = min(95, int((stats['count'] / total) * 100))  # raw repo-count share)
         skills[lang] = {
             'percentage': pct,
             'repos': stats['count'],

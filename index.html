@@ -299,7 +299,7 @@
         <li>Montage van elektrische (sterkstroom) installaties</li>
     </ul>
 </div>
-<button class="show-more-btn" onclick="toggleExperience(this)" style="margin-top:.5rem;cursor:pointer;">Show more</button>
+<button class="show-more-btn" data-action="toggle-experience" style="margin-top:.5rem;cursor:pointer;">Show more</button>
 </section><section class="card">
 <h2 data-i18n="education">Opleiding</h2>
 <div class="timeline-item">
@@ -419,7 +419,7 @@
 <div id="repos-showcase-container">
 <p class="about-text">Loading repositories...</p>
 </div>
-<button class="show-more-btn" onclick="toggleExperience(this)" style="margin-top:.5rem;cursor:pointer;">Show more</button>
+<button class="show-more-btn" data-action="toggle-experience" style="margin-top:.5rem;cursor:pointer;">Show more</button>
 <div class="section-updated" id="repos-updated"></div>
 </section><section class="card no-print">
 <h2 data-i18n="activity">Live Activity</h2>
@@ -447,7 +447,6 @@
 </div>
 <p class="about-text" id="stats-note" style="font-size: 0.8rem; margin-top: 0.5rem;"></p>
 <div class="section-updated" id="stats-updated"></div>
-<img src="https://github-readme-stats.vercel.app/api?username=itsdarklikehell&show_icons=true&theme=transparent" alt="GitHub stats" loading="lazy" style="max-width:100%;margin-top:1rem;" onerror="this.style.display='none'"/>
 <div id="contributions-container">
 <p class="about-text">Loading activity...</p>
 </div>
@@ -527,7 +526,7 @@
 <li data-i18n="cert_am_desc">Geldig rijbewijs</li>
 </ul>
 </div>
-<button class="show-more-btn" onclick="toggleExperience(this)" style="margin-top:.5rem;cursor:pointer;">Show more</button>
+<button class="show-more-btn" data-action="toggle-experience" style="margin-top:.5rem;cursor:pointer;">Show more</button>
 </section><section class="card no-print">
 <h2>📊 Contribution Heatmap</h2>
 <div id="contribution-heatmap">
@@ -600,9 +599,9 @@
 <div class="download-group">
   <a class="download-btn lang-nl" href="bauke-molenaar-cv.pdf" download="bauke-molenaar-cv.pdf" target="_blank">🇳🇱 <span data-i18n="download_pdf_nl">Download CV (NL)</span></a>
   <a class="download-btn lang-en" href="bauke-molenaar-cv-en.pdf" download="bauke-molenaar-cv-en.pdf" target="_blank">🇬🇧 <span data-i18n="download_pdf_en">Download CV (EN)</span></a>
-  <a class="download-btn lang-nl" href="#" onclick="downloadJSON(); return false;">🇳🇱 <span data-i18n="download_json">Download JSON</span></a>
+  <a class="download-btn lang-nl" href="#" data-action="download-json">🇳🇱 <span data-i18n="download_json">Download JSON</span></a>
   <a class="download-btn lang-en" href="#" onclick="downloadJSON(); return false;" style="margin-top: 0.5rem;">🇬🇧 <span data-i18n="download_json">Download JSON</span></a>
-   <a class="download-btn lang-nl" href="#" onclick="window.print(); return false;">🇳🇱 <span data-i18n="print_cv_nl">Print CV (NL)</span></a>
+   <a class="download-btn lang-nl" href="#" data-action="print-cv">🇳🇱 <span data-i18n="print_cv_nl">Print CV (NL)</span></a>
    <a class="download-btn lang-en" href="#" onclick="window.print(); return false;" style="margin-top: 0.5rem;">🇬🇧 <span data-i18n="print_cv_en">Print CV (EN)</span></a>
 </div>
 </section>
@@ -615,7 +614,7 @@
 <a class="share-btn" href="https://www.facebook.com/sharer/sharer.php?u=https://itsdarklikehell.github.io/my-resume/" target="_blank">📘 <span data-i18n="share_facebook">Facebook</span></a>
 <a class="share-btn" href="https://t.me/share/url?url=https://itsdarklikehell.github.io/my-resume/&text=Bekijk%20mijn%20CV" target="_blank">✈️ <span data-i18n="share_telegram">Telegram</span></a>
 <a class="share-btn" href="mailto:?subject=Bekijk%20mijn%20CV&body=https://itsdarklikehell.github.io/my-resume/" target="_blank">✉️ <span data-i18n="share_email">Email</span></a>
-<a class="share-btn" href="#" onclick="navigator.clipboard.writeText('https://itsdarklikehell.github.io/my-resume/');return false;">🔗 <span data-i18n="share_copy">Copy link</span></a>
+<a class="share-btn" href="#" data-action="copy-link">🔗 <span data-i18n="share_copy">Copy link</span></a>
 </div>
 </section>
 <section class="card" id="expertise-section">
@@ -629,7 +628,7 @@
 <span class="tag" data-i18n="exp_zonnepanelen">Zonnepanelen</span>
 <span class="tag" data-i18n="exp_sterkstroom">Sterkstroom</span>
 </div>
-<button class="show-more-btn" onclick="toggleExperience(this)" style="margin-top:.5rem;cursor:pointer;">Show more</button>
+<button class="show-more-btn" data-action="toggle-experience" style="margin-top:.5rem;cursor:pointer;">Show more</button>
 </section>
 <section class="card">
 <h2 data-i18n="skills">Vaardigheden</h2>
@@ -642,14 +641,14 @@
 </div>
 <div class="donut-legend" id="donut-legend"></div>
 </div>
-<button class="show-more-btn" id="skill-sort-toggle" onclick="toggleSkillSort()" style="margin-bottom:.5rem;cursor:pointer;">Auto-sort: ON</button>
+<button class="show-more-btn" id="skill-sort-toggle" data-action="toggle-skill-sort" style="margin-bottom:.5rem;cursor:pointer;">Auto-sort: ON</button>
 <div style="margin-bottom:1rem;padding:.75rem;border:1px solid var(--accent);border-radius:8px;font-size:.9rem;">
 <strong>Highlighted:</strong> Cybersecurity / Wi-Fi auditing (pwnagotchi, Armitage) · Automation & tooling · ComfyUI / AI tooling · Python · Shell/Bash · JavaScript/TypeScript · HTML · Lua · Rust
 </div>
 <div id="skills-container">
 <p class="about-text">Loading skills...</p>
 </div>
-<button class="show-more-btn" onclick="toggleSkillsMore(this)" data-toggle-target="skills-container" style="margin-top:.5rem;cursor:pointer;">Show more</button>
+<button class="show-more-btn" data-action="toggle-skills-more" data-toggle-target="skills-container" style="margin-top:.5rem;cursor:pointer;">Show more</button>
 <div class="section-updated" id="skills-updated"></div>
 </section><section class="card">
 <h2 data-i18n="skill_matrix_title">Skill Matrix</h2>
