@@ -70,6 +70,9 @@ export function renderVacancyProfile({ container, repos = [], lang = 'nl' }) {
   const ui = UI[locale];
   const render = () => {
     const profile = getVacancyProfile(selected, locale);
+    if (selected === 'general') {
+      container.insertAdjacentHTML('afterbegin', '<p class="vacancy-profile-default">Open for roles in automation, software development, cybersecurity, electrical engineering, and IT support.</p>');
+    }
     const filtered = filterAndSortRepos(repos, { profile: profile.projectFilter, sort: 'recent' }).slice(0, 3);
     container.innerHTML = `
       <div class="vacancy-profile-controls">
