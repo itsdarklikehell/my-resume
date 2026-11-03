@@ -1,0 +1,75 @@
+name: Print CV page count
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main, "fix/compact-two-page-print-cv"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  print-cv:
+    name: Verify A4 CV is at most two pages
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install project dependencies
+        run: npm ci
+
+      - name: Build website
+        run: npm run build
+
+      - name: Install Chromium and PDF checker
+        run: |
+          npm install --no-save --package-lock=false playwright
+          npx playwright install --with-deps chromium
+          python -m pip install --user pypdf
+
+      - name: Start preview server
+        run: |
+          npm run preview -- --host 127.0.0.1 > /tmp/cv-preview.log 2>&1 &
+          for attempt in {1..30}; do
+            if curl --fail --silent http://127.0.0.1:4173/my-resume/ > /dev/null || curl --fail --silent http://127.0.0.1:4173/ > /dev/null; then
+              break
+            fi
+            sleep 2
+          done
+          cat /tmp/cv-preview.log
+
+      - name: Generate A4 PDF and enforce two-page limit
+        run: |
+          node scripts/print-cv.mjs
+          python - <<'PY'
+          from pypdf import PdfReader
+          from pathlib import Path
+
+          pdf = Path("artifacts/cv-print.pdf")
+          if not pdf.is_file() or pdf.stat().st_size == 0:
+              raise SystemExit("Print check failed: PDF was not generated.")
+          pages = len(PdfReader(str(pdf)).pages)
+          print(f"Generated CV: {pages} page(s), A4.")
+          if pages > 2:
+              raise SystemExit(f"Print check failed: expected at most 2 pages, got {pages}.")
+          if pages < 1:
+              raise SystemExit("Print check failed: PDF contains no pages.")
+          PY
+
+      - name: Upload generated PDF for inspection
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cv-print-preview
+          path: artifacts/cv-print.pdf
+          if-no-files-found: ignore
+          retention-days: 14
