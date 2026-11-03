@@ -1582,6 +1582,54 @@ loadGitHubData()
     if (themeBtn) themeBtn.addEventListener('click', toggleTheme);
     const paletteBtn = document.querySelector('.palette-toggle');
     if (paletteBtn) paletteBtn.addEventListener('click', togglePalette);
+
+    // Event delegation for data-action buttons (replaces inline onclick handlers)
+    document.addEventListener('click', (event) => {
+      const target = event.target.closest('[data-action]');
+      if (!target) return;
+      const action = target.dataset.action;
+      switch (action) {
+        case 'toggle-experience': {
+          const btn = target;
+          const card = btn.closest('section.card');
+          if (card) {
+            card.classList.toggle('expanded');
+            updateToggleLabel(btn);
+          }
+          break;
+        }
+        case 'download-json':
+          downloadJSON();
+          event.preventDefault();
+          break;
+        case 'print-cv':
+          event.preventDefault();
+          window.print();
+          break;
+        case 'copy-link': {
+          const url = 'https://itsdarklikehell.github.io/my-resume/';
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(url).catch(() => {});
+          }
+          event.preventDefault();
+          break;
+        }
+        case 'toggle-skill-sort':
+          toggleSkillSort();
+          break;
+        case 'toggle-skills-more': {
+          const btn = target;
+          const container = document.getElementById(btn.dataset.toggleTarget || 'skills-container');
+          if (container) {
+            container.classList.toggle('expanded');
+            updateToggleLabel(btn);
+          }
+          break;
+        }
+        default:
+          break;
+      }
+    });
   }
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', bind);

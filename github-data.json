@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-02T14:51:49.707951Z",
+  "generated_at": "2026-11-03T09:13:48.520245Z",
   "user": {
     "login": "itsdarklikehell",
     "name": "Bauke Molenaar",
@@ -148,7 +148,7 @@
       "language": "JavaScript",
       "stars": 0,
       "description": "Digitale resume van Bauke Molenaar",
-      "updated_at": "2026-11-01T12:44:40Z",
+      "updated_at": "2026-11-02T14:52:19Z",
       "url": "https://github.com/itsdarklikehell/my-resume",
       "topics": [
         "cv",
@@ -1166,32 +1166,32 @@
   ],
   "skills": {
     "Python": {
-      "percentage": 38,
+      "percentage": 19,
       "repos": 11,
       "stars": 264
     },
     "Shell": {
-      "percentage": 94,
+      "percentage": 47,
       "repos": 27,
       "stars": 23
     },
     "JavaScript": {
-      "percentage": 21,
+      "percentage": 10,
       "repos": 6,
       "stars": 0
     },
     "HTML": {
-      "percentage": 10,
+      "percentage": 5,
       "repos": 3,
       "stars": 0
     },
     "Lua": {
-      "percentage": 7,
+      "percentage": 3,
       "repos": 2,
       "stars": 0
     },
     "Rust": {
-      "percentage": 3,
+      "percentage": 1,
       "repos": 1,
       "stars": 0
     }
