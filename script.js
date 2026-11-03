@@ -277,13 +277,13 @@ function renderAchievements() {
   const items = [];
   const thm = profileData.tryhackme;
   const ms = profileData.microsoft;
-  if (thm && thm.badges && thm.badges !== 'N/A') {
+  if (thm && thm.badges && thm.badges !== 'N/A' && thm.badges !== null) {
     items.push({
       label: t.ach_thm_bronze_n || 'TryHackMe Badge',
       value: thm.badges,
     });
   }
-  if (ms && ms.badges && ms.badges !== 'N/A') {
+  if (ms && ms.badges && ms.badges !== 'N/A' && ms.badges !== null) {
     items.push({
       label: t.ach_ms_badges_n || 'Microsoft Learn Badges',
       value: ms.badges,
@@ -540,7 +540,21 @@ function renderProfiles() {
       const hasReal = Object.entries(d).some(
         ([key, value]) => key !== 'generated_at' && key !== 'github' && isDisplayable(value)
       );
-      if (!hasReal) return '';
+      if (!hasReal) {
+        const emptyMessage = ({
+          nl: 'Niet geconfigureerd of geen gegevens beschikbaar.',
+          en: 'Not configured or no data available.',
+          de: 'Nicht konfiguriert oder keine Daten verfügbar.',
+          fr: 'Non configuré ou aucune donnée disponible.',
+        })[currentLang] || 'Not configured or no data available.';
+        return `<div class="platform-card" style="border-left: 4px solid var(--text-muted);">
+                <div class="card-header">
+                    <div class="card-icon" style="color: var(--text-muted);">${p.icon}</div>
+                    <div class="card-name">${p.label}</div>
+                </div>
+                <div class="card-footer">${emptyMessage}</div>
+            </div>`;
+      }
       let fieldRows = '';
       for (const [k, v] of Object.entries(d)) {
         if (k !== 'github' && k !== 'generated_at' && isDisplayable(v)) {
@@ -583,7 +597,7 @@ function renderSkillMatrix() {
   const thm =
     profileData && profileData.tryhackme ? profileData.tryhackme : null;
   const matrix =
-    thm && thm.skill_matrix && thm.skill_matrix !== 'N/A'
+    thm && thm.skill_matrix && thm.skill_matrix !== 'N/A' && thm.skill_matrix !== null
       ? thm.skill_matrix.split(', ').filter(Boolean)
       : [];
 
