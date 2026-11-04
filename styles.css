@@ -2353,3 +2353,57 @@ html:not([lang="nl"]) .download-btn.lang-nl {
   font-size: .82rem;
   line-height: 1.45;
 }
+
+
+/* Gource legend */
+.gource-legend {
+  margin-top: 0.85rem;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface2);
+}
+.gource-legend-title {
+  margin: 0 0 0.75rem;
+  color: var(--text);
+  font-size: 0.9rem;
+  font-weight: 650;
+}
+.gource-legend-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.8rem 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.gource-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  min-width: 0;
+}
+.gource-legend-symbol {
+  display: grid;
+  flex: 0 0 2rem;
+  width: 2rem;
+  height: 2rem;
+  place-items: center;
+  border: 1px solid var(--border);
+  border-radius: 0.65rem;
+  background: var(--surface);
+  color: var(--accent);
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+.gource-legend-person { color: var(--accent2); }
+.gource-legend-folder { color: var(--accent3); }
+.gource-legend-file { color: var(--accent); }
+.gource-legend-activity { color: var(--text); }
+.gource-legend-item strong,
+.gource-legend-item small { display: block; }
+.gource-legend-item strong { color: var(--text); font-size: 0.8rem; }
+.gource-legend-item small { margin-top: 0.1rem; color: var(--text-muted); font-size: 0.72rem; line-height: 1.35; }
+@media (max-width: 560px) {
+  .gource-legend-list { grid-template-columns: 1fr; gap: 0.7rem; }
+}
