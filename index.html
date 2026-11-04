@@ -116,10 +116,10 @@
 <div class="download-group">
   <a class="download-btn lang-nl" href="bauke-molenaar-cv.pdf" download="bauke-molenaar-cv.pdf" target="_blank">🇳🇱 <span data-i18n="download_pdf_nl">Download CV (NL)</span></a>
   <a class="download-btn lang-en" href="bauke-molenaar-cv-en.pdf" download="bauke-molenaar-cv-en.pdf" target="_blank">🇬🇧 <span data-i18n="download_pdf_en">Download CV (EN)</span></a>
-  <a class="download-btn lang-nl" href="#" onclick="downloadJSON(); return false;">🇳🇱 <span data-i18n="download_json">Download JSON</span></a>
-  <a class="download-btn lang-en" href="#" onclick="downloadJSON(); return false;" style="margin-top: 0.5rem;">🇬🇧 <span data-i18n="download_json">Download JSON</span></a>
-   <a class="download-btn lang-nl" href="#" onclick="window.print(); return false;">🇳🇱 <span data-i18n="print_cv_nl">Print CV (NL)</span></a>
-   <a class="download-btn lang-en" href="#" onclick="window.print(); return false;" style="margin-top: 0.5rem;">🇬🇧 <span data-i18n="print_cv_en">Print CV (EN)</span></a>
+  <a class="download-btn lang-nl" href="#" data-action="download-json">🇳🇱 <span data-i18n="download_json">Download JSON</span></a>
+  <a class="download-btn lang-en" href="#" data-action="download-json" style="margin-top: 0.5rem;">🇬🇧 <span data-i18n="download_json">Download JSON</span></a>
+   <a class="download-btn lang-nl" href="#" data-action="print-cv">🇳🇱 <span data-i18n="print_cv_nl">Print CV (NL)</span></a>
+   <a class="download-btn lang-en" href="#" data-action="print-cv" style="margin-top: 0.5rem;">🇬🇧 <span data-i18n="print_cv_en">Print CV (EN)</span></a>
 </div>
 </section>
 <section class="card no-print">
@@ -131,7 +131,7 @@
 <a class="share-btn" href="https://www.facebook.com/sharer/sharer.php?u=https://itsdarklikehell.github.io/my-resume/" target="_blank">📘 <span data-i18n="share_facebook">Facebook</span></a>
 <a class="share-btn" href="https://t.me/share/url?url=https://itsdarklikehell.github.io/my-resume/&text=Bekijk%20mijn%20CV" target="_blank">✈️ <span data-i18n="share_telegram">Telegram</span></a>
 <a class="share-btn" href="mailto:?subject=Bekijk%20mijn%20CV&body=https://itsdarklikehell.github.io/my-resume/" target="_blank">✉️ <span data-i18n="share_email">Email</span></a>
-<a class="share-btn" href="#" onclick="navigator.clipboard.writeText('https://itsdarklikehell.github.io/my-resume/');return false;">🔗 <span data-i18n="share_copy">Copy link</span></a>
+<a class="share-btn" href="#" data-action="copy-link">🔗 <span data-i18n="share_copy">Copy link</span></a>
 </div>
 </section>
 </div>
