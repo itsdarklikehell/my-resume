@@ -228,24 +228,13 @@ test('skill evidence explorer filters by project-backed category', async ({ page
 });
 
 
-test('CV download, print and sharing actions are visible below the profile header', async ({ page }) => {
+test('data quality report exposes freshness and validation metrics', async ({ page }) => {
   await page.goto('?lang=nl');
-  const toolbar = page.locator('.top-resume-actions');
-  await expect(toolbar).toBeVisible();
-  await expect(toolbar.locator('[data-i18n="print_cv_nl"]')).toBeVisible();
-  await expect(toolbar.locator('[data-i18n="download_pdf_nl"]')).toBeVisible();
-  await expect(toolbar.locator('[data-i18n="share_linkedin"]')).toBeVisible();
-
-  const order = await page.evaluate(() => {
-    const header = document.querySelector('.header');
-    const actions = document.querySelector('.top-resume-actions');
-    const grid = document.querySelector('.grid');
-    return header.compareDocumentPosition(actions) & Node.DOCUMENT_POSITION_FOLLOWING
-      && actions.compareDocumentPosition(grid) & Node.DOCUMENT_POSITION_FOLLOWING;
-  });
-  expect(order).toBeTruthy();
-
-  await page.setViewportSize({ width: 390, height: 844 });
-  await expect(toolbar).toBeVisible();
-  await expect(toolbar.locator('[data-i18n="print_cv_nl"]')).toBeVisible();
+  const report = page.locator('[data-quality-report]');
+  await expect(report).toBeVisible({ timeout: 20_000 });
+  await expect(report.getByRole('heading', { name: 'Datakwaliteit & herkomst' })).toBeVisible();
+  await expect(report.getByText('GitHub-gegevens')).toBeVisible();
+  await expect(report.getByText('Profielbronnen')).toBeVisible();
+  await expect(report.getByText('Ontbrekende velden')).toBeVisible();
+  await expect(report.getByText('Ongeldige records')).toBeVisible();
 });
