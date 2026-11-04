@@ -144,7 +144,7 @@
     "sites_active": null,
     "reached": null
   },
-  "generated_at": "2026-11-03T13:41:58.309883Z",
+  "generated_at": "2026-11-04T13:50:46.920342Z",
   "microsoft": {
     "rank": null,
     "points": 0,
@@ -241,48 +241,49 @@
   },
   "itchio": {
     "games": [],
-    "followers": null,
-    "level": null,
-    "xp": null,
-    "xp_last_year": null,
-    "weekly_streak": null,
-    "top_interests": null,
-    "skills": null,
-    "event_participation": null,
-    "yearly_activity": null,
-    "reputation_points": null,
-    "top_tools": null,
-    "badges": null,
-    "skill_matrix": null,
-    "badges_count": null,
-    "paths_completed": null,
-    "rooms_completed": null,
-    "rooms_created": null,
-    "team_rankings": null,
-    "writeups_count": null,
-    "events_attended": null,
-    "kata_completed": null,
-    "top_languages": null,
-    "recent_articles": null,
-    "comment_count": null,
-    "gold_badges": null,
-    "silver_badges": null,
-    "bronze_badges": null,
-    "top_tags": null,
-    "answer_count": null,
-    "question_count": null,
-    "game_rating": null,
-    "game_jams": null,
-    "respects": null,
-    "follows": null,
-    "machines_owned": null,
-    "country": null,
-    "member_since": null,
-    "next_rank": null,
-    "apps_published": null,
-    "communities": null,
-    "sites_active": null,
-    "reached": null
+    "followers": "N/A",
+    "level": "N/A",
+    "xp": "N/A",
+    "xp_last_year": "N/A",
+    "weekly_streak": "N/A",
+    "top_interests": "N/A",
+    "skills": "N/A",
+    "event_participation": "N/A",
+    "yearly_activity": "N/A",
+    "reputation_points": "N/A",
+    "top_tools": "N/A",
+    "badges": "N/A",
+    "skill_matrix": "N/A",
+    "badges_count": "N/A",
+    "paths_completed": "N/A",
+    "rooms_completed": "N/A",
+    "rooms_created": "N/A",
+    "team_rankings": "N/A",
+    "writeups_count": "N/A",
+    "events_attended": "N/A",
+    "kata_completed": "N/A",
+    "top_languages": "N/A",
+    "recent_articles": "N/A",
+    "comment_count": "N/A",
+    "gold_badges": "N/A",
+    "silver_badges": "N/A",
+    "bronze_badges": "N/A",
+    "top_tags": "N/A",
+    "answer_count": "N/A",
+    "question_count": "N/A",
+    "game_rating": "N/A",
+    "game_jams": "N/A",
+    "respects": "N/A",
+    "follows": "N/A",
+    "machines_owned": "N/A",
+    "country": "N/A",
+    "member_since": "N/A",
+    "next_rank": "N/A",
+    "apps_published": "N/A",
+    "communities": "N/A",
+    "sites_active": "N/A",
+    "reached": "N/A",
+    "games_published": "0"
   },
   "codewars": {
     "level": "8 kyu",
@@ -555,5 +556,84 @@
         "completed_at": "2024"
       }
     ]
+  },
+  "source_status": {
+    "tryhackme": {
+      "status": "empty",
+      "checked_at": "2026-11-04T13:50:46.920342Z",
+      "last_successful_at": null,
+      "available_fields": 0,
+      "retained": true
+    },
+    "hackthebox": {
+      "status": "ok",
+      "checked_at": "2026-11-04T13:50:46.920342Z",
+      "last_successful_at": "2026-11-04T13:50:46.920342Z",
+      "available_fields": 14,
+      "retained": false
+    },
+    "cylab": {
+      "status": "empty",
+      "checked_at": "2026-11-04T13:50:46.920342Z",
+      "last_successful_at": null,
+      "available_fields": 0,
+      "retained": true
+    },
+    "microsoft": {
+      "status": "empty",
+      "checked_at": "2026-11-04T13:50:46.920342Z",
+      "last_successful_at": null,
+      "available_fields": 0,
+      "retained": true
+    },
+    "ctftime": {
+      "status": "ok",
+      "checked_at": "2026-11-04T13:50:46.920342Z",
+      "last_successful_at": "2026-11-04T13:50:46.920342Z",
+      "available_fields": 5,
+      "retained": false
+    },
+    "itchio": {
+      "status": "ok",
+      "checked_at": "2026-11-04T13:50:46.920342Z",
+      "last_successful_at": "2026-11-04T13:50:46.920342Z",
+      "available_fields": 1,
+      "retained": false
+    },
+    "codewars": {
+      "status": "ok",
+      "checked_at": "2026-11-04T13:50:46.920342Z",
+      "last_successful_at": "2026-11-04T13:50:46.920342Z",
+      "available_fields": 8,
+      "retained": false
+    },
+    "devto": {
+      "status": "ok",
+      "checked_at": "2026-11-04T13:50:46.920342Z",
+      "last_successful_at": "2026-11-04T13:50:46.920342Z",
+      "available_fields": 2,
+      "retained": false
+    },
+    "leetcode": {
+      "status": "empty",
+      "checked_at": "2026-11-04T13:50:46.920342Z",
+      "last_successful_at": null,
+      "available_fields": 0,
+      "retained": true
+    },
+    "stackoverflow": {
+      "status": "ok",
+      "checked_at": "2026-11-04T13:50:46.920342Z",
+      "last_successful_at": "2026-11-04T13:50:46.920342Z",
+      "available_fields": 12,
+      "retained": false
+    },
+    "stackapps": {
+      "status": "ok",
+      "checked_at": "2026-11-04T13:50:46.920342Z",
+      "last_successful_at": "2026-11-04T13:50:46.920342Z",
+      "available_fields": 7,
+      "retained": false
+    }
   }
 }
