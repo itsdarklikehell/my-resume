@@ -144,7 +144,7 @@
     "sites_active": null,
     "reached": null
   },
-  "generated_at": "2026-11-07T12:31:48.934273Z",
+  "generated_at": "2026-11-08T12:49:34.773244Z",
   "microsoft": {
     "rank": null,
     "points": 0,
@@ -560,78 +560,78 @@
   "source_status": {
     "tryhackme": {
       "status": "empty",
-      "checked_at": "2026-11-07T12:31:48.934273Z",
+      "checked_at": "2026-11-08T12:49:34.773244Z",
       "last_successful_at": null,
       "available_fields": 0,
       "retained": true
     },
     "hackthebox": {
       "status": "ok",
-      "checked_at": "2026-11-07T12:31:48.934273Z",
-      "last_successful_at": "2026-11-07T12:31:48.934273Z",
+      "checked_at": "2026-11-08T12:49:34.773244Z",
+      "last_successful_at": "2026-11-08T12:49:34.773244Z",
       "available_fields": 14,
       "retained": false
     },
     "cylab": {
       "status": "empty",
-      "checked_at": "2026-11-07T12:31:48.934273Z",
+      "checked_at": "2026-11-08T12:49:34.773244Z",
       "last_successful_at": null,
       "available_fields": 0,
       "retained": true
     },
     "microsoft": {
       "status": "empty",
-      "checked_at": "2026-11-07T12:31:48.934273Z",
+      "checked_at": "2026-11-08T12:49:34.773244Z",
       "last_successful_at": null,
       "available_fields": 0,
       "retained": true
     },
     "ctftime": {
       "status": "ok",
-      "checked_at": "2026-11-07T12:31:48.934273Z",
-      "last_successful_at": "2026-11-07T12:31:48.934273Z",
+      "checked_at": "2026-11-08T12:49:34.773244Z",
+      "last_successful_at": "2026-11-08T12:49:34.773244Z",
       "available_fields": 5,
       "retained": false
     },
     "itchio": {
       "status": "ok",
-      "checked_at": "2026-11-07T12:31:48.934273Z",
-      "last_successful_at": "2026-11-07T12:31:48.934273Z",
+      "checked_at": "2026-11-08T12:49:34.773244Z",
+      "last_successful_at": "2026-11-08T12:49:34.773244Z",
       "available_fields": 1,
       "retained": false
     },
     "codewars": {
       "status": "ok",
-      "checked_at": "2026-11-07T12:31:48.934273Z",
-      "last_successful_at": "2026-11-07T12:31:48.934273Z",
+      "checked_at": "2026-11-08T12:49:34.773244Z",
+      "last_successful_at": "2026-11-08T12:49:34.773244Z",
       "available_fields": 8,
       "retained": false
     },
     "devto": {
       "status": "ok",
-      "checked_at": "2026-11-07T12:31:48.934273Z",
-      "last_successful_at": "2026-11-07T12:31:48.934273Z",
+      "checked_at": "2026-11-08T12:49:34.773244Z",
+      "last_successful_at": "2026-11-08T12:49:34.773244Z",
       "available_fields": 2,
       "retained": false
     },
     "leetcode": {
       "status": "empty",
-      "checked_at": "2026-11-07T12:31:48.934273Z",
+      "checked_at": "2026-11-08T12:49:34.773244Z",
       "last_successful_at": null,
       "available_fields": 0,
       "retained": true
     },
     "stackoverflow": {
       "status": "ok",
-      "checked_at": "2026-11-07T12:31:48.934273Z",
-      "last_successful_at": "2026-11-07T12:31:48.934273Z",
+      "checked_at": "2026-11-08T12:49:34.773244Z",
+      "last_successful_at": "2026-11-08T12:49:34.773244Z",
       "available_fields": 12,
       "retained": false
     },
     "stackapps": {
       "status": "ok",
-      "checked_at": "2026-11-07T12:31:48.934273Z",
-      "last_successful_at": "2026-11-07T12:31:48.934273Z",
+      "checked_at": "2026-11-08T12:49:34.773244Z",
+      "last_successful_at": "2026-11-08T12:49:34.773244Z",
       "available_fields": 7,
       "retained": false
     }
