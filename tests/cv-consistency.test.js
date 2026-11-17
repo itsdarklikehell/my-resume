@@ -1,5 +1,6 @@
 import { readFile } from 'node:fs/promises';
 import { describe, expect, it } from 'vitest';
+import { deduplicateRepos, filterAndSortRepos } from '../src/dynamic-profile.js';
 
 describe('CV page consistency', () => {
   it('keeps the published experience timeline at 17 entries', async () => {
@@ -76,5 +77,41 @@ describe('CV page consistency', () => {
     const roles = [...experience.matchAll(/<div class="role"([^>]*)>/g)];
     expect(roles).toHaveLength(17);
     expect(roles.every(([, attributes]) => attributes.includes('data-i18n='))).toBe(true);
+  });
+  it('uses the complete telephone number in the clickable contact link', async () => {
+    const html = await readFile(new URL('../index.html', import.meta.url), 'utf8');
+    expect(html).toContain('href="tel:+31636065494"');
+    expect(html).not.toContain('href="tel:+316****5494"');
+  });
+
+  it('keeps only one visible repository-card catalogue alongside curated case studies', async () => {
+    const html = await readFile(new URL('../index.html', import.meta.url), 'utf8');
+    expect(html).toContain('class="featured-project-grid"');
+    expect(html).toContain('id="projects-container"');
+    expect(html).toMatch(/id="featured-section"[^>]*hidden/);
+    expect(html).toMatch(/id="repos-showcase-section" hidden/);
+  });
+
+  it('deduplicates repeated repository URLs without merging same-named repositories from different owners', () => {
+    const entries = [
+      { name: 'project', url: 'https://github.com/example/project' },
+      { name: 'PROJECT', url: 'https://github.com/EXAMPLE/project.git/' },
+      { name: 'project', url: 'https://github.com/another-owner/project' },
+    ];
+    expect(deduplicateRepos(entries)).toHaveLength(2);
+    expect(filterAndSortRepos(entries)).toHaveLength(2);
+  });
+
+  it('gives every project case study a keyboard skip link and shared language control', async () => {
+    for (const file of ['pwnagotchi-control-center.html', 'pwnagotchi-plugins.html', 'pwnspeaker.html']) {
+      const html = await readFile(new URL('../projects/' + file, import.meta.url), 'utf8');
+      expect(html).toContain('class="skip-link" href="#project-content"');
+      expect(html).toContain('id="project-content" tabindex="-1"');
+      expect(html).toContain('class="lang-toggle"');
+      expect(html).not.toContain('<select aria-label="Language">');
+    }
+    const script = await readFile(new URL('../projects/project-page.js', import.meta.url), 'utf8');
+    expect(script).toContain("const order = ['nl', 'en', 'de', 'fr']");
+    expect(script).toContain("url.searchParams.set('lang', next)");
   });
 });

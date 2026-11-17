@@ -12,17 +12,11 @@
   <link rel="stylesheet" href="./project-page.css">
 </head>
 <body>
-  <main class="project-page" data-project-page="pwnspeaker" data-repo="https://github.com/itsdarklikehell-interactive/pwnspeaker" data-readme="https://github.com/itsdarklikehell-interactive/pwnspeaker/blob/master/README.md" data-media="https://raw.githubusercontent.com/itsdarklikehell-interactive/pwnspeaker/master/gource.mp4">
+  <a class="skip-link" href="#project-content" data-field="skip">Ga naar inhoud</a>
+  <main id="project-content" tabindex="-1" class="project-page" data-project-page="pwnspeaker" data-repo="https://github.com/itsdarklikehell-interactive/pwnspeaker" data-readme="https://github.com/itsdarklikehell-interactive/pwnspeaker/blob/master/README.md" data-media="https://raw.githubusercontent.com/itsdarklikehell-interactive/pwnspeaker/master/gource.mp4">
     <nav class="project-page-header" aria-label="Project navigation">
       <a data-field="back" href="../index.html?lang=nl#projects-section">← Terug naar portfolio</a>
-      <label><span data-field="language-label">Taal</span>
-        <select aria-label="Language">
-          <option value="nl">Nederlands</option>
-          <option value="en">English</option>
-          <option value="de">Deutsch</option>
-          <option value="fr">Français</option>
-        </select>
-      </label>
+      <button class="lang-toggle" type="button" data-field="language-toggle" aria-label="Taal wijzigen (NL)" title="Taal wijzigen">🌐 <span data-field="language-current">NL</span></button>
     </nav>
     <header class="project-page-hero">
       <p class="project-page-eyebrow" data-field="eyebrow"></p>

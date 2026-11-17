@@ -74,8 +74,23 @@ export function classifyRepo(repo) {
   return categories.length ? categories : ['other'];
 }
 
+export function deduplicateRepos(repos) {
+  const seen = new Set();
+  return (Array.isArray(repos) ? repos : []).filter(repo => {
+    if (!repo || typeof repo !== 'object') return false;
+    let normalizedUrl = typeof repo.url === 'string' ? repo.url.trim().toLowerCase() : '';
+    while (normalizedUrl.endsWith('/')) normalizedUrl = normalizedUrl.slice(0, -1);
+    if (normalizedUrl.endsWith('.git')) normalizedUrl = normalizedUrl.slice(0, -4);
+    const normalizedName = String(repo.name || '').trim().toLowerCase();
+    const key = normalizedUrl || (normalizedName ? 'name:' + normalizedName : '');
+    if (!key || seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+}
+
 export function filterAndSortRepos(repos, { profile = 'all', query = '', sort = 'recent' } = {}) {
-  const safeRepos = Array.isArray(repos) ? repos.filter(repo => repo && !repo.fork) : [];
+  const safeRepos = deduplicateRepos(repos).filter(repo => !repo.fork);
   const filtered = safeRepos.filter(repo => {
     const matchesProfile = profile === 'all' || classifyRepo(repo).includes(profile);
     const haystack = normalize([
