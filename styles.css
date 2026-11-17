@@ -18,7 +18,9 @@
   --surface2: #e8eaf0;
   --border: #d1d5e0;
   --text: #1a1d27;
-  --text-muted: #5a6070;
+  --text-muted: #4b5563;
+  --accent: #3157c8;
+  --accent2: #087e78;
 }
 
 /* Color palette overrides */
@@ -880,7 +882,9 @@ body {
     --surface2: #e8eaf0;
     --border: #d1d5e0;
     --text: #1a1d27;
-    --text-muted: #5a6070;
+    --text-muted: #4b5563;
+    --accent: #3157c8;
+    --accent2: #087e78;
   }
 }
 
