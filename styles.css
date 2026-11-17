@@ -769,7 +769,7 @@ body {
    Print uses A4, tighter spacing and slightly reduced typography to preserve
    the complete printable resume in a maximum of two pages. */
 @page {
-  size: A4;
+  size: a4;
   margin: 8mm;
 }
 @media print {
