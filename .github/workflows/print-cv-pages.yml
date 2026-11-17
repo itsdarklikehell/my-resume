@@ -49,7 +49,7 @@ jobs:
 
       - name: Generate A4 PDF and enforce two-page limit
         run: |
-          node scripts/print-cv.mjs
+          CV_URL=http://127.0.0.1:4173/my-resume/ node scripts/print-cv.mjs
           python - <<'PY'
           from pypdf import PdfReader
           from pathlib import Path
