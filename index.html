@@ -131,7 +131,7 @@
 <a class="share-btn" href="https://www.facebook.com/sharer/sharer.php?u=https://itsdarklikehell.github.io/my-resume/" target="_blank">📘 <span data-i18n="share_facebook">Facebook</span></a>
 <a class="share-btn" href="https://t.me/share/url?url=https://itsdarklikehell.github.io/my-resume/&text=Bekijk%20mijn%20CV" target="_blank">✈️ <span data-i18n="share_telegram">Telegram</span></a>
 <a class="share-btn" href="mailto:?subject=Bekijk%20mijn%20CV&body=https://itsdarklikehell.github.io/my-resume/" target="_blank">✉️ <span data-i18n="share_email">Email</span></a>
-<a class="share-btn" href="#" onclick="navigator.clipboard.writeText('https://itsdarklikehell.github.io/my-resume/');return false;">🔗 <span data-i18n="share_copy">Copy link</span></a>
+<a class="share-btn" href="#" data-action="copy-link">🔗 <span data-i18n="share_copy">Copy link</span></a>
 </div>
 </section>
 </div>
@@ -641,18 +641,5 @@
 </div>
 <script type="module" src="script.js" defer></script>
 
-<script>
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    // Register only this project site's scoped worker. Do not unregister other
-    // registrations on the shared github.io origin.
-    navigator.serviceWorker.register('/my-resume/sw.js', { scope: '/my-resume/' }).then(reg => {
-      console.log('ServiceWorker registered:', reg.scope);
-    }).catch(err => {
-      console.log('ServiceWorker registration failed:', err);
-    });
-  });
-}
-</script>
 </body>
 </html>
