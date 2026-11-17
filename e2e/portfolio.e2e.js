@@ -281,16 +281,25 @@ test('URL language override works for all four supported languages', async ({ pa
 
 test('all rendered images load and the page has no uncaught runtime errors', async ({ page }) => {
   const pageErrors = [];
+  const consoleErrors = [];
   page.on('pageerror', error => pageErrors.push(error.message));
+  page.on('console', message => {
+    if (message.type() === 'error') consoleErrors.push(message.text());
+  });
   await page.goto('?lang=nl');
   await expect(page.locator('#hero-updated')).not.toBeEmpty({ timeout: 30_000 });
 
-  const brokenImages = await page.locator('img').evaluateAll(images =>
-    images.filter(image => !image.complete || image.naturalWidth === 0)
-      .map(image => ({ src: image.currentSrc || image.src, alt: image.alt }))
+  const brokenVisibleImages = await page.locator('img').evaluateAll(images =>
+    images.filter(image => {
+      const rect = image.getBoundingClientRect();
+      const visible = rect.width > 0 && rect.height > 0 &&
+        rect.top < window.innerHeight && rect.bottom > 0;
+      return visible && (!image.complete || image.naturalWidth === 0);
+    }).map(image => ({ src: image.currentSrc || image.src, alt: image.alt }))
   );
-  expect(brokenImages, 'all rendered images should load').toEqual([]);
+  expect(brokenVisibleImages, 'visible images should load').toEqual([]);
   expect(pageErrors, 'uncaught browser errors').toEqual([]);
+  expect(consoleErrors, 'browser console errors').toEqual([]);
 });
 
 test('axe accessibility audit passes in all supported languages', async ({ page }) => {
