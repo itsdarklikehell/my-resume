@@ -142,6 +142,7 @@ body {
 }
 
 .lang-toggle {
+  color: var(--text);
   position: fixed;
   top: 1.5rem;
   right: 4.5rem;
@@ -727,7 +728,7 @@ body {
   resize: vertical;
 }
 .contact-form button {
-  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  background: #3157c8;
   color: #fff;
   border: none;
   border-radius: 8px;
@@ -1799,6 +1800,7 @@ html:not([lang="nl"]) .download-btn.lang-nl {
   font-size: 0.82rem;
 }
 .vacancy-profile-evidence a {
+  color: var(--accent);
   display: inline-block;
   padding: 0.25rem 0.55rem;
   border-radius: 0.45rem;
@@ -2035,8 +2037,8 @@ html:not([lang="nl"]) .download-btn.lang-nl {
   transform: translateY(-1px);
 }
 .recruiter-link-primary {
-  background: var(--accent);
-  border-color: var(--accent);
+  background: #3157c8;
+  border-color: #3157c8;
   color: #fff;
 }
 .recruiter-link-primary:hover { color: #fff; }
@@ -2373,3 +2375,8 @@ html:not([lang="nl"]) .download-btn.lang-nl {
     transition-duration: 0.01ms !important;
   }
 }
+
+
+/* Keep dynamically rendered links and metadata readable on dark surfaces. */
+.dynamic-timeline-item a { color: var(--accent); }
+.repo-card .repo-lang { color: var(--text-muted) !important; }
