@@ -335,8 +335,8 @@ export const translations = {
     exp_technicum_net3_period: '2004 — 2005',
     exp_technicum_net3_1:
       'Installatie van computernetwerken en telecommunicatie',
-    print_cv_nl: 'Print CV (NL)',
-    print_cv_en: 'Print CV (EN)',
+    print_cv: 'Print CV',
+    
     share_linkedin: 'LinkedIn',
     share_twitter: 'Twitter',
     share_whatsapp: 'WhatsApp',
@@ -606,8 +606,8 @@ export const translations = {
     exp_unistar_dak_company: 'Unistar',
     exp_unistar_dak_period: '2008 — 2009',
     exp_unistar_dak_1: 'Installation technology and roofing',
-    print_cv_nl: 'Print CV (NL)',
-    print_cv_en: 'Print CV (EN)',
+    print_cv: 'Print CV',
+    
     repos_showcase: 'GitHub Repositories',
     share_copy: 'Copy link',
     share_email: 'Email',
@@ -773,8 +773,8 @@ export const translations = {
     show_less: 'Weniger anzeigen',
     auto_sort_on: 'Automatische Sortierung: AN',
     auto_sort_off: 'Automatische Sortierung: AUS',
-    print_cv_nl: 'CV drucken (NL)',
-    print_cv_en: 'CV drucken (EN)',
+    print_cv: 'Lebenslauf drucken',
+    
     share_linkedin: 'LinkedIn',
     share_twitter: 'Twitter',
     share_whatsapp: 'WhatsApp',
@@ -969,8 +969,8 @@ export const translations = {
     show_less: 'Afficher moins',
     auto_sort_on: 'Tri automatique : ACTIVÉ',
     auto_sort_off: 'Tri automatique : DÉSACTIVÉ',
-    print_cv_nl: 'Imprimer le CV (NL)',
-    print_cv_en: 'Imprimer le CV (EN)',
+    print_cv: 'Imprimer le CV',
+    
     share_linkedin: 'LinkedIn',
     share_twitter: 'Twitter',
     share_whatsapp: 'WhatsApp',
