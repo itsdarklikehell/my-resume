@@ -335,6 +335,8 @@ export const translations = {
     exp_technicum_net3_period: '2004 — 2005',
     exp_technicum_net3_1:
       'Installatie van computernetwerken en telecommunicatie',
+    exp_technicum_volt2_role: 'Assistent-monteur montage (sterkstroom)',
+    exp_technicum_volt2_1: 'Montage van elektrische (sterkstroom) installaties',
     print_cv: 'Print CV',
     
     share_linkedin: 'LinkedIn',
@@ -606,6 +608,8 @@ export const translations = {
     exp_unistar_dak_company: 'Unistar',
     exp_unistar_dak_period: '2008 — 2009',
     exp_unistar_dak_1: 'Installation technology and roofing',
+    exp_technicum_volt2_role: 'Installation assistant (high-voltage)',
+    exp_technicum_volt2_1: 'Installation of electrical (high-voltage) systems',
     print_cv: 'Print CV',
     
     repos_showcase: 'GitHub Repositories',
@@ -773,6 +777,8 @@ export const translations = {
     show_less: 'Weniger anzeigen',
     auto_sort_on: 'Automatische Sortierung: AN',
     auto_sort_off: 'Automatische Sortierung: AUS',
+    exp_technicum_volt2_role: 'Montageassistent (Starkstrom)',
+    exp_technicum_volt2_1: 'Montage elektrischer Starkstromanlagen',
     print_cv: 'Lebenslauf drucken',
     
     share_linkedin: 'LinkedIn',
@@ -969,6 +975,8 @@ export const translations = {
     show_less: 'Afficher moins',
     auto_sort_on: 'Tri automatique : ACTIVÉ',
     auto_sort_off: 'Tri automatique : DÉSACTIVÉ',
+    exp_technicum_volt2_role: 'Assistant monteur en installations électriques (courant fort)',
+    exp_technicum_volt2_1: 'Installation de systèmes électriques à courant fort',
     print_cv: 'Imprimer le CV',
     
     share_linkedin: 'LinkedIn',
