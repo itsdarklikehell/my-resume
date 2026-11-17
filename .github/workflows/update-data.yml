@@ -7,10 +7,12 @@ on:
     - cron: '0 6 * * *'  # Dagelijks om 06:00 UTC
   workflow_dispatch:  # Handmatig triggeren
 
+concurrency:
+  group: update-data-main
+  cancel-in-progress: false
+
 permissions:
   contents: write
-  pages: write
-  id-token: write
 
 jobs:
   update-data:
@@ -67,7 +69,18 @@ jobs:
           git add github-data.json profile-data.json
           if ! git diff-index --quiet HEAD --; then
             git commit -m "Update GitHub and profile data ($(date +%Y-%m-%d))"
-            git push || true
+            # Other workflows can push to main concurrently; never hide a failed data publish.
+            for attempt in 1 2 3; do
+              git fetch origin main
+              git rebase origin/main
+              if git push origin HEAD:main; then
+                exit 0
+              fi
+              echo "Push attempt ${attempt} failed; retrying after fetching main."
+              sleep $((attempt * 2))
+            done
+            echo "::error::Unable to publish refreshed profile data after 3 attempts."
+            exit 1
           else
             echo "No changes to commit"
           fi
