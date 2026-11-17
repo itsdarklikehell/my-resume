@@ -64,16 +64,16 @@ jobs:
         run: |
           npm run preview -- --host 127.0.0.1 > /tmp/cv-preview.log 2>&1 &
           for attempt in {1..30}; do
-            if curl --fail --silent http://127.0.0.1:4173/ > /dev/null; then
+            if curl --fail --silent http://127.0.0.1:4173/my-resume/ > /dev/null; then
               break
             fi
             sleep 2
           done
-          curl --fail --silent http://127.0.0.1:4173/ > /dev/null
+          curl --fail --silent http://127.0.0.1:4173/my-resume/ > /dev/null
           cat /tmp/cv-preview.log
 
       - name: Generate Dutch and English CV PDFs
-        run: node scripts/print-cv.mjs
+        run: CV_URL=http://127.0.0.1:4173/my-resume/ node scripts/print-cv.mjs
 
       - name: Commit regenerated PDFs to the source branch
         env:
