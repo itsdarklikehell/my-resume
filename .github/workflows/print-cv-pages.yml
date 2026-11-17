@@ -54,15 +54,16 @@ jobs:
           from pypdf import PdfReader
           from pathlib import Path
 
-          pdf = Path("artifacts/cv-print.pdf")
-          if not pdf.is_file() or pdf.stat().st_size == 0:
-              raise SystemExit("Print check failed: PDF was not generated.")
-          pages = len(PdfReader(str(pdf)).pages)
-          print(f"Generated CV: {pages} page(s), A4.")
-          if pages > 2:
-              raise SystemExit(f"Print check failed: expected at most 2 pages, got {pages}.")
-          if pages < 1:
-              raise SystemExit("Print check failed: PDF contains no pages.")
+          for name in ("cv-print.pdf", "cv-print-en.pdf"):
+              pdf = Path("artifacts") / name
+              if not pdf.is_file() or pdf.stat().st_size == 0:
+                  raise SystemExit(f"Print check failed: {name} was not generated.")
+              pages = len(PdfReader(str(pdf)).pages)
+              print(f"Generated {name}: {pages} page(s), A4.")
+              if pages > 2:
+                  raise SystemExit(f"Print check failed: {name} exceeds the two-page limit ({pages} pages).")
+              if pages < 1:
+                  raise SystemExit(f"Print check failed: {name} contains no pages.")
           PY
 
       - name: Upload generated PDF for inspection
@@ -70,6 +71,6 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: cv-print-preview
-          path: artifacts/cv-print.pdf
+          path: artifacts/*.pdf
           if-no-files-found: ignore
           retention-days: 14
