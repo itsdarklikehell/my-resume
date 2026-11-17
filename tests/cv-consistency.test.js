@@ -28,6 +28,7 @@ describe('CV page consistency', () => {
     expect(script).toContain('profileData.source_status?.[p.key]');
     expect(script).toContain('last_successful_at');
     expect(script).toContain('no_successful_update');
+    expect(script).not.toContain("opacity:.7;");
   });
 
   it('publishes refreshed data with retries instead of hiding git push failures', async () => {
