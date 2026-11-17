@@ -49,7 +49,7 @@ Un site CV bilingue (NL/EN) — désormais multilingue (NL/EN/DE/FR) — mis à 
 ### Sections
 1. **Hero** — nom, titre, courte introduction, informations de contact.
 2. **À propos de moi** — courte biographie.
-3. **Expérience** — chronologie de travail de 23 entrées avec rôle, entreprise, période et description.
+3. **Expérience** — chronologie de travail de 17 entrées avec rôle, entreprise, période et description.
 4. **Formation** — Friesche Poort (Tweewielerherstel Monteur) et Friesland College (Monteur Sterkstroom Installaties).
 5. **Projets** — vitrine de dépôts GitHub catégorisée.
 6. **Dépôts GitHub** — mêmes données que Projets, section dédiée.
@@ -61,8 +61,8 @@ Un site CV bilingue (NL/EN) — désormais multilingue (NL/EN/DE/FR) — mis à 
 12. **Gource** — vidéo de visualisation de l'historique des commits GitHub.
 13. **Télécharger le CV** — export PDF basé sur l'impression (NL/EN) + téléchargement JSON.
 14. **Partager** — partage LinkedIn, Twitter/X, WhatsApp.
-15. **Contact** — formulaire de contact par e-mail.
-16. **Barre latérale** — tags d'expertise, Langues (NL/DE/EN avec niveaux : Moedertaal/Basis/Professioneel).
+**Contact** — liens directs vers l’e-mail, le téléphone, LinkedIn et GitHub dans la section Hero.
+15. **Barre latérale** — tags d'expertise, Langues (NL/DE/EN avec niveaux : Moedertaal/Basis/Professioneel).
 
 ### Technique
 - **SEO** — balises Open Graph, Twitter Cards, `robots.txt`, `sitemap.xml`, `site.webmanifest`, `browserconfig.xml`, `humans.txt`, `.well-known/security.txt`.

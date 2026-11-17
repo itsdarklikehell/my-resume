@@ -49,7 +49,7 @@ A bilingual (NL/EN) — now multilingual (NL/EN/DE/FR) — live-updating CV/resu
 ### Sections
 1. **Hero** — name, title, short intro, contact info.
 2. **About Me** — short bio.
-3. **Experience** — 23-item work timeline with role, company, period, and description.
+3. **Experience** — 17-item work timeline with role, company, period, and description.
 4. **Education** — Friesche Poort (Tweewielerherstel Monteur) and Friesland College (Monteur Sterkstroom Installaties).
 5. **Projects** — categorized GitHub repos showcase.
 6. **GitHub Repositories** — same data as Projects, dedicated section.
@@ -61,8 +61,8 @@ A bilingual (NL/EN) — now multilingual (NL/EN/DE/FR) — live-updating CV/resu
 12. **Gource** — video visualization of GitHub commit history.
 13. **Download CV** — print-based PDF export (NL/EN) + JSON download.
 14. **Share** — LinkedIn, Twitter/X, WhatsApp sharing.
-15. **Contact** — email contact form.
-16. **Sidebar** — Expertise tags, Languages (NL/DE/EN with levels: Moedertaal/Basis/Professioneel).
+**Contact** — direct email, phone, LinkedIn and GitHub links in the hero section.
+15. **Sidebar** — Expertise tags, Languages (NL/DE/EN with levels: Moedertaal/Basis/Professioneel).
 
 ### Technical
 - **SEO** — Open Graph tags, Twitter cards, `robots.txt`, `sitemap.xml`, `site.webmanifest`, `browserconfig.xml`, `humans.txt`, `.well-known/security.txt`.

@@ -1611,6 +1611,9 @@ loadGitHubData()
               }`;
             document.head.appendChild(printStyle);
           }
+          // The page is translated in-place; print exactly the currently selected language.
+          applyLang(currentLang);
+          document.documentElement.lang = currentLang;
           window.print();
           break;
         case 'copy-link': {

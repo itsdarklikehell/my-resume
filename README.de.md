@@ -49,7 +49,7 @@ Eine zweisprachige (NL/EN) — mittlerweile mehrsprachige (NL/EN/DE/FR) — live
 ### Abschnitte
 1. **Hero** — Name, Titel, kurze Einleitung, Kontaktinformationen.
 2. **Über mich** — kurze Biografie.
-3. **Erfahrung** — 23-Einträge-Arbeitszeitstrahl mit Rolle, Unternehmen, Zeitraum und Beschreibung.
+3. **Erfahrung** — 17-Einträge-Arbeitszeitstrahl mit Rolle, Unternehmen, Zeitraum und Beschreibung.
 4. **Ausbildung** — Friesche Poort (Tweewielerherstel Monteur) und Friesland College (Monteur Sterkstroom Installaties).
 5. **Projekte** — kategorisiertes GitHub-Repo-Showcase.
 6. **GitHub-Repositories** — gleiche Daten wie Projekte, separater Abschnitt.
@@ -61,8 +61,8 @@ Eine zweisprachige (NL/EN) — mittlerweile mehrsprachige (NL/EN/DE/FR) — live
 12. **Gource** — Videovisualisierung des GitHub-Commit-Verlaufs.
 13. **CV-Download** — druckbasierter PDF-Export (NL/EN) + JSON-Download.
 14. **Teilen** — LinkedIn, Twitter/X, WhatsApp-Teilen.
-15. **Kontakt** — E-Mail-Kontaktformular.
-16. **Seitenleiste** — Expertise-Tags, Sprachen (NL/DE/EN mit Niveaus: Moedertaal/Basis/Professioneel).
+**Kontakt** — direkte Links zu E-Mail, Telefon, LinkedIn und GitHub im Hero-Bereich.
+15. **Seitenleiste** — Expertise-Tags, Sprachen (NL/DE/EN mit Niveaus: Moedertaal/Basis/Professioneel).
 
 ### Technik
 - **SEO** — Open Graph-Tags, Twitter Cards, `robots.txt`, `sitemap.xml`, `site.webmanifest`, `browserconfig.xml`, `humans.txt`, `.well-known/security.txt`.
