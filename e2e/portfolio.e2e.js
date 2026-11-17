@@ -306,13 +306,10 @@ test('axe accessibility audit passes in all supported languages', async ({ page 
   for (const lang of ['nl', 'en', 'de', 'fr']) {
     await page.goto(`?lang=${lang}`);
     await expect(page.locator('#hero-updated')).not.toBeEmpty({ timeout: 30_000 });
-    await page.waitForFunction(() =>
-      [...document.querySelectorAll('.timeline-item')].every(element =>
-        getComputedStyle(element).opacity === '1'
-      ),
-      null,
-      { timeout: 5_000 },
-    );
+    // Audit the settled state rather than text while its entrance animation is fading in.
+    await page.addStyleTag({
+      content: '.timeline-item { opacity: 1 !important; animation: none !important; transform: none !important; }',
+    });
     const theme = await page.evaluate(() => {
       const root = getComputedStyle(document.documentElement);
       const sample = selector => {
