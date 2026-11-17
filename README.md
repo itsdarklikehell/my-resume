@@ -184,3 +184,10 @@ Cybersecurity enthusiast and developer focused on offensive security, automation
 
 *Profile maintained with care. Feel free to reach out for collaboration or security discussions.*
 
+
+
+## Automated data and PDF maintenance
+
+- Platform cards show the last **successful** source update. If a source cannot be refreshed, previously saved values remain visible but are identified as retained data instead of being presented as newly updated.
+- The `update-data.yml` workflow retries publication to `main` when another workflow pushes concurrently; a failed push is reported as a failed run.
+- Dutch and English CV PDFs are generated from the built site with explicit `?lang=nl` and `?lang=en` overrides. The PDF workflow checks that each version stays within two A4 pages.
