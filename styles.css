@@ -769,7 +769,7 @@ body {
    Print uses A4, tighter spacing and slightly reduced typography to preserve
    the complete printable resume in a maximum of two pages. */
 @page {
-  size: A4;
+  size: a4;
   margin: 8mm;
 }
 @media print {
@@ -2352,4 +2352,17 @@ html:not([lang="nl"]) .download-btn.lang-nl {
   color: var(--text-muted);
   font-size: .82rem;
   line-height: 1.45;
+}
+
+
+/* Respect users who prefer reduced motion. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

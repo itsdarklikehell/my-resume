@@ -9,7 +9,7 @@ A bilingual (NL/EN) — now multilingual (NL/EN/DE/FR) — live-updating CV/resu
 ### Site structure
 - **Single-page CV** — everything on one static HTML page with a clean card-based layout.
 - **Responsive design** — works on desktop and mobile; print-friendly CSS for PDF export.
-- **No build step** — pure HTML/CSS/JS, served directly from GitHub Pages.
+- **Static site with a build step** — HTML/CSS/JavaScript source is bundled with Vite for production and deployed to GitHub Pages.
 
 ### Languages (i18n)
 - **4 languages**: Nederlands (nl), English (en), Deutsch (de), Français (fr).
@@ -72,6 +72,13 @@ A bilingual (NL/EN) — now multilingual (NL/EN/DE/FR) — live-updating CV/resu
 - **CI** — basic HTML validation and broken-link checks on push/PR.
 
 ---
+
+## Local development and checks
+
+- `npm install` — install development dependencies.
+- `npm run dev` — start the local Vite development server.
+- `npm run check` — run ESLint, HTML validation, Stylelint, unit tests, and the production build.
+- `npm run build` — create the production build in `dist/`.
 
 ## Repository structure
 
