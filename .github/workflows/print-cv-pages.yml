@@ -30,6 +30,9 @@ jobs:
       - name: Build website
         run: npm run build
 
+      - name: Copy live data files into the preview build
+        run: cp profile-data.json github-data.json dist/
+
       - name: Install Chromium and PDF checker
         run: |
           npm install --no-save --package-lock=false playwright
