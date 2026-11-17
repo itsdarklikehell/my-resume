@@ -11,17 +11,6 @@ on:
       - 'github-data.json'
       - 'scripts/print-cv.mjs'
       - '.github/workflows/generate-cv-pdfs.yml'
-  pull_request:
-    branches: [main]
-    types: [opened, synchronize, reopened]
-    paths:
-      - 'index.html'
-      - 'script.js'
-      - 'styles.css'
-      - 'profile-data.json'
-      - 'github-data.json'
-      - 'scripts/print-cv.mjs'
-      - '.github/workflows/generate-cv-pdfs.yml'
   workflow_dispatch:
 
 permissions:
@@ -33,14 +22,13 @@ concurrency:
 
 jobs:
   generate:
-    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-24.04
     steps:
       - name: Check out the source branch
         uses: actions/checkout@v4
         with:
-          repository: ${{ github.event.pull_request.head.repo.full_name || github.repository }}
-          ref: ${{ github.event.pull_request.head.ref || github.ref_name }}
+          repository: ${{ github.repository }}
+          ref: ${{ github.ref_name }}
           fetch-depth: 0
 
       - name: Set up Node.js
@@ -80,8 +68,6 @@ jobs:
 
       - name: Commit regenerated PDFs to the source branch
         env:
-          EVENT_NAME: ${{ github.event_name }}
-          PR_HEAD_REF: ${{ github.event.pull_request.head.ref }}
           REF_NAME: ${{ github.ref_name }}
         run: |
           git config user.name "github-actions[bot]"
@@ -92,11 +78,7 @@ jobs:
             exit 0
           fi
           git commit -m "docs: regenerate Dutch and English CV PDFs"
-          if [ "$EVENT_NAME" = "pull_request" ]; then
-            TARGET_BRANCH="$PR_HEAD_REF"
-          else
-            TARGET_BRANCH="$REF_NAME"
-          fi
+          TARGET_BRANCH="$REF_NAME"
           for attempt in 1 2 3; do
             git fetch origin "refs/heads/$TARGET_BRANCH:refs/remotes/origin/$TARGET_BRANCH"
             if ! git rebase "origin/$TARGET_BRANCH"; then
