@@ -1441,7 +1441,6 @@ function renderDonut() {
 }
 
 function downloadJSON() {
-  const s = githubData && githubData.stats ? githubData.stats : {};
   const data = {
     name: 'Bauke Molenaar',
     title: 'Technisch professional',
@@ -1452,8 +1451,8 @@ function downloadJSON() {
     hackthebox:
       'https://profile.hackthebox.com/profile/01a0f22b-f959-73b9-925c-c2e2e350db97',
     cylab: 'https://learn.cylabacademy.org/users/SgtStroopwafel',
-    skills: s.skills || {},
-    repos: s.repos || [],
+    skills: gSkills() || {},
+    repos: gRepos() || [],
     generated_at:
       (githubData && githubData.generated_at) || new Date().toISOString(),
   };
@@ -1618,8 +1617,24 @@ loadGitHubData()
           break;
         case 'copy-link': {
           const url = 'https://itsdarklikehell.github.io/my-resume/';
+          const fallbackCopy = () => {
+            const input = document.createElement('textarea');
+            input.value = url;
+            input.setAttribute('readonly', '');
+            input.style.position = 'absolute';
+            input.style.left = '-9999px';
+            document.body.appendChild(input);
+            input.select();
+            try {
+              if (typeof document.execCommand === 'function') document.execCommand('copy');
+            } finally {
+              input.remove();
+            }
+          };
           if (navigator.clipboard && navigator.clipboard.writeText) {
-            navigator.clipboard.writeText(url).catch(() => {});
+            navigator.clipboard.writeText(url).catch(fallbackCopy);
+          } else {
+            fallbackCopy();
           }
           event.preventDefault();
           break;
