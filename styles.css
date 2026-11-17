@@ -437,6 +437,8 @@ body {
   font-size: 0.95rem;
   font-weight: 600;
   text-decoration: none;
+  font-family: inherit;
+  text-align: left;
   cursor: pointer;
   transition:
     transform 0.2s,
@@ -757,6 +759,7 @@ body {
   color: var(--text);
   font-size: 0.85rem;
   text-decoration: none;
+  font-family: inherit;
   cursor: pointer;
   transition: all 0.2s;
 }
