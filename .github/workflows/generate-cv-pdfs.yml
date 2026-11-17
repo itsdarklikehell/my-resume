@@ -60,6 +60,9 @@ jobs:
       - name: Build website
         run: npm run build
 
+      - name: Copy live data files into the preview build
+        run: cp profile-data.json github-data.json dist/
+
       - name: Start preview server
         run: |
           npm run preview -- --host 127.0.0.1 > /tmp/cv-preview.log 2>&1 &
