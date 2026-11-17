@@ -25,6 +25,9 @@ describe('CV page consistency', () => {
     const script = await readFile(new URL('../script.js', import.meta.url), 'utf8');
     expect(script).toContain('skills: gSkills() || {}');
     expect(script).toContain('repos: gRepos() || []');
+    expect(script).toContain('profileData.source_status?.[p.key]');
+    expect(script).toContain('last_successful_at');
+    expect(script).toContain('no_successful_update');
   });
 
   it('publishes refreshed data with retries instead of hiding git push failures', async () => {
