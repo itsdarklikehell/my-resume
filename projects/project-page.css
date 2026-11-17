@@ -5,6 +5,10 @@
 }
 .project-page-header {
   display: flex;
+  padding: .75rem;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface);
   justify-content: space-between;
   align-items: center;
   gap: 1rem;
@@ -12,7 +16,12 @@
   margin-bottom: 1.5rem;
 }
 .project-page-header a,
-.project-page a { color: var(--accent); }
+.project-page a { color: var(--text); }
+.project-page .lang-toggle {
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--border);
+}
 .project-page-header select {
   padding: .45rem .65rem;
   color: var(--text);
@@ -60,6 +69,7 @@
   background: var(--surface);
 }
 .project-page-section h2 {
+  color: var(--text);
   margin: 0 0 .65rem;
   font-size: 1.05rem;
 }
@@ -107,6 +117,11 @@
   background: var(--surface);
 }
 .project-page-footer {
+  padding: .75rem;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface);
+  color: var(--text);
   margin: 1.25rem 0;
   color: var(--text-muted);
   font-size: .78rem;
