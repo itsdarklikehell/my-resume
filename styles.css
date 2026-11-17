@@ -20,7 +20,7 @@
   --text: #1a1d27;
   --text-muted: #4b5563;
   --accent: #3157c8;
-  --accent2: #087e78;
+  --accent2: #00645f;
 }
 
 /* Color palette overrides */
@@ -884,7 +884,7 @@ body {
     --text: #1a1d27;
     --text-muted: #4b5563;
     --accent: #3157c8;
-    --accent2: #087e78;
+    --accent2: #00645f;
   }
 }
 
