@@ -306,12 +306,32 @@ test('axe accessibility audit passes in all supported languages', async ({ page 
   for (const lang of ['nl', 'en', 'de', 'fr']) {
     await page.goto(`?lang=${lang}`);
     await expect(page.locator('#hero-updated')).not.toBeEmpty({ timeout: 30_000 });
+    const theme = await page.evaluate(() => {
+      const root = getComputedStyle(document.documentElement);
+      const sample = selector => {
+        const element = document.querySelector(selector);
+        if (!element) return null;
+        const style = getComputedStyle(element);
+        return { color: style.color, background: style.backgroundColor, opacity: style.opacity };
+      };
+      return {
+        theme: document.documentElement.dataset.theme,
+        palette: document.documentElement.dataset.palette || 'default',
+        accent: root.getPropertyValue('--accent').trim(),
+        accent2: root.getPropertyValue('--accent2').trim(),
+        muted: root.getPropertyValue('--text-muted').trim(),
+        lang: sample('#lang-label'),
+        company: sample('.timeline-item .company'),
+      };
+    });
     const results = await new AxeBuilder({ page })
       .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'])
       .analyze();
-    const violations = results.violations.map(violation =>
-      `${violation.id} (${violation.impact}): ${violation.nodes.map(node => node.target.join(' ')).join(', ')}`
+    const violations = results.violations.flatMap(violation =>
+      violation.nodes.map(node =>
+        `${violation.id} (${violation.impact}) ${node.target.join(' ')}: ${node.failureSummary}`
+      )
     );
-    expect(violations, `axe violations for lang=${lang}`).toEqual([]);
+    expect(violations, `axe violations for lang=${lang}; theme=${JSON.stringify(theme)}`).toEqual([]);
   }
 });
