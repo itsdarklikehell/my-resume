@@ -474,7 +474,7 @@ function renderProfiles() {
 
   container.innerHTML = profiles.map(profile =>
     '<a href="' + escapeHtml(profile.url) + '" target="_blank" rel="noopener" class="activity-card" ' +
-      'style="text-decoration:none;color:inherit;' + '' + '">' +
+      'style="text-decoration:none;color:inherit;">' +
       '<div class="activity-icon">' + profile.icon + '</div>' +
       '<div class="activity-name">' + escapeHtml(profile.name) + '</div>' +
       '<div class="activity-link">' + escapeHtml(profile.username) + '</div>' +
