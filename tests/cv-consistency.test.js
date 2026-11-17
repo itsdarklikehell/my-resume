@@ -45,6 +45,8 @@ describe('CV page consistency', () => {
     expect(script).toContain('target.searchParams.set("lang", output.lang)');
     const workflow = await readFile(new URL('../.github/workflows/generate-cv-pdfs.yml', import.meta.url), 'utf8');
     expect(workflow).toContain('cp profile-data.json github-data.json dist/');
+    expect(workflow).toContain('git rebase "origin/$TARGET_BRANCH"');
+    expect(workflow).toContain('Unable to publish regenerated PDFs after 3 attempts.');
   });
 
   it('updates the document language before printing the active translation', async () => {
