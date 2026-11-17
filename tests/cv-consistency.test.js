@@ -40,6 +40,8 @@ describe('CV page consistency', () => {
     expect(script).toContain('bauke-molenaar-cv.pdf');
     expect(script).toContain('bauke-molenaar-cv-en.pdf');
     expect(script).toContain('target.searchParams.set("lang", output.lang)');
+    const workflow = await readFile(new URL('../.github/workflows/generate-cv-pdfs.yml', import.meta.url), 'utf8');
+    expect(workflow).toContain('cp profile-data.json github-data.json dist/');
   });
 
   it('updates the document language before printing the active translation', async () => {
