@@ -1,4 +1,7 @@
 /* Standalone technical project case studies */
+/* Apply theme changes immediately on these pages: animated inherited colors
+   can briefly fail contrast checks while the saved theme is restored. */
+body.project-page-body { transition: none; }
 .project-page {
   width: min(100% - 2rem, 980px);
   margin: 2rem auto 4rem;
@@ -21,6 +24,7 @@
   color: var(--text);
   background: var(--surface);
   border: 1px solid var(--border);
+  transition: none;
 }
 .project-page-header select {
   padding: .45rem .65rem;
