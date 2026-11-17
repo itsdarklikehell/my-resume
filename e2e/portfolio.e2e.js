@@ -339,3 +339,35 @@ test('axe accessibility audit passes in all supported languages', async ({ page 
     expect(violations, `axe violations for lang=${lang}; theme=${JSON.stringify(theme)}`).toEqual([]);
   }
 });
+
+test('project case studies share the four-language toggle and keyboard skip link', async ({ page }) => {
+  for (const project of ['pwnagotchi-control-center', 'pwnagotchi-plugins', 'pwnspeaker']) {
+    await page.goto('projects/' + project + '.html?lang=nl');
+    await expect(page.locator('html')).toHaveAttribute('lang', 'nl');
+    const skip = page.locator('.skip-link');
+    await expect(skip).toHaveAttribute('href', '#project-content');
+    await skip.focus();
+    await expect(skip).toBeFocused();
+    await skip.press('Enter');
+    await expect(page.locator('#project-content')).toBeFocused();
+    const languageToggle = page.locator('[data-field="language-toggle"]');
+    for (const lang of ['EN', 'DE', 'FR', 'NL']) {
+      await languageToggle.click();
+      await expect(page.locator('html')).toHaveAttribute('lang', lang.toLowerCase());
+      await expect(page.locator('[data-field="language-current"]')).toHaveText(lang);
+    }
+  }
+});
+
+test('project case studies pass axe WCAG 2.1 AA in all supported languages', async ({ page }) => {
+  for (const lang of ['nl', 'en', 'de', 'fr']) {
+    await page.goto('projects/pwnagotchi-control-center.html?lang=' + lang);
+    const results = await new AxeBuilder({ page })
+      .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'])
+      .analyze();
+    const violations = results.violations.flatMap(violation =>
+      violation.nodes.map(node => violation.id + ' (' + violation.impact + ') ' + node.target.join(' ') + ': ' + node.failureSummary)
+    );
+    expect(violations, 'project-page axe violations for lang=' + lang).toEqual([]);
+  }
+});

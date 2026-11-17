@@ -5,7 +5,13 @@ const slug = root?.dataset.projectPage;
 const params = new URLSearchParams(window.location.search);
 const supported = ['nl', 'en', 'de', 'fr'];
 const requested = params.get('lang');
-const lang = supported.includes(requested) ? requested : 'nl';
+const storedLang = (() => {
+  try { return localStorage.getItem('lang'); } catch { return null; }
+})();
+const browserLang = (navigator.language || 'nl').slice(0, 2).toLowerCase();
+const preferredLang = supported.includes(storedLang) ? storedLang : browserLang;
+const lang = supported.includes(requested) ? requested
+  : supported.includes(preferredLang) ? preferredLang : 'nl';
 const page = projectPages[slug]?.[lang] || projectPages[slug]?.nl;
 const labels = ui[lang] || ui.nl;
 
@@ -53,6 +59,16 @@ if (!root || !page) {
   setText('[data-field="footer"]', page.footer);
   setText('[data-field="back"]', page.backLabel);
   setText('[data-field="language-label"]', labels.language);
+  const skipLink = document.querySelector('[data-field="skip"]');
+  if (skipLink) skipLink.textContent = labels.skip;
+  const languageToggle = root.querySelector('[data-field="language-toggle"]');
+  const languageCurrent = root.querySelector('[data-field="language-current"]');
+  if (languageCurrent) languageCurrent.textContent = lang.toUpperCase();
+  if (languageToggle) {
+    languageToggle.setAttribute('aria-label', labels.languageSwitch + ' (' + lang.toUpperCase() + ')');
+    languageToggle.title = labels.languageSwitch;
+  }
+  try { localStorage.setItem('lang', lang); } catch { /* Storage can be disabled. */ }
   root.querySelector('.project-page-header')?.setAttribute('aria-label', labels.back);
   root.querySelector('[data-field="links"]')?.setAttribute('aria-label', labels.resources || labels.evidence);
   setText('[data-label="challenge"]', labels.challenge);
@@ -95,13 +111,12 @@ if (!root || !page) {
   });
   const back = root.querySelector('[data-field="back"]');
   if (back) back.href = `../index.html?lang=${lang}#projects-section`;
-  const select = root.querySelector('select');
-  if (select) {
-    select.value = lang;
-    select.addEventListener('change', () => {
-      const url = new URL(window.location.href);
-      url.searchParams.set('lang', select.value);
-      window.location.href = url.toString();
-    });
-  }
+  languageToggle?.addEventListener('click', () => {
+    const order = ['nl', 'en', 'de', 'fr'];
+    const next = order[(order.indexOf(lang) + 1) % order.length];
+    try { localStorage.setItem('lang', next); } catch { /* URL remains the source of truth. */ }
+    const url = new URL(window.location.href);
+    url.searchParams.set('lang', next);
+    window.location.assign(url.toString());
+  });
 }
