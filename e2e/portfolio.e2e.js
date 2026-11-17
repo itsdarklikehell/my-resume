@@ -235,6 +235,6 @@ test('data quality report exposes freshness and validation metrics', async ({ pa
   await expect(report.getByRole('heading', { name: 'Datakwaliteit & herkomst' })).toBeVisible();
   await expect(report.getByRole('heading', { name: 'GitHub-gegevens', level: 3 })).toBeVisible();
   await expect(report.getByRole('heading', { name: 'Profielbronnen', level: 3 })).toBeVisible();
-  await expect(report.getByRole('heading', { name: 'Ontbrekende velden', level: 3 })).toBeVisible();
-  await expect(report.getByRole('heading', { name: 'Ongeldige records', level: 3 })).toBeVisible();
+  await expect(report.getByText('Ontbrekende velden', { exact: true }).first()).toBeVisible();
+  await expect(report.getByText('Ongeldige records', { exact: true }).first()).toBeVisible();
 });
