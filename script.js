@@ -474,7 +474,7 @@ function renderProfiles() {
 
   container.innerHTML = profiles.map(profile =>
     '<a href="' + escapeHtml(profile.url) + '" target="_blank" rel="noopener" class="activity-card" ' +
-      'style="text-decoration:none;color:inherit;' + (profile.live ? '' : 'opacity:.7;') + '">' +
+      'style="text-decoration:none;color:inherit;">' +
       '<div class="activity-icon">' + profile.icon + '</div>' +
       '<div class="activity-name">' + escapeHtml(profile.name) + '</div>' +
       '<div class="activity-link">' + escapeHtml(profile.username) + '</div>' +
@@ -592,11 +592,19 @@ function renderPlatformCards() {
           fieldRows += `<div class="field-row"><span class="field-key">${escapeHtml(k)}:</span> <span class="field-val">${escapeHtml(v)}</span></div>`;
         }
       }
-      const refreshedDate = d.generated_at ? new Date(d.generated_at) : null;
+      const sourceStatus = profileData.source_status?.[p.key] || {};
+      const lastSuccessfulAt = sourceStatus.last_successful_at ||
+        (!profileData.source_status ? d.generated_at : null);
+      const refreshedDate = lastSuccessfulAt ? new Date(lastSuccessfulAt) : null;
       const locale = ({ nl: 'nl-NL', en: 'en-GB', de: 'de-DE', fr: 'fr-FR' })[currentLang] || 'nl-NL';
       const refreshed = refreshedDate && !Number.isNaN(refreshedDate.getTime())
         ? refreshedDate.toLocaleDateString(locale)
         : '';
+      const retained = Boolean(sourceStatus.retained) ||
+        ['empty', 'unavailable'].includes(sourceStatus.status);
+      const refreshMessage = refreshed
+        ? `${retained ? (t.last_successful_update || 'Last successful update') : (t.last_refreshed || 'Last refreshed')}: ${refreshed}`
+        : (t.no_successful_update || 'No successful refresh recorded; showing saved data.');
       return `<div class="platform-card" style="border-left: 4px solid var(--accent);">
                 <div class="card-header">
                     <div class="card-icon" style="color: var(--accent);">${p.icon}</div>
@@ -606,7 +614,7 @@ function renderPlatformCards() {
                     <summary style="cursor:pointer;font-size:.8rem;opacity:.8;">📊 ${t.stats || 'Stats'}</summary>
                     ${fieldRows}
                 </details>
-                <div class="card-footer">${t.last_refreshed || 'Last refreshed'}: ${refreshed}</div>
+                <div class="card-footer">${escapeHtml(refreshMessage)}</div>
                 ${isInactive(p.key, d) ? `<div class="card-footer" style="color: var(--text-muted);">Inactive</div>` : ''}
             </div>`;
     })
@@ -619,7 +627,9 @@ function renderPlatformCards() {
   })[currentLang] || 'Geen platformgegevens beschikbaar.';
   container.innerHTML =
     html || `<p class="about-text">${emptyMessage}</p>`;
-  setSectionTimestamp('platform-cards', profileData.generated_at || null);
+  // Per-source successful timestamps are shown on each card; a dataset-wide
+  // generated_at would incorrectly make retained values look freshly updated.
+  setSectionTimestamp('platform-cards', null);
 }
 function renderSkillMatrix() {
   const container = document.getElementById('skill-matrix-container');
@@ -1441,7 +1451,6 @@ function renderDonut() {
 }
 
 function downloadJSON() {
-  const s = githubData && githubData.stats ? githubData.stats : {};
   const data = {
     name: 'Bauke Molenaar',
     title: 'Technisch professional',
@@ -1452,8 +1461,8 @@ function downloadJSON() {
     hackthebox:
       'https://profile.hackthebox.com/profile/01a0f22b-f959-73b9-925c-c2e2e350db97',
     cylab: 'https://learn.cylabacademy.org/users/SgtStroopwafel',
-    skills: s.skills || {},
-    repos: s.repos || [],
+    skills: gSkills() || {},
+    repos: gRepos() || [],
     generated_at:
       (githubData && githubData.generated_at) || new Date().toISOString(),
   };
@@ -1618,8 +1627,24 @@ loadGitHubData()
           break;
         case 'copy-link': {
           const url = 'https://itsdarklikehell.github.io/my-resume/';
+          const fallbackCopy = () => {
+            const input = document.createElement('textarea');
+            input.value = url;
+            input.setAttribute('readonly', '');
+            input.style.position = 'absolute';
+            input.style.left = '-9999px';
+            document.body.appendChild(input);
+            input.select();
+            try {
+              if (typeof document.execCommand === 'function') document.execCommand('copy');
+            } finally {
+              input.remove();
+            }
+          };
           if (navigator.clipboard && navigator.clipboard.writeText) {
-            navigator.clipboard.writeText(url).catch(() => {});
+            navigator.clipboard.writeText(url).catch(fallbackCopy);
+          } else {
+            fallbackCopy();
           }
           event.preventDefault();
           break;

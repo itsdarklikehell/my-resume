@@ -1,4 +1,6 @@
 import { test, expect } from '@playwright/test';
+import { readFile } from 'node:fs/promises';
+import AxeBuilder from '@axe-core/playwright';
 
 test.beforeEach(async ({ page }) => {
   await page.addInitScript(() => {
@@ -237,4 +239,103 @@ test('data quality report exposes freshness and validation metrics', async ({ pa
   await expect(report.getByRole('heading', { name: 'Profielbronnen', level: 3 })).toBeVisible();
   await expect(report.getByText('Ontbrekende velden', { exact: true }).first()).toBeVisible();
   await expect(report.getByText('Ongeldige records', { exact: true }).first()).toBeVisible();
+});
+
+
+test('download, print and copy actions work without placeholder links', async ({ page }) => {
+  await page.goto('?lang=en');
+  await expect(page.locator('#hero-updated')).not.toBeEmpty({ timeout: 30_000 });
+
+  const downloadPromise = page.waitForEvent('download');
+  await page.locator('[data-action="download-json"]').click();
+  const download = await downloadPromise;
+  expect(download.suggestedFilename()).toBe('bauke-molenaar-cv.json');
+  const downloadPath = await download.path();
+  expect(downloadPath).toBeTruthy();
+  const payload = JSON.parse(await readFile(downloadPath, 'utf8'));
+  expect(payload.repos.length).toBeGreaterThan(0);
+  expect(Object.keys(payload.skills).length).toBeGreaterThan(0);
+
+  await page.evaluate(() => {
+    Object.defineProperty(navigator, 'clipboard', {
+      configurable: true,
+      value: { writeText: async text => { window.__copiedLink = text; } },
+    });
+    window.print = () => { document.documentElement.dataset.printInvoked = 'true'; };
+  });
+  await page.locator('[data-action="copy-link"]').click();
+  await expect.poll(() => page.evaluate(() => window.__copiedLink))
+    .toBe('https://itsdarklikehell.github.io/my-resume/');
+  await page.locator('[data-action="print-cv"]').click();
+  await expect(page.locator('html')).toHaveAttribute('data-print-invoked', 'true');
+  await expect(page.locator('html')).toHaveAttribute('lang', 'en');
+});
+
+test('URL language override works for all four supported languages', async ({ page }) => {
+  for (const lang of ['nl', 'en', 'de', 'fr']) {
+    await page.goto(`?lang=${lang}`);
+    await expect(page.locator('html')).toHaveAttribute('lang', lang);
+    await expect(page.locator('h1')).toContainText('Bauke Molenaar');
+  }
+});
+
+test('all rendered images load and the page has no uncaught runtime errors', async ({ page }) => {
+  const pageErrors = [];
+  const consoleErrors = [];
+  page.on('pageerror', error => pageErrors.push(error.message));
+  page.on('console', message => {
+    if (message.type() === 'error') consoleErrors.push(message.text());
+  });
+  await page.goto('?lang=nl');
+  await expect(page.locator('#hero-updated')).not.toBeEmpty({ timeout: 30_000 });
+
+  const brokenVisibleImages = await page.locator('img').evaluateAll(images =>
+    images.filter(image => {
+      const rect = image.getBoundingClientRect();
+      const visible = rect.width > 0 && rect.height > 0 &&
+        rect.top < window.innerHeight && rect.bottom > 0;
+      return visible && (!image.complete || image.naturalWidth === 0);
+    }).map(image => ({ src: image.currentSrc || image.src, alt: image.alt }))
+  );
+  expect(brokenVisibleImages, 'visible images should load').toEqual([]);
+  expect(pageErrors, 'uncaught browser errors').toEqual([]);
+  expect(consoleErrors, 'browser console errors').toEqual([]);
+});
+
+test('axe accessibility audit passes in all supported languages', async ({ page }) => {
+  for (const lang of ['nl', 'en', 'de', 'fr']) {
+    await page.goto(`?lang=${lang}`);
+    await expect(page.locator('#hero-updated')).not.toBeEmpty({ timeout: 30_000 });
+    // Audit the settled state rather than text while its entrance animation is fading in.
+    await page.addStyleTag({
+      content: '.timeline-item { opacity: 1 !important; animation: none !important; transform: none !important; }',
+    });
+    const theme = await page.evaluate(() => {
+      const root = getComputedStyle(document.documentElement);
+      const sample = selector => {
+        const element = document.querySelector(selector);
+        if (!element) return null;
+        const style = getComputedStyle(element);
+        return { color: style.color, background: style.backgroundColor, opacity: style.opacity };
+      };
+      return {
+        theme: document.documentElement.dataset.theme,
+        palette: document.documentElement.dataset.palette || 'default',
+        accent: root.getPropertyValue('--accent').trim(),
+        accent2: root.getPropertyValue('--accent2').trim(),
+        muted: root.getPropertyValue('--text-muted').trim(),
+        lang: sample('#lang-label'),
+        company: sample('.timeline-item .company'),
+      };
+    });
+    const results = await new AxeBuilder({ page })
+      .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'])
+      .analyze();
+    const violations = results.violations.flatMap(violation =>
+      violation.nodes.map(node =>
+        `${violation.id} (${violation.impact}) ${node.target.join(' ')}: ${node.failureSummary}`
+      )
+    );
+    expect(violations, `axe violations for lang=${lang}; theme=${JSON.stringify(theme)}`).toEqual([]);
+  }
 });

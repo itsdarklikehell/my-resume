@@ -18,7 +18,9 @@
   --surface2: #e8eaf0;
   --border: #d1d5e0;
   --text: #1a1d27;
-  --text-muted: #5a6070;
+  --text-muted: #4b5563;
+  --accent: #3157c8;
+  --accent2: #00645f;
 }
 
 /* Color palette overrides */
@@ -140,6 +142,7 @@ body {
 }
 
 .lang-toggle {
+  color: var(--text);
   position: fixed;
   top: 1.5rem;
   right: 4.5rem;
@@ -437,6 +440,8 @@ body {
   font-size: 0.95rem;
   font-weight: 600;
   text-decoration: none;
+  font-family: inherit;
+  text-align: left;
   cursor: pointer;
   transition:
     transform 0.2s,
@@ -723,7 +728,7 @@ body {
   resize: vertical;
 }
 .contact-form button {
-  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  background: #3157c8;
   color: #fff;
   border: none;
   border-radius: 8px;
@@ -757,6 +762,7 @@ body {
   color: var(--text);
   font-size: 0.85rem;
   text-decoration: none;
+  font-family: inherit;
   cursor: pointer;
   transition: all 0.2s;
 }
@@ -877,7 +883,9 @@ body {
     --surface2: #e8eaf0;
     --border: #d1d5e0;
     --text: #1a1d27;
-    --text-muted: #5a6070;
+    --text-muted: #4b5563;
+    --accent: #3157c8;
+    --accent2: #00645f;
   }
 }
 
@@ -1792,6 +1800,7 @@ html:not([lang="nl"]) .download-btn.lang-nl {
   font-size: 0.82rem;
 }
 .vacancy-profile-evidence a {
+  color: var(--accent);
   display: inline-block;
   padding: 0.25rem 0.55rem;
   border-radius: 0.45rem;
@@ -2028,8 +2037,8 @@ html:not([lang="nl"]) .download-btn.lang-nl {
   transform: translateY(-1px);
 }
 .recruiter-link-primary {
-  background: var(--accent);
-  border-color: var(--accent);
+  background: #3157c8;
+  border-color: #3157c8;
   color: #fff;
 }
 .recruiter-link-primary:hover { color: #fff; }
@@ -2366,3 +2375,8 @@ html:not([lang="nl"]) .download-btn.lang-nl {
     transition-duration: 0.01ms !important;
   }
 }
+
+
+/* Keep dynamically rendered links and metadata readable on dark surfaces. */
+.dynamic-timeline-item a { color: var(--accent); }
+.repo-card .repo-lang { color: var(--text-muted) !important; }
