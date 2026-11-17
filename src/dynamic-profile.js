@@ -78,9 +78,9 @@ export function deduplicateRepos(repos) {
   const seen = new Set();
   return (Array.isArray(repos) ? repos : []).filter(repo => {
     if (!repo || typeof repo !== 'object') return false;
-    const normalizedUrl = typeof repo.url === 'string'
-      ? repo.url.trim().replace(/\.git$/i, '').replace(/\/+$/, '').toLowerCase()
-      : '';
+    let normalizedUrl = typeof repo.url === 'string' ? repo.url.trim().toLowerCase() : '';
+    while (normalizedUrl.endsWith('/')) normalizedUrl = normalizedUrl.slice(0, -1);
+    if (normalizedUrl.endsWith('.git')) normalizedUrl = normalizedUrl.slice(0, -4);
     const normalizedName = String(repo.name || '').trim().toLowerCase();
     const key = normalizedUrl || (normalizedName ? 'name:' + normalizedName : '');
     if (!key || seen.has(key)) return false;
