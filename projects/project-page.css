@@ -24,6 +24,7 @@ body.project-page-body { transition: none; }
   color: var(--text);
   background: var(--surface);
   border: 1px solid var(--border);
+  transition: none;
 }
 .project-page-header select {
   padding: .45rem .65rem;
