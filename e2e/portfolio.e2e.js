@@ -1,4 +1,6 @@
 import { test, expect } from '@playwright/test';
+import { readFile } from 'node:fs/promises';
+import AxeBuilder from '@axe-core/playwright';
 
 test.beforeEach(async ({ page }) => {
   await page.addInitScript(() => {
@@ -237,4 +239,70 @@ test('data quality report exposes freshness and validation metrics', async ({ pa
   await expect(report.getByRole('heading', { name: 'Profielbronnen', level: 3 })).toBeVisible();
   await expect(report.getByText('Ontbrekende velden', { exact: true }).first()).toBeVisible();
   await expect(report.getByText('Ongeldige records', { exact: true }).first()).toBeVisible();
+});
+
+
+test('download, print and copy actions work without placeholder links', async ({ page }) => {
+  await page.goto('?lang=en');
+  await expect(page.locator('#hero-updated')).not.toBeEmpty({ timeout: 30_000 });
+
+  const downloadPromise = page.waitForEvent('download');
+  await page.locator('[data-action="download-json"]').click();
+  const download = await downloadPromise;
+  expect(download.suggestedFilename()).toBe('bauke-molenaar-cv.json');
+  const downloadPath = await download.path();
+  expect(downloadPath).toBeTruthy();
+  const payload = JSON.parse(await readFile(downloadPath, 'utf8'));
+  expect(payload.repos.length).toBeGreaterThan(0);
+  expect(Object.keys(payload.skills).length).toBeGreaterThan(0);
+
+  await page.evaluate(() => {
+    Object.defineProperty(navigator, 'clipboard', {
+      configurable: true,
+      value: { writeText: async text => { window.__copiedLink = text; } },
+    });
+    window.print = () => { document.documentElement.dataset.printInvoked = 'true'; };
+  });
+  await page.locator('[data-action="copy-link"]').click();
+  await expect.poll(() => page.evaluate(() => window.__copiedLink))
+    .toBe('https://itsdarklikehell.github.io/my-resume/');
+  await page.locator('[data-action="print-cv"]').click();
+  await expect(page.locator('html')).toHaveAttribute('data-print-invoked', 'true');
+  await expect(page.locator('html')).toHaveAttribute('lang', 'en');
+});
+
+test('URL language override works for all four supported languages', async ({ page }) => {
+  for (const lang of ['nl', 'en', 'de', 'fr']) {
+    await page.goto(`?lang=${lang}`);
+    await expect(page.locator('html')).toHaveAttribute('lang', lang);
+    await expect(page.locator('h1')).toContainText('Bauke Molenaar');
+  }
+});
+
+test('all rendered images load and the page has no uncaught runtime errors', async ({ page }) => {
+  const pageErrors = [];
+  page.on('pageerror', error => pageErrors.push(error.message));
+  await page.goto('?lang=nl');
+  await expect(page.locator('#hero-updated')).not.toBeEmpty({ timeout: 30_000 });
+
+  const brokenImages = await page.locator('img').evaluateAll(images =>
+    images.filter(image => !image.complete || image.naturalWidth === 0)
+      .map(image => ({ src: image.currentSrc || image.src, alt: image.alt }))
+  );
+  expect(brokenImages, 'all rendered images should load').toEqual([]);
+  expect(pageErrors, 'uncaught browser errors').toEqual([]);
+});
+
+test('axe accessibility audit passes in all supported languages', async ({ page }) => {
+  for (const lang of ['nl', 'en', 'de', 'fr']) {
+    await page.goto(`?lang=${lang}`);
+    await expect(page.locator('#hero-updated')).not.toBeEmpty({ timeout: 30_000 });
+    const results = await new AxeBuilder({ page })
+      .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'])
+      .analyze();
+    const violations = results.violations.map(violation =>
+      `${violation.id} (${violation.impact}): ${violation.nodes.map(node => node.target.join(' ')).join(', ')}`
+    );
+    expect(violations, `axe violations for lang=${lang}`).toEqual([]);
+  }
 });
