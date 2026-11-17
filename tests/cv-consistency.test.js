@@ -12,11 +12,34 @@ describe('CV page consistency', () => {
     expect(experience.match(/class="timeline-item"/g) || []).toHaveLength(17);
   });
 
-  it('offers one language-neutral JSON download and one current-language print action', async () => {
+  it('uses semantic buttons for JSON download, print and copy actions', async () => {
     const html = await readFile(new URL('../index.html', import.meta.url), 'utf8');
-    expect((html.match(/data-action="download-json"/g) || [])).toHaveLength(1);
-    expect((html.match(/data-action="print-cv"/g) || [])).toHaveLength(1);
+    for (const action of ['download-json', 'print-cv', 'copy-link']) {
+      expect(html).toMatch(new RegExp(`<button[^>]*data-action="${action}"`));
+    }
+    expect(html).not.toMatch(/<a[^>]*href="#"[^>]*data-action=/);
     expect(html).toContain('data-i18n="print_cv"');
+  });
+
+  it('exports normalized repository and skill data rather than nonexistent stats fields', async () => {
+    const script = await readFile(new URL('../script.js', import.meta.url), 'utf8');
+    expect(script).toContain('skills: gSkills() || {}');
+    expect(script).toContain('repos: gRepos() || []');
+  });
+
+  it('publishes refreshed data with retries instead of hiding git push failures', async () => {
+    const workflow = await readFile(new URL('../.github/workflows/update-data.yml', import.meta.url), 'utf8');
+    expect(workflow).toContain('group: update-data-main');
+    expect(workflow).toContain('git rebase origin/main');
+    expect(workflow).toContain('git push origin HEAD:main');
+    expect(workflow).not.toContain('git push || true');
+  });
+
+  it('generates Dutch and English PDFs from explicit language URLs', async () => {
+    const script = await readFile(new URL('../scripts/print-cv.mjs', import.meta.url), 'utf8');
+    expect(script).toContain('bauke-molenaar-cv.pdf');
+    expect(script).toContain('bauke-molenaar-cv-en.pdf');
+    expect(script).toContain('target.searchParams.set("lang", output.lang)');
   });
 
   it('updates the document language before printing the active translation', async () => {
