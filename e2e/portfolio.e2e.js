@@ -185,7 +185,7 @@ test('technical project case study pages load and switch languages', async ({ pa
     await expect(page.locator('h1')).toHaveText(title);
     await expect(page.locator('[data-field="steps"] li')).toHaveCount(4);
     await expect(page.locator('[data-field="links"] a')).toHaveCount(3);
-    await page.locator('select[aria-label="Language"]').selectOption('en');
+    await page.locator('[data-field="language-toggle"]').click();
     await expect(page.locator('html')).toHaveAttribute('lang', 'en');
     await expect(page.locator('h1')).toHaveText(title);
     await expect(page.locator('[data-field="back"]')).toHaveAttribute('href', '../index.html?lang=en#projects-section');
