@@ -12,6 +12,11 @@ describe('CV page consistency', () => {
     expect(experience.match(/class="timeline-item"/g) || []).toHaveLength(17);
   });
 
+  it('bumps the service-worker cache so deployed app-shell and data assets refresh', async () => {
+    const sw = await readFile(new URL('../sw.js', import.meta.url), 'utf8');
+    expect(sw).toContain("const CACHE_NAME = 'resume-cache-v9';");
+  });
+
   it('uses semantic buttons for JSON download, print and copy actions', async () => {
     const html = await readFile(new URL('../index.html', import.meta.url), 'utf8');
     for (const action of ['download-json', 'print-cv', 'copy-link']) {
