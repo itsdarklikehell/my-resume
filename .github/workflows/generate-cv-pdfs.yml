@@ -93,7 +93,22 @@ jobs:
           fi
           git commit -m "docs: regenerate Dutch and English CV PDFs"
           if [ "$EVENT_NAME" = "pull_request" ]; then
-            git push origin "HEAD:$PR_HEAD_REF"
+            TARGET_BRANCH="$PR_HEAD_REF"
           else
-            git push origin "HEAD:$REF_NAME"
+            TARGET_BRANCH="$REF_NAME"
           fi
+          for attempt in 1 2 3; do
+            git fetch origin "refs/heads/$TARGET_BRANCH:refs/remotes/origin/$TARGET_BRANCH"
+            if ! git rebase "origin/$TARGET_BRANCH"; then
+              git rebase --abort
+              echo "::error::Could not rebase regenerated PDFs onto $TARGET_BRANCH."
+              exit 1
+            fi
+            if git push origin "HEAD:$TARGET_BRANCH"; then
+              exit 0
+            fi
+            echo "PDF push attempt $attempt failed; retrying after fetching $TARGET_BRANCH."
+            sleep $((attempt * 2))
+          done
+          echo "::error::Unable to publish regenerated PDFs after 3 attempts."
+          exit 1
