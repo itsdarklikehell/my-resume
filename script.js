@@ -1644,3 +1644,18 @@ loadGitHubData()
     bind();
   }
 })();
+
+
+// Register this site's scoped service worker without inline scripts (CSP-safe).
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker
+      .register('/my-resume/sw.js', { scope: '/my-resume/' })
+      .then((registration) => {
+        console.log('ServiceWorker registered:', registration.scope);
+      })
+      .catch((error) => {
+        console.warn('ServiceWorker registration failed:', error);
+      });
+  });
+}
