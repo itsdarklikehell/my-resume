@@ -27,7 +27,7 @@ jobs:
         run: npm ci
 
       - name: Install Playwright test runner
-        run: npm install --no-save --package-lock=false @playwright/test@1.55.0
+        run: npm install --no-save --package-lock=false @playwright/test@1.55.0 @axe-core/playwright@4.10.2
 
       - name: Install Chromium and system dependencies
         run: npx playwright install --with-deps chromium
