@@ -32,4 +32,13 @@ describe('CV page consistency', () => {
       expect(readme).not.toMatch(/23[^\n]*(?:item|items|entries|Einträge|entrées)/i);
     }
   });
+  it('translates every experience role and its description', async () => {
+    const html = await readFile(new URL('../index.html', import.meta.url), 'utf8');
+    const start = html.indexOf('<h2 data-i18n="experience"');
+    const end = html.indexOf('<h2 data-i18n="education"', start);
+    const experience = html.slice(start, end);
+    const roles = [...experience.matchAll(/<div class="role"([^>]*)>/g)];
+    expect(roles).toHaveLength(17);
+    expect(roles.every(([, attributes]) => attributes.includes('data-i18n='))).toBe(true);
+  });
 });
