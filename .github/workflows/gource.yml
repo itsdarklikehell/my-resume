@@ -39,9 +39,15 @@ jobs:
           gource_dir_depth: 3
           gource_filename_time: 3.5
           # Exclude generated video from its own history; keep source and data changes visible.
-          gource_file_filter: '(^|/)gource\.mp4$|(__pycache__|\.pyc|node_modules|\.git/)'
+          gource_file_filter: '(^|/)gource\\.mp4$|(__pycache__|\\.pyc|node_modules|\\.git/)'
           logo_url: "https://itsdarklikehell.github.io/my-resume/og-image.png"
           avatars_auto_fetch: true
+
+      # The Gource action renders inside its own container; ffprobe is needed on the runner.
+      - name: Install FFmpeg tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install --no-install-recommends -y ffmpeg
 
       - name: Verify rendered video
         run: |
