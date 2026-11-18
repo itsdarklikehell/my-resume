@@ -40,11 +40,11 @@ jobs:
           gource_overlay_background_color: "10182A"
           gource_bloom_multiplier: 0.5
           gource_bloom_intensity: 0.5
-          gource_key: "--key"
+          gource_key: ""
           gource_camera_mode: "track"
-          # Hide the date HUD (which competes with the cinematic title); retain file labels.
-          gource_hide_items: "mouse,date"
-          gource_user_scale: 0.85
+          # Hide the date HUD, extension legend and dense labels; keep the tree and contributor motion readable.
+          gource_hide_items: "mouse,date,filenames,dirnames"
+          gource_user_scale: 0.65
           # Shallower labels and shorter persistence reduce collisions in dense commit clusters.
           gource_dir_depth: 2
           gource_filename_time: 2.0
