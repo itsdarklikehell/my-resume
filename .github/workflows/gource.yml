@@ -14,7 +14,6 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-      actions: write
 
     steps:
       - name: Checkout
@@ -22,34 +21,53 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Gource Action
+      - name: Render Gource video
         uses: nbprojekt/gource-action@57256d303c5a9a5e72ed92ba13e3e83c5ec8b257 # v1.3.0
         with:
-          gource_title: "my-resume"
+          gource_title: "Bauke Molenaar | my-resume"
           gource_resolution: "1080p"
-          gource_fps: 30
-          gource_auto_skip_seconds: 0.1
-          gource_seconds_per_day: 0.05
-          gource_time_scale: 2.0
-          gource_font_size: 32
+          gource_fps: 60
+          gource_auto_skip_seconds: 0.65
+          gource_seconds_per_day: 0.12
+          gource_time_scale: 1.5
+          gource_font_size: 38
           gource_font_color: "E8EAF0"
-          gource_bloom_multiplier: 0.6
-          gource_bloom_intensity: 0.6
-          gource_hide_items: "mouse,date"
-          gource_user_scale: 1.0
+          gource_bloom_multiplier: 0.35
+          gource_bloom_intensity: 0.35
+          gource_hide_items: "mouse"
+          gource_user_scale: 1.25
           gource_dir_depth: 3
-          gource_filename_time: 2.5
-          gource_file_filter: '(__pycache__|\.pyc|node_modules|\.git/)'
+          gource_filename_time: 3.5
+          # Exclude generated video from its own history; keep source and data changes visible.
+          gource_file_filter: '(^|/)gource\.mp4$|(__pycache__|\.pyc|node_modules|\.git/)'
           logo_url: "https://itsdarklikehell.github.io/my-resume/og-image.png"
           avatars_auto_fetch: true
 
-      - name: Copy video to repo root
-        run: cp ./gource/gource.mp4 ./gource.mp4
-
-      - name: Commit and push gource.mp4
+      - name: Verify rendered video
         run: |
+          test -s ./gource/gource.mp4
+          ffprobe -v error \
+            -show_entries format=duration,size \
+            -show_entries stream=width,height,r_frame_rate \
+            -of default=noprint_wrappers=1 ./gource/gource.mp4
+
+      - name: Upload rendered video for review
+        uses: actions/upload-artifact@v4
+        with:
+          name: gource-preview
+          path: ./gource/gource.mp4
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Update repository video
+        run: |
+          cp ./gource/gource.mp4 ./gource.mp4
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add gource.mp4
-          git commit -m "Update gource visualization [skip ci]" || true
-          git push || true
+          if git diff --cached --quiet; then
+            echo "Gource video is unchanged."
+          else
+            git commit -m "Update Gource visualization [skip ci]"
+            git push
+          fi
