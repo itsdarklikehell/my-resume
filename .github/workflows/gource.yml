@@ -66,14 +66,36 @@ jobs:
           retention-days: 14
 
       - name: Update repository video
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          cp ./gource/gource.mp4 ./gource.mp4
+          # Preserve the rendered file while moving the checkout to the latest main.
+          cp ./gource/gource.mp4 /tmp/gource.mp4
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add gource.mp4
-          if git diff --cached --quiet; then
-            echo "Gource video is unchanged."
-          else
+
+          # A concurrent workflow may update main while this video is rendering.
+          # Rebase the video-only change onto the latest main and retry a raced push.
+          for attempt in 1 2 3; do
+            git fetch origin main
+            git checkout -B gource-video-update origin/main
+            cp /tmp/gource.mp4 ./gource.mp4
+            git add gource.mp4
+
+            if git diff --cached --quiet; then
+              echo "Gource video is unchanged."
+              exit 0
+            fi
+
             git commit -m "Update Gource visualization [skip ci]"
-            git push
-          fi
+            if git push origin HEAD:main; then
+              echo "Gource video updated successfully."
+              exit 0
+            fi
+
+            echo "Push attempt ${attempt} raced with another main update; retrying."
+            sleep 2
+          done
+
+          echo "Could not update gource.mp4 after 3 attempts." >&2
+          exit 1
