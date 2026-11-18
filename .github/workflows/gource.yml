@@ -46,7 +46,7 @@ jobs:
           gource_dir_depth: 3
           gource_filename_time: 3.5
           # Exclude generated video from its own history; keep source and data changes visible.
-          gource_file_filter: '(^|/)gource\\.mp4$|(__pycache__|\\.pyc|node_modules|\\.git/)'
+          gource_file_filter: '(^|/)gource\.mp4$|(__pycache__|\.pyc|node_modules|\.git/)'
           logo_url: "https://itsdarklikehell.github.io/my-resume/og-image.png"
           avatars_auto_fetch: true
 
@@ -74,27 +74,27 @@ jobs:
           RAW_DURATION="$(ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 "$RAW_VIDEO")"
           TOTAL_DURATION="$(python3 -c "print(float('$RAW_DURATION') + $INTRO_SECONDS + $OUTRO_SECONDS)")"
 
-          ffmpeg -hide_banner -loglevel error -y \\
-            -f lavfi -i "color=c=0x070B16:s=1920x1080:r=60:d=$INTRO_SECONDS" \\
-            -vf "drawbox=x=700:y=420:w=520:h=3:color=0x718CFF@0.9:t=fill,drawtext=fontfile=$FONT:text='BAUKE MOLENAAR':fontcolor=white:fontsize=64:x=(w-text_w)/2:y=470,drawtext=fontfile=$FONT:text='MY DEVELOPMENT JOURNEY':fontcolor=0xAAB8DD:fontsize=30:x=(w-text_w)/2:y=570,fade=t=in:st=0:d=0.7,fade=t=out:st=2.8:d=0.7" \\
+          ffmpeg -hide_banner -loglevel error -y \
+            -f lavfi -i "color=c=0x070B16:s=1920x1080:r=60:d=$INTRO_SECONDS" \
+            -vf "drawbox=x=700:y=420:w=520:h=3:color=0x718CFF@0.9:t=fill,drawtext=fontfile=$FONT:text='BAUKE MOLENAAR':fontcolor=white:fontsize=64:x=(w-text_w)/2:y=470,drawtext=fontfile=$FONT:text='MY DEVELOPMENT JOURNEY':fontcolor=0xAAB8DD:fontsize=30:x=(w-text_w)/2:y=570,fade=t=in:st=0:d=0.7,fade=t=out:st=2.8:d=0.7" \
             -an -c:v libx264 -preset ultrafast -crf 23 -pix_fmt yuv420p -r 60 "$INTRO"
 
-          ffmpeg -hide_banner -loglevel error -y \\
-            -f lavfi -i "color=c=0x070B16:s=1920x1080:r=60:d=$OUTRO_SECONDS" \\
-            -vf "drawbox=x=760:y=420:w=400:h=3:color=0x718CFF@0.9:t=fill,drawtext=fontfile=$FONT:text='EXPLORE THE PROJECT':fontcolor=white:fontsize=54:x=(w-text_w)/2:y=475,drawtext=fontfile=$FONT:text='itsdarklikehell.github.io/my-resume':fontcolor=0xAAB8DD:fontsize=28:x=(w-text_w)/2:y=565,fade=t=in:st=0:d=0.7,fade=t=out:st=2.8:d=0.7" \\
+          ffmpeg -hide_banner -loglevel error -y \
+            -f lavfi -i "color=c=0x070B16:s=1920x1080:r=60:d=$OUTRO_SECONDS" \
+            -vf "drawbox=x=760:y=420:w=400:h=3:color=0x718CFF@0.9:t=fill,drawtext=fontfile=$FONT:text='EXPLORE THE PROJECT':fontcolor=white:fontsize=54:x=(w-text_w)/2:y=475,drawtext=fontfile=$FONT:text='itsdarklikehell.github.io/my-resume':fontcolor=0xAAB8DD:fontsize=28:x=(w-text_w)/2:y=565,fade=t=in:st=0:d=0.7,fade=t=out:st=2.8:d=0.7" \
             -an -c:v libx264 -preset ultrafast -crf 23 -pix_fmt yuv420p -r 60 "$OUTRO"
 
-          ffmpeg -hide_banner -loglevel error -y \\
-            -i "$INTRO" -i "$RAW_VIDEO" -i "$OUTRO" \\
-            -filter_complex "[0:v][1:v][2:v]concat=n=3:v=1:a=0[v]" \\
-            -map "[v]" -an -c:v libx264 -preset medium -crf 20 \\
+          ffmpeg -hide_banner -loglevel error -y \
+            -i "$INTRO" -i "$RAW_VIDEO" -i "$OUTRO" \
+            -filter_complex "[0:v][1:v][2:v]concat=n=3:v=1:a=0[v]" \
+            -map "[v]" -an -c:v libx264 -preset medium -crf 20 \
             -pix_fmt yuv420p -r 60 -movflags +faststart "$VISUAL"
 
           python3 scripts/create_gource_soundtrack.py --duration "$TOTAL_DURATION" --output "$SOUNDTRACK"
 
-          ffmpeg -hide_banner -loglevel error -y \\
-            -i "$VISUAL" -i "$SOUNDTRACK" \\
-            -map 0:v:0 -map 1:a:0 -c:v copy -c:a aac -b:a 160k \\
+          ffmpeg -hide_banner -loglevel error -y \
+            -i "$VISUAL" -i "$SOUNDTRACK" \
+            -map 0:v:0 -map 1:a:0 -c:v copy -c:a aac -b:a 160k \
             -shortest -movflags +faststart "$FINAL"
 
           echo "TOTAL_DURATION=$TOTAL_DURATION" >> "$GITHUB_ENV"
