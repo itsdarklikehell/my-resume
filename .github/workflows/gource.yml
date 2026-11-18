@@ -43,6 +43,12 @@ jobs:
           logo_url: "https://itsdarklikehell.github.io/my-resume/og-image.png"
           avatars_auto_fetch: true
 
+      # The Gource action renders inside its own container; ffprobe is needed on the runner.
+      - name: Install FFmpeg tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install --no-install-recommends -y ffmpeg
+
       - name: Verify rendered video
         run: |
           test -s ./gource/gource.mp4
