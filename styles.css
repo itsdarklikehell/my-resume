@@ -2380,3 +2380,51 @@ html:not([lang="nl"]) .download-btn.lang-nl {
 /* Keep dynamically rendered links and metadata readable on dark surfaces. */
 .dynamic-timeline-item a { color: var(--accent); }
 .repo-card .repo-lang { color: var(--text-muted) !important; }
+
+
+/* Responsive, native-controls Gource showcase on the CV page. */
+.gource-showcase {
+  display: grid;
+  gap: .75rem;
+  margin: 1.1rem 0 1.35rem;
+  padding: clamp(.85rem, 2vw, 1.25rem);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface2);
+  min-width: 0;
+}
+.gource-showcase-copy h3 {
+  margin: 0 0 .4rem;
+  font-size: 1.05rem;
+}
+.gource-showcase-copy p,
+.gource-showcase-caption {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: .88rem;
+  line-height: 1.55;
+}
+.gource-showcase-video {
+  display: block;
+  width: 100%;
+  max-height: min(68vh, 620px);
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  background: #070b16;
+}
+.gource-showcase-download {
+  justify-self: start;
+  color: var(--accent);
+  font-size: .88rem;
+  font-weight: 600;
+  text-underline-offset: .18em;
+}
+@media (max-width: 600px) {
+  .gource-showcase { margin-inline: 0; }
+  .gource-showcase-video { max-height: none; }
+}
+@media print {
+  .gource-showcase { display: none; }
+}

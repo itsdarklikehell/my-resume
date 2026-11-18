@@ -514,15 +514,17 @@
 <p class="about-text">Loading heatmap...</p>
 </div>
 <div class="section-updated" id="heatmap-updated"></div>
-</section><section class="card" id="gource-section">
-<h2 data-i18n="activity_video">Projectactiviteit</h2>
-<p class="about-text" data-i18n="activity_video_note" style="font-size: 0.8rem; margin-bottom: 0.75rem;">
-                        Gevisualiseerde commit-historie van mijn GitHub-werk.
-                    </p>
-<video loading="lazy" controls playsinline preload="none" width="1920" height="1080" style="width: 100%; border-radius: 8px; border: 1px solid var(--border); background: #000;" poster="og-image.png">
+</section><section class="card gource-showcase" id="gource-section" aria-labelledby="gource-showcase-title">
+<div class="gource-showcase-copy">
+<h2 id="gource-showcase-title" data-i18n="gource_showcase_title">Achter de schermen: de ontwikkeling van deze CV-site</h2>
+<p data-i18n="gource_showcase_intro">Bekijk hoe de code, functies en structuur van dit project zich door de tijd hebben ontwikkeld.</p>
+</div>
+<video class="gource-showcase-video" controls preload="none" playsinline poster="og-image.png" aria-describedby="gource-showcase-caption">
 <source src="gource.mp4" type="video/mp4"/>
+<span data-i18n="gource_showcase_fallback">Je browser ondersteunt deze video niet.</span>
 </video>
-<div class="section-updated" id="gource-updated"></div>
+<p id="gource-showcase-caption" class="gource-showcase-caption" data-i18n="gource_showcase_caption">Cinematische ontwikkelgeschiedenis met originele elektronische soundtrack. Gebruik de videobediening voor pauzeren en volledig scherm.</p>
+<a class="gource-showcase-download" href="gource.mp4" download data-i18n="gource_showcase_download">Download de Gource-video</a>
 </section></div>
 <aside class="sidebar">
 <section class="card" id="proficiency-section">

@@ -15,7 +15,7 @@ describe('CV page consistency', () => {
 
   it('bumps the service-worker cache so deployed app-shell and data assets refresh', async () => {
     const sw = await readFile(new URL('../sw.js', import.meta.url), 'utf8');
-    expect(sw).toContain("const CACHE_NAME = 'resume-cache-v10';");
+    expect(sw).toContain("const CACHE_NAME = 'resume-cache-v11';");
   });
 
   it('uses semantic buttons for JSON download, print and copy actions', async () => {

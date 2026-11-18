@@ -1,5 +1,5 @@
 const CACHE_PREFIX = 'resume-cache-';
-const CACHE_NAME = 'resume-cache-v10';
+const CACHE_NAME = 'resume-cache-v11';
 const urlsToCache = [
   '/my-resume/',
   '/my-resume/index.html',
@@ -13,7 +13,6 @@ const urlsToCache = [
   '/my-resume/site.webmanifest',
   '/my-resume/bauke-molenaar-cv.pdf',
   '/my-resume/bauke-molenaar-cv-en.pdf',
-  '/my-resume/gource.mp4',
   '/my-resume/profile-data.json',
   '/my-resume/github-data.json',
 ];
@@ -42,6 +41,13 @@ self.addEventListener('fetch', event => {
   const requestUrl = new URL(request.url);
 
   if (request.method !== 'GET' || requestUrl.origin !== self.location.origin) {
+    return;
+  }
+
+  if (requestUrl.pathname.endsWith('/gource.mp4')) {
+    // Never pin the frequently regenerated video in the service-worker cache.
+    // Preserve Range requests so native seeking works, and revalidate each visit.
+    event.respondWith(fetch(request, { cache: 'no-store' }));
     return;
   }
 

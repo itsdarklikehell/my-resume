@@ -932,22 +932,19 @@ function renderGitHubRepos() {
   setSectionTimestamp('repos', githubData.generated_at);
 }
 
-// Gource project activity video: hides itself if gource.mp4 isn't available.
+// Gource showcase: hide the entire player and download link when unavailable.
 function renderGource() {
   const section = document.getElementById('gource-section');
   const video = document.querySelector('#gource-section video');
   if (!section || !video) return;
 
-  // Check whether gource.mp4 exists via HEAD request
-  fetch('gource.mp4', { method: 'HEAD', cache: 'no-cache' })
-    .then(r => {
-      if (r.ok) {
-        section.style.display = '';
-      } else {
-        section.style.display = 'none';
-      }
+  fetch('gource.mp4', { method: 'HEAD', cache: 'no-store' })
+    .then(response => {
+      section.hidden = !response.ok;
+      section.style.display = response.ok ? '' : 'none';
     })
     .catch(() => {
+      section.hidden = true;
       section.style.display = 'none';
     });
 }
