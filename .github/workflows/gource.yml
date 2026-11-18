@@ -33,37 +33,108 @@ jobs:
           gource_time_scale: 1.5
           gource_font_size: 38
           gource_font_color: "E8EAF0"
+          gource_background_color: "070B16"
+          gource_overlay_background_color: "10182A"
           gource_bloom_multiplier: 0.5
           gource_bloom_intensity: 0.5
           gource_key: "--key"
+          gource_camera_mode: "overview"
           gource_hide_items: "mouse"
           gource_user_scale: 1.25
           gource_dir_depth: 3
           gource_filename_time: 3.5
           # Exclude generated video from its own history; keep source and data changes visible.
-          gource_file_filter: '(^|/)gource\.mp4$|(__pycache__|\.pyc|node_modules|\.git/)'
+          gource_file_filter: '(^|/)gource\\.mp4$|(__pycache__|\\.pyc|node_modules|\\.git/)'
           logo_url: "https://itsdarklikehell.github.io/my-resume/og-image.png"
           avatars_auto_fetch: true
 
-      # The Gource action renders inside its own container; ffprobe is needed on the runner.
+      # Gource renders a silent source video. Build a cinematic wrapper and an original soundtrack.
       - name: Install FFmpeg tools
         run: |
           sudo apt-get update
-          sudo apt-get install --no-install-recommends -y ffmpeg
+          sudo apt-get install --no-install-recommends -y ffmpeg fonts-dejavu-core
 
-      - name: Verify rendered video
+      - name: Create cinematic intro, outro and original soundtrack
+        shell: bash
         run: |
-          test -s ./gource/gource.mp4
-          ffprobe -v error \
-            -show_entries format=duration,size \
-            -show_entries stream=width,height,r_frame_rate \
-            -of default=noprint_wrappers=1 ./gource/gource.mp4
+          set -euo pipefail
+          RAW_VIDEO="./gource/gource.mp4"
+          INTRO="./gource/intro.mp4"
+          OUTRO="./gource/outro.mp4"
+          VISUAL="./gource/visual.mp4"
+          SOUNDTRACK="./gource/soundtrack.wav"
+          FINAL="./gource/gource-cinematic.mp4"
+          INTRO_SECONDS="3.5"
+          OUTRO_SECONDS="3.5"
+          FONT="/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
 
-      - name: Upload rendered video for review
+          test -s "$RAW_VIDEO"
+          RAW_DURATION="$(ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 "$RAW_VIDEO")"
+          TOTAL_DURATION="$(python3 -c "print(float('$RAW_DURATION') + $INTRO_SECONDS + $OUTRO_SECONDS)")"
+          OUTRO_START="$(python3 -c "print(float('$RAW_DURATION') + $INTRO_SECONDS)")"
+
+          ffmpeg -hide_banner -loglevel error -y \
+            -f lavfi -i "color=c=0x070B16:s=1920x1080:r=60:d=$INTRO_SECONDS" \
+            -vf "drawbox=x=700:y=420:w=520:h=3:color=0x718CFF@0.9:t=fill,drawtext=fontfile=$FONT:text='BAUKE MOLENAAR':fontcolor=white:fontsize=64:x=(w-text_w)/2:y=470,drawtext=fontfile=$FONT:text='MY DEVELOPMENT JOURNEY':fontcolor=0xAAB8DD:fontsize=30:x=(w-text_w)/2:y=570,fade=t=in:st=0:d=0.7,fade=t=out:st=2.8:d=0.7" \
+            -an -c:v libx264 -preset ultrafast -crf 23 -pix_fmt yuv420p -r 60 "$INTRO"
+
+          ffmpeg -hide_banner -loglevel error -y \
+            -f lavfi -i "color=c=0x070B16:s=1920x1080:r=60:d=$OUTRO_SECONDS" \
+            -vf "drawbox=x=760:y=420:w=400:h=3:color=0x718CFF@0.9:t=fill,drawtext=fontfile=$FONT:text='EXPLORE THE PROJECT':fontcolor=white:fontsize=54:x=(w-text_w)/2:y=475,drawtext=fontfile=$FONT:text='itsdarklikehell.github.io/my-resume':fontcolor=0xAAB8DD:fontsize=28:x=(w-text_w)/2:y=565,fade=t=in:st=0:d=0.7,fade=t=out:st=2.8:d=0.7" \
+            -an -c:v libx264 -preset ultrafast -crf 23 -pix_fmt yuv420p -r 60 "$OUTRO"
+
+          ffmpeg -hide_banner -loglevel error -y \
+            -i "$INTRO" -i "$RAW_VIDEO" -i "$OUTRO" \
+            -filter_complex "[0:v][1:v][2:v]concat=n=3:v=1:a=0[v]" \
+            -map "[v]" -an -c:v libx264 -preset medium -crf 20 \
+            -pix_fmt yuv420p -r 60 -movflags +faststart "$VISUAL"
+
+          python3 scripts/create_gource_soundtrack.py --duration "$TOTAL_DURATION" --output "$SOUNDTRACK"
+
+          ffmpeg -hide_banner -loglevel error -y \
+            -i "$VISUAL" -i "$SOUNDTRACK" \
+            -map 0:v:0 -map 1:a:0 -c:v copy -c:a aac -b:a 160k \
+            -shortest -movflags +faststart "$FINAL"
+
+          echo "RAW_DURATION=$RAW_DURATION" >> "$GITHUB_ENV"
+          echo "TOTAL_DURATION=$TOTAL_DURATION" >> "$GITHUB_ENV"
+          echo "OUTRO_START=$OUTRO_START" >> "$GITHUB_ENV"
+
+      - name: Verify final cinematic video
+        run: |
+          set -euo pipefail
+          FINAL="./gource/gource-cinematic.mp4"
+          test -s "$FINAL"
+
+          ffprobe -v error -show_entries stream=codec_type,codec_name,width,height,r_frame_rate,sample_rate,channels -show_entries format=duration,size -of default=noprint_wrappers=1 "$FINAL" | tee /tmp/gource-video-info.txt
+
+          grep -q '^codec_type=video$' /tmp/gource-video-info.txt
+          grep -q '^codec_type=audio$' /tmp/gource-video-info.txt
+          grep -q '^codec_name=h264$' /tmp/gource-video-info.txt
+          grep -q '^codec_name=aac$' /tmp/gource-video-info.txt
+          grep -q '^width=1920$' /tmp/gource-video-info.txt
+          grep -q '^height=1080$' /tmp/gource-video-info.txt
+          grep -q '^r_frame_rate=60/1$' /tmp/gource-video-info.txt
+
+          python3 - <<'PY'
+          import os
+          import subprocess
+
+          duration = float(subprocess.check_output([
+              "ffprobe", "-v", "error", "-show_entries", "format=duration",
+              "-of", "default=noprint_wrappers=1:nokey=1", "./gource/gource-cinematic.mp4"
+          ], text=True).strip())
+          expected = float(os.environ["TOTAL_DURATION"])
+          if abs(duration - expected) > 0.15:
+              raise SystemExit(f"Unexpected duration: {duration:.2f}s (expected {expected:.2f}s)")
+          print(f"Verified cinematic runtime: {duration:.2f}s")
+          PY
+
+      - name: Upload final video for review
         uses: actions/upload-artifact@v4
         with:
-          name: gource-preview
-          path: ./gource/gource.mp4
+          name: gource-2-cinematic-preview
+          path: ./gource/gource-cinematic.mp4
           if-no-files-found: error
           retention-days: 14
 
@@ -73,7 +144,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           # Preserve the rendered file while moving the checkout to the latest main.
-          cp ./gource/gource.mp4 /tmp/gource.mp4
+          cp ./gource/gource-cinematic.mp4 /tmp/gource.mp4
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
@@ -91,7 +162,7 @@ jobs:
               exit 0
             fi
 
-            git commit -m "Update Gource visualization"
+            git commit -m "Publish cinematic Gource 2.0 video"
             if git push origin HEAD:main; then
               echo "Gource video updated successfully."
               echo "video_updated=true" >> "$GITHUB_OUTPUT"
