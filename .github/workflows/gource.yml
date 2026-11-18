@@ -15,14 +15,14 @@ jobs:
   gource:
     runs-on: ubuntu-latest
     permissions:
-      contents: write
-      actions: write
+      contents: read
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          persist-credentials: false
 
       - name: Render Gource video
         uses: nbprojekt/gource-action@57256d303c5a9a5e72ed92ba13e3e83c5ec8b257 # v1.3.0
@@ -46,7 +46,7 @@ jobs:
           gource_dir_depth: 3
           gource_filename_time: 3.5
           # Exclude generated video from its own history; keep source and data changes visible.
-          gource_file_filter: '(^|/)gource\.mp4$|(__pycache__|\.pyc|node_modules|\.git/)'
+          gource_file_filter: '(^|/)gource\\.mp4$|(__pycache__|\\.pyc|node_modules|\\.git/)'
           logo_url: "https://itsdarklikehell.github.io/my-resume/og-image.png"
           avatars_auto_fetch: true
 
@@ -73,34 +73,31 @@ jobs:
           test -s "$RAW_VIDEO"
           RAW_DURATION="$(ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 "$RAW_VIDEO")"
           TOTAL_DURATION="$(python3 -c "print(float('$RAW_DURATION') + $INTRO_SECONDS + $OUTRO_SECONDS)")"
-          OUTRO_START="$(python3 -c "print(float('$RAW_DURATION') + $INTRO_SECONDS)")"
 
-          ffmpeg -hide_banner -loglevel error -y \
-            -f lavfi -i "color=c=0x070B16:s=1920x1080:r=60:d=$INTRO_SECONDS" \
-            -vf "drawbox=x=700:y=420:w=520:h=3:color=0x718CFF@0.9:t=fill,drawtext=fontfile=$FONT:text='BAUKE MOLENAAR':fontcolor=white:fontsize=64:x=(w-text_w)/2:y=470,drawtext=fontfile=$FONT:text='MY DEVELOPMENT JOURNEY':fontcolor=0xAAB8DD:fontsize=30:x=(w-text_w)/2:y=570,fade=t=in:st=0:d=0.7,fade=t=out:st=2.8:d=0.7" \
+          ffmpeg -hide_banner -loglevel error -y \\
+            -f lavfi -i "color=c=0x070B16:s=1920x1080:r=60:d=$INTRO_SECONDS" \\
+            -vf "drawbox=x=700:y=420:w=520:h=3:color=0x718CFF@0.9:t=fill,drawtext=fontfile=$FONT:text='BAUKE MOLENAAR':fontcolor=white:fontsize=64:x=(w-text_w)/2:y=470,drawtext=fontfile=$FONT:text='MY DEVELOPMENT JOURNEY':fontcolor=0xAAB8DD:fontsize=30:x=(w-text_w)/2:y=570,fade=t=in:st=0:d=0.7,fade=t=out:st=2.8:d=0.7" \\
             -an -c:v libx264 -preset ultrafast -crf 23 -pix_fmt yuv420p -r 60 "$INTRO"
 
-          ffmpeg -hide_banner -loglevel error -y \
-            -f lavfi -i "color=c=0x070B16:s=1920x1080:r=60:d=$OUTRO_SECONDS" \
-            -vf "drawbox=x=760:y=420:w=400:h=3:color=0x718CFF@0.9:t=fill,drawtext=fontfile=$FONT:text='EXPLORE THE PROJECT':fontcolor=white:fontsize=54:x=(w-text_w)/2:y=475,drawtext=fontfile=$FONT:text='itsdarklikehell.github.io/my-resume':fontcolor=0xAAB8DD:fontsize=28:x=(w-text_w)/2:y=565,fade=t=in:st=0:d=0.7,fade=t=out:st=2.8:d=0.7" \
+          ffmpeg -hide_banner -loglevel error -y \\
+            -f lavfi -i "color=c=0x070B16:s=1920x1080:r=60:d=$OUTRO_SECONDS" \\
+            -vf "drawbox=x=760:y=420:w=400:h=3:color=0x718CFF@0.9:t=fill,drawtext=fontfile=$FONT:text='EXPLORE THE PROJECT':fontcolor=white:fontsize=54:x=(w-text_w)/2:y=475,drawtext=fontfile=$FONT:text='itsdarklikehell.github.io/my-resume':fontcolor=0xAAB8DD:fontsize=28:x=(w-text_w)/2:y=565,fade=t=in:st=0:d=0.7,fade=t=out:st=2.8:d=0.7" \\
             -an -c:v libx264 -preset ultrafast -crf 23 -pix_fmt yuv420p -r 60 "$OUTRO"
 
-          ffmpeg -hide_banner -loglevel error -y \
-            -i "$INTRO" -i "$RAW_VIDEO" -i "$OUTRO" \
-            -filter_complex "[0:v][1:v][2:v]concat=n=3:v=1:a=0[v]" \
-            -map "[v]" -an -c:v libx264 -preset medium -crf 20 \
+          ffmpeg -hide_banner -loglevel error -y \\
+            -i "$INTRO" -i "$RAW_VIDEO" -i "$OUTRO" \\
+            -filter_complex "[0:v][1:v][2:v]concat=n=3:v=1:a=0[v]" \\
+            -map "[v]" -an -c:v libx264 -preset medium -crf 20 \\
             -pix_fmt yuv420p -r 60 -movflags +faststart "$VISUAL"
 
           python3 scripts/create_gource_soundtrack.py --duration "$TOTAL_DURATION" --output "$SOUNDTRACK"
 
-          ffmpeg -hide_banner -loglevel error -y \
-            -i "$VISUAL" -i "$SOUNDTRACK" \
-            -map 0:v:0 -map 1:a:0 -c:v copy -c:a aac -b:a 160k \
+          ffmpeg -hide_banner -loglevel error -y \\
+            -i "$VISUAL" -i "$SOUNDTRACK" \\
+            -map 0:v:0 -map 1:a:0 -c:v copy -c:a aac -b:a 160k \\
             -shortest -movflags +faststart "$FINAL"
 
-          echo "RAW_DURATION=$RAW_DURATION" >> "$GITHUB_ENV"
           echo "TOTAL_DURATION=$TOTAL_DURATION" >> "$GITHUB_ENV"
-          echo "OUTRO_START=$OUTRO_START" >> "$GITHUB_ENV"
 
       - name: Verify final cinematic video
         run: |
@@ -132,7 +129,7 @@ jobs:
           print(f"Verified cinematic runtime: {duration:.2f}s")
           PY
 
-      - name: Upload final video for review
+      - name: Upload final video for review and publishing
         uses: actions/upload-artifact@v4
         with:
           name: gource-2-cinematic-preview
@@ -140,48 +137,52 @@ jobs:
           if-no-files-found: error
           retention-days: 14
 
+  publish:
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    needs: gource
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      actions: write
+
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: true
+
+      - name: Download verified cinematic video
+        uses: actions/download-artifact@v4
+        with:
+          name: gource-2-cinematic-preview
+          path: ./gource
+
       - name: Update repository video
-        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
-        id: update_video
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          # Preserve the rendered file while moving the checkout to the latest main.
-          cp ./gource/gource-cinematic.mp4 /tmp/gource.mp4
+          set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          # A concurrent workflow may update main while this video is rendering.
-          # Rebase the video-only change onto the latest main and retry a raced push.
-          for attempt in 1 2 3; do
-            git fetch origin main
-            git checkout -B gource-video-update origin/main
-            cp /tmp/gource.mp4 ./gource.mp4
-            git add gource.mp4
+          cp ./gource/gource-cinematic.mp4 /tmp/gource.mp4
+          git fetch origin main
+          git checkout -B gource-video-update origin/main
+          cp /tmp/gource.mp4 ./gource.mp4
+          git add gource.mp4
 
-            if git diff --cached --quiet; then
-              echo "Gource video is unchanged."
-              echo "video_updated=false" >> "$GITHUB_OUTPUT"
-              exit 0
-            fi
-
+          if git diff --cached --quiet; then
+            echo "Gource video is already up to date."
+          else
             git commit -m "Publish cinematic Gource 2.0 video"
-            if git push origin HEAD:main; then
-              echo "Gource video updated successfully."
-              echo "video_updated=true" >> "$GITHUB_OUTPUT"
-              exit 0
-            fi
+            git push origin HEAD:main
+            echo "Gource video updated successfully."
+          fi
 
-            echo "Push attempt ${attempt} raced with another main update; retrying."
-            sleep 2
-          done
-
-          echo "Could not update gource.mp4 after 3 attempts." >&2
-          exit 1
-
-      # GITHUB_TOKEN pushes do not start push-triggered workflows. Dispatch Pages explicitly.
+      # Dispatch Pages on every successful main render, so a transient dispatch
+      # failure can be recovered by rerunning this workflow even if the MP4 is unchanged.
       - name: Publish updated video to GitHub Pages
-        if: steps.update_video.outputs.video_updated == 'true'
         uses: actions/github-script@v7
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
