@@ -28,7 +28,7 @@ Acceptance: each case has traceable evidence and clearly separates facts from ex
 - [x] Add evidence-backed filters for Automation, Software Development, Linux & Networking, Cybersecurity and Integrations.
 - [x] Link each demonstrated skill to concrete project case studies or repository code.
 - [ ] Add a Data Analytics filter only when relevant SQL, BI or analysis work can be linked as concrete evidence.
-- [ ] Improve terminal commands, keyboard history and completion.
+- [x] Improve terminal commands with bounded keyboard history and Tab completion.
 - [ ] Refine Recruiter Mode and role-specific CV output using verified source data.
 
 Acceptance: skills are described through evidence, not arbitrary proficiency percentages; interactive features work on keyboard and mobile.
