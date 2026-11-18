@@ -92,6 +92,12 @@ export function renderInteractiveTerminal({ container, repos = [], lang = 'nl' }
     event.preventDefault();
     const raw = input.value.trim();
     const command = raw.toLowerCase().split(/\s+/)[0];
+    if (raw) {
+      if (history[history.length - 1] !== raw) history.push(raw);
+      if (history.length > 30) history.shift();
+    }
+    historyIndex = history.length;
+    draftCommand = '';
     if (command === 'clear') {
       output.replaceChildren();
       input.value = '';
