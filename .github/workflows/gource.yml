@@ -38,6 +38,8 @@ jobs:
           gource_font_color: "E8EAF0"
           gource_background_color: "070B16"
           gource_overlay_background_color: "10182A"
+          # The action composites its own date HUD; blend that overlay into the background.
+          gource_overlay_font_color: "070B16"
           gource_bloom_multiplier: 0.5
           gource_bloom_intensity: 0.5
           gource_key: ""
