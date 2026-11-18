@@ -14,6 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      actions: write
 
     steps:
       - name: Checkout
@@ -32,14 +33,15 @@ jobs:
           gource_time_scale: 1.5
           gource_font_size: 38
           gource_font_color: "E8EAF0"
-          gource_bloom_multiplier: 0.35
-          gource_bloom_intensity: 0.35
+          gource_bloom_multiplier: 0.5
+          gource_bloom_intensity: 0.5
+          gource_key: "--key"
           gource_hide_items: "mouse"
           gource_user_scale: 1.25
           gource_dir_depth: 3
           gource_filename_time: 3.5
           # Exclude generated video from its own history; keep source and data changes visible.
-          gource_file_filter: '(^|/)gource\.mp4$|(__pycache__|\.pyc|node_modules|\.git/)'
+          gource_file_filter: '(^|/)gource\\.mp4$|(__pycache__|\\.pyc|node_modules|\\.git/)'
           logo_url: "https://itsdarklikehell.github.io/my-resume/og-image.png"
           avatars_auto_fetch: true
 
@@ -52,9 +54,9 @@ jobs:
       - name: Verify rendered video
         run: |
           test -s ./gource/gource.mp4
-          ffprobe -v error \
-            -show_entries format=duration,size \
-            -show_entries stream=width,height,r_frame_rate \
+          ffprobe -v error \\
+            -show_entries format=duration,size \\
+            -show_entries stream=width,height,r_frame_rate \\
             -of default=noprint_wrappers=1 ./gource/gource.mp4
 
       - name: Upload rendered video for review
@@ -66,6 +68,7 @@ jobs:
           retention-days: 14
 
       - name: Update repository video
+        id: update_video
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -84,12 +87,14 @@ jobs:
 
             if git diff --cached --quiet; then
               echo "Gource video is unchanged."
+              echo "video_updated=false" >> "$GITHUB_OUTPUT"
               exit 0
             fi
 
-            git commit -m "Update Gource visualization [skip ci]"
+            git commit -m "Update Gource visualization"
             if git push origin HEAD:main; then
               echo "Gource video updated successfully."
+              echo "video_updated=true" >> "$GITHUB_OUTPUT"
               exit 0
             fi
 
@@ -99,3 +104,17 @@ jobs:
 
           echo "Could not update gource.mp4 after 3 attempts." >&2
           exit 1
+
+      # GITHUB_TOKEN pushes do not start push-triggered workflows. Dispatch Pages explicitly.
+      - name: Publish updated video to GitHub Pages
+        if: steps.update_video.outputs.video_updated == 'true'
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            await github.rest.actions.createWorkflowDispatch({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              workflow_id: "static.yml",
+              ref: "main"
+            });
