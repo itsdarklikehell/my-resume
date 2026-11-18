@@ -54,6 +54,39 @@ export function renderInteractiveTerminal({ container, repos = [], lang = 'nl' }
   const input = container.querySelector('[data-terminal-input]');
   const output = container.querySelector('[data-terminal-output]');
   const projects = (Array.isArray(repos) ? repos : []).filter(repo => repo && !repo.fork).slice(0, 5);
+  const commands = ['help', 'about', 'skills', 'projects', 'contact', 'clear'];
+  const history = [];
+  let historyIndex = 0;
+  let draftCommand = '';
+
+  input.addEventListener('keydown', event => {
+    if (event.key === 'ArrowUp' && history.length) {
+      event.preventDefault();
+      if (historyIndex === history.length) draftCommand = input.value;
+      historyIndex = Math.max(0, historyIndex - 1);
+      input.value = history[historyIndex];
+      input.setSelectionRange(input.value.length, input.value.length);
+    } else if (event.key === 'ArrowDown' && history.length) {
+      event.preventDefault();
+      historyIndex = Math.min(history.length, historyIndex + 1);
+      input.value = historyIndex === history.length ? draftCommand : history[historyIndex];
+      input.setSelectionRange(input.value.length, input.value.length);
+    } else if (event.key === 'Tab') {
+      event.preventDefault();
+      const prefix = input.value.trim().toLowerCase();
+      if (!prefix) return;
+      const matches = commands.filter(command => command.startsWith(prefix));
+      if (!matches.length) return;
+      const commonPrefix = matches.reduce((common, command) => {
+        let length = 0;
+        while (length < common.length && command[length] === common[length]) length += 1;
+        return common.slice(0, length);
+      });
+      if (commonPrefix.length > prefix.length) input.value = commonPrefix;
+      else if (matches.length === 1) input.value = matches[0];
+      input.setSelectionRange(input.value.length, input.value.length);
+    }
+  });
 
   form.addEventListener('submit', event => {
     event.preventDefault();
