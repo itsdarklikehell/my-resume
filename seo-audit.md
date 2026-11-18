@@ -1,35 +1,37 @@
-# SEO Audit — https://itsdarklikehell.github.io/my-resume/
+# SEO and crawlability audit
 
-Audited files: index.html, robots.txt, sitemap.xml, .well-known/* (none extra)
-Repo: /tmp/my-resume-improve
+Last verified: 2026-11-18  
+Site: https://itsdarklikehell.github.io/my-resume/
 
-## Current State
-- Meta description: present (Dutch), 85 chars — OK
-- OG tags: title, description, image (1200x630), url, type — present
-- Twitter card: `summary_large_image` + title/desc/image — present; missing `twitter:image:alt`
-- Canonical: `<link rel="canonical" href="https://itsdarklikehell.github.io/my-resume/">` — present
-- robots.txt: permissive (`Allow: /`) — present
-- sitemap.xml: single URL, lastmod=2026-10-20, monthly, 1.0 — present
-- JSON-LD: `Person` schema with name, jobTitle, url, image, email, address, knowsLanguage, knowsAbout, sameAs — present
-- CSP meta tag present
-- `lang="nl"` set
+This file records the current implementation. The Playwright regression test
+`SEO metadata, structured data and crawl files stay consistent` checks the
+high-value metadata and crawl directives so this audit does not silently go stale.
 
-## Gaps / Improvements
-1. **Twitter card** — add `twitter:image:alt` (currently missing); also add `twitter:site` / `twitter:creator` if account exists.
-2. **JSON-LD** — add `description` (bio summary) and `mainEntityOfPage` pointing to canonical URL. Add `worksFor` org if applicable. `telephone` masked (`+316****5494`) — fine for privacy.
-3. **Meta** — add `keywords` meta for ICT/professional terms (optional, low SEO weight but harmless). Ensure `<meta name="author" content="Bauke Molenaar">` is present (not seen).
-4. **Sitemap** — add `<changefreq>weekly</changefreq>` for active resume; ensure `lastmod` updates on content change.
-5. **robots.txt** — fine, but could reference sitemap: `Sitemap: https://itsdarklikehell.github.io/my-resume/sitemap.xml`
-6. **.well-known** — no `security.txt` or `.well-known/security.txt`. Reference `references/seo-files.md` recommends it.
-7. **OG / Twitter image alt** — `og:image:alt` exists; add matching `twitter:image:alt`.
-8. **Language / hreflang** — if multi-language (README.de, .fr, .nl), no `hreflang` links in HTML head. Not critical for single-page.
-9. **Performance / accessibility** — CSP already present; consider `loading="lazy"` on images, `preload` for LCP.
-10. **Canonical** — good; verify it matches the live URL exactly (it does).
+## Verified implementation
 
-## Suggested Edits (minimal)
-- In `<head>` after twitter:image, add: `<meta content="Bauke Molenaar — technisch professional" name="twitter:image:alt"/>`
-- In robots.txt, add sitemap line.
-- In JSON-LD, add `"description": "Technisch professional met passie voor ICT..."` and `"mainEntityOfPage": {"@type":"WebPage","@id":"https://..."}`.
-- Add `<meta name="author" content="Bauke Molenaar">` after viewport.
+- Dutch page title, description, author and keywords metadata are present.
+- Canonical URL points to the GitHub Pages homepage.
+- Open Graph title, description, image, dimensions, URL, type and image alt text are present.
+- Twitter large-image card metadata includes title, description, image and image alt text.
+- JSON-LD describes the person, includes a description, canonical `mainEntityOfPage`,
+  contact fields, languages, areas of knowledge and public profile links.
+- Content Security Policy is present in the document head.
+- `robots.txt` allows public crawling and advertises the sitemap.
+- `sitemap.xml` includes the homepage and all three multilingual technical case-study URLs.
+- `.well-known/security.txt` provides a security contact and encryption reference.
+- The primary profile image is preloaded as the page's likely Largest Contentful Paint image.
+- Lighthouse CI audits performance, accessibility, best practices and SEO. Accessibility
+  is enforced as an error threshold; other category thresholds currently warn.
 
-No major structural issues. Site is well-optimized for a GitHub Pages resume.
+## Follow-up considerations
+
+- Keep sitemap `lastmod` values aligned with real content changes; do not update them on every build.
+- Add language-specific canonical/hreflang metadata only if separate indexable language URLs are introduced.
+- Add social profile attribution metadata only when a verified Twitter/X account is intended.
+- Keep third-party analytics disabled by default; current interaction counters remain browser-local.
+
+## Privacy notes
+
+The structured data contains public professional contact details and public profile links.
+Review these before publishing any new fields. Do not add private identifiers, precise home
+address data, or unverified employer relationships.
