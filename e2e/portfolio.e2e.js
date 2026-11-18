@@ -13,6 +13,51 @@ test.beforeEach(async ({ page }) => {
   });
 });
 
+test('SEO metadata, structured data and crawl files stay consistent', async ({ page }) => {
+  await page.goto('?lang=nl');
+
+  const metadata = await page.evaluate(() => {
+    const meta = name => document.querySelector('meta[name="' + name + '"]')?.content || '';
+    const property = name => document.querySelector('meta[property="' + name + '"]')?.content || '';
+    const schemaElement = document.querySelector('script[type="application/ld+json"]');
+    return {
+      title: document.title,
+      description: meta('description'),
+      author: meta('author'),
+      canonical: document.querySelector('link[rel="canonical"]')?.href || '',
+      ogTitle: property('og:title'),
+      ogImageAlt: property('og:image:alt'),
+      twitterCard: meta('twitter:card'),
+      twitterImageAlt: meta('twitter:image:alt'),
+      schema: schemaElement ? JSON.parse(schemaElement.textContent) : null,
+    };
+  });
+
+  expect(metadata.title).toContain('Bauke Molenaar');
+  expect(metadata.description.length).toBeGreaterThan(40);
+  expect(metadata.author).toBe('Bauke Molenaar');
+  expect(metadata.canonical).toBe('https://itsdarklikehell.github.io/my-resume/');
+  expect(metadata.ogTitle).toContain('Bauke Molenaar');
+  expect(metadata.ogImageAlt).toBeTruthy();
+  expect(metadata.twitterCard).toBe('summary_large_image');
+  expect(metadata.twitterImageAlt).toBeTruthy();
+  expect(metadata.schema['@type']).toBe('Person');
+  expect(metadata.schema.url).toBe(metadata.canonical);
+  expect(metadata.schema.mainEntityOfPage['@id']).toBe(metadata.canonical);
+
+  const robotsResponse = await page.request.get(new URL('robots.txt', page.url()).toString());
+  expect(robotsResponse.ok()).toBeTruthy();
+  expect(await robotsResponse.text()).toContain('Sitemap: https://itsdarklikehell.github.io/my-resume/sitemap.xml');
+
+  const sitemapResponse = await page.request.get(new URL('sitemap.xml', page.url()).toString());
+  expect(sitemapResponse.ok()).toBeTruthy();
+  const sitemap = await sitemapResponse.text();
+  expect(sitemap).toContain(metadata.canonical);
+  for (const project of ['pwnagotchi-control-center.html', 'pwnagotchi-plugins.html', 'pwnspeaker.html']) {
+    expect(sitemap).toContain('/projects/' + project);
+  }
+});
+
 test('home page loads key CV sections and enhancement controls', async ({ page }) => {
   const pageErrors = [];
   page.on('pageerror', error => pageErrors.push(error.message));
