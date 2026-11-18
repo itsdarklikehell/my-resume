@@ -1,5 +1,11 @@
 export const translations = {
   nl: {
+    gource_showcase_title: "Achter de schermen: de ontwikkeling van deze CV-site",
+    gource_showcase_intro: "Bekijk hoe de code, functies en structuur van dit project zich door de tijd hebben ontwikkeld.",
+    gource_showcase_fallback: "Je browser ondersteunt deze video niet.",
+    gource_showcase_caption: "Cinematische ontwikkelgeschiedenis met originele elektronische soundtrack. Gebruik de videobediening voor pauzeren en volledig scherm.",
+    gource_showcase_download: "Download de Gource-video",
+
     tagline:
       'ICT, automatisering & technisch probleemoplossen',
     about: 'Over Mij',
@@ -355,6 +361,12 @@ export const translations = {
     last_updated: 'Laatst bijgewerkt',
   },
   en: {
+    gource_showcase_title: "Behind the scenes: how this CV website evolved",
+    gource_showcase_intro: "See how the code, features and structure of this project have evolved over time.",
+    gource_showcase_fallback: "Your browser does not support this video.",
+    gource_showcase_caption: "Cinematic development history with an original electronic soundtrack. Use the video controls to pause or enter fullscreen.",
+    gource_showcase_download: "Download the Gource video",
+
     tagline: 'IT, automation & technical problem-solving',
     about: 'About Me',
     recruiter_focus: 'Focus: Python · Shell/Bash · JavaScript/TypeScript · Linux · automation',
@@ -704,6 +716,12 @@ export const translations = {
     auto_sort_off: 'Auto-sort: OFF',
   },
   de: {
+    gource_showcase_title: "Hinter den Kulissen: die Entwicklung dieser Lebenslauf-Website",
+    gource_showcase_intro: "Sehen Sie, wie sich Code, Funktionen und Struktur dieses Projekts im Laufe der Zeit entwickelt haben.",
+    gource_showcase_fallback: "Ihr Browser unterstützt dieses Video nicht.",
+    gource_showcase_caption: "Filmische Entwicklungsgeschichte mit originalem elektronischem Soundtrack. Nutzen Sie die Videosteuerung zum Pausieren oder für den Vollbildmodus.",
+    gource_showcase_download: "Gource-Video herunterladen",
+
     tagline:
       'IT, Automatisierung & technische Problemlösung',
     about: 'Über Mich',
@@ -905,6 +923,12 @@ export const translations = {
     auto_sort_off: 'Automatisch sortieren: AUS',
   },
   fr: {
+    gource_showcase_title: "Dans les coulisses : l’évolution de ce site CV",
+    gource_showcase_intro: "Découvrez comment le code, les fonctionnalités et la structure de ce projet ont évolué au fil du temps.",
+    gource_showcase_fallback: "Votre navigateur ne prend pas en charge cette vidéo.",
+    gource_showcase_caption: "Historique de développement cinématographique avec une bande-son électronique originale. Utilisez les commandes vidéo pour mettre en pause ou passer en plein écran.",
+    gource_showcase_download: "Télécharger la vidéo Gource",
+
     tagline: 'Informatique, automatisation et résolution de problèmes',
     about: 'À Propos',
     recruiter_focus: 'Domaines : Python · Shell/Bash · JavaScript/TypeScript · Linux · automatisation',
