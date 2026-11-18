@@ -133,6 +133,32 @@ test('interactive terminal supports safe commands and clear', async ({ page }) =
   await expect(output.locator('.portfolio-terminal-entry')).toHaveCount(0);
 });
 
+test('interactive terminal supports keyboard command history and tab completion', async ({ page }) => {
+  await page.goto('?lang=en');
+  const input = page.locator('[data-terminal-input]');
+  const output = page.locator('[data-terminal-output]');
+  await expect(input).toBeVisible({ timeout: 20_000 });
+
+  await input.fill('skills');
+  await input.press('Enter');
+  await input.fill('projects');
+  await input.press('Enter');
+
+  await input.press('ArrowUp');
+  await expect(input).toHaveValue('projects');
+  await input.press('ArrowUp');
+  await expect(input).toHaveValue('skills');
+  await input.press('ArrowDown');
+  await expect(input).toHaveValue('projects');
+  await input.press('ArrowDown');
+  await expect(input).toHaveValue('');
+
+  await input.fill('pro');
+  await input.press('Tab');
+  await expect(input).toHaveValue('projects');
+  await expect(output).toContainText('Python');
+});
+
 test('donut centre label stays centred on desktop and mobile', async ({ page }) => {
   await page.goto('?lang=nl');
   const chart = page.locator('#donut-chart');
