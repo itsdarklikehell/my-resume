@@ -46,7 +46,7 @@ jobs:
           gource_dir_depth: 3
           gource_filename_time: 3.5
           # Exclude generated video from its own history; keep source and data changes visible.
-          gource_file_filter: '(^|/)gource\\.mp4$|(__pycache__|\\.pyc|node_modules|\\.git/)'
+          gource_file_filter: '(^|/)gource\.mp4$|(__pycache__|\.pyc|node_modules|\.git/)'
           logo_url: "https://itsdarklikehell.github.io/my-resume/og-image.png"
           avatars_auto_fetch: true
 
