@@ -1,5 +1,5 @@
 const CACHE_PREFIX = 'resume-cache-';
-const CACHE_NAME = 'resume-cache-v9';
+const CACHE_NAME = 'resume-cache-v10';
 const urlsToCache = [
   '/my-resume/',
   '/my-resume/index.html',
@@ -75,7 +75,7 @@ self.addEventListener('fetch', event => {
   }
 
   // Keep cache-first behavior for larger, mostly static assets such as images
-  // and the Gource video.
+  // and the Gource video. Cache version changes force clients to fetch new assets.
   event.respondWith(
     caches.match(request).then(cached => cached || fetch(request))
   );
