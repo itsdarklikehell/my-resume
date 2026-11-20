@@ -1,32 +1,32 @@
 {
-  "generated_at": "2026-11-19T15:19:15.755966Z",
+  "generated_at": "2026-11-20T07:52:14.036243Z",
   "source_status": {
     "user_repositories": {
       "status": "ok",
       "record_count": 6,
-      "checked_at": "2026-11-19T15:19:15.755966Z",
-      "last_successful_at": "2026-11-19T15:19:15.755966Z",
+      "checked_at": "2026-11-20T07:52:14.036243Z",
+      "last_successful_at": "2026-11-20T07:52:14.036243Z",
       "retained": false
     },
     "organization_repositories": {
       "status": "ok",
       "record_count": 52,
-      "checked_at": "2026-11-19T15:19:15.755966Z",
-      "last_successful_at": "2026-11-19T15:19:15.755966Z",
+      "checked_at": "2026-11-20T07:52:14.036243Z",
+      "last_successful_at": "2026-11-20T07:52:14.036243Z",
       "retained": false
     },
     "contributions": {
       "status": "ok",
       "record_count": 100,
-      "checked_at": "2026-11-19T15:19:15.755966Z",
-      "last_successful_at": "2026-11-19T15:19:15.755966Z",
+      "checked_at": "2026-11-20T07:52:14.036243Z",
+      "last_successful_at": "2026-11-20T07:52:14.036243Z",
       "retained": false
     },
     "user_profile": {
       "status": "ok",
       "record_count": 1,
-      "checked_at": "2026-11-19T15:19:15.755966Z",
-      "last_successful_at": "2026-11-19T15:19:15.755966Z",
+      "checked_at": "2026-11-20T07:52:14.036243Z",
+      "last_successful_at": "2026-11-20T07:52:14.036243Z",
       "retained": false
     }
   },
@@ -603,6 +603,426 @@
   ],
   "contributions": [
     {
+      "type": "PullRequestEvent",
+      "repo": "itsdarklikehell/my-resume",
+      "date": "2026-11-20T07:51:52Z",
+      "url": "https://github.com/itsdarklikehell/my-resume"
+    },
+    {
+      "type": "PullRequestEvent",
+      "repo": "itsdarklikehell-interactive/batch_comfytester-stub",
+      "date": "2026-11-20T07:49:58Z",
+      "url": "https://github.com/itsdarklikehell-interactive/batch_comfytester-stub"
+    },
+    {
+      "type": "PushEvent",
+      "repo": "itsdarklikehell/my-resume",
+      "date": "2026-11-18T14:19:52Z",
+      "url": "https://github.com/itsdarklikehell/my-resume"
+    },
+    {
+      "type": "PushEvent",
+      "repo": "itsdarklikehell-interactive/ci-templates",
+      "date": "2026-11-18T13:00:18Z",
+      "url": "https://github.com/itsdarklikehell-interactive/ci-templates"
+    },
+    {
+      "type": "CreateEvent",
+      "repo": "itsdarklikehell/ctf-writeups",
+      "date": "2026-11-18T12:53:14Z",
+      "url": "https://github.com/itsdarklikehell/ctf-writeups"
+    },
+    {
+      "type": "PushEvent",
+      "repo": "itsdarklikehell-interactive/ci-templates",
+      "date": "2026-11-18T12:51:55Z",
+      "url": "https://github.com/itsdarklikehell-interactive/ci-templates"
+    },
+    {
+      "type": "CreateEvent",
+      "repo": "itsdarklikehell-interactive/ci-templates",
+      "date": "2026-11-18T12:51:52Z",
+      "url": "https://github.com/itsdarklikehell-interactive/ci-templates"
+    },
+    {
+      "type": "PushEvent",
+      "repo": "itsdarklikehell/my-resume",
+      "date": "2026-11-18T14:15:48Z",
+      "url": "https://github.com/itsdarklikehell/my-resume"
+    },
+    {
+      "type": "PushEvent",
+      "repo": "itsdarklikehell-interactive/ci-templates",
+      "date": "2026-11-18T12:59:17Z",
+      "url": "https://github.com/itsdarklikehell-interactive/ci-templates"
+    },
+    {
+      "type": "CreateEvent",
+      "repo": "itsdarklikehell-interactive/batch_comfytester-stub",
+      "date": "2026-11-18T12:56:41Z",
+      "url": "https://github.com/itsdarklikehell-interactive/batch_comfytester-stub"
+    },
+    {
+      "type": "PushEvent",
+      "repo": "itsdarklikehell/my-resume",
+      "date": "2026-11-18T11:23:25Z",
+      "url": "https://github.com/itsdarklikehell/my-resume"
+    },
+    {
+      "type": "CreateEvent",
+      "repo": "itsdarklikehell-interactive/.github",
+      "date": "2026-11-18T12:55:50Z",
+      "url": "https://github.com/itsdarklikehell-interactive/.github"
+    },
+    {
+      "type": "CreateEvent",
+      "repo": "itsdarklikehell-interactive/github-automation-scripts",
+      "date": "2026-11-18T12:55:27Z",
+      "url": "https://github.com/itsdarklikehell-interactive/github-automation-scripts"
+    },
+    {
+      "type": "PushEvent",
+      "repo": "itsdarklikehell/ctf-writeups",
+      "date": "2026-11-18T12:53:17Z",
+      "url": "https://github.com/itsdarklikehell/ctf-writeups"
+    },
+    {
+      "type": "PushEvent",
+      "repo": "itsdarklikehell/my-resume",
+      "date": "2026-11-18T11:17:03Z",
+      "url": "https://github.com/itsdarklikehell/my-resume"
+    },
+    {
+      "type": "PushEvent",
+      "repo": "itsdarklikehell-interactive/ci-templates",
+      "date": "2026-11-18T12:57:56Z",
+      "url": "https://github.com/itsdarklikehell-interactive/ci-templates"
+    },
+    {
+      "type": "CreateEvent",
+      "repo": "itsdarklikehell-interactive/hmol33-my-resume",
+      "date": "2026-11-18T12:55:19Z",
+      "url": "https://github.com/itsdarklikehell-interactive/hmol33-my-resume"
+    },
+    {
+      "type": "PushEvent",
+      "repo": "itsdarklikehell-interactive/itsdarklikehell-interactive",
+      "date": "2026-11-18T12:50:45Z",
+      "url": "https://github.com/itsdarklikehell-interactive/itsdarklikehell-interactive"
+    },
+    {
+      "type": "PushEvent",
+      "repo": "itsdarklikehell/my-resume",
+      "date": "2026-11-18T15:07:38Z",
+      "url": "https://github.com/itsdarklikehell/my-resume"
+    },
+    {
+      "type": "PushEvent",
+      "repo": "itsdarklikehell/my-resume",
+      "date": "2026-11-18T15:06:59Z",
+      "url": "https://github.com/itsdarklikehell/my-resume"
+    },
+    {
+      "type": "CreateEvent",
+      "repo": "itsdarklikehell/my-resume",
+      "date": "2026-11-18T15:04:59Z",
+      "url": "https://github.com/itsdarklikehell/my-resume"
+    },
+    {
+      "type": "CreateEvent",
+      "repo": "itsdarklikehell/my-resume",
+      "date": "2026-11-18T11:01:47Z",
+      "url": "https://github.com/itsdarklikehell/my-resume"
+    },
+    {
+      "type": "PushEvent",
+      "repo": "itsdarklikehell/my-resume",
+      "date": "2026-11-18T14:19:49Z",
+      "url": "https://github.com/itsdarklikehell/my-resume"
+    },
+    {
+      "type": "PushEvent",
+      "repo": "itsdarklikehell/my-resume",
+      "date": "2026-11-18T14:05:02Z",
+      "url": "https://github.com/itsdarklikehell/my-resume"
+    },
+    {
+      "type": "PushEvent",
+      "repo": "itsdarklikehell/my-resume",
+      "date": "2026-11-18T15:18:08Z",
+      "url": "https://github.com/itsdarklikehell/my-resume"
+    },
+    {
+      "type": "PushEvent",
+      "repo": "itsdarklikehell/my-resume",
+      "date": "2026-11-18T15:06:19Z",
+      "url": "https://github.com/itsdarklikehell/my-resume"
+    },
+    {
+      "type": "PushEvent",
+      "repo": "itsdarklikehell/my-resume",
+      "date": "2026-11-18T10:03:33Z",
+      "url": "https://github.com/itsdarklikehell/my-resume"
+    },
+    {
+      "type": "CreateEvent",
+      "repo": "itsdarklikehell/my-resume",
+      "date": "2026-11-18T10:37:02Z",
+      "url": "https://github.com/itsdarklikehell/my-resume"
+    },
+    {
+      "type": "PushEvent",
+      "repo": "itsdarklikehell-interactive/ci-templates",
+      "date": "2026-11-18T13:03:15Z",
+      "url": "https://github.com/itsdarklikehell-interactive/ci-templates"
+    },
+    {
+      "type": "PushEvent",
+      "repo": "itsdarklikehell-interactive/ci-templates",
+      "date": "2026-11-18T13:00:11Z",
+      "url": "https://github.com/itsdarklikehell-interactive/ci-templates"
+    },
+    {
+      "type": "CreateEvent",
+      "repo": "itsdarklikehell-interactive/api-gateway",
+      "date": "2026-11-18T12:55:12Z",
+      "url": "https://github.com/itsdarklikehell-interactive/api-gateway"
+    },
+    {
+      "type": "PushEvent",
+      "repo": "itsdarklikehell-interactive/batch_comfytester-stub",
+      "date": "2026-11-18T13:29:21Z",
+      "url": "https://github.com/itsdarklikehell-interactive/batch_comfytester-stub"
+    },
+    {
+      "type": "PushEvent",
+      "repo": "itsdarklikehell/my-resume",
+      "date": "2026-11-18T10:14:49Z",
+      "url": "https://github.com/itsdarklikehell/my-resume"
+    },
+    {
+      "type": "CreateEvent",
+      "repo": "itsdarklikehell/my-resume",
+      "date": "2026-11-18T14:32:00Z",
+      "url": "https://github.com/itsdarklikehell/my-resume"
+    },
+    {
+      "type": "PushEvent",
+      "repo": "itsdarklikehell/my-resume",
+      "date": "2026-11-18T15:18:39Z",
+      "url": "https://github.com/itsdarklikehell/my-resume"
+    },
+    {
+      "type": "PushEvent",
+      "repo": "itsdarklikehell-interactive/ci-templates",
+      "date": "2026-11-18T12:59:14Z",
+      "url": "https://github.com/itsdarklikehell-interactive/ci-templates"
+    },
+    {
+      "type": "PushEvent",
+      "repo": "itsdarklikehell-interactive/ci-templates",
+      "date": "2026-11-18T12:59:09Z",
+      "url": "https://github.com/itsdarklikehell-interactive/ci-templates"
+    },
+    {
+      "type": "PushEvent",
+      "repo": "itsdarklikehell-interactive/batch_comfytester-stub",
+      "date": "2026-11-18T12:56:44Z",
+      "url": "https://github.com/itsdarklikehell-interactive/batch_comfytester-stub"
+    },
+    {
+      "type": "PushEvent",
+      "repo": "itsdarklikehell-interactive/veloren-agent-intergration",
+      "date": "2026-11-18T12:56:36Z",
+      "url": "https://github.com/itsdarklikehell-interactive/veloren-agent-intergration"
+    },
+    {
+      "type": "CreateEvent",
+      "repo": "itsdarklikehell-interactive/fleet-dashboard",
+      "date": "2026-11-18T12:55:04Z",
+      "url": "https://github.com/itsdarklikehell-interactive/fleet-dashboard"
+    },
+    {
+      "type": "PushEvent",
+      "repo": "itsdarklikehell/my-resume",
+      "date": "2026-11-18T14:05:04Z",
+      "url": "https://github.com/itsdarklikehell/my-resume"
+    },
+    {
+      "type": "PushEvent",
+      "repo": "itsdarklikehell/my-resume",
+      "date": "2026-11-18T14:22:13Z",
+      "url": "https://github.com/itsdarklikehell/my-resume"
+    },
+    {
+      "type": "PushEvent",
+      "repo": "itsdarklikehell/my-resume",
+      "date": "2026-11-18T11:23:47Z",
+      "url": "https://github.com/itsdarklikehell/my-resume"
+    },
+    {
+      "type": "PushEvent",
+      "repo": "itsdarklikehell/my-resume",
+      "date": "2026-11-18T14:04:59Z",
+      "url": "https://github.com/itsdarklikehell/my-resume"
+    },
+    {
+      "type": "PushEvent",
+      "repo": "itsdarklikehell-interactive/ci-templates",
+      "date": "2026-11-18T13:11:22Z",
+      "url": "https://github.com/itsdarklikehell-interactive/ci-templates"
+    },
+    {
+      "type": "PushEvent",
+      "repo": "itsdarklikehell-interactive/ci-templates",
+      "date": "2026-11-18T13:00:07Z",
+      "url": "https://github.com/itsdarklikehell-interactive/ci-templates"
+    },
+    {
+      "type": "PushEvent",
+      "repo": "itsdarklikehell-interactive/ci-templates",
+      "date": "2026-11-18T12:59:21Z",
+      "url": "https://github.com/itsdarklikehell-interactive/ci-templates"
+    },
+    {
+      "type": "PushEvent",
+      "repo": "itsdarklikehell-interactive/itsdarklikehell-interactive",
+      "date": "2026-11-18T12:54:45Z",
+      "url": "https://github.com/itsdarklikehell-interactive/itsdarklikehell-interactive"
+    },
+    {
+      "type": "PushEvent",
+      "repo": "itsdarklikehell/custom-security-tooling",
+      "date": "2026-11-18T12:52:41Z",
+      "url": "https://github.com/itsdarklikehell/custom-security-tooling"
+    },
+    {
+      "type": "PushEvent",
+      "repo": "itsdarklikehell-interactive/ci-templates",
+      "date": "2026-11-18T13:00:20Z",
+      "url": "https://github.com/itsdarklikehell-interactive/ci-templates"
+    },
+    {
+      "type": "PushEvent",
+      "repo": "itsdarklikehell-interactive/github-automation-scripts",
+      "date": "2026-11-18T12:55:30Z",
+      "url": "https://github.com/itsdarklikehell-interactive/github-automation-scripts"
+    },
+    {
+      "type": "CreateEvent",
+      "repo": "itsdarklikehell-interactive/apprise-notify",
+      "date": "2026-11-18T12:53:39Z",
+      "url": "https://github.com/itsdarklikehell-interactive/apprise-notify"
+    },
+    {
+      "type": "PushEvent",
+      "repo": "itsdarklikehell/security-automation-toolkit",
+      "date": "2026-11-18T12:53:24Z",
+      "url": "https://github.com/itsdarklikehell/security-automation-toolkit"
+    },
+    {
+      "type": "PushEvent",
+      "repo": "itsdarklikehell/my-resume",
+      "date": "2026-11-18T10:31:29Z",
+      "url": "https://github.com/itsdarklikehell/my-resume"
+    },
+    {
+      "type": "CreateEvent",
+      "repo": "itsdarklikehell/custom-security-tooling",
+      "date": "2026-11-18T12:52:38Z",
+      "url": "https://github.com/itsdarklikehell/custom-security-tooling"
+    },
+    {
+      "type": "CreateEvent",
+      "repo": "itsdarklikehell/my-resume",
+      "date": "2026-11-18T12:38:34Z",
+      "url": "https://github.com/itsdarklikehell/my-resume"
+    },
+    {
+      "type": "PushEvent",
+      "repo": "itsdarklikehell/my-resume",
+      "date": "2026-11-18T11:16:55Z",
+      "url": "https://github.com/itsdarklikehell/my-resume"
+    },
+    {
+      "type": "PushEvent",
+      "repo": "itsdarklikehell/my-resume",
+      "date": "2026-11-18T10:25:37Z",
+      "url": "https://github.com/itsdarklikehell/my-resume"
+    },
+    {
+      "type": "CreateEvent",
+      "repo": "itsdarklikehell/my-resume",
+      "date": "2026-11-18T10:25:28Z",
+      "url": "https://github.com/itsdarklikehell/my-resume"
+    },
+    {
+      "type": "PushEvent",
+      "repo": "itsdarklikehell/my-resume",
+      "date": "2026-11-18T10:12:51Z",
+      "url": "https://github.com/itsdarklikehell/my-resume"
+    },
+    {
+      "type": "PushEvent",
+      "repo": "itsdarklikehell/my-resume",
+      "date": "2026-11-18T10:12:36Z",
+      "url": "https://github.com/itsdarklikehell/my-resume"
+    },
+    {
+      "type": "PushEvent",
+      "repo": "itsdarklikehell-interactive/itsdarklikehell-interactive",
+      "date": "2026-11-18T12:28:39Z",
+      "url": "https://github.com/itsdarklikehell-interactive/itsdarklikehell-interactive"
+    },
+    {
+      "type": "PushEvent",
+      "repo": "itsdarklikehell-interactive/ci-templates",
+      "date": "2026-11-18T12:59:24Z",
+      "url": "https://github.com/itsdarklikehell-interactive/ci-templates"
+    },
+    {
+      "type": "PushEvent",
+      "repo": "itsdarklikehell-interactive/ci-templates",
+      "date": "2026-11-18T12:59:06Z",
+      "url": "https://github.com/itsdarklikehell-interactive/ci-templates"
+    },
+    {
+      "type": "PushEvent",
+      "repo": "itsdarklikehell-interactive/ci-templates",
+      "date": "2026-11-18T12:57:51Z",
+      "url": "https://github.com/itsdarklikehell-interactive/ci-templates"
+    },
+    {
+      "type": "PushEvent",
+      "repo": "itsdarklikehell-interactive/.github",
+      "date": "2026-11-18T12:55:52Z",
+      "url": "https://github.com/itsdarklikehell-interactive/.github"
+    },
+    {
+      "type": "PushEvent",
+      "repo": "itsdarklikehell-interactive/api-gateway",
+      "date": "2026-11-18T12:55:15Z",
+      "url": "https://github.com/itsdarklikehell-interactive/api-gateway"
+    },
+    {
+      "type": "PushEvent",
+      "repo": "itsdarklikehell-interactive/itsdarklikehell-interactive",
+      "date": "2026-11-18T12:54:54Z",
+      "url": "https://github.com/itsdarklikehell-interactive/itsdarklikehell-interactive"
+    },
+    {
+      "type": "PushEvent",
+      "repo": "itsdarklikehell/itsdarklikehell",
+      "date": "2026-11-18T12:53:03Z",
+      "url": "https://github.com/itsdarklikehell/itsdarklikehell"
+    },
+    {
+      "type": "PushEvent",
+      "repo": "itsdarklikehell/my-resume",
+      "date": "2026-11-18T11:16:33Z",
+      "url": "https://github.com/itsdarklikehell/my-resume"
+    },
+    {
       "type": "PushEvent",
       "repo": "itsdarklikehell-interactive/itsdarklikehell-interactive",
       "date": "2026-11-19T09:01:43Z",
@@ -781,426 +1201,6 @@
       "repo": "itsdarklikehell-interactive/batch_comfytester-stub",
       "date": "2026-11-19T08:43:27Z",
       "url": "https://github.com/itsdarklikehell-interactive/batch_comfytester-stub"
-    },
-    {
-      "type": "PullRequestEvent",
-      "repo": "itsdarklikehell-interactive/stacks",
-      "date": "2026-11-19T08:30:36Z",
-      "url": "https://github.com/itsdarklikehell-interactive/stacks"
-    },
-    {
-      "type": "PullRequestEvent",
-      "repo": "itsdarklikehell-interactive/batch_comfytester-stub",
-      "date": "2026-11-19T08:21:45Z",
-      "url": "https://github.com/itsdarklikehell-interactive/batch_comfytester-stub"
-    },
-    {
-      "type": "PullRequestEvent",
-      "repo": "itsdarklikehell-interactive/itsdarklikehell-interactive",
-      "date": "2026-11-19T08:21:40Z",
-      "url": "https://github.com/itsdarklikehell-interactive/itsdarklikehell-interactive"
-    },
-    {
-      "type": "PullRequestEvent",
-      "repo": "itsdarklikehell-interactive/veloren-agent-intergration",
-      "date": "2026-11-19T08:18:57Z",
-      "url": "https://github.com/itsdarklikehell-interactive/veloren-agent-intergration"
-    },
-    {
-      "type": "PullRequestEvent",
-      "repo": "itsdarklikehell-interactive/batch_comfytester-stub",
-      "date": "2026-11-19T08:18:31Z",
-      "url": "https://github.com/itsdarklikehell-interactive/batch_comfytester-stub"
-    },
-    {
-      "type": "PullRequestEvent",
-      "repo": "itsdarklikehell-interactive/itsdarklikehell-interactive",
-      "date": "2026-11-19T08:18:28Z",
-      "url": "https://github.com/itsdarklikehell-interactive/itsdarklikehell-interactive"
-    },
-    {
-      "type": "PullRequestEvent",
-      "repo": "itsdarklikehell-interactive/.github",
-      "date": "2026-11-19T08:16:17Z",
-      "url": "https://github.com/itsdarklikehell-interactive/.github"
-    },
-    {
-      "type": "PullRequestEvent",
-      "repo": "itsdarklikehell-interactive/batch_comfytester-stub",
-      "date": "2026-11-19T08:15:19Z",
-      "url": "https://github.com/itsdarklikehell-interactive/batch_comfytester-stub"
-    },
-    {
-      "type": "PullRequestEvent",
-      "repo": "itsdarklikehell-interactive/itsdarklikehell-interactive",
-      "date": "2026-11-19T08:15:16Z",
-      "url": "https://github.com/itsdarklikehell-interactive/itsdarklikehell-interactive"
-    },
-    {
-      "type": "PullRequestEvent",
-      "repo": "itsdarklikehell-interactive/hmol33-my-resume",
-      "date": "2026-11-19T08:06:10Z",
-      "url": "https://github.com/itsdarklikehell-interactive/hmol33-my-resume"
-    },
-    {
-      "type": "PullRequestEvent",
-      "repo": "itsdarklikehell/security-automation-toolkit",
-      "date": "2026-11-19T08:05:33Z",
-      "url": "https://github.com/itsdarklikehell/security-automation-toolkit"
-    },
-    {
-      "type": "PullRequestEvent",
-      "repo": "itsdarklikehell-interactive/itsdarklikehell-interactive",
-      "date": "2026-11-19T08:04:11Z",
-      "url": "https://github.com/itsdarklikehell-interactive/itsdarklikehell-interactive"
-    },
-    {
-      "type": "PullRequestEvent",
-      "repo": "itsdarklikehell-interactive/batch_comfytester-stub",
-      "date": "2026-11-19T08:02:55Z",
-      "url": "https://github.com/itsdarklikehell-interactive/batch_comfytester-stub"
-    },
-    {
-      "type": "PullRequestEvent",
-      "repo": "itsdarklikehell-interactive/fleet-dashboard",
-      "date": "2026-11-19T08:01:22Z",
-      "url": "https://github.com/itsdarklikehell-interactive/fleet-dashboard"
-    },
-    {
-      "type": "PullRequestEvent",
-      "repo": "itsdarklikehell-interactive/github-automation-scripts",
-      "date": "2026-11-19T08:01:18Z",
-      "url": "https://github.com/itsdarklikehell-interactive/github-automation-scripts"
-    },
-    {
-      "type": "PullRequestEvent",
-      "repo": "itsdarklikehell-interactive/skills-getting-started-with-github-copilot",
-      "date": "2026-11-19T08:01:04Z",
-      "url": "https://github.com/itsdarklikehell-interactive/skills-getting-started-with-github-copilot"
-    },
-    {
-      "type": "PullRequestEvent",
-      "repo": "itsdarklikehell-interactive/api-gateway",
-      "date": "2026-11-19T07:59:41Z",
-      "url": "https://github.com/itsdarklikehell-interactive/api-gateway"
-    },
-    {
-      "type": "PullRequestEvent",
-      "repo": "itsdarklikehell-interactive/batch_comfytester-stub",
-      "date": "2026-11-19T07:59:31Z",
-      "url": "https://github.com/itsdarklikehell-interactive/batch_comfytester-stub"
-    },
-    {
-      "type": "PullRequestEvent",
-      "repo": "itsdarklikehell/itsdarklikehell",
-      "date": "2026-11-19T07:59:23Z",
-      "url": "https://github.com/itsdarklikehell/itsdarklikehell"
-    },
-    {
-      "type": "PullRequestEvent",
-      "repo": "itsdarklikehell/custom-security-tooling",
-      "date": "2026-11-19T07:59:19Z",
-      "url": "https://github.com/itsdarklikehell/custom-security-tooling"
-    },
-    {
-      "type": "PullRequestEvent",
-      "repo": "itsdarklikehell/ctf-writeups",
-      "date": "2026-11-19T07:59:15Z",
-      "url": "https://github.com/itsdarklikehell/ctf-writeups"
-    },
-    {
-      "type": "PullRequestEvent",
-      "repo": "itsdarklikehell-interactive/itsdarklikehell-interactive",
-      "date": "2026-11-19T07:57:49Z",
-      "url": "https://github.com/itsdarklikehell-interactive/itsdarklikehell-interactive"
-    },
-    {
-      "type": "PullRequestEvent",
-      "repo": "itsdarklikehell-interactive/itsdarklikehell-interactive",
-      "date": "2026-11-19T07:56:25Z",
-      "url": "https://github.com/itsdarklikehell-interactive/itsdarklikehell-interactive"
-    },
-    {
-      "type": "PullRequestEvent",
-      "repo": "itsdarklikehell-interactive/itsdarklikehell-interactive",
-      "date": "2026-11-19T07:53:59Z",
-      "url": "https://github.com/itsdarklikehell-interactive/itsdarklikehell-interactive"
-    },
-    {
-      "type": "PullRequestEvent",
-      "repo": "itsdarklikehell-interactive/ci-templates",
-      "date": "2026-11-19T07:51:12Z",
-      "url": "https://github.com/itsdarklikehell-interactive/ci-templates"
-    },
-    {
-      "type": "PullRequestEvent",
-      "repo": "itsdarklikehell-interactive/itsdarklikehell-interactive",
-      "date": "2026-11-19T07:50:39Z",
-      "url": "https://github.com/itsdarklikehell-interactive/itsdarklikehell-interactive"
-    },
-    {
-      "type": "PullRequestEvent",
-      "repo": "itsdarklikehell-interactive/ci-templates",
-      "date": "2026-11-19T07:50:36Z",
-      "url": "https://github.com/itsdarklikehell-interactive/ci-templates"
-    },
-    {
-      "type": "PushEvent",
-      "repo": "itsdarklikehell/my-resume",
-      "date": "2026-11-18T14:19:47Z",
-      "url": "https://github.com/itsdarklikehell/my-resume"
-    },
-    {
-      "type": "PushEvent",
-      "repo": "itsdarklikehell-interactive/api-gateway",
-      "date": "2026-11-18T13:28:40Z",
-      "url": "https://github.com/itsdarklikehell-interactive/api-gateway"
-    },
-    {
-      "type": "PushEvent",
-      "repo": "itsdarklikehell-interactive/ci-templates",
-      "date": "2026-11-18T12:59:12Z",
-      "url": "https://github.com/itsdarklikehell-interactive/ci-templates"
-    },
-    {
-      "type": "PushEvent",
-      "repo": "itsdarklikehell-interactive/skills-getting-started-with-github-copilot",
-      "date": "2026-11-18T12:55:45Z",
-      "url": "https://github.com/itsdarklikehell-interactive/skills-getting-started-with-github-copilot"
-    },
-    {
-      "type": "PushEvent",
-      "repo": "itsdarklikehell-interactive/hmol33-my-resume",
-      "date": "2026-11-18T12:55:22Z",
-      "url": "https://github.com/itsdarklikehell-interactive/hmol33-my-resume"
-    },
-    {
-      "type": "CreateEvent",
-      "repo": "itsdarklikehell/my-resume",
-      "date": "2026-11-17T14:21:07Z",
-      "url": "https://github.com/itsdarklikehell/my-resume"
-    },
-    {
-      "type": "PushEvent",
-      "repo": "itsdarklikehell/my-resume",
-      "date": "2026-11-18T12:00:00Z",
-      "url": "https://github.com/itsdarklikehell/my-resume"
-    },
-    {
-      "type": "PushEvent",
-      "repo": "itsdarklikehell/my-resume",
-      "date": "2026-11-18T11:02:11Z",
-      "url": "https://github.com/itsdarklikehell/my-resume"
-    },
-    {
-      "type": "PushEvent",
-      "repo": "itsdarklikehell/my-resume",
-      "date": "2026-11-17T12:51:01Z",
-      "url": "https://github.com/itsdarklikehell/my-resume"
-    },
-    {
-      "type": "PushEvent",
-      "repo": "itsdarklikehell/my-resume",
-      "date": "2026-11-17T12:48:55Z",
-      "url": "https://github.com/itsdarklikehell/my-resume"
-    },
-    {
-      "type": "PushEvent",
-      "repo": "itsdarklikehell/my-resume",
-      "date": "2026-11-17T11:59:14Z",
-      "url": "https://github.com/itsdarklikehell/my-resume"
-    },
-    {
-      "type": "PushEvent",
-      "repo": "itsdarklikehell/my-resume",
-      "date": "2026-11-17T15:11:13Z",
-      "url": "https://github.com/itsdarklikehell/my-resume"
-    },
-    {
-      "type": "CreateEvent",
-      "repo": "itsdarklikehell/my-resume",
-      "date": "2026-11-17T15:04:58Z",
-      "url": "https://github.com/itsdarklikehell/my-resume"
-    },
-    {
-      "type": "PushEvent",
-      "repo": "itsdarklikehell/my-resume",
-      "date": "2026-11-17T14:57:09Z",
-      "url": "https://github.com/itsdarklikehell/my-resume"
-    },
-    {
-      "type": "PullRequestEvent",
-      "repo": "itsdarklikehell/my-resume",
-      "date": "2026-11-18T15:18:31Z",
-      "url": "https://github.com/itsdarklikehell/my-resume"
-    },
-    {
-      "type": "PullRequestEvent",
-      "repo": "itsdarklikehell/my-resume",
-      "date": "2026-11-18T15:18:37Z",
-      "url": "https://github.com/itsdarklikehell/my-resume"
-    },
-    {
-      "type": "CreateEvent",
-      "repo": "itsdarklikehell/my-resume",
-      "date": "2026-11-17T14:56:59Z",
-      "url": "https://github.com/itsdarklikehell/my-resume"
-    },
-    {
-      "type": "PullRequestEvent",
-      "repo": "itsdarklikehell/my-resume",
-      "date": "2026-11-18T15:06:24Z",
-      "url": "https://github.com/itsdarklikehell/my-resume"
-    },
-    {
-      "type": "PullRequestEvent",
-      "repo": "itsdarklikehell/my-resume",
-      "date": "2026-11-18T15:05:24Z",
-      "url": "https://github.com/itsdarklikehell/my-resume"
-    },
-    {
-      "type": "PushEvent",
-      "repo": "itsdarklikehell/my-resume",
-      "date": "2026-11-17T13:00:19Z",
-      "url": "https://github.com/itsdarklikehell/my-resume"
-    },
-    {
-      "type": "PullRequestEvent",
-      "repo": "itsdarklikehell/my-resume",
-      "date": "2026-11-17T12:15:51Z",
-      "url": "https://github.com/itsdarklikehell/my-resume"
-    },
-    {
-      "type": "PullRequestEvent",
-      "repo": "itsdarklikehell/my-resume",
-      "date": "2026-11-18T14:32:04Z",
-      "url": "https://github.com/itsdarklikehell/my-resume"
-    },
-    {
-      "type": "PullRequestEvent",
-      "repo": "itsdarklikehell/my-resume",
-      "date": "2026-11-18T14:22:12Z",
-      "url": "https://github.com/itsdarklikehell/my-resume"
-    },
-    {
-      "type": "PushEvent",
-      "repo": "itsdarklikehell/my-resume",
-      "date": "2026-11-17T12:46:13Z",
-      "url": "https://github.com/itsdarklikehell/my-resume"
-    },
-    {
-      "type": "PushEvent",
-      "repo": "itsdarklikehell/my-resume",
-      "date": "2026-11-17T12:40:35Z",
-      "url": "https://github.com/itsdarklikehell/my-resume"
-    },
-    {
-      "type": "PullRequestEvent",
-      "repo": "itsdarklikehell/my-resume",
-      "date": "2026-11-18T14:05:09Z",
-      "url": "https://github.com/itsdarklikehell/my-resume"
-    },
-    {
-      "type": "PushEvent",
-      "repo": "itsdarklikehell/my-resume",
-      "date": "2026-11-17T12:22:38Z",
-      "url": "https://github.com/itsdarklikehell/my-resume"
-    },
-    {
-      "type": "CreateEvent",
-      "repo": "itsdarklikehell/my-resume",
-      "date": "2026-11-17T12:20:06Z",
-      "url": "https://github.com/itsdarklikehell/my-resume"
-    },
-    {
-      "type": "PullRequestEvent",
-      "repo": "itsdarklikehell-interactive/itsdarklikehell-interactive",
-      "date": "2026-11-18T13:11:47Z",
-      "url": "https://github.com/itsdarklikehell-interactive/itsdarklikehell-interactive"
-    },
-    {
-      "type": "PullRequestEvent",
-      "repo": "itsdarklikehell-interactive/ci-templates",
-      "date": "2026-11-18T13:11:21Z",
-      "url": "https://github.com/itsdarklikehell-interactive/ci-templates"
-    },
-    {
-      "type": "PullRequestEvent",
-      "repo": "itsdarklikehell-interactive/batch_comfytester-stub",
-      "date": "2026-11-18T12:56:45Z",
-      "url": "https://github.com/itsdarklikehell-interactive/batch_comfytester-stub"
-    },
-    {
-      "type": "PullRequestEvent",
-      "repo": "itsdarklikehell-interactive/veloren-agent-intergration",
-      "date": "2026-11-18T12:56:38Z",
-      "url": "https://github.com/itsdarklikehell-interactive/veloren-agent-intergration"
-    },
-    {
-      "type": "PullRequestEvent",
-      "repo": "itsdarklikehell-interactive/.github",
-      "date": "2026-11-18T12:55:53Z",
-      "url": "https://github.com/itsdarklikehell-interactive/.github"
-    },
-    {
-      "type": "PullRequestEvent",
-      "repo": "itsdarklikehell-interactive/skills-getting-started-with-github-copilot",
-      "date": "2026-11-18T12:55:46Z",
-      "url": "https://github.com/itsdarklikehell-interactive/skills-getting-started-with-github-copilot"
-    },
-    {
-      "type": "PullRequestEvent",
-      "repo": "itsdarklikehell-interactive/github-automation-scripts",
-      "date": "2026-11-18T12:55:31Z",
-      "url": "https://github.com/itsdarklikehell-interactive/github-automation-scripts"
-    },
-    {
-      "type": "PullRequestEvent",
-      "repo": "itsdarklikehell-interactive/hmol33-my-resume",
-      "date": "2026-11-18T12:55:24Z",
-      "url": "https://github.com/itsdarklikehell-interactive/hmol33-my-resume"
-    },
-    {
-      "type": "PullRequestEvent",
-      "repo": "itsdarklikehell-interactive/api-gateway",
-      "date": "2026-11-18T12:55:16Z",
-      "url": "https://github.com/itsdarklikehell-interactive/api-gateway"
-    },
-    {
-      "type": "PullRequestEvent",
-      "repo": "itsdarklikehell-interactive/fleet-dashboard",
-      "date": "2026-11-18T12:55:09Z",
-      "url": "https://github.com/itsdarklikehell-interactive/fleet-dashboard"
-    },
-    {
-      "type": "PullRequestEvent",
-      "repo": "itsdarklikehell/security-automation-toolkit",
-      "date": "2026-11-18T12:53:25Z",
-      "url": "https://github.com/itsdarklikehell/security-automation-toolkit"
-    },
-    {
-      "type": "PullRequestEvent",
-      "repo": "itsdarklikehell/ctf-writeups",
-      "date": "2026-11-18T12:53:18Z",
-      "url": "https://github.com/itsdarklikehell/ctf-writeups"
-    },
-    {
-      "type": "PullRequestEvent",
-      "repo": "itsdarklikehell/itsdarklikehell",
-      "date": "2026-11-18T12:53:04Z",
-      "url": "https://github.com/itsdarklikehell/itsdarklikehell"
-    },
-    {
-      "type": "PullRequestEvent",
-      "repo": "itsdarklikehell/custom-security-tooling",
-      "date": "2026-11-18T12:52:42Z",
-      "url": "https://github.com/itsdarklikehell/custom-security-tooling"
-    },
-    {
-      "type": "PullRequestEvent",
-      "repo": "itsdarklikehell-interactive/ci-templates",
-      "date": "2026-11-18T12:52:02Z",
-      "url": "https://github.com/itsdarklikehell-interactive/ci-templates"
     }
   ],
   "skills": {
