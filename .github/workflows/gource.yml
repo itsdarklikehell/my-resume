@@ -33,18 +33,21 @@ jobs:
           gource_auto_skip_seconds: 0.65
           gource_seconds_per_day: 0.12
           gource_time_scale: 1.5
-          gource_font_size: 38
+          # Smaller typography and avatars give the tracking camera more breathing room.
+          gource_font_size: 30
           gource_font_color: "E8EAF0"
           gource_background_color: "070B16"
           gource_overlay_background_color: "10182A"
           gource_bloom_multiplier: 0.5
           gource_bloom_intensity: 0.5
-          gource_key: "--key"
-          gource_camera_mode: "overview"
-          gource_hide_items: "mouse"
-          gource_user_scale: 1.25
-          gource_dir_depth: 3
-          gource_filename_time: 3.5
+          gource_key: ""
+          gource_camera_mode: "track"
+          # Hide the date HUD, extension legend and dense labels; keep the tree and contributor motion readable.
+          gource_hide_items: "mouse,date,filenames,dirnames"
+          gource_user_scale: 0.65
+          # Shallower labels and shorter persistence reduce collisions in dense commit clusters.
+          gource_dir_depth: 2
+          gource_filename_time: 2.0
           # Exclude generated video from its own history; keep source and data changes visible.
           gource_file_filter: '(^|/)gource\.mp4$|(__pycache__|\.pyc|node_modules|\.git/)'
           logo_url: "https://itsdarklikehell.github.io/my-resume/og-image.png"
@@ -86,7 +89,7 @@ jobs:
 
           ffmpeg -hide_banner -loglevel error -y \
             -i "$INTRO" -i "$RAW_VIDEO" -i "$OUTRO" \
-            -filter_complex "[0:v][1:v][2:v]concat=n=3:v=1:a=0[v]" \
+            -filter_complex "[1:v]drawbox=x=0:y=0:w=iw:h=100:color=0x070B16:t=fill[clean_gource];[0:v][clean_gource][2:v]concat=n=3:v=1:a=0[v]" \
             -map "[v]" -an -c:v libx264 -preset medium -crf 20 \
             -pix_fmt yuv420p -r 60 -movflags +faststart "$VISUAL"
 
