@@ -1,32 +1,32 @@
 {
-  "generated_at": "2026-11-24T17:00:42.271686Z",
+  "generated_at": "2026-11-25T16:51:21.147188Z",
   "source_status": {
     "user_repositories": {
       "status": "ok",
       "record_count": 6,
-      "checked_at": "2026-11-24T17:00:42.271686Z",
-      "last_successful_at": "2026-11-24T17:00:42.271686Z",
+      "checked_at": "2026-11-25T16:51:21.147188Z",
+      "last_successful_at": "2026-11-25T16:51:21.147188Z",
       "retained": false
     },
     "organization_repositories": {
       "status": "ok",
-      "record_count": 52,
-      "checked_at": "2026-11-24T17:00:42.271686Z",
-      "last_successful_at": "2026-11-24T17:00:42.271686Z",
+      "record_count": 53,
+      "checked_at": "2026-11-25T16:51:21.147188Z",
+      "last_successful_at": "2026-11-25T16:51:21.147188Z",
       "retained": false
     },
     "contributions": {
       "status": "ok",
       "record_count": 100,
-      "checked_at": "2026-11-24T17:00:42.271686Z",
-      "last_successful_at": "2026-11-24T17:00:42.271686Z",
+      "checked_at": "2026-11-25T16:51:21.147188Z",
+      "last_successful_at": "2026-11-25T16:51:21.147188Z",
       "retained": false
     },
     "user_profile": {
       "status": "ok",
       "record_count": 1,
-      "checked_at": "2026-11-24T17:00:42.271686Z",
-      "last_successful_at": "2026-11-24T17:00:42.271686Z",
+      "checked_at": "2026-11-25T16:51:21.147188Z",
+      "last_successful_at": "2026-11-25T16:51:21.147188Z",
       "retained": false
     }
   },
@@ -448,6 +448,15 @@
       "topics": []
     },
     {
+      "name": "5.5e-companion",
+      "language": "JavaScript",
+      "stars": 0,
+      "description": "Real-time D&D 5.5e session companion for character management, encounters, loot, shops, and QR-based player sheets.",
+      "updated_at": "2026-10-18T06:01:35Z",
+      "url": "https://github.com/itsdarklikehell-interactive/5.5e-companion",
+      "topics": []
+    },
+    {
       "name": "fleet-manager",
       "language": "Shell",
       "stars": 0,
@@ -602,6 +611,18 @@
     }
   ],
   "contributions": [
+    {
+      "type": "PushEvent",
+      "repo": "itsdarklikehell-interactive/ci-templates",
+      "date": "2026-11-23T08:20:35Z",
+      "url": "https://github.com/itsdarklikehell-interactive/ci-templates"
+    },
+    {
+      "type": "PushEvent",
+      "repo": "itsdarklikehell-interactive/foundryvtt-docker",
+      "date": "2026-11-23T07:33:11Z",
+      "url": "https://github.com/itsdarklikehell-interactive/foundryvtt-docker"
+    },
     {
       "type": "PushEvent",
       "repo": "itsdarklikehell-interactive/d20",
@@ -1189,18 +1210,6 @@
       "repo": "itsdarklikehell/my-resume",
       "date": "2026-11-18T14:43:58Z",
       "url": "https://github.com/itsdarklikehell/my-resume"
-    },
-    {
-      "type": "PushEvent",
-      "repo": "itsdarklikehell-interactive/veloren-agent-intergration",
-      "date": "2026-11-18T13:29:58Z",
-      "url": "https://github.com/itsdarklikehell-interactive/veloren-agent-intergration"
-    },
-    {
-      "type": "PullRequestEvent",
-      "repo": "itsdarklikehell-interactive/itsdarklikehell-interactive",
-      "date": "2026-11-20T08:02:08Z",
-      "url": "https://github.com/itsdarklikehell-interactive/itsdarklikehell-interactive"
     }
   ],
   "skills": {
@@ -1209,8 +1218,8 @@
       "percentage": 6
     },
     "JavaScript": {
-      "repos": 6,
-      "percentage": 12
+      "repos": 7,
+      "percentage": 14
     },
     "Lua": {
       "repos": 1,
@@ -1226,11 +1235,11 @@
     },
     "Shell": {
       "repos": 28,
-      "percentage": 56
+      "percentage": 55
     }
   },
   "stats": {
-    "total_repos": 58,
+    "total_repos": 59,
     "total_stars": 287,
     "languages": 6
   }
