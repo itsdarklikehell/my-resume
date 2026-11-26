@@ -1,32 +1,32 @@
 {
-  "generated_at": "2026-11-25T16:51:21.147188Z",
+  "generated_at": "2026-11-26T16:28:24.566673Z",
   "source_status": {
     "user_repositories": {
       "status": "ok",
       "record_count": 6,
-      "checked_at": "2026-11-25T16:51:21.147188Z",
-      "last_successful_at": "2026-11-25T16:51:21.147188Z",
+      "checked_at": "2026-11-26T16:28:24.566673Z",
+      "last_successful_at": "2026-11-26T16:28:24.566673Z",
       "retained": false
     },
     "organization_repositories": {
       "status": "ok",
       "record_count": 53,
-      "checked_at": "2026-11-25T16:51:21.147188Z",
-      "last_successful_at": "2026-11-25T16:51:21.147188Z",
+      "checked_at": "2026-11-26T16:28:24.566673Z",
+      "last_successful_at": "2026-11-26T16:28:24.566673Z",
       "retained": false
     },
     "contributions": {
       "status": "ok",
       "record_count": 100,
-      "checked_at": "2026-11-25T16:51:21.147188Z",
-      "last_successful_at": "2026-11-25T16:51:21.147188Z",
+      "checked_at": "2026-11-26T16:28:24.566673Z",
+      "last_successful_at": "2026-11-26T16:28:24.566673Z",
       "retained": false
     },
     "user_profile": {
       "status": "ok",
       "record_count": 1,
-      "checked_at": "2026-11-25T16:51:21.147188Z",
-      "last_successful_at": "2026-11-25T16:51:21.147188Z",
+      "checked_at": "2026-11-26T16:28:24.566673Z",
+      "last_successful_at": "2026-11-26T16:28:24.566673Z",
       "retained": false
     }
   },
