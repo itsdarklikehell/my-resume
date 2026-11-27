@@ -1,32 +1,32 @@
 {
-  "generated_at": "2026-11-26T16:28:24.566673Z",
+  "generated_at": "2026-11-27T16:13:56.917501Z",
   "source_status": {
     "user_repositories": {
       "status": "ok",
       "record_count": 6,
-      "checked_at": "2026-11-26T16:28:24.566673Z",
-      "last_successful_at": "2026-11-26T16:28:24.566673Z",
+      "checked_at": "2026-11-27T16:13:56.917501Z",
+      "last_successful_at": "2026-11-27T16:13:56.917501Z",
       "retained": false
     },
     "organization_repositories": {
       "status": "ok",
       "record_count": 53,
-      "checked_at": "2026-11-26T16:28:24.566673Z",
-      "last_successful_at": "2026-11-26T16:28:24.566673Z",
+      "checked_at": "2026-11-27T16:13:56.917501Z",
+      "last_successful_at": "2026-11-27T16:13:56.917501Z",
       "retained": false
     },
     "contributions": {
       "status": "ok",
       "record_count": 100,
-      "checked_at": "2026-11-26T16:28:24.566673Z",
-      "last_successful_at": "2026-11-26T16:28:24.566673Z",
+      "checked_at": "2026-11-27T16:13:56.917501Z",
+      "last_successful_at": "2026-11-27T16:13:56.917501Z",
       "retained": false
     },
     "user_profile": {
       "status": "ok",
       "record_count": 1,
-      "checked_at": "2026-11-26T16:28:24.566673Z",
-      "last_successful_at": "2026-11-26T16:28:24.566673Z",
+      "checked_at": "2026-11-27T16:13:56.917501Z",
+      "last_successful_at": "2026-11-27T16:13:56.917501Z",
       "retained": false
     }
   },
@@ -108,9 +108,9 @@
     {
       "name": "RetroPie-Nointro-Full-Romsets",
       "language": "Shell",
-      "stars": 1,
+      "stars": 2,
       "description": "Download and extract No-Intro full romsets in proper directories on RetroPie.",
-      "updated_at": "2026-10-18T06:09:27Z",
+      "updated_at": "2026-11-27T05:14:15Z",
       "url": "https://github.com/itsdarklikehell-interactive/RetroPie-Nointro-Full-Romsets",
       "topics": []
     },
@@ -1240,7 +1240,7 @@
   },
   "stats": {
     "total_repos": 59,
-    "total_stars": 287,
+    "total_stars": 288,
     "languages": 6
   }
 }
